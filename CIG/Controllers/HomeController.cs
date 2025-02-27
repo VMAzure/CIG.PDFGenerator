@@ -14,11 +14,18 @@ namespace CIG.Controllers
         private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
+        private static SymmetricSecurityKey GetSigningKey()
+        {
+            var keyBytes = Encoding.UTF8.GetBytes(JwtKey);
+            return new SymmetricSecurityKey(keyBytes);
+        }
+
         [HttpGet]
         public IActionResult Index([FromQuery] string token)
         {
             if (string.IsNullOrEmpty(token))
             {
+                Console.WriteLine("🔴 Nessun token ricevuto, reindirizzo al login.");
                 return Redirect(LoginRedirectUrl);
             }
 
@@ -28,7 +35,7 @@ namespace CIG.Controllers
                 var validationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey)),
+                    IssuerSigningKey = GetSigningKey(),  // 🔹 Usa la funzione per gestire la chiave
                     ValidateIssuer = true,
                     ValidIssuer = JwtIssuer,
                     ValidateAudience = false,
@@ -40,12 +47,25 @@ namespace CIG.Controllers
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var claims = jwtToken.Claims.ToDictionary(c => c.Type, c => c.Value);
 
-                return View(claims); // 🔹 Mostra la homepage con i dati del token
+                Console.WriteLine("✅ Token valido per l'utente: " + claims["sub"]);
+                return View(claims);
             }
-            catch
+            catch (SecurityTokenExpiredException)
             {
+                Console.WriteLine("🔴 Token SCADUTO, reindirizzo al login.");
+                return Redirect(LoginRedirectUrl);
+            }
+            catch (SecurityTokenException ex)
+            {
+                Console.WriteLine("🔴 Errore nel token: " + ex.Message);
+                return Redirect(LoginRedirectUrl);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("🔴 Errore generico: " + ex.Message);
                 return Redirect(LoginRedirectUrl);
             }
         }
+
     }
 }
