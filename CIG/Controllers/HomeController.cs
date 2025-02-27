@@ -36,10 +36,10 @@ namespace CIG.Controllers
 
                 var validationParameters = new TokenValidationParameters
                 {
+                    
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = GetSigningKey(),
-                    ValidateIssuer = true,
-                    ValidIssuer = JwtIssuer,  // 🔹 Controlliamo se il valore è corretto nei log
+                    ValidateIssuer = false, // 🔹 Cambiato da true a false, perché il token non ha "iss"
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
