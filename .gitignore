@@ -1,0 +1,7 @@
+# Escludere i file di Visual Studio
+.vs/
+*.user
+*.suo
+*.vscode/
+bin/
+obj/
