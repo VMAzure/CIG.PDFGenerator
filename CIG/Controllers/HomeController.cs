@@ -7,6 +7,13 @@ namespace CIG.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return Content("L'app CIG è online! 🚀 Aggiungi un token nella query string per visualizzare i dettagli.");
+        }
+
+        [HttpGet("token-info")]
         public IActionResult TokenInfo([FromQuery] string token)
         {
             if (string.IsNullOrEmpty(token))
