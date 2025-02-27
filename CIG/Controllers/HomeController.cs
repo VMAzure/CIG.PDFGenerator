@@ -32,12 +32,14 @@ namespace CIG.Controllers
             try
             {
                 var handler = new JwtSecurityTokenHandler();
+                Console.WriteLine("🔍 Valore di JwtIssuer: " + JwtIssuer); // Debug nei log
+
                 var validationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = GetSigningKey(),  // 🔹 Usa la funzione per gestire la chiave
+                    IssuerSigningKey = GetSigningKey(),
                     ValidateIssuer = true,
-                    ValidIssuer = JwtIssuer,
+                    ValidIssuer = JwtIssuer,  // 🔹 Controlliamo se il valore è corretto nei log
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
