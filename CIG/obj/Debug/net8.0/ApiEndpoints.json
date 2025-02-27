@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "CIG.Controllers.AuthController",
+    "Method": "ValidateToken",
+    "RelativePath": "api/auth/validate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

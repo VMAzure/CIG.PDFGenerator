@@ -1,0 +1,16 @@
+﻿@model Dictionary<string, string>
+
+<h2>Token JWT Decodificato</h2>
+<table border="1">
+    <tr>
+        <th>Claim</th>
+        <th>Valore</th>
+    </tr>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@claim.Key</td>
+            <td>@claim.Value</td>
+        </tr>
+    }
+</table>
