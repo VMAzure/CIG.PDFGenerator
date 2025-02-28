@@ -9,25 +9,10 @@ using System.Threading.Tasks;
 using Npgsql;
 using CIG.Models;
 
+
 namespace CIG.Controllers
 {
-    // Definizione del modello di vista. Se hai già questo file in CIG\Models, elimina questa definizione.
-    public class HomeViewModel
-    {
-        // Claims dell'utente decodificati dal token JWT
-        public Dictionary<string, string> Claims { get; set; } = new Dictionary<string, string>();
-        public Dictionary<string, string> Config { get; set; } = new Dictionary<string, string>();
-
-        public List<string> Brands { get; set; } = new List<string>();
-
-        // Nuove liste per i dropdown
-        public List<string> Gammas { get; set; } = new List<string>();          // Modelli / Gamma
-        public List<string> ModelYears { get; set; } = new List<string>();        // Anno modello
-        public List<string> Versiones { get; set; } = new List<string>();         // Versione
-        public List<string> Allestimentos { get; set; } = new List<string>();       // Allestimento
-        public List<string> TipoAlimentaziones { get; set; } = new List<string>();  // Tipo alimentazione
-    }
-
+    
     public class HomeController : Controller
     {
         private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
@@ -197,5 +182,11 @@ namespace CIG.Controllers
 
             return View(viewModel);
         }
+
+        public IActionResult Error404()
+        {
+            return View();
+        }
+
     }
 }
