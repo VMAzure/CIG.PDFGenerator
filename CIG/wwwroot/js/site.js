@@ -22,6 +22,14 @@
     const ctx = canvas.getContext("2d");
 
     // 🔄 Funzione per popolare dropdown
+    
+    // Elementi della UI
+    const marcaDropdown = document.getElementById("marca");
+    const modelloDropdown = document.getElementById("modello");
+    const versioneDropdown = document.getElementById("versione");
+    const coloreDropdown = document.getElementById("colore");
+
+    // 🔄 Funzione per popolare un dropdown
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         console.log("🔍 Chiamata API a:", endpoint); // Debug dell'endpoint usato
 
@@ -35,7 +43,6 @@
             .then(data => {
                 console.log("✅ JSON ricevuto:", data); // Debug JSON ricevuto
 
-                // 🔹 Controlla se esiste "preselect.options" per estrarre i dati
                 if (!data.preselect || !data.preselect.options || !data.preselect.options[keyName]) {
                     throw new Error(`❌ La chiave '${keyName}' non esiste nei dati ricevuti.`);
                 }
@@ -55,24 +62,40 @@
             .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
     }
 
-
-
-
-    // 📥 Popola dropdown dinamici
-    function loadDropdowns() {
-
-        // ✅ Corretto endpoint per ottenere le marche
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
-            // ✅ Corretto endpoint per ottenere i modelli di una marca specifica
-            fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily", () => {
-                // ✅ Corretto endpoint per ottenere le versioni di un modello
-                fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
-            });
-        });
-
-        // ✅ Corretto endpoint per ottenere i colori disponibili
-        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${marcaDropdown.value}`, coloreDropdown, "paintId");
+    // 🎯 Carica solo le marche all'inizio
+    function loadMarche() {
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make");
     }
+
+    // 🎯 Quando cambia la marca, carica i modelli
+    marcaDropdown.addEventListener("change", function () {
+        let selectedMake = marcaDropdown.value;
+        if (!selectedMake) return;
+
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
+    });
+
+    // 🎯 Quando cambia il modello, carica le versioni
+    modelloDropdown.addEventListener("change", function () {
+        let selectedMake = marcaDropdown.value;
+        let selectedModel = modelloDropdown.value;
+        if (!selectedMake || !selectedModel) return;
+
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
+    });
+
+    // 🎯 Quando cambia la versione, carica i colori
+    versioneDropdown.addEventListener("change", function () {
+        let selectedMake = marcaDropdown.value;
+        if (!selectedMake) return;
+
+        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${selectedMake}`, coloreDropdown, "paintId");
+    });
+
+    // 🚀 Avvia caricamento iniziale delle marche
+    loadMarche();
+
+
 
     // 🎨 Genera immagine
     function generateImage() {
