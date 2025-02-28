@@ -8,18 +8,6 @@
         color: white !important;
     }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
-    background-color: #1e1e1e; /* Colore dark mode */
-    padding: 10px;
-    font-size: 12px;
-    color: white;
-}
-
 
 body {
     background-color: #121212;
@@ -30,11 +18,12 @@ body {
 }
 
 .container {
+    min-height: calc(100vh - 100px); /* Assicura spazio per il footer */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 
 .content-wrapper {
     display: flex;
@@ -164,4 +153,15 @@ canvas {
     canvas {
         max-width: 100%;
     }
+}
+.footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background-color: #1e1e1e; /* Colore dark mode */
+    padding: 10px;
+    font-size: 12px;
+    color: white;
+    bottom: 0;
+    margin-top: 50px; /* Spazio tra il contenuto e il footer */
 }
