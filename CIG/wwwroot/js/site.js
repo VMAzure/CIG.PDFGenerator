@@ -21,18 +21,20 @@
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 🎯 Carica solo le marche all'inizio UNA VOLTA
+    // 🎯 Carica solo le marche all'inizio
     function loadMarche() {
-        if (marcaDropdown.options.length > 1) return; // ✅ Evita chiamate ripetute
+        marcaDropdown.innerHTML = '<option value="" selected>Caricamento...</option>'; // 🔹 Messaggio di attesa
+        marcaDropdown.disabled = true;
 
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
             marcaDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una marca</option>');
             marcaDropdown.disabled = false; // ✅ Abilita il dropdown dopo il caricamento
         });
     }
+
     // 🔄 Funzione per popolare un dropdown con opzione iniziale
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
-        console.log("🔍 Chiamata API a:", endpoint); // Debug dell'endpoint usato
+        console.log("🔍 Chiamata API a:", endpoint); // Debug
 
         fetch(endpoint)
             .then(response => {
@@ -42,7 +44,7 @@
                 return response.json();
             })
             .then(data => {
-                console.log("✅ JSON ricevuto:", data); // Debug JSON ricevuto
+                console.log("✅ JSON ricevuto:", data); // Debug
 
                 if (!data.preselect || !data.preselect.options || !data.preselect.options[keyName]) {
                     throw new Error(`❌ La chiave '${keyName}' non esiste nei dati ricevuti.`);
@@ -71,12 +73,16 @@
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
 
-        // Pulisce i dropdown successivi per evitare selezioni errate
-        modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
+        modelloDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
         coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
+        modelloDropdown.disabled = true;
+        versioneDropdown.disabled = true;
+        coloreDropdown.disabled = true;
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily", () => {
+            modelloDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona un modello</option>');
+        });
     });
 
     // 🎯 Quando cambia il modello, carica le versioni
@@ -85,10 +91,14 @@
         let selectedModel = modelloDropdown.value;
         if (!selectedMake || !selectedModel) return;
 
-        versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
+        versioneDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
         coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
+        versioneDropdown.disabled = true;
+        coloreDropdown.disabled = true;
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange", () => {
+            versioneDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una versione</option>');
+        });
     });
 
     // 🎯 Quando cambia la versione, carica i colori
@@ -96,11 +106,13 @@
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
 
-        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
+        coloreDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
+        coloreDropdown.disabled = true;
 
-        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${selectedMake}`, coloreDropdown, "paintId");
+        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${selectedMake}`, coloreDropdown, "paintId", () => {
+            coloreDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona un colore</option>');
+        });
     });
-
 
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
