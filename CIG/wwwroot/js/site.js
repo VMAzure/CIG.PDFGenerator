@@ -21,7 +21,16 @@
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 🔄 Funzione per popolare un dropdown
+    // 🎯 Carica solo le marche all'inizio UNA VOLTA
+    function loadMarche() {
+        if (marcaDropdown.options.length > 1) return; // ✅ Evita chiamate ripetute
+
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
+            marcaDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una marca</option>');
+            marcaDropdown.disabled = false; // ✅ Abilita il dropdown dopo il caricamento
+        });
+    }
+    // 🔄 Funzione per popolare un dropdown con opzione iniziale
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         console.log("🔍 Chiamata API a:", endpoint); // Debug dell'endpoint usato
 
@@ -41,7 +50,8 @@
 
                 const optionsList = data.preselect.options[keyName];
 
-                dropdown.innerHTML = ""; // Pulisce il dropdown
+                dropdown.innerHTML = '<option value="" selected>Seleziona un valore</option>'; // ✅ Opzione iniziale
+
                 optionsList.forEach(item => {
                     let option = document.createElement("option");
                     option.value = item;
@@ -49,20 +59,22 @@
                     dropdown.appendChild(option);
                 });
 
+                dropdown.disabled = false; // ✅ Abilita il dropdown dopo il caricamento
+
                 if (callback) callback(); // Esegui callback per il dropdown successivo
             })
             .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
-    }
-
-    // 🎯 Carica solo le marche all'inizio
-    function loadMarche() {
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make");
     }
 
     // 🎯 Quando cambia la marca, carica i modelli
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
+
+        // Pulisce i dropdown successivi per evitare selezioni errate
+        modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
+        versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
+        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
 
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
     });
@@ -73,6 +85,9 @@
         let selectedModel = modelloDropdown.value;
         if (!selectedMake || !selectedModel) return;
 
+        versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
+        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
+
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
 
@@ -81,8 +96,11 @@
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
 
+        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
+
         fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${selectedMake}`, coloreDropdown, "paintId");
     });
+
 
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
