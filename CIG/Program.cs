@@ -30,11 +30,29 @@ builder.Services.AddControllersWithViews();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler(appBuilder =>
+    {
+        appBuilder.Run(async context =>
+        {
+            if (context.Response.StatusCode == 404)
+            {
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync("404 - Risorsa non trovata");
+            }
+            else
+            {
+                context.Response.ContentType = "text/plain";
+                await context.Response.WriteAsync($"Errore {context.Response.StatusCode}");
+            }
+        });
+    });
+
     app.UseHsts();
 }
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
