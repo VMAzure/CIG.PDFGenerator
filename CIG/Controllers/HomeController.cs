@@ -273,12 +273,6 @@ namespace CIG.Controllers
             return Ok(allestimenti);
         }
 
-
-        [HttpGet("Error404")]
-            public IActionResult Error404()
-            {
-                return View();
-            }
         }
     }
 
