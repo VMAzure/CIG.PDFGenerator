@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Net.Http.Json; // ✅ IMPORTANTE: Importa questa libreria per ReadFromJsonAsync<T>()
+using System.IdentityModel.Tokens.Jwt; // 🔹 NECESSARIO PER JWT
+using Microsoft.IdentityModel.Tokens; // 🔹 NECESSARIO PER TokenValidationParameters e SecurityToken
 using CIG.Models;
 
 
 
-namespace CIG.Controllers
-{
 
-    // public class HomeController : Controller
-    /*{
-       private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
+namespace CIG.Controllers
+    {
+        [Route("api")]
+        [ApiController]
+        public class HomeController : Controller
+        {
+
+        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
         private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
@@ -73,12 +77,9 @@ namespace CIG.Controllers
                 Console.WriteLine("🔴 Errore generico: " + ex.Message);
                 return Redirect(LoginRedirectUrl);
             }
-       */
+            return View();
+        }
 
-    [Route("api")]
-    [ApiController]
-    public class HomeController : Controller
-    {
         private readonly string _customerId = "yourCustomerKey"; // 🔹 Sostituisci con il tuo customerId di IMAGIN.Studio
         private readonly HttpClient _httpClient = new HttpClient();
 
