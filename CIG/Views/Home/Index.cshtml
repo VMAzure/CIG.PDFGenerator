@@ -1,6 +1,5 @@
 ﻿@model CIG.Models.HomeViewModel
 
-
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -8,175 +7,187 @@
 <div class="container">
     <h1>Benvenuto su CIG 🚀</h1>
 
-    <!-- Informazioni utente (Token) -->
-    <h2>Informazioni utente (Token)</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Claim</th>
-                <th>Valore</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var claim in Model.Claims)
+    <h2>Seleziona il veicolo</h2>
+
+    <!-- Dropdown Marca -->
+    <div class="form-group">
+        <label for="brandDropdown">Marca</label>
+        <select id="brandDropdown" class="form-control">
+            <option value="">-- Seleziona Marca --</option>
+            @foreach (var brand in Model.Brands)
             {
-                <tr>
-                    <td>@claim.Key</td>
-                    <td>@claim.Value</td>
-                </tr>
+                <option value="@brand">@brand</option>
             }
-        </tbody>
-    </table>
+        </select>
+    </div>
 
-    <!-- Configurazione IMAGIN.studio -->
-    <h2>Configurazione IMAGIN.studio</h2>
-    <ul>
-        @foreach (var config in Model.Config)
-        {
-            <li><strong>@config.Key:</strong> @config.Value</li>
-        }
-    </ul>
+    <!-- Dropdown Modello -->
+    <div class="form-group">
+        <label for="gammaDropdown">Modello</label>
+        <select id="gammaDropdown" class="form-control" disabled>
+            <option value="">-- Seleziona Modello --</option>
+        </select>
+    </div>
 
-    <!-- Form per i parametri di immagine -->
-    <h2>Parametri per l'immagine</h2>
-    <form id="imageForm">
-        <!-- Dropdown Marca -->
-        <div class="form-group">
-            <label for="brandDropdown">Marca</label>
-            <select id="brandDropdown" class="form-control" name="make">
-                <option value="">-- Seleziona Marca --</option>
-                @foreach (var brand in Model.Brands)
-                {
-                    <option value="@brand">@brand</option>
-                }
-            </select>
-        </div>
+    <!-- Dropdown Anno -->
+    <div class="form-group">
+        <label for="yearDropdown">Anno</label>
+        <select id="yearDropdown" class="form-control" disabled>
+            <option value="">-- Seleziona Anno --</option>
+        </select>
+    </div>
 
-        <!-- Dropdown Modello (Gamma) -->
-        <div class="form-group">
-            <label for="gammaDropdown">Modello (Gamma)</label>
-            <select id="gammaDropdown" class="form-control" name="modelFamily">
-                <option value="">-- Seleziona Modello --</option>
-                @foreach (var gamma in Model.Gammas)
-                {
-                    <option value="@gamma">@gamma</option>
-                }
-            </select>
-        </div>
+    <!-- Dropdown Versione -->
+    <div class="form-group">
+        <label for="versioneDropdown">Versione</label>
+        <select id="versioneDropdown" class="form-control" disabled>
+            <option value="">-- Seleziona Versione --</option>
+        </select>
+    </div>
 
-        <!-- Dropdown Anno Modello -->
-        <div class="form-group">
-            <label for="yearDropdown">Anno Modello</label>
-            <select id="yearDropdown" class="form-control" name="modelYear">
-                <option value="">-- Seleziona Anno --</option>
-                @foreach (var year in Model.ModelYears)
-                {
-                    <option value="@year">@year</option>
-                }
-            </select>
-        </div>
+    <!-- Dropdown Allestimento -->
+    <div class="form-group">
+        <label for="allestimentoDropdown">Allestimento</label>
+        <select id="allestimentoDropdown" class="form-control" disabled>
+            <option value="">-- Seleziona Allestimento --</option>
+        </select>
+    </div>
 
-        <!-- Dropdown Versione -->
-        <div class="form-group">
-            <label for="versioneDropdown">Versione</label>
-            <select id="versioneDropdown" class="form-control" name="versione">
-                <option value="">-- Seleziona Versione --</option>
-                @foreach (var versione in Model.Versiones)
-                {
-                    <option value="@versione">@versione</option>
-                }
-            </select>
-        </div>
+    <!-- Dropdown Tipo di Alimentazione -->
+    <div class="form-group">
+        <label for="tipoAlimentazioneDropdown">Tipo di Alimentazione</label>
+        <select id="tipoAlimentazioneDropdown" class="form-control" disabled>
+            <option value="">-- Seleziona Tipo di Alimentazione --</option>
+        </select>
+    </div>
 
-        <!-- Dropdown Allestimento -->
-        <div class="form-group">
-            <label for="allestimentoDropdown">Allestimento</label>
-            <select id="allestimentoDropdown" class="form-control" name="allestimento">
-                <option value="">-- Seleziona Allestimento --</option>
-                @foreach (var allestimento in Model.Allestimentos)
-                {
-                    <option value="@allestimento">@allestimento</option>
-                }
-            </select>
-        </div>
-
-        <!-- Dropdown Tipo Alimentazione -->
-        <div class="form-group">
-            <label for="tipoAlimentazioneDropdown">Tipo Alimentazione</label>
-            <select id="tipoAlimentazioneDropdown" class="form-control" name="tipoAlimentazione">
-                <option value="">-- Seleziona Tipo Alimentazione --</option>
-                @foreach (var tipo in Model.TipoAlimentaziones)
-                {
-                    <option value="@tipo">@tipo</option>
-                }
-            </select>
-        </div>
-
-        <!-- Qui potresti aggiungere altri campi (angle, zoomLevel, ecc.) -->
-        <button type="submit" class="btn btn-primary">Recupera Immagine</button>
-    </form>
-
-    <!-- Canvas per mostrare l'immagine -->
-    <h2>Immagine</h2>
-    <canvas id="imageCanvas" width="400" height="300" style="border:1px solid #ccc;">
-        Il tuo browser non supporta il canvas.
-    </canvas>
 </div>
 
 <script>
-    // Caricamento immagine di default (placeholder o configurazione)
-    var defaultImageUrl = "@(Model.Config.ContainsKey("cover_image_url_default") ? Model.Config["cover_image_url_default"] : "https://via.placeholder.com/400x300")";
+    document.addEventListener("DOMContentLoaded", function () {
+        const brandDropdown = document.getElementById("brandDropdown");
+        const gammaDropdown = document.getElementById("gammaDropdown");
+        const yearDropdown = document.getElementById("yearDropdown");
+        const versioneDropdown = document.getElementById("versioneDropdown");
+        const allestimentoDropdown = document.getElementById("allestimentoDropdown");
+        const tipoAlimentazioneDropdown = document.getElementById("tipoAlimentazioneDropdown");
 
-    var canvas = document.getElementById("imageCanvas");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.onload = function() {
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    };
-    img.src = defaultImageUrl;
+        // Disabilita tutti i dropdown all'avvio (tranne la marca)
+        gammaDropdown.disabled = true;
+        yearDropdown.disabled = true;
+        versioneDropdown.disabled = true;
+        allestimentoDropdown.disabled = true;
+        tipoAlimentazioneDropdown.disabled = true;
 
-    // Gestione del submit del form per costruire l'URL dell'immagine
-    document.getElementById("imageForm").addEventListener("submit", function(e) {
-        e.preventDefault();
+        // Evento al cambio della Marca
+        brandDropdown.addEventListener("change", function () {
+            const selectedBrand = this.value;
 
-        // Leggi i valori selezionati
-        var make = document.getElementById("brandDropdown").value;
-        var modelFamily = document.getElementById("gammaDropdown").value;
-        var modelYear = document.getElementById("yearDropdown").value;
-        var versione = document.getElementById("versioneDropdown").value;
-        var allestimento = document.getElementById("allestimentoDropdown").value;
-        var tipoAlimentazione = document.getElementById("tipoAlimentazioneDropdown").value;
+            if (selectedBrand) {
+                gammaDropdown.disabled = false;
+                gammaDropdown.innerHTML = "<option value=''>-- Seleziona Modello --</option>";
 
-        // Recupera i parametri fissi dalla configurazione (passati via Razor)
-        var config = {
-            customer: "@Model.Config["customer"]",
-            tailoring: "@Model.Config["tailoring"]",
-            fileType: "@Model.Config["filetype"]",
-            safeMode: "@Model.Config["safemode"]",
-            billingTag: "@Model.Config["billingtag"]"
-        };
+                fetch(`/api/getModels?brand=${selectedBrand}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(model => {
+                            gammaDropdown.innerHTML += `<option value="${model}">${model}</option>`;
+                        });
+                    });
+            } else {
+                gammaDropdown.disabled = true;
+                yearDropdown.disabled = true;
+                versioneDropdown.disabled = true;
+                allestimentoDropdown.disabled = true;
+                tipoAlimentazioneDropdown.disabled = true;
+            }
+        });
 
-        // Costruisci l'URL per l'API getImage
-        var url = "https://cdn.imagin.studio/getImage" +
-                  "?customer=" + encodeURIComponent(config.customer) +
-                  "&tailoring=" + encodeURIComponent(config.tailoring) +
-                  "&make=" + encodeURIComponent(make) +
-                  "&modelFamily=" + encodeURIComponent(modelFamily) +
-                  (modelYear ? "&modelYear=" + encodeURIComponent(modelYear) : "") +
-                  (versione ? "&versione=" + encodeURIComponent(versione) : "") +
-                  (allestimento ? "&allestimento=" + encodeURIComponent(allestimento) : "") +
-                  (tipoAlimentazione ? "&tipoAlimentazione=" + encodeURIComponent(tipoAlimentazione) : "") +
-                  "&fileType=" + encodeURIComponent(config.fileType) +
-                  "&safeMode=" + encodeURIComponent(config.safeMode) +
-                  "&billingTag=" + encodeURIComponent(config.billingTag);
+        // Evento al cambio del Modello
+        gammaDropdown.addEventListener("change", function () {
+            const selectedModel = this.value;
 
-        // Aggiorna il canvas con la nuova immagine
-        var newImg = new Image();
-        newImg.onload = function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(newImg, 0, 0, canvas.width, canvas.height);
-        };
-        newImg.src = url;
+            if (selectedModel) {
+                yearDropdown.disabled = false;
+                yearDropdown.innerHTML = "<option value=''>-- Seleziona Anno --</option>";
+
+                fetch(`/api/getYears?model=${selectedModel}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(year => {
+                            yearDropdown.innerHTML += `<option value="${year}">${year}</option>`;
+                        });
+                    });
+            } else {
+                yearDropdown.disabled = true;
+                versioneDropdown.disabled = true;
+                allestimentoDropdown.disabled = true;
+                tipoAlimentazioneDropdown.disabled = true;
+            }
+        });
+
+        // Evento al cambio dell'Anno
+        yearDropdown.addEventListener("change", function () {
+            const selectedYear = this.value;
+
+            if (selectedYear) {
+                versioneDropdown.disabled = false;
+                versioneDropdown.innerHTML = "<option value=''>-- Seleziona Versione --</option>";
+
+                fetch(`/api/getVersions?year=${selectedYear}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(version => {
+                            versioneDropdown.innerHTML += `<option value="${version}">${version}</option>`;
+                        });
+                    });
+            } else {
+                versioneDropdown.disabled = true;
+                allestimentoDropdown.disabled = true;
+                tipoAlimentazioneDropdown.disabled = true;
+            }
+        });
+
+        // Evento al cambio della Versione
+        versioneDropdown.addEventListener("change", function () {
+            const selectedVersion = this.value;
+
+            if (selectedVersion) {
+                allestimentoDropdown.disabled = false;
+                allestimentoDropdown.innerHTML = "<option value=''>-- Seleziona Allestimento --</option>";
+
+                fetch(`/api/getAllestimenti?version=${selectedVersion}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(allestimento => {
+                            allestimentoDropdown.innerHTML += `<option value="${allestimento}">${allestimento}</option>`;
+                        });
+                    });
+            } else {
+                allestimentoDropdown.disabled = true;
+                tipoAlimentazioneDropdown.disabled = true;
+            }
+        });
+
+        // Evento al cambio dell'Allestimento
+        allestimentoDropdown.addEventListener("change", function () {
+            const selectedAllestimento = this.value;
+
+            if (selectedAllestimento) {
+                tipoAlimentazioneDropdown.disabled = false;
+                tipoAlimentazioneDropdown.innerHTML = "<option value=''>-- Seleziona Tipo di Alimentazione --</option>";
+
+                fetch(`/api/getAlimentazione?allestimento=${selectedAllestimento}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(alimentazione => {
+                            tipoAlimentazioneDropdown.innerHTML += `<option value="${alimentazione.descrizione}">${alimentazione.descrizione}</option>`;
+                        });
+                    });
+            } else {
+                tipoAlimentazioneDropdown.disabled = true;
+            }
+        });
+
     });
 </script>
-
