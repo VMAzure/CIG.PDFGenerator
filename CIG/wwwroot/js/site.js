@@ -27,41 +27,34 @@
 
         fetch(endpoint)
             .then(response => {
-                console.log("📥 Contenuto ricevuto:", response); // Debug dell'intera risposta
-
                 if (!response.ok) {
                     throw new Error(`Errore API: ${response.status} ${response.statusText}`);
                 }
-
-                const contentType = response.headers.get("content-type");
-                console.log("📑 Content-Type ricevuto:", contentType); // Debug tipo di risposta
-
-                if (!contentType || !contentType.includes("application/json")) {
-                    return response.text().then(text => {
-                        console.error("❌ La risposta API NON è JSON! Contenuto ricevuto:", text);
-                        throw new Error("La risposta API non è in formato JSON");
-                    });
-                }
-
                 return response.json();
             })
             .then(data => {
-                console.log("✅ Dati JSON ricevuti:", data); // Debug JSON ricevuto
+                console.log("✅ JSON ricevuto:", data); // Debug JSON ricevuto
 
-                if (!Array.isArray(data)) {
-                    throw new Error("La risposta API non è un array valido.");
+                // 🔹 Controlla se esiste "preselect.options" per estrarre i dati
+                if (!data.preselect || !data.preselect.options || !data.preselect.options[keyName]) {
+                    throw new Error(`❌ La chiave '${keyName}' non esiste nei dati ricevuti.`);
                 }
+
+                const optionsList = data.preselect.options[keyName];
+
                 dropdown.innerHTML = ""; // Pulisce il dropdown
-                data.forEach(item => {
+                optionsList.forEach(item => {
                     let option = document.createElement("option");
-                    option.value = item[keyName];
-                    option.textContent = item[keyName].toUpperCase();
+                    option.value = item;
+                    option.textContent = item.toUpperCase();
                     dropdown.appendChild(option);
                 });
+
                 if (callback) callback(); // Esegui callback per il dropdown successivo
             })
             .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
     }
+
 
 
 
