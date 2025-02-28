@@ -24,8 +24,20 @@
     // 🔄 Funzione per popolare dropdown
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         fetch(endpoint)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Errore API: ${response.status} ${response.statusText}`);
+                }
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    throw new Error("La risposta API non è in formato JSON");
+                }
+                return response.json();
+            })
             .then(data => {
+                if (!Array.isArray(data)) {
+                    throw new Error("La risposta API non è un array valido.");
+                }
                 dropdown.innerHTML = ""; // Pulisce il dropdown
                 data.forEach(item => {
                     let option = document.createElement("option");
@@ -35,8 +47,9 @@
                 });
                 if (callback) callback(); // Esegui callback per il dropdown successivo
             })
-            .catch(error => console.error("Errore nel caricamento:", error));
+            .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
     }
+
 
     // 📥 Popola dropdown dinamici
     function loadDropdowns() {
