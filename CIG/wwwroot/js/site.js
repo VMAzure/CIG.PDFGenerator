@@ -9,7 +9,7 @@
     const coloreDropdown = document.getElementById("colore");
     const zoomTypeDropdown = document.getElementById("zoomType");
 
-    const angleSlider = document.getElementById("angle");
+    
     const zoomSlider = document.getElementById("zoomLevel");
     const groundSlider = document.getElementById("groundPlane");
 

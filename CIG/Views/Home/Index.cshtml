@@ -20,10 +20,6 @@
             <label for="versione">Versione:</label>
             <select id="versione" class="dropdown"></select>
 
-            <!-- Colore -->
-            <label for="colore">Colore:</label>
-            <select id="colore" class="dropdown"></select>
-
             <!-- Zoom Type -->
             <label for="zoomType">Tipo di Zoom:</label>
             <select id="zoomType" class="dropdown">
@@ -32,31 +28,16 @@
                 <option value="adaptive">Adaptive</option>
             </select>
 
-            <!-- Angle (Rotazione) -->
-            <label for="angle">Rotazione Auto: <span id="angleValue">213</span></label>
-            <input type="range" id="angle" min="200" max="231" value="213" class="slider">
-
-            <!-- Zoom Level -->
-            <label for="zoomLevel">Zoom Level: <span id="zoomValue">15</span></label>
-            <input type="range" id="zoomLevel" min="0" max="30" value="15" class="slider">
-
-            <!-- Ground Plane Adjustment -->
-            <label for="groundPlane">Ground Plane Adjustment: <span id="groundValue">0</span></label>
-            <input type="range" id="groundPlane" min="-1" max="1" step="0.01" value="0" class="slider">
-
             <button id="genera" class="btn-generate">Genera Immagine</button>
         </div>
 
-        <!-- Colonna destra: Canvas -->
-        <div class="canvas-container">
-            <h2>Anteprima Immagine</h2>
-            <canvas id="imageCanvas"></canvas>
-            <label for="angleSlider">Rotazione Auto:</label>
-            <input type="range" id="angleSlider" min="200" max="231" value="0" class="slider" disabled>
-            <input type="range" id="verticalSlider" min="-50" max="50" value="0" class="slider-vertical">
+        <!-- Slider Rotazione (inizialmente disattivato) -->
+        <label for="angleSlider">Rotazione Auto:</label>
+        <input type="range" id="angleSlider" min="0" max="231" value="0" class="slider" disabled>
 
-
-        </div>
+        <!-- Slider verticale accanto al canvas per spostare l'immagine -->
+        <input type="range" id="verticalSlider" min="-50" max="50" value="0"
+               style="writing-mode: vertical-lr; direction: rtl; height: 300px;">
     </div>
 </div>
 
