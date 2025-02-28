@@ -22,14 +22,12 @@ namespace CIG.Controllers
 
     public class HomeController : Controller
     {
-        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // 🔴 Usa la chiave reale
+        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
         private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
-        // Connection string per il database Supabase (configurala con i tuoi dati)
-        private readonly string _connectionString = "Host=db.dvlyhzdnabwdpnziyjma.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=Azuremilano.2025;";
-
-
+        // Connection string per il database Supabase utilizzando il pooler IPv4 e SSL
+        private readonly string _connectionString = "Host=aws-0-eu-central-1.pooler.supabase.com;Port=6543;Database=postgres;Username=postgres.dvlyhzdnabwdpnziyjma;Password=Azuremilano.2025;SSL Mode=Require;Trust Server Certificate=true;";
 
         private static SymmetricSecurityKey GetSigningKey()
         {
@@ -37,6 +35,7 @@ namespace CIG.Controllers
             return new SymmetricSecurityKey(keyBytes);
         }
 
+    
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] string token)
         {
