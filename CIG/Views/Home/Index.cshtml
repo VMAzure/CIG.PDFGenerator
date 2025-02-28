@@ -1,158 +1,30 @@
-﻿@model CIG.Models.HomeViewModel
-
+﻿﻿﻿@Model CIG.Models.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container">
-    <h1>Seleziona il veicolo</h1>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <!-- Dropdown Marca -->
-    <div class="form-group">
-        <label for="brandDropdown">Marca</label>
-        <select id="brandDropdown" class="form-control">
-            <option value="">-- Seleziona Marca --</option>
-            @foreach (var brand in Model.Brands)
+    <h2 class="mt-4">Benvenuto su CIG 🚀</h2>
+    <p>Hai effettuato l'accesso con il seguente token:</p>
+
+    <table class="table table-striped mt-3">
+        <thead class="thead-dark">
+            <tr>
+                <th>Claim</th>
+                <th>Valore</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
             {
-                <option value="@brand">@brand</option>
+                <tr>
+                    <td>@claim.Key</td>
+                    <td>@claim.Value</td>
+                </tr>
             }
-        </select>
-    </div>
-
-    <!-- Dropdown Modello -->
-    <div class="form-group">
-        <label for="modelDropdown">Modello</label>
-        <select id="modelDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Modello --</option>
-        </select>
-    </div>
-
-    <!-- Dropdown Versione -->
-    <div class="form-group">
-        <label for="versionDropdown">Versione</label>
-        <select id="versionDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Versione --</option>
-        </select>
-    </div>
-
-    <!-- Dropdown Allestimento -->
-    <div class="form-group">
-        <label for="allestimentoDropdown">Allestimento</label>
-        <select id="allestimentoDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Allestimento --</option>
-        </select>
-    </div>
-
-    <!-- Campo libero Model Year -->
-    <div class="form-group">
-        <label for="modelYearInput">Anno Modello</label>
-        <input type="text" id="modelYearInput" class="form-control" placeholder="Es: 2024">
-    </div>
-
-    <!-- Dropdown Colore -->
-    <div class="form-group">
-        <label for="paintDropdown">Colore</label>
-        <select id="paintDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Colore --</option>
-        </select>
-    </div>
-
-    <!-- Canvas per visualizzare l'immagine -->
-    <h2>Anteprima Immagine</h2>
-    <canvas id="imageCanvas" width="600" height="400" style="border:1px solid #ccc;">
-        Il tuo browser non supporta il canvas.
-    </canvas>
+        </tbody>
+    </table>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const brandDropdown = document.getElementById("brandDropdown");
-        const modelDropdown = document.getElementById("modelDropdown");
-        const versionDropdown = document.getElementById("versionDropdown");
-        const allestimentoDropdown = document.getElementById("allestimentoDropdown");
-        const modelYearInput = document.getElementById("modelYearInput");
-        const paintDropdown = document.getElementById("paintDropdown");
-        const canvas = document.getElementById("imageCanvas");
-        const ctx = canvas.getContext("2d");
-        const customerId = "yourCustomerKey"; // 🔹 Sostituisci con il tuo customer ID di IMAGIN.Studio
-
-        function fetchData(url, dropdown, nextDropdowns) {
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    dropdown.innerHTML = "<option value=''>-- Seleziona --</option>";
-                    if (data.length > 0) {
-                        data.forEach(item => {
-                            dropdown.innerHTML += `<option value="${item}">${item}</option>`;
-                        });
-                        dropdown.disabled = false;
-                    } else {
-                        dropdown.disabled = true;
-                    }
-                    nextDropdowns.forEach(next => {
-                        next.disabled = true;
-                        next.innerHTML = "<option value=''>-- Seleziona --</option>";
-                    });
-                })
-                .catch(error => console.error("Errore durante il caricamento:", error));
-        }
-
-        function updateImage() {
-            const brand = brandDropdown.value;
-            const model = modelDropdown.value;
-            const version = versionDropdown.value;
-            const allestimento = allestimentoDropdown.value;
-            const modelYear = modelYearInput.value;
-            const paint = paintDropdown.value;
-
-            if (!brand || !model) return;
-
-            let imageUrl = `https://cdn.imagin.studio/getImage?customer=${customerId}&make=${brand}&modelFamily=${model}`;
-
-            if (version) imageUrl += `&trim=${version}`;
-            if (allestimento) imageUrl += `&allestimento=${allestimento}`;
-            if (modelYear) imageUrl += `&modelYear=${modelYear}`;
-            if (paint) imageUrl += `&paintDescription=${paint}`;
-
-            console.log("Caricamento immagine da:", imageUrl);
-
-            var img = new Image();
-            img.onload = function () {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            };
-            img.src = imageUrl;
-        }
-
-        brandDropdown.addEventListener("change", function () {
-            const brand = this.value;
-            if (brand) {
-                fetchData(`/api/getModels?brand=${brand}`, modelDropdown, [versionDropdown, allestimentoDropdown, paintDropdown]);
-            }
-        });
-
-        modelDropdown.addEventListener("change", function () {
-            const brand = brandDropdown.value;
-            const model = this.value;
-            if (model) {
-                fetchData(`/api/getCarDetails?brand=${brand}&model=${model}`, versionDropdown, [allestimentoDropdown]);
-                fetchData(`/api/getPaints?brand=${brand}&model=${model}`, paintDropdown, []);
-                updateImage();
-            }
-        });
-
-        versionDropdown.addEventListener("change", function () {
-            const brand = brandDropdown.value;
-            const model = modelDropdown.value;
-            const version = this.value;
-            if (version) {
-                fetchData(`/api/getAllestimenti?brand=${brand}&model=${model}&version=${version}`, allestimentoDropdown, []);
-                updateImage();
-            }
-        });
-
-        allestimentoDropdown.addEventListener("change", updateImage);
-        modelYearInput.addEventListener("input", updateImage);
-        paintDropdown.addEventListener("change", updateImage);
-    });
-</script>

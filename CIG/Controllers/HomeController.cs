@@ -1,30 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.IdentityModel.Tokens.Jwt; // 🔹 NECESSARIO PER JWT
-using Microsoft.IdentityModel.Tokens; // 🔹 NECESSARIO PER TokenValidationParameters e SecurityToken
-using CIG.Models;
-
-
-
 
 namespace CIG.Controllers
+{
+    public class HomeController : Controller
     {
-        [Route("api")]
-        [ApiController]
-        public class HomeController : Controller
-        {
-
-        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
+        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // 🔴 Usa la chiave reale
         private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
-       
         private static SymmetricSecurityKey GetSigningKey()
         {
             var keyBytes = Encoding.UTF8.GetBytes(JwtKey);
@@ -32,7 +21,7 @@ namespace CIG.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index([FromQuery] string token)
+        public IActionResult Index([FromQuery] string token)
         {
             if (string.IsNullOrEmpty(token))
             {
@@ -40,17 +29,17 @@ namespace CIG.Controllers
                 return Redirect(LoginRedirectUrl);
             }
 
-            Dictionary<string, string> claimsDict;
             try
             {
                 var handler = new JwtSecurityTokenHandler();
-                Console.WriteLine("🔍 Valore di JwtIssuer: " + JwtIssuer);
+                Console.WriteLine("🔍 Valore di JwtIssuer: " + JwtIssuer); // Debug nei log
 
                 var validationParameters = new TokenValidationParameters
                 {
+
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = GetSigningKey(),
-                    ValidateIssuer = false,  // Il token potrebbe non avere l'issuer
+                    ValidateIssuer = false, // 🔹 Cambiato da true a false, perché il token non ha "iss"
                     ValidateAudience = false,
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero
@@ -58,9 +47,10 @@ namespace CIG.Controllers
 
                 handler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                claimsDict = jwtToken.Claims.ToDictionary(c => c.Type, c => c.Value);
+                var claims = jwtToken.Claims.ToDictionary(c => c.Type, c => c.Value);
 
-                Console.WriteLine("✅ Token valido per l'utente: " + claimsDict["sub"]);
+                Console.WriteLine("✅ Token valido per l'utente: " + claims["sub"]);
+                return View(claims);
             }
             catch (SecurityTokenExpiredException)
             {
@@ -77,101 +67,10 @@ namespace CIG.Controllers
                 Console.WriteLine("🔴 Errore generico: " + ex.Message);
                 return Redirect(LoginRedirectUrl);
             }
-            return View();
         }
 
-        private readonly string _customerId = "yourCustomerKey"; // 🔹 Sostituisci con il tuo customerId di IMAGIN.Studio
-        private readonly HttpClient _httpClient = new HttpClient();
-
-        [HttpGet("api/getBrands")]
-        public async Task<List<string>> GetBrands()
-        {
-            var brands = new List<string>();
-            var url = $"https://cdn.imagin.studio/getCarListing?customer={_customerId}";
-
-            try
-            {
-                var response = await _httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    brands = await response.Content.ReadFromJsonAsync<List<string>>(); // ✅ SOSTITUITO ReadAsAsync
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Errore in getBrands: {ex.Message}");
-            }
-
-            return brands;
-        }
-
-        [HttpGet("api/getCarDetails")]
-        public async Task<IActionResult> GetCarDetails([FromQuery] string brand, [FromQuery] string model)
-        {
-            if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(model))
-                return BadRequest("I parametri 'brand' e 'model' sono obbligatori.");
-
-            var carDetails = new Dictionary<string, List<string>>();
-            var url = $"https://cdn.imagin.studio/getCarListing?customer={_customerId}&make={brand}&modelFamily={model}";
-
-            try
-            {
-                var response = await _httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var data = await response.Content.ReadFromJsonAsync<dynamic>(); // ✅ SOSTITUITO ReadAsAsync
-                    carDetails["versions"] = data.ContainsKey("Version") ? data["Version"].ToObject<List<string>>() : new List<string>();
-                    carDetails["trims"] = data.ContainsKey("Trim") ? data["Trim"].ToObject<List<string>>() : new List<string>();
-                    carDetails["bodySizes"] = data.ContainsKey("BodySize") ? data["BodySize"].ToObject<List<string>>() : new List<string>();
-                    carDetails["powerTrains"] = data.ContainsKey("PowerTrain") ? data["PowerTrain"].ToObject<List<string>>() : new List<string>();
-                    carDetails["modelVariants"] = data.ContainsKey("ModelVariant") ? data["ModelVariant"].ToObject<List<string>>() : new List<string>();
-                    carDetails["transmissions"] = data.ContainsKey("Transmission") ? data["Transmission"].ToObject<List<string>>() : new List<string>();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Errore in getCarDetails: {ex.Message}");
-                return StatusCode(500, "Errore interno del server");
-            }
-
-            return Ok(carDetails);
-        }
-
-        [HttpGet("api/getPaints")]
-        public async Task<IActionResult> GetPaints([FromQuery] string brand, [FromQuery] string model)
-        {
-            if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(model))
-                return BadRequest("I parametri 'brand' e 'model' sono obbligatori.");
-
-            var paints = new List<Dictionary<string, string>>();
-            var url = $"https://cdn.imagin.studio/getPaints?customer={_customerId}&target=car&make={brand}&modelFamily={model}";
-
-            try
-            {
-                var response = await _httpClient.GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    var data = await response.Content.ReadFromJsonAsync<dynamic>(); // ✅ SOSTITUITO ReadAsAsync
-                    foreach (var paint in data["paintCombinations"])
-                    {
-                        var paintId = paint.Name;
-                        var paintDescription = paint["mapped"].First.First["paintDescription"].ToString();
-                        paints.Add(new Dictionary<string, string> { { "paintId", paintId }, { "paintDescription", paintDescription } });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Errore in getPaints: {ex.Message}");
-                return StatusCode(500, "Errore interno del server");
-            }
-
-            return Ok(paints);
-        }
     }
 }
-
-
 
 
 
