@@ -143,7 +143,8 @@
         }
 
         // 🌍 Costruzione URL API
-        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&paintId=${paintId}&angle=${angle}&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=${groundPlaneAdjustment}&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+        // 🌍 Costruzione URL API senza paintId
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
 
         console.log("📸 URL generato:", imageUrl); // Debug
 
@@ -165,5 +166,65 @@
     groundSlider.oninput = () => { groundValue.textContent = groundSlider.value; };
 
     // 🚀 Inizializza
-    generaBtn.addEventListener("click", generateImage);
+    const angleSlider = document.getElementById("angleSlider");
+    let cachedImages = {}; // 🔹 Oggetto per tenere in cache le immagini di ogni angolo
+
+    // 🖼️ Scarica tutte le immagini nella cache locale
+    function preloadImages(make, modelFamily, modelRange) {
+        for (let angle = 0; angle <= 231; angle++) {
+            let img = new Image();
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+            cachedImages[angle] = img;
+        }
+    }
+
+    // 🎨 Genera immagine iniziale e abilita slider
+    function generateImage() {
+        const make = marcaDropdown.value;
+        const modelFamily = modelloDropdown.value;
+        const modelRange = versioneDropdown.value;
+        const zoomType = zoomTypeDropdown.value;
+        const zoomLevel = zoomSlider.value;
+
+        if (!make || !modelFamily || !modelRange) {
+            alert("Seleziona tutti i campi prima di generare l'immagine!");
+            return;
+        }
+
+        // 📥 Precarica immagini per la rotazione
+        preloadImages(make, modelFamily, modelRange);
+
+        // 🖼️ Mostra l'immagine iniziale
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
+        };
+    }
+
+    // 🎥 Cambia immagine in base allo slider
+    angleSlider.addEventListener("input", function () {
+        let angle = angleSlider.value;
+        let img = cachedImages[angle]; // 🔹 Prende l'immagine dalla cache
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    });
+
+    const verticalSlider = document.getElementById("verticalSlider");
+
+    verticalSlider.addEventListener("input", function () {
+        let offsetY = parseInt(verticalSlider.value);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let img = cachedImages[angleSlider.value]; // 🔹 Prende l'immagine attuale dalla cache
+        ctx.drawImage(img, 0, offsetY, canvas.width, canvas.height); // 🔹 Sposta l'immagine in verticale
+    });
+
+
 });
