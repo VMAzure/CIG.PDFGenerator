@@ -23,18 +23,31 @@
 
     // 🔄 Funzione per popolare dropdown
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
+        console.log("🔍 Chiamata API a:", endpoint); // Debug dell'endpoint usato
+
         fetch(endpoint)
             .then(response => {
+                console.log("📥 Contenuto ricevuto:", response); // Debug dell'intera risposta
+
                 if (!response.ok) {
                     throw new Error(`Errore API: ${response.status} ${response.statusText}`);
                 }
+
                 const contentType = response.headers.get("content-type");
+                console.log("📑 Content-Type ricevuto:", contentType); // Debug tipo di risposta
+
                 if (!contentType || !contentType.includes("application/json")) {
-                    throw new Error("La risposta API non è in formato JSON");
+                    return response.text().then(text => {
+                        console.error("❌ La risposta API NON è JSON! Contenuto ricevuto:", text);
+                        throw new Error("La risposta API non è in formato JSON");
+                    });
                 }
+
                 return response.json();
             })
             .then(data => {
+                console.log("✅ Dati JSON ricevuti:", data); // Debug JSON ricevuto
+
                 if (!Array.isArray(data)) {
                     throw new Error("La risposta API non è un array valido.");
                 }
@@ -49,6 +62,7 @@
             })
             .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
     }
+
 
 
     // 📥 Popola dropdown dinamici
