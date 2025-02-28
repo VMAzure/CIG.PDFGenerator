@@ -27,7 +27,8 @@ namespace CIG.Controllers
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
         // Connection string per il database Supabase (configurala con i tuoi dati)
-        private readonly string _connectionString = "postgresql://postgres:Azuremilano.2025@db.dvlyhzdnabwdpnziyjma.supabase.co:5432/postgres";
+        private readonly string _connectionString = "Host=db.dvlyhzdnabwdpnziyjma.supabase.co;Port=5432;Database=postgres;Username=postgres;Password=Azuremilano.2025;";
+
 
 
         private static SymmetricSecurityKey GetSigningKey()
