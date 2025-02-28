@@ -60,13 +60,18 @@
 
     // 📥 Popola dropdown dinamici
     function loadDropdowns() {
-        fetchDropdownData(`${baseUrl}?customer=${customerKey}`, marcaDropdown, "make", () => {
-            fetchDropdownData(`${baseUrl}?customer=${customerKey}&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily", () => {
-                fetchDropdownData(`${baseUrl}?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
+
+        // ✅ Corretto endpoint per ottenere le marche
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
+            // ✅ Corretto endpoint per ottenere i modelli di una marca specifica
+            fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily", () => {
+                // ✅ Corretto endpoint per ottenere le versioni di un modello
+                fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
             });
         });
 
-        fetchDropdownData(`${baseUrl}?customer=${customerKey}&target=make`, coloreDropdown, "paintId");
+        // ✅ Corretto endpoint per ottenere i colori disponibili
+        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${marcaDropdown.value}`, coloreDropdown, "paintId");
     }
 
     // 🎨 Genera immagine
