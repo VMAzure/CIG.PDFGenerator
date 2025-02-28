@@ -118,7 +118,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        configValues.Add(reader.GetString(0), reader.GetString(1));
+                        configValues.Add(reader.IsDBNull(0) ? "" : reader.GetString(0), reader.GetString(1));
                     }
                 }
 
@@ -128,7 +128,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        brands.Add(reader.GetString(0));
+                        brands.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
                     }
                 }
 
@@ -138,7 +138,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        gammas.Add(reader.GetString(0));
+                        gammas.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
                     }
                 }
 
@@ -148,7 +148,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        modelYears.Add(reader.GetInt32(0).ToString());
+                        modelYears.Add(reader.IsDBNull(0) ? "" : reader.GetInt32(0).ToString());
                     }
                 }
 
@@ -158,7 +158,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        versiones.Add(reader.GetString(0));
+                        versiones.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
                     }
                 }
 
@@ -168,7 +168,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        allestimentos.Add(reader.GetString(0));
+                        allestimentos.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
                     }
                 }
 
@@ -178,7 +178,7 @@ namespace CIG.Controllers
                 {
                     while (await reader.ReadAsync())
                     {
-                        tipoAlimentaziones.Add(reader.GetString(0));
+                        tipoAlimentaziones.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
                     }
                 }
             }
