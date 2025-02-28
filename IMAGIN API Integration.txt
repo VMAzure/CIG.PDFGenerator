@@ -1,0 +1,748 @@
+API Integration
+Manuals
+Getting Started
+Introduction to IMAGIN.studio Playbook Rules
+Let us handle the mapping. Providing your data streamlines the process, ensuring seamless mapping, prioritized image selection, and an ever-evolving service. Your data fuels the CDN!
+
+We offer access to an ever expanding CDN, serving you billions of unique images. We connect these images to many car specification data sets, including yours. The data agnostic imagery of every product that your customers want to see is the very heart of our service.
+We provide the relevant imagery in the relevant place in a relevant format in time to support your marketing and sales campaigns, with as little of your effort as possible.
+
+ALWAYS STRAIGHT FROM OUR CDN
+The images are and remain property of IMAGIN.studio. We do not sell the images to you as a customer, but instead sell one Micro Use License for each requested image from the getImage API. 
+
+Unless otherwise stated in the agreement, our images may never be downloaded, cached on server side, distributed or modified by our customers. End user browser caching is accepted. Images may only be used straight from our CDN by using one of the available API's. This also ensures you have at all times the best version available of the images you are looking for.
+
+USE THE CORRECT API AND DATA POINTS
+IMAGIN.studio's CDN offers several APIs to fit the different implementation needs across the vast automotive ecosystem. It's important you use the appropriate one and use it as intended. These API's all operate on a subset of our generic attributes and corresponding source data. read more
+
+INCLUDE PAINT SWATCHES / TILES ON YOUR PAGES
+You may retrieve color information needed to create color tiles, which we call swatches, in your front-end code using the paint API's, which grants a Micro Use License to the end user for a single download/use of the returned data for the duration of the users' session.
+
+IMAGIN.STUDIO SUITE
+If you desire to browse through the image offering, grab an image URL and use it your CMS, like any other digital asset management solution does, then visit https://dashboard.imagin.studio/
+
+You will find features here to tailor and customize your images, request missing paints, verify how your data is matched to content, cars coming soon and more. read more
+
+IMAGE CREATION UPON FIRST TIME REQUEST
+You can potentially request any of the billions of unique images that our CDN has to offer. Producing each possible image ahead of time would be an impossible task, which is is why our CDN creates images when a specific image is requested for the first time and then stores it into cache for any further use. read more
+
+Starting Your Implementation
+You can fetch content through a URL fetch request at any of our APIs. A request is always formatted the same way:
+
+https://{cdn-instance}.imagin.studio/{api-name}?customer={customer-key}&{query parameters}
+
+CDN-INSTANCE
+By default this CDN instance to use is 'cdn'. If however you wish to bypass the maximum server connections that Chrome allows simultaneously, then you may desire to any of the numbered cdn instances :: cdn-01 | cdn-02 | … | cdn-09
+
+API-NAME
+API's that we currently have in place for you ::
+
+/getImage read more
+
+/getPaintSwatches read more
+
+CUSTOMER-KEY
+Always apply your customer key to each API request. If you don't know your customer key, you can request this information at service@imagin.studio .
+
+QUERY-PARAMETERS
+The CDN attempts to match the data points you provide to the content it has to offer. The more data points you supply in your requests, the more accurate the returned content will be. Make sure to provide the mandatory data points and feel free to specify as many additional ones as you desire.
+Please only provide the relevant data. Please do not provide data like 'default' or 'unknown', but simply leave an attribute out of the request or leave the attribute empty if no relevant data is available.
+
+Find the data points used by the IMAGIN.studio's CDN here.
+
+Share your data for faster results. We'll streamline your workflow, prioritize the right images, and improve the service we provide based on your needs.
+
+API Integration
+Manuals
+CDN Data Points
+Let us handle the mapping. Providing your data streamlines the process, ensuring seamless mapping, prioritized image selection, and an ever-evolving service. Your data fuels the CDN!
+
+We support a wide range of data formats and structures, ensuring compatibility with your existing systems. Simply map your data to the appropriate API data points, and our CDN will handle the rest.
+
+Data points in bold are required.
+
+DATA POINTS
+Data point
+Description
+Possible values
+Example
+customer
+
+Your customer key, as given to you by IMAGIN.studio. This key defines tailoring and billing structures.
+
+tailoring
+
+Your tailoring key. Tailoring controls the logo shown on the license plate.
+
+make
+
+The make/brand of the car you are requesting.
+
+audi
+
+modelFamily
+
+The model of the car you are requesting.
+
+a3
+
+modelRange
+
+Key to differentiate special model lines such as Audi S, BMW M, Mercedes AMG, etc.
+
+rs3
+
+modelVariant
+
+The type of the body of the car you are requesting.
+
+hatchback
+
+sedan
+
+estate
+
+mpv
+
+suv
+
+convertible
+
+coupe
+
+targa
+
+pickup
+
+closed-cabin
+
+double-cabin
+
+passenger-cabin
+
+suv
+
+powerTrain
+
+Specifies the drive type of the car.
+
+phev
+
+bodySize
+
+Specifies the car's body size. For passenger vehicles you specify the number of doors. For commercial vehicles this attribute is used to specify the height and length of the vehicle (L1H2).
+
+5
+
+modelYear
+
+The year of introduction of the model or facelift. Trims are classified by the introduction year of the first trim launched, not the trim itself. The CDN will look for a car that is equal or older than the year requested.
+
+2024
+
+trim*
+
+Only the name of the trim / edition you are requesting. Stripped from any engine, powertrain or other data. Trim requests that include other data than trim name might be misunderstood.
+
+business-edition
+
+paintId
+
+Only the product id / product code of the paint option you wish to receive. PaintId's containing paint descriptions, rgb values or any information other than the product option code might be misunderstood.
+
+2t
+
+paintDescription
+
+The description of the paint you have requested with the paint id. The paint's description provides essential information as, if the paintId can not be resolved, this property is used to aid the research to the requested paintId. When omitted no research can be done to research an unresolvable paint id. The "paintDescription" should not be used on its own and should always be associated with a "paintID".
+
+brilliant-black-metallic
+
+randomPaint
+
+By adding the &randomPaint=true datapoint to the URL, a random paint (color) will be assigned to the requested vehicle.
+
+true
+
+false
+
+true
+
+rimId
+
+Not yet available. The product id / product code of the rim option you wish to receive. rimId's containing product descriptions, sizing values or any information other than the product option code might be misunderstood.
+
+cg0
+
+rimDescription
+
+Not yet available. The product description of the rim you have requested with the rimId. If when the description is omitted the request will be ignored.
+
+wheels-17-inch-cast-aluminum-"5-w-spoke"-design
+
+angle
+
+Specifies the viewpoint of the camera.
+
+21
+
+angles
+
+zoomType*
+
+Fullscreen : The viewer maximizes the car's size to fill the display area.
+
+Relative :  (Default on standard angles) Sizes are consistent across different car models.
+
+Adaptive : (Default on 360 spinner) Maximizes display size while maintaining proportional accuracy across all angles.
+
+relative
+
+fullscreen
+
+adaptive
+
+fullscreen
+
+zoomLevel
+
+Controls the magnification of a vehicle on the canvas. Increasing it makes the vehicle larger, while decreasing it makes it smaller.
+
+0 -> 10 -> 30
+
+15
+
+groundPlaneAdjustment*
+
+Decimal point percentage to change the position where the car wheels touch the ground. An automated offset may be applied to your settings.
+
+-1 -> 0.08 -> 1
+
+-0.07
+
+fileType
+
+The type of image you wish to receive. PNG's and WEBP are transparent. All file types are web optimized.
+
+webp*
+
+jpeg
+
+png*
+
+png
+
+safeMode*
+
+Enables or disables safemode. Safemode protects the object in the image from being cut-off when being manipulated through zoomType, zoomLevel or groundPlaneAdjustment.
+
+true
+
+false
+
+true
+
+width
+
+The width of the image you wish to receive. Any requested width is resolved back to the first larger standard CDN size. For example 745 returns 800. All sizes are web optimized except for 3456, which offers with highest quality possible disregarding file size.
+
+150
+
+400
+
+800
+
+1200*
+
+1600*
+
+2600*
+
+3456*
+
+800
+
+margins*
+
+Range in % of width and height of margins around the usable area of the image. Defaults to 0.02 (2%)
+
+Range of 0 to 0.4
+
+0.03
+
+countryCode
+
+Allows to specify a country code. May be used for personalized (country based) license plates or for selecting a country-specific trim.
+
+ISO 3166-1 alpha-2 country code
+
+NL
+
+billingTag
+
+identifier for the business unit to whom the cost of this request need to be cross billed.
+
+showroom
+
+steering
+
+Not yet available. Left or Right hand driven car.
+
+lhd
+
+rhd
+
+lhd
+
+transmission
+
+Not yet available. Type of transmission installed in the vehicle. Automatic or manual.
+
+automatic
+
+manual
+
+a
+
+position*
+
+Defines the vertical position of the car. "horizon" places the vehicle on the artificial horizon. It can then be manually fine tuned with "groundPlaneAdjustment". Can not be applied to 360 and/or lifestyle images.
+
+horizon (default)
+
+center
+
+bottom
+
+bottom
+
+*only available for Premium and Enterprise plans
+
+DATA STANDARDS
+Our CDN is designed for maximum flexibility and seamlessly integrates with data from any data provider or car manufacturer. Regardless of your existing data sources or preferred partners, our system can readily adapt and process your information. This eliminates the need for complex data migrations or custom integrations, saving you time and resources.
+
+API Integration
+Manuals
+getImage API Behavior & Timing
+Diving into the image production process will enhance your understanding of the CDN behavior and timing, allowing you to optimize your usage.
+
+Let us handle the mapping. Providing your data streamlines the process, ensuring seamless mapping, prioritized image selection, and an ever-evolving service. Your data fuels the CDN!
+
+You fetch any image by calling our getImage image API using a URL with Query String parameters to tell us which image you wish to receive.
+
+In order for the IMAGIN.studio CDN to deliver the desired image our CDN needs to:
+
+analyze your data;
+
+look for the vehicle you are asking for;
+
+look for the spray cans to create your paint;
+
+produce your car with your paint;
+
+adjust the image to your tailoring settings.
+
+DATA TRAINING
+The quality of our image matching relies 100% on the correct mapping of incoming customer data to internal IMAGIN images (from our perspective). So in order to get started, training the platform to understand your data is the first step.
+
+The platform is learning about your data starting the moment you request your first image. You will notice that whenever you request images and receive placeholder images, new images will automatically appear soon after.
+
+Tip when getting started : Our data-driven system learns and adapts over time. As it gathers information about your data structure, the implementation of your user experience will become increasingly streamlined and efficient. However, if you have an initial car data export for us (CSV file), we can speed up the initial training.
+
+CAR MODELS CREATION
+Whenever we receive a request for a car model that we have not produced yet, we automatically start the production process. When the production is done images can be created.
+
+PAINT DEFINITION
+Aside from understanding your car data, the CDN must have the definition of the paint you are requesting on your car on file. Any new paint that is requested automatically triggers new paint creation in our Paint Studio. Once the paint is created, it can be used on any car.
+
+IMAGE CREATION
+When the IMAGIN.studio's CDN receives an image request from you, the requested car image is created for you automatically by our factory.
+
+IMAGE TAILORING
+If the requested image is created it is adjusted to meet your requested tailoring specifications. Tailoring settings include specific width, fileType, offset, zoomType, zoomLevel, licenseplate logo, among many others.
+
+IMAGE DELIVERY VS IMAGE CREATION
+The CDN can create billions of different specific images. Having all of the ingredients to make an image does not per se triggers image creation, as the volume would exceed a quadrillion images. Instead, you or your customers trigger an image creation when that picture has never been created before, which is then stored in the global CDN cache which includes all our customers. Hence, we only create the images that our customers are actually requesting.
+
+We consistently deliver high-performance image serving, handling hundreds of millions of requests monthly and effortlessly scaling to meet the demands of global campaigns.
+
+TIMING OF THE GETIMAGE API
+In the event the image is not yet in cache, it will be created and put into the global CDN cache. The platform handles many different scenarios, yet the following are good to consider:
+
+Three different substitute image can be shown.
+
+Situation
+Result
+Timing
+Car data is not understood by CDN yet
+
+CDN triggers a data training assignment. Training starts immediately. Returned image: substitute image if partial data set is known, a speedShape if make and model are unknown
+
+ETA returned image : 20ms to 300ms ETA data training: 1 to 3 business days to train the data
+
+Car model has not yet been produced by IMAGIN.studio
+
+CDN triggers model production for this missing car Returned image: speedShape Returned header: X
+
+ETA speedShape image: 20ms to 300ms ETA missing model: 7 to 30 days to build the car
+
+Car model exists, but with different trim details
+
+CDN triggers trim production for this missing trim Returned image: requested car model but with alternative rim or bumper
+
+ETA substitute image: 20ms to 300ms ETA new image: Unfortunately no expectation can be given, depends on overal production load of new model releases and new model year facelifts.
+
+Paint requested has not been produced by IMAGIN.studio yet
+
+CDN triggers paint definition assignment. Paint creation starts immediately. Image creation starts immediately after paint creation completed. Returned image: requested vehicle in light grey metallic Returned header: X-ImaginStudio-Performed-Matches includes paintId as a substituted value
+
+ETA substitute image: 20ms to 1000ms ETA new image: 1 to 48 hours Refresh afterwards shows created image
+
+Car has been created, the paint is known by the CDN, but the paint was never requested on the requested car before by anyone on the platform
+
+CDN triggers image creation automatically. Production starts immediately Returned image: requested vehicle in light grey metallic Returned header: X-ImaginStudio-Performed-Matches includes paintId as a substituted value
+
+ETA substitute image: 20ms to 1000ms ETA new image: 1 to 48 hours Refresh afterwards shows created image
+
+Image has been created before, but not with your requested specific image resolution/offset/width/filetype/licenseplate
+
+CDN triggers image tailoring automatically. Customization starts immediately. V2: Returned image: waitShape V3: Direct image response
+
+V2: ETA 20 to 40 seconds, Refresh afterwards shows created image V3: ETA less then 3 seconds. In exceptional cases V3 may return a waitShape after 5 seconds. In this particular case the actual demand is too high and the creation is queued.
+
+Requested image has been created before
+
+Image is returned straight from CDN cache (no waitShape)
+
+20ms and 300ms load time depending on file size and local internet connections
+
+After 7 days the cache status of an image will be reconsidered.
+
+A check is performed to validate if the images returend the last time is still the best choice. For example a new trim may have been introduced. (no waitShape)
+
+1 to 2 second load time
+
+API Integration
+Manuals
+CDN Return Header Behavior
+There is a nifty feature that comes with the IMAGIN.studio image service. Your code can read the Response Header information on any image returned by the platform. It will tell you exactly if a speedshape is returned or not, and IF and also WHAT was near matched. This allows you to control your user experience to the best of your ability.
+
+The Response Headers contain this information, which you can see in your browser (developer console).
+
+LOGIC BEHIND THE HEADER ATTRIBUTES
+x-carcloudaccess-request-resolved: false :: no image found, speedshape is returned
+
+x-carcloudaccess-request-found: true :: no matching was needed to return this image
+
+x-imaginstudio-is-mlmatch: true/false :: redacted match or match based on a machine learning algorithm
+
+x-carcloudaccess-performed-matches: {} :: JSON describing each attribute and value used to near match
+
+
+
+ACCESS HEADERS WITH CODE
+
+And of course you can also use scripting to read this information. You can find a sample of such code below.
+
+Copy
+  async function getImageHeaders(url) {
+                        // input :: any IMAGIN.studio car image url (as string)
+                        // let responseHeader = await getImageHeaders('https://cdn.imagin.studio/getImage?&make=audi&modelFamily=a4&angle=01');
+                        // returns :: IMAGIN.studio near match information (as json object)
+                    
+                        // USEFUL HEADER ATTRIBUTES
+                        // x-imaginstudio-request-found > boolean; if true the request was entirely satisfied
+                        // x-imaginstudio-request-resolved > boolean; if true the request was succesfully near matched
+                        // x-imaginstudio-performed-matches > json object; parameters and values that were substituted while near matching
+                        return new Promise(async (resolve, reject) => {
+                            try {
+                                let request = new XMLHttpRequest();
+                                request.open("GET", url);
+                                request.onload = function () {
+                                    const headers = {};
+                                    request.getAllResponseHeaders()
+                                        .trim()
+                                        .split(/[\r\n]+/)
+                                        .map(value => value.split(/: /))
+                                        .forEach(keyValue => {
+                                            if (keyValue[0] !== '') headers[keyValue[0]] = keyValue[1];
+                                        });
+                                    resolve(headers)
+                                }
+                                request.onerror = function () { resolve({}) };
+                                request.responseType = "json";
+                                request.send();
+                            } catch (e) {
+                                console.error(e);
+                                resolve({});
+                            }
+                        });
+                    }
+                    
+                    const imgUrl = 'https://cdn.imagin.studio/getImage?customer=yourKey&make=volkswagen&modelFamily=polo&paintId=imaginwhite&angle=01';
+                    async function readResponseHeader(imgUrl) {
+                        let headers = await getImageHeaders(imgUrl);
+                        console.log(headers.hasOwnProperty('x-imaginstudio-performed-matches') ? JSON.stringify(headers['x-imaginstudio-performed-matches'], null, 2) : 'request was satisfied');
+                    }
+
+API Integration
+Manuals
+Paint Data & API Behavior
+Let us handle the mapping. Providing your paint data streamlines the process, ensuring seamless mapping, prioritized image selection, and an ever-evolving service. Your data fuels the CDN!
+
+Do you have any API that returns the list of available color codes or description in a json format response?
+Yes we do. Although few things need to be considered.
+
+A car paint from from most brands is often available in some countries and not in others.
+
+A car paint can be known by a host of different product codes.
+
+A car paint might be available on one vehicle but not on another, and even differ between markets.
+
+In rare occasions, one paint code may be used to classify two different paints by the same car brand.
+
+A car paint may be available but could be yet to be known on the CDN.
+
+This paint may exist in IMAGIN.studio's paint library, but never have been requested on the specific car you are looking for.
+
+Related APIs:
+
+GETPAINTSWATCHES
+This API prodives a the colour information to create paint tiles / colour swatches with
+
+GETPAINTS
+This API provides a list of all paint combinations known in our library
+
+getPaintSwatches API
+The IMAGIN Paint Swatch API provides an efficient way to obtain RGB color information of the primary, secondary and tertiary spray cans used for any given paint code.
+
+API ENDPOINT
+https://cdn.imagin.studio/getPaintSwatches?&customer={customerId}make={make}&paints={paints}
+
+QUERY STRING DATA POINTS
+make :: accepts the car make/brand as a concatenated string (e.g. tesla)
+paints :: accepts an array of OEM paint codes to retrieve (e.g. pbsb,pmng)
+customer :: a mandatory attribute for every API we offer
+
+EXAMPLE
+https://cdn.imagin.studio/getPaintSwatches?customer={yourcustomerkey}&make=tesla&paints=pbsb,pmng,ppmr,ppsb,ppsw
+
+RETURNS JSON
+primarySprayCan
+secondarySprayCan (if applicable)
+tertiarySprayCan (if applicable)
+
+Copy
+                {
+                    "make": "tesla",
+                    "paints": {
+                        "pbsb": {
+                            "paintId": "psp0319",
+                            "paintDescription": "obsidian",
+                            "primarySprayCan": {
+                                "sprayCanId": "pbsb",
+                                "paintType": "normal",
+                                "primarySprayCanRGB": "#1e1e1e",
+                                "primarySprayCanHighLightRGB": "#252525",
+                                "colourCluster": "dark grey"
+                            }
+                        },
+                        "pmng": {
+                            "paintId": "psp00054",
+                            "paintDescription": "midnight silver (metallic)",
+                            "primarySprayCan": {
+                                "sprayCanId": "pmng",
+                                "paintType": "normal",
+                                "primarySprayCanRGB": "#77787c",
+                                "primarySprayCanHighLightRGB": "#929398",
+                                "colourCluster": "grey"
+                            }
+                        }
+                    }
+                }
+getPaints API
+The IMAGIN Paint Swatch API provides an efficient way to obtain paint availability, mapping and RGB color information of the primary, secondary and tertiary spray cans.
+
+API ENDPOINT
+For requesting available paints per make
+
+https://cdn.imagin.studio/getPaints?&customer={customerId}&target=make&make={make}
+
+For requesting available paints with specific car details
+
+https://cdn.imagin.studio/getPaints?&customer={customerId}&target=car&make={make}modelFamily={modelFamily}(&...other optional properties)[&paintIds=paint1,paint2]
+
+The (optional) properties include modelRange, modelVariant, bodySize, modelYear, trim, and powerTrain. A description of these properties can be found here. With the optional property paintIds a filter can be applied to the result set. List up to 10 comma separated paintId's here to limit the result set.
+
+RETURNS JSON
+Copy
+                {
+                    "paintData": {
+                        "target": "car",
+                        "make": "audi",
+                        "modelFamily": "a1",
+                        "modelRange": "0",
+                        "modelVariant": "0",
+                        "bodySize": null,
+                        "modelYear": "2022",
+                        "trim": "eu",
+                        "powerTrain": null,
+                        "paintCombinations": {
+                            "pspc0101": {
+                                "mapped": {
+                                    "2ypa": {
+                                        "paintDescription": "glacier-white-metallic",
+                                        "nativePaintDescriptions": [],
+                                        "orderable": true,
+                                        "available": true
+                                    }
+                                },
+                                "paintSwatch": {
+                                    "primary": {
+                                        "highLight": "#abacb1",
+                                        "lowLight": "#aeaead"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+The result payload provides a list of paints (paintcombinations). Per paint the codes which are mapped to that particular paint combination is shown. If a paint is know to be available from the manufacturer it is listed as orderable = true. When the target=car property is used the result set will also include the available flag, indicating if rendering has already taken place, or rendering will take place on the first request.
+
+Here is you find a code snippet for our 360° images to use as a spinner.
+
+Logo
+Edit fiddle - JSFiddle - Code Playground
+Copy
+<input type="range" min="0" value="0" class="slider" id="angleSlider" />
+<div id="imagesContainer" />
+Copy
+	// Setup
+const customerId = "your-customer-id";
+
+// Example url for the Abarth 124-spider
+const cdnUrl = `https://cdn.imagin.studio/getImage?customer=${customerId}&make=abarth&modelFamily=124-spider&modelRange=124-spider&modelVariant=ca&bodySize=2&modelYear=2018`;
+const angles = ["200", "201", "202", "203", "204", "205", "206", "207", "208", "209", "210", "211", "212", "213", "214", "215", "216", "217", "218", "219", "220", "221", "222", "223", "224", "225", "226", "227", "228", "229", "230", "231"];
+
+// Select elements
+const sliderElement = document.getElementById("angleSlider");
+const imagesContainerElement = document.getElementById("imagesContainer");
+const images = [];
+
+
+// Initialization
+const init = () => {
+		
+    // clear the images array
+    images.length = 0;
+    
+    // create the images
+    angles.reverse().forEach((angle, index) => {
+      const img = document.createElement("img");
+      img.src = `${cdnUrl}&angle=${angle}`;
+      img.classList.add("image");
+      if (index === 0) {
+	      img.classList.add("current");
+      }
+      images.push(img);
+    	imagesContainerElement.appendChild(img);
+    });
+    sliderElement.setAttribute("max", angles.length -1);
+    sliderElement.oninput = (e) => {
+    	handleUpdate(e.currentTarget.value);
+    };
+};
+
+const handleUpdate = (value) => {
+		const intValue = parseInt(value, 10);
+		images.forEach((image, index) => {
+    	if (index === intValue) {
+      	image.classList.add("current");
+      } else {
+      	image.classList.remove("current");
+      }
+    });
+};
+
+init();
+Copy
+#imagesContainer {
+  position: relative;
+}
+
+img.image {
+  position: absolute;
+  visibility: hidden;
+  max-width: 300px;
+}
+img.image.current {
+  visibility: visible;
+}
+
+API Integration
+Manuals
+Connecting to backend CDN API Methods
+1. Obtain API Credentials: 
+Obtain your CDN API credentials, which consist of a "customerId" (username) and a "customerSecret" (password) specific to your CDN account. The customerId is what is used to connect to the CDN for front-end calls. The customerId and customerSecret can be found in the dashboard.
+
+2. Formulate API Request:
+Prepare the request you want to send to the CDN API, including any required parameters, headers, and payload according to the API's documentation.
+
+i.e. https://cdn.imagin.studio/getSignedUrl?&make=audi&modelFamily=a4
+
+3. Include Authorization Header:
+Add the `Authorization` header to your request. The value of this header should be the word "Basic" followed by a space and the Base64-encoded string of your "customerId:customerSecret" combination.
+
+ For example, if your "customerId" is "abc123" and your "customerSecret" is "xyz987", you need to Base64 encode the string "abc123:xyz987". This would result in the encoded value "YWJjMTIzOnh5ejk4Nw==". Add this to the `Authorization` header in the format: `Authorization: Basic YWJjMTIzOnh5ejk4Nw==`.
+
+4. Send the Request: 
+Send the prepared HTTP request to the CDN API server, ensuring that the `Authorization` header is included. The server will receive and process your request.
+
+The CDN API will ignore any customer= parameters which may be supplied in the Query String of the request.
+
+That's it! Following these steps, you can connect to the CDN API by including the "customerId" as the username and the "customerSecret" as the password in the `Authorization` header.
+
+API Integration
+Manuals
+Creating a signedUrl
+1. Obtain API Credentials:
+Obtain your CDN API credentials, which consist of a "customerId" (username) and a "customerSecret" (password) specific to your CDN account. The customerId is what is used to connect to the CDN for front-end calls. The customerId and customerSecret can be found in the dashboard.
+
+2. Formulate API Request:
+Prepare the request you want to send to the CDN API getSignedUrl, including any required parameters, headers, and payload according to the API's documentation. 
+
+For instance: https://cdn.imagin.studio/getSignedUrl?&make=audi&modelFamily=a4
+
+3. Include Authorization Header:
+Add the `Authorization` header to your request. The value of this header should be the word "Basic" followed by a space and the Base64-encoded string of your "customerId:customerSecret" combination.
+
+For example, if your "customerId" is "abc123" and your "customerSecret" is "xyz987", you need to Base64 encode the string "abc123:xyz987". This would result in the encoded value "YWJjMTIzOnh5ejk4Nw==". Add this to the `Authorization` header in the format: `Authorization: Basic YWJjMTIzOnh5ejk4Nw==`.
+
+4. Add the created code to your URL Request:
+Send the prepared HTTP request to the CDN API server, by just attaching the returned string to https://cdn.imagin.studio/{created-Base64-encoded-request}
+
+That's it! Following these steps, you can connect to the CDN API by including the "customerId" as the username and the "customerSecret" as the password in the `Authorization` header.
+
+API Integration
+Manuals
+Embedding a referer
+Here is an example of how to embed a referer using axios.
+Copy
+import axios from 'axios';
+
+// Create Axios instance with baseURL
+const axiosInstance = axios.create({ baseURL: 'https://cdn.imagin.studio/getImage?customer=yourCustomerValue' });
+
+// Function to fetch data with custom referrer header
+const fetchData = async () => {
+  try {
+    const response = await axiosInstance.get('/data', { headers: { 'Referer': 'https://myapp.com' } });
+    console.log('Data:', response.data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+// Example usage
+fetchData(); // Make a GET request with custom referrer header
+Our service api’s (getCarListing, getPaints and getPaintSwatches), do pup up in usage but will not be charged.

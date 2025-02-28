@@ -1,25 +1,22 @@
-﻿@model Dictionary<string, string>
+﻿@model CIG.Controllers.HomeViewModel
 
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <h2 class="mt-4">Benvenuto su CIG 🚀</h2>
-    <p>Hai effettuato l'accesso con il seguente token:</p>
-
-    <table class="table table-striped mt-3">
-        <thead class="thead-dark">
+<div class="container">
+    <h1>Benvenuto su CIG 🚀</h1>
+    
+    <h2>Informazioni utente (Token)</h2>
+    <table class="table table-striped">
+        <thead>
             <tr>
                 <th>Claim</th>
                 <th>Valore</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var claim in Model)
+            @foreach (var claim in Model.Claims)
             {
                 <tr>
                     <td>@claim.Key</td>
@@ -28,4 +25,41 @@
             }
         </tbody>
     </table>
+    
+    <h2>Configurazione IMAGIN.studio</h2>
+    <ul>
+        @foreach (var config in Model.Config)
+        {
+            <li><strong>@config.Key:</strong> @config.Value</li>
+        }
+    </ul>
+    
+    <h2>Seleziona Marca</h2>
+    <select id="brandDropdown" class="form-control">
+        <option value="">-- Seleziona Marca --</option>
+        @foreach (var brand in Model.Brands)
+        {
+            <option value="@brand">@brand</option>
+        }
+    </select>
+    
+    <h2>Immagine</h2>
+    <canvas id="imageCanvas" width="400" height="300" style="border:1px solid #ccc;">
+        Il tuo browser non supporta il canvas.
+    </canvas>
 </div>
+
+<script>
+    // Esempio: carica un'immagine di default.
+    // Se esiste una chiave "cover_image_url_default" in configurazione, la useremo; altrimenti, una placeholder.
+    var imageUrl = "@(Model.Config.ContainsKey("cover_image_url_default") ? Model.Config["cover_image_url_default"] : "https://via.placeholder.com/400x300")";
+    
+    var canvas = document.getElementById("imageCanvas");
+    var ctx = canvas.getContext("2d");
+    var img = new Image();
+    img.onload = function() {
+        // Disegna l'immagine adattandola al canvas
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+    img.src = imageUrl;
+</script>

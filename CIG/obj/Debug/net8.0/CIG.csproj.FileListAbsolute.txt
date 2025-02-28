@@ -42,3 +42,7 @@ C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\refint\CIG.dll
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.pdb
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.genruntimeconfig.cache
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\ref\CIG.dll
+C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.sourcelink.json
+C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Npgsql.dll
