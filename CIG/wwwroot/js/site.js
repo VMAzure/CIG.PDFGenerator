@@ -21,14 +21,6 @@
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 🔄 Funzione per popolare dropdown
-    
-    // Elementi della UI
-    const marcaDropdown = document.getElementById("marca");
-    const modelloDropdown = document.getElementById("modello");
-    const versioneDropdown = document.getElementById("versione");
-    const coloreDropdown = document.getElementById("colore");
-
     // 🔄 Funzione per popolare un dropdown
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         console.log("🔍 Chiamata API a:", endpoint); // Debug dell'endpoint usato
@@ -95,8 +87,6 @@
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
 
-
-
     // 🎨 Genera immagine
     function generateImage() {
         const make = marcaDropdown.value;
@@ -136,6 +126,5 @@
     groundSlider.oninput = () => { groundValue.textContent = groundSlider.value; };
 
     // 🚀 Inizializza
-    loadDropdowns();
     generaBtn.addEventListener("click", generateImage);
 });
