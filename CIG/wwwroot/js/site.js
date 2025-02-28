@@ -22,8 +22,13 @@
     const ctx = canvas.getContext("2d");
 
     // 🎯 Carica solo le marche all'inizio
+    let marcheCaricate = false; // Flag per evitare doppie chiamate
+
     function loadMarche() {
-        marcaDropdown.innerHTML = '<option value="" selected>Caricamento...</option>'; // 🔹 Messaggio di attesa
+        if (marcheCaricate) return; // ✅ Evita chiamate ripetute
+        marcheCaricate = true; // ✅ Imposta il flag per evitare doppie chiamate
+
+        marcaDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
         marcaDropdown.disabled = true;
 
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
@@ -31,6 +36,7 @@
             marcaDropdown.disabled = false; // ✅ Abilita il dropdown dopo il caricamento
         });
     }
+
 
     // 🔄 Funzione per popolare un dropdown con opzione iniziale
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
@@ -53,7 +59,6 @@
                 const optionsList = data.preselect.options[keyName];
 
                 dropdown.innerHTML = '<option value="" selected>Seleziona un valore</option>'; // ✅ Opzione iniziale
-
                 optionsList.forEach(item => {
                     let option = document.createElement("option");
                     option.value = item;
@@ -61,12 +66,16 @@
                     dropdown.appendChild(option);
                 });
 
-                dropdown.disabled = false; // ✅ Abilita il dropdown dopo il caricamento
+                dropdown.disabled = false; // ✅ Assicuriamoci che il dropdown sia sempre abilitato!
 
                 if (callback) callback(); // Esegui callback per il dropdown successivo
             })
-            .catch(error => console.error("❌ Errore nel caricamento dei dati:", error));
+            .catch(error => {
+                console.error("❌ Errore nel caricamento dei dati:", error);
+                dropdown.disabled = false; // ✅ Evita che rimanga bloccato in caso di errore
+            });
     }
+
 
     // 🎯 Quando cambia la marca, carica i modelli
     marcaDropdown.addEventListener("change", function () {
