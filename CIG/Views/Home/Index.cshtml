@@ -60,8 +60,13 @@
             <option value="">-- Seleziona Tipo di Alimentazione --</option>
         </select>
     </div>
+    <h2>Immagine</h2>
+    <canvas id="imageCanvas" width="400" height="300" style="border:1px solid #ccc;">
+        Il tuo browser non supporta il canvas.
+    </canvas>
 
 </div>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -71,13 +76,25 @@
         const versioneDropdown = document.getElementById("versioneDropdown");
         const allestimentoDropdown = document.getElementById("allestimentoDropdown");
         const tipoAlimentazioneDropdown = document.getElementById("tipoAlimentazioneDropdown");
+        const canvas = document.getElementById("imageCanvas");
+        const ctx = canvas.getContext("2d");
 
-        // Disabilita tutti i dropdown all'avvio (tranne la marca)
+        // Disabilita tutti i dropdown tranne la Marca
         gammaDropdown.disabled = true;
         yearDropdown.disabled = true;
         versioneDropdown.disabled = true;
         allestimentoDropdown.disabled = true;
         tipoAlimentazioneDropdown.disabled = true;
+
+        // Funzione per caricare un'immagine nel canvas
+        function loadImage(url) {
+            var img = new Image();
+            img.onload = function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            };
+            img.src = url;
+        }
 
         // Evento al cambio della Marca
         brandDropdown.addEventListener("change", function () {
@@ -90,9 +107,13 @@
                 fetch(`/api/getModels?brand=${selectedBrand}`)
                     .then(response => response.json())
                     .then(data => {
-                        data.forEach(model => {
-                            gammaDropdown.innerHTML += `<option value="${model}">${model}</option>`;
-                        });
+                        if (data.length > 0) {
+                            data.forEach(model => {
+                                gammaDropdown.innerHTML += `<option value="${model}">${model}</option>`;
+                            });
+                        } else {
+                            gammaDropdown.disabled = true;
+                        }
                     });
             } else {
                 gammaDropdown.disabled = true;
@@ -114,9 +135,13 @@
                 fetch(`/api/getYears?model=${selectedModel}`)
                     .then(response => response.json())
                     .then(data => {
-                        data.forEach(year => {
-                            yearDropdown.innerHTML += `<option value="${year}">${year}</option>`;
-                        });
+                        if (data.length > 0) {
+                            data.forEach(year => {
+                                yearDropdown.innerHTML += `<option value="${year}">${year}</option>`;
+                            });
+                        } else {
+                            yearDropdown.disabled = true;
+                        }
                     });
             } else {
                 yearDropdown.disabled = true;
@@ -137,33 +162,16 @@
                 fetch(`/api/getVersions?year=${selectedYear}`)
                     .then(response => response.json())
                     .then(data => {
-                        data.forEach(version => {
-                            versioneDropdown.innerHTML += `<option value="${version}">${version}</option>`;
-                        });
+                        if (data.length > 0) {
+                            data.forEach(version => {
+                                versioneDropdown.innerHTML += `<option value="${version}">${version}</option>`;
+                            });
+                        } else {
+                            versioneDropdown.disabled = true;
+                        }
                     });
             } else {
                 versioneDropdown.disabled = true;
-                allestimentoDropdown.disabled = true;
-                tipoAlimentazioneDropdown.disabled = true;
-            }
-        });
-
-        // Evento al cambio della Versione
-        versioneDropdown.addEventListener("change", function () {
-            const selectedVersion = this.value;
-
-            if (selectedVersion) {
-                allestimentoDropdown.disabled = false;
-                allestimentoDropdown.innerHTML = "<option value=''>-- Seleziona Allestimento --</option>";
-
-                fetch(`/api/getAllestimenti?version=${selectedVersion}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(allestimento => {
-                            allestimentoDropdown.innerHTML += `<option value="${allestimento}">${allestimento}</option>`;
-                        });
-                    });
-            } else {
                 allestimentoDropdown.disabled = true;
                 tipoAlimentazioneDropdown.disabled = true;
             }
@@ -189,5 +197,16 @@
             }
         });
 
-    });
+        // Carica immagine quando tutti i dropdown sono selezionati
+        tipoAlimentazioneDropdown.addEventListener("change", function () {
+            const brand = brandDropdown.value;
+            const gamma = gammaDropdown.value;
+            const year = yearDropdown.value;
+            const versione = versioneDropdown.value;
+            const allestimento = allestimentoDropdown.value;
+            const tipoAlimentazione = tipoAlimentazioneDropdown.value;
+
+            if (brand && gamma && year && versione && allestimento && tipoAlimentazione) {
+                const imageUrl = `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${brand}
+
 </script>

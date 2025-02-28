@@ -12,7 +12,7 @@ using CIG.Models;
 
 namespace CIG.Controllers
 {
-    
+
     public class HomeController : Controller
     {
         private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
@@ -187,6 +187,204 @@ namespace CIG.Controllers
         {
             return View();
         }
+    }
 
+
+namespace CIG.Controllers
+    {
+        [Route("api")] // ✅ Route posizionato correttamente
+        [ApiController]
+        public class HomeController : Controller
+        {
+            private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb";
+            private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
+            private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
+
+            private readonly string _connectionString =
+                "Host=aws-0-eu-central-1.pooler.supabase.com;" +
+                "Port=6543;" +
+                "Database=postgres;" +
+                "Username=postgres.dvlyhzdnabwdpnziyjma;" +
+                "Password=Azuremilano.2025;" +
+                "SSL Mode=Require;" +
+                "Trust Server Certificate=true;";
+
+            private static SymmetricSecurityKey GetSigningKey()
+            {
+                var keyBytes = Encoding.UTF8.GetBytes(JwtKey);
+                return new SymmetricSecurityKey(keyBytes);
+            }
+
+            [HttpGet]
+            public async Task<IActionResult> Index([FromQuery] string token)
+            {
+                if (string.IsNullOrEmpty(token))
+                {
+                    return Redirect(LoginRedirectUrl);
+                }
+
+                Dictionary<string, string> claimsDict;
+                try
+                {
+                    var handler = new JwtSecurityTokenHandler();
+                    var validationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = GetSigningKey(),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+
+                    handler.ValidateToken(token, validationParameters, out SecurityToken validatedToken);
+                    var jwtToken = (JwtSecurityToken)validatedToken;
+                    claimsDict = jwtToken.Claims.ToDictionary(c => c.Type, c => c.Value);
+                }
+                catch (SecurityTokenExpiredException)
+                {
+                    return Redirect(LoginRedirectUrl);
+                }
+                catch (SecurityTokenException)
+                {
+                    return Redirect(LoginRedirectUrl);
+                }
+                catch (Exception)
+                {
+                    return Redirect(LoginRedirectUrl);
+                }
+
+                // Recupera i dati da Supabase:
+                var configValues = new Dictionary<string, string>();
+                var brands = new List<string>();
+                var gammas = new List<string>();
+                var modelYears = new List<string>();
+                var versiones = new List<string>();
+                var allestimentos = new List<string>();
+                var tipoAlimentaziones = new List<string>();
+
+                using (var conn = new NpgsqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+
+                    // Recupera configurazione
+                    using (var cmd = new NpgsqlCommand("SELECT config_key, config_value FROM imagin_config", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            configValues.Add(reader.IsDBNull(0) ? "" : reader.GetString(0), reader.GetString(1));
+                        }
+                    }
+
+                    // Recupera lista marchi
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Brand\" FROM cars ORDER BY \"Brand\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            brands.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
+                        }
+                    }
+
+                    // Recupera gamma
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Gamma\" FROM cars ORDER BY \"Gamma\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            gammas.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
+                        }
+                    }
+
+                    // Recupera anni modelli
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"ModelYear\" FROM cars WHERE \"ModelYear\" IS NOT NULL ORDER BY \"ModelYear\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            modelYears.Add(reader.IsDBNull(0) ? "" : reader.GetInt32(0).ToString());
+                        }
+                    }
+
+                    // Recupera versioni
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Versione\" FROM cars ORDER BY \"Versione\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            versiones.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
+                        }
+                    }
+
+                    // Recupera allestimenti
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Allestimento\" FROM cars ORDER BY \"Allestimento\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            allestimentos.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
+                        }
+                    }
+
+                    // Recupera tipo alimentazione con descrizione
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"TipoAlimentazione\", \"Alimentazione\" FROM cars ORDER BY \"Alimentazione\"", conn))
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            tipoAlimentaziones.Add(reader.IsDBNull(1) ? "" : reader.GetString(1));
+                        }
+                    }
+                }
+
+                var viewModel = new HomeViewModel
+                {
+                    Claims = claimsDict,
+                    Config = configValues,
+                    Brands = brands,
+                    Gammas = gammas,
+                    ModelYears = modelYears,
+                    Versiones = versiones,
+                    Allestimentos = allestimentos,
+                    TipoAlimentaziones = tipoAlimentaziones
+                };
+
+                return View(viewModel);
+            }
+
+            [HttpGet("getModels")]
+            public async Task<IActionResult> GetModels([FromQuery] string brand)
+            {
+                if (string.IsNullOrEmpty(brand))
+                    return BadRequest("Il parametro 'brand' è obbligatorio.");
+
+                var models = new List<string>();
+
+                using (var conn = new NpgsqlConnection(_connectionString))
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Gamma\" FROM cars WHERE \"Brand\" = @brand ORDER BY \"Gamma\"", conn))
+                    {
+                        cmd.Parameters.AddWithValue("@brand", brand);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                models.Add(reader.GetString(0));
+                            }
+                        }
+                    }
+                }
+                return Ok(models);
+            }
+
+            public IActionResult Error404()
+            {
+                return View();
+            }
+        }
     }
 }
+
+
