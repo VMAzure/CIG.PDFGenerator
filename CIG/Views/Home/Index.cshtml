@@ -1,30 +1,60 @@
-﻿﻿﻿@Model CIG.Models.HomeViewModel
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "Generatore Immagini Auto";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <div class="content-wrapper">
+        <!-- Colonna sinistra: Controlli -->
+        <div class="controls">
+            <h2>Configura l'immagine</h2>
 
-    <h2 class="mt-4">Benvenuto su CIG 🚀</h2>
-    <p>Hai effettuato l'accesso con il seguente token:</p>
+            <!-- Marca -->
+            <label for="marca">Marca:</label>
+            <select id="marca" class="dropdown"></select>
 
-    <table class="table table-striped mt-3">
-        <thead class="thead-dark">
-            <tr>
-                <th>Claim</th>
-                <th>Valore</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var claim in Model)
-            {
-                <tr>
-                    <td>@claim.Key</td>
-                    <td>@claim.Value</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <!-- Modello -->
+            <label for="modello">Modello:</label>
+            <select id="modello" class="dropdown"></select>
+
+            <!-- Versione -->
+            <label for="versione">Versione:</label>
+            <select id="versione" class="dropdown"></select>
+
+            <!-- Colore -->
+            <label for="colore">Colore:</label>
+            <select id="colore" class="dropdown"></select>
+
+            <!-- Zoom Type -->
+            <label for="zoomType">Tipo di Zoom:</label>
+            <select id="zoomType" class="dropdown">
+                <option value="relative">Relative</option>
+                <option value="fullscreen">Fullscreen</option>
+                <option value="adaptive">Adaptive</option>
+            </select>
+
+            <!-- Angle (Rotazione) -->
+            <label for="angle">Rotazione Auto: <span id="angleValue">213</span></label>
+            <input type="range" id="angle" min="200" max="231" value="213" class="slider">
+
+            <!-- Zoom Level -->
+            <label for="zoomLevel">Zoom Level: <span id="zoomValue">15</span></label>
+            <input type="range" id="zoomLevel" min="0" max="30" value="15" class="slider">
+
+            <!-- Ground Plane Adjustment -->
+            <label for="groundPlane">Ground Plane Adjustment: <span id="groundValue">0</span></label>
+            <input type="range" id="groundPlane" min="-1" max="1" step="0.01" value="0" class="slider">
+
+            <button id="genera" class="btn-generate">Genera Immagine</button>
+        </div>
+
+        <!-- Colonna destra: Canvas -->
+        <div class="canvas-container">
+            <h2>Anteprima Immagine</h2>
+            <canvas id="imageCanvas"></canvas>
+        </div>
+    </div>
 </div>
+
+<!-- Script per gestire le API -->
+<script src="~/js/site.js"></script>
+<link rel="stylesheet" href="~/css/site.css">
