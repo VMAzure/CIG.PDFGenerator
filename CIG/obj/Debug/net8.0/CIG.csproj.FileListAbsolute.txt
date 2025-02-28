@@ -35,7 +35,6 @@ C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets\msb
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.CIG.props
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.CIG.props
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.csproj.Up2Date
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.dll
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\refint\CIG.dll
@@ -46,3 +45,4 @@ C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\CIG.sourcelink.json
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\valer\source\repos\VMAzure\CIG\CIG\bin\Debug\net8.0\Npgsql.dll
+C:\Users\valer\source\repos\VMAzure\CIG\CIG\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

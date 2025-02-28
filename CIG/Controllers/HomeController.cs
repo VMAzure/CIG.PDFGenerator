@@ -1,34 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Npgsql;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Net.Http.Json; // ✅ IMPORTANTE: Importa questa libreria per ReadFromJsonAsync<T>()
 using CIG.Models;
+
 
 
 namespace CIG.Controllers
 {
-    
-    public class HomeController : Controller
-    {
-        private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
+
+    // public class HomeController : Controller
+    /*{
+       private const string JwtKey = "88fd0837-0bb4-4e4f-9e62-0560ccc7e8fb"; // Usa la chiave reale
         private const string JwtIssuer = "https://coreapi-production-ca29.up.railway.app";
         private const string LoginRedirectUrl = "https://corewebapp-azcore.up.railway.app/";
 
-        // Connection string per il database Supabase (pooler IPv4 + SSL)
-        private readonly string _connectionString =
-            "Host=aws-0-eu-central-1.pooler.supabase.com;" +
-            "Port=6543;" +
-            "Database=postgres;" +
-            "Username=postgres.dvlyhzdnabwdpnziyjma;" +
-            "Password=Azuremilano.2025;" +
-            "SSL Mode=Require;" +
-            "Trust Server Certificate=true;";
-
+       
         private static SymmetricSecurityKey GetSigningKey()
         {
             var keyBytes = Encoding.UTF8.GetBytes(JwtKey);
@@ -81,200 +73,104 @@ namespace CIG.Controllers
                 Console.WriteLine("🔴 Errore generico: " + ex.Message);
                 return Redirect(LoginRedirectUrl);
             }
+       */
 
-            // Recupera i dati da Supabase:
-            var configValues = new Dictionary<string, string>();
+    [Route("api")]
+    [ApiController]
+    public class HomeController : Controller
+    {
+        private readonly string _customerId = "yourCustomerKey"; // 🔹 Sostituisci con il tuo customerId di IMAGIN.Studio
+        private readonly HttpClient _httpClient = new HttpClient();
+
+        [HttpGet("api/getBrands")]
+        public async Task<List<string>> GetBrands()
+        {
             var brands = new List<string>();
+            var url = $"https://cdn.imagin.studio/getCarListing?customer={_customerId}";
 
-            // Nuove liste per i dropdown
-            var gammas = new List<string>();
-            var modelYears = new List<string>();
-            var versiones = new List<string>();
-            var allestimentos = new List<string>();
-            var tipoAlimentaziones = new List<string>();
-
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                await conn.OpenAsync();
-
-                // Recupera i valori dalla tabella "imagin_config"
-                using (var cmd = new NpgsqlCommand("SELECT config_key, config_value FROM imagin_config", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
+                var response = await _httpClient.GetAsync(url);
+                if (response.IsSuccessStatusCode)
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        configValues.Add(reader.IsDBNull(0) ? "" : reader.GetString(0), reader.GetString(1));
-                    }
-                }
-
-                // Recupera la lista dei marchi (Brand)
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Brand\" FROM cars ORDER BY \"Brand\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        brands.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
-                    }
-                }
-
-                // Recupera i modelli (Gamma)
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Gamma\" FROM cars ORDER BY \"Gamma\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        gammas.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
-                    }
-                }
-
-                // Recupera gli anni dei modelli (non null)
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"ModelYear\" FROM cars WHERE \"ModelYear\" IS NOT NULL ORDER BY \"ModelYear\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        modelYears.Add(reader.IsDBNull(0) ? "" : reader.GetInt32(0).ToString());
-                    }
-                }
-
-                // Recupera le versioni
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Versione\" FROM cars ORDER BY \"Versione\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        versiones.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
-                    }
-                }
-
-                // Recupera gli allestimenti
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Allestimento\" FROM cars ORDER BY \"Allestimento\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        allestimentos.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
-                    }
-                }
-
-                // Recupera i tipi di alimentazione
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"TipoAlimentazione\" FROM cars ORDER BY \"TipoAlimentazione\"", conn))
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        tipoAlimentaziones.Add(reader.IsDBNull(0) ? "" : reader.GetString(0));
-                    }
+                    brands = await response.Content.ReadFromJsonAsync<List<string>>(); // ✅ SOSTITUITO ReadAsAsync
                 }
             }
-
-            var viewModel = new HomeViewModel
+            catch (Exception ex)
             {
-                Claims = claimsDict,
-                Config = configValues,
-                Brands = brands,
-                Gammas = gammas,
-                ModelYears = modelYears,
-                Versiones = versiones,
-                Allestimentos = allestimentos,
-                TipoAlimentaziones = tipoAlimentaziones
-            };
-
-            return View(viewModel);
-        }
-
-        public IActionResult Error404()
-        {
-            return View();
-        }
-
-
-        // API per ottenere i modelli in base alla marca selezionata
-        [HttpGet("api/getModels")]
-        public async Task<IActionResult> GetModels([FromQuery] string brand)
-        {
-            if (string.IsNullOrEmpty(brand))
-                return BadRequest("Il parametro 'brand' è obbligatorio.");
-
-            var models = new List<string>();
-
-            using (var conn = new NpgsqlConnection(_connectionString))
-            {
-                await conn.OpenAsync();
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Gamma\" FROM cars WHERE \"Brand\" = @brand ORDER BY \"Gamma\"", conn))
-                {
-                    cmd.Parameters.AddWithValue("@brand", brand);
-                    using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            models.Add(reader.GetString(0));
-                        }
-                    }
-                }
+                Console.WriteLine($"Errore in getBrands: {ex.Message}");
             }
-            return Ok(models);
+
+            return brands;
         }
 
-        // API per ottenere le versioni in base alla marca e al modello selezionati
-        [HttpGet("api/getVersions")]
-        public async Task<IActionResult> GetVersions([FromQuery] string brand, [FromQuery] string model)
+        [HttpGet("api/getCarDetails")]
+        public async Task<IActionResult> GetCarDetails([FromQuery] string brand, [FromQuery] string model)
         {
             if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(model))
                 return BadRequest("I parametri 'brand' e 'model' sono obbligatori.");
 
-            var versions = new List<string>();
+            var carDetails = new Dictionary<string, List<string>>();
+            var url = $"https://cdn.imagin.studio/getCarListing?customer={_customerId}&make={brand}&modelFamily={model}";
 
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                await conn.OpenAsync();
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Versione\" FROM cars WHERE \"Brand\" = @brand AND \"Gamma\" = @model ORDER BY \"Versione\"", conn))
+                var response = await _httpClient.GetAsync(url);
+                if (response.IsSuccessStatusCode)
                 {
-                    cmd.Parameters.AddWithValue("@brand", brand);
-                    cmd.Parameters.AddWithValue("@model", model);
-                    using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            versions.Add(reader.GetString(0));
-                        }
-                    }
+                    var data = await response.Content.ReadFromJsonAsync<dynamic>(); // ✅ SOSTITUITO ReadAsAsync
+                    carDetails["versions"] = data.ContainsKey("Version") ? data["Version"].ToObject<List<string>>() : new List<string>();
+                    carDetails["trims"] = data.ContainsKey("Trim") ? data["Trim"].ToObject<List<string>>() : new List<string>();
+                    carDetails["bodySizes"] = data.ContainsKey("BodySize") ? data["BodySize"].ToObject<List<string>>() : new List<string>();
+                    carDetails["powerTrains"] = data.ContainsKey("PowerTrain") ? data["PowerTrain"].ToObject<List<string>>() : new List<string>();
+                    carDetails["modelVariants"] = data.ContainsKey("ModelVariant") ? data["ModelVariant"].ToObject<List<string>>() : new List<string>();
+                    carDetails["transmissions"] = data.ContainsKey("Transmission") ? data["Transmission"].ToObject<List<string>>() : new List<string>();
                 }
             }
-            return Ok(versions);
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Errore in getCarDetails: {ex.Message}");
+                return StatusCode(500, "Errore interno del server");
+            }
+
+            return Ok(carDetails);
         }
 
-        // API per ottenere gli allestimenti in base a marca, modello e versione selezionati
-        [HttpGet("api/getAllestimenti")]
-        public async Task<IActionResult> GetAllestimenti([FromQuery] string brand, [FromQuery] string model, [FromQuery] string version)
+        [HttpGet("api/getPaints")]
+        public async Task<IActionResult> GetPaints([FromQuery] string brand, [FromQuery] string model)
         {
-            if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(model) || string.IsNullOrEmpty(version))
-                return BadRequest("I parametri 'brand', 'model' e 'version' sono obbligatori.");
+            if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(model))
+                return BadRequest("I parametri 'brand' e 'model' sono obbligatori.");
 
-            var allestimenti = new List<string>();
+            var paints = new List<Dictionary<string, string>>();
+            var url = $"https://cdn.imagin.studio/getPaints?customer={_customerId}&target=car&make={brand}&modelFamily={model}";
 
-            using (var conn = new NpgsqlConnection(_connectionString))
+            try
             {
-                await conn.OpenAsync();
-                using (var cmd = new NpgsqlCommand("SELECT DISTINCT \"Allestimento\" FROM cars WHERE \"Brand\" = @brand AND \"Gamma\" = @model AND \"Versione\" = @version ORDER BY \"Allestimento\"", conn))
+                var response = await _httpClient.GetAsync(url);
+                if (response.IsSuccessStatusCode)
                 {
-                    cmd.Parameters.AddWithValue("@brand", brand);
-                    cmd.Parameters.AddWithValue("@model", model);
-                    cmd.Parameters.AddWithValue("@version", version);
-                    using (var reader = await cmd.ExecuteReaderAsync())
+                    var data = await response.Content.ReadFromJsonAsync<dynamic>(); // ✅ SOSTITUITO ReadAsAsync
+                    foreach (var paint in data["paintCombinations"])
                     {
-                        while (await reader.ReadAsync())
-                        {
-                            allestimenti.Add(reader.GetString(0));
-                        }
+                        var paintId = paint.Name;
+                        var paintDescription = paint["mapped"].First.First["paintDescription"].ToString();
+                        paints.Add(new Dictionary<string, string> { { "paintId", paintId }, { "paintDescription", paintDescription } });
                     }
                 }
             }
-            return Ok(allestimenti);
-        }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Errore in getPaints: {ex.Message}");
+                return StatusCode(500, "Errore interno del server");
+            }
 
+            return Ok(paints);
         }
     }
+}
 
 
-    
+
+
+

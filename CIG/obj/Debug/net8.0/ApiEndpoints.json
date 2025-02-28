@@ -1,14 +1,39 @@
 [
   {
-    "ContainingType": "CIG.Controllers.CIG.Controllers.HomeController",
-    "Method": "Index",
-    "RelativePath": "api",
+    "ContainingType": "CIG.Controllers.HomeController",
+    "Method": "GetBrands",
+    "RelativePath": "api/api/getBrands",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "CIG.Controllers.HomeController",
+    "Method": "GetCarDetails",
+    "RelativePath": "api/api/getCarDetails",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "token",
+        "Name": "brand",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "model",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -16,13 +41,24 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "CIG.Controllers.CIG.Controllers.HomeController",
-    "Method": "Error404",
-    "RelativePath": "api",
-    "HttpMethod": "",
+    "ContainingType": "CIG.Controllers.HomeController",
+    "Method": "GetPaints",
+    "RelativePath": "api/api/getPaints",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "brand",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "model",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -35,22 +71,6 @@
     "Parameters": [
       {
         "Name": "token",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CIG.Controllers.CIG.Controllers.HomeController",
-    "Method": "GetModels",
-    "RelativePath": "api/getModels",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "brand",
         "Type": "System.String",
         "IsRequired": false
       }
