@@ -5,11 +5,8 @@
 }
 
 <div class="container">
-    <h1>Benvenuto su CIG 🚀</h1>
+    <h1>Seleziona il veicolo</h1>
 
-    <h2>Seleziona il veicolo</h2>
-
-    <!-- Dropdown Marca -->
     <div class="form-group">
         <label for="brandDropdown">Marca</label>
         <select id="brandDropdown" class="form-control">
@@ -21,192 +18,94 @@
         </select>
     </div>
 
-    <!-- Dropdown Modello -->
     <div class="form-group">
-        <label for="gammaDropdown">Modello</label>
-        <select id="gammaDropdown" class="form-control" disabled>
+        <label for="modelDropdown">Modello</label>
+        <select id="modelDropdown" class="form-control" disabled>
             <option value="">-- Seleziona Modello --</option>
         </select>
     </div>
 
-    <!-- Dropdown Anno -->
     <div class="form-group">
-        <label for="yearDropdown">Anno</label>
-        <select id="yearDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Anno --</option>
-        </select>
-    </div>
-
-    <!-- Dropdown Versione -->
-    <div class="form-group">
-        <label for="versioneDropdown">Versione</label>
-        <select id="versioneDropdown" class="form-control" disabled>
+        <label for="versionDropdown">Versione</label>
+        <select id="versionDropdown" class="form-control" disabled>
             <option value="">-- Seleziona Versione --</option>
         </select>
     </div>
 
-    <!-- Dropdown Allestimento -->
     <div class="form-group">
-        <label for="allestimentoDropdown">Allestimento</label>
+        <label for="allestimentoDropdown">Allestimento (opzionale)</label>
         <select id="allestimentoDropdown" class="form-control" disabled>
             <option value="">-- Seleziona Allestimento --</option>
         </select>
     </div>
 
-    <!-- Dropdown Tipo di Alimentazione -->
     <div class="form-group">
-        <label for="tipoAlimentazioneDropdown">Tipo di Alimentazione</label>
-        <select id="tipoAlimentazioneDropdown" class="form-control" disabled>
-            <option value="">-- Seleziona Tipo di Alimentazione --</option>
-        </select>
+        <label for="modelYearInput">Anno Modello</label>
+        <input type="text" id="modelYearInput" class="form-control" placeholder="Es: 2024">
     </div>
-    <h2>Immagine</h2>
-    <canvas id="imageCanvas" width="400" height="300" style="border:1px solid #ccc;">
-        Il tuo browser non supporta il canvas.
-    </canvas>
-
 </div>
+
 
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const brandDropdown = document.getElementById("brandDropdown");
-        const gammaDropdown = document.getElementById("gammaDropdown");
-        const yearDropdown = document.getElementById("yearDropdown");
-        const versioneDropdown = document.getElementById("versioneDropdown");
+        const modelDropdown = document.getElementById("modelDropdown");
+        const versionDropdown = document.getElementById("versionDropdown");
         const allestimentoDropdown = document.getElementById("allestimentoDropdown");
-        const tipoAlimentazioneDropdown = document.getElementById("tipoAlimentazioneDropdown");
-        const canvas = document.getElementById("imageCanvas");
-        const ctx = canvas.getContext("2d");
 
-        // Disabilita tutti i dropdown tranne la Marca
-        gammaDropdown.disabled = true;
-        yearDropdown.disabled = true;
-        versioneDropdown.disabled = true;
-        allestimentoDropdown.disabled = true;
-        tipoAlimentazioneDropdown.disabled = true;
-
-        // Funzione per caricare un'immagine nel canvas
-        function loadImage(url) {
-            var img = new Image();
-            img.onload = function () {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            };
-            img.src = url;
-        }
-
-        // Evento al cambio della Marca
         brandDropdown.addEventListener("change", function () {
-            const selectedBrand = this.value;
+            const brand = this.value;
 
-            if (selectedBrand) {
-                gammaDropdown.disabled = false;
-                gammaDropdown.innerHTML = "<option value=''>-- Seleziona Modello --</option>";
+            if (brand) {
+                modelDropdown.disabled = false;
+                modelDropdown.innerHTML = "<option value=''>-- Seleziona Modello --</option>";
 
-                fetch(`/api/getModels?brand=${selectedBrand}`)
+                fetch(`/api/getModels?brand=${brand}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (data.length > 0) {
-                            data.forEach(model => {
-                                gammaDropdown.innerHTML += `<option value="${model}">${model}</option>`;
-                            });
-                        } else {
-                            gammaDropdown.disabled = true;
-                        }
-                    });
-            } else {
-                gammaDropdown.disabled = true;
-                yearDropdown.disabled = true;
-                versioneDropdown.disabled = true;
-                allestimentoDropdown.disabled = true;
-                tipoAlimentazioneDropdown.disabled = true;
-            }
-        });
-
-        // Evento al cambio del Modello
-        gammaDropdown.addEventListener("change", function () {
-            const selectedModel = this.value;
-
-            if (selectedModel) {
-                yearDropdown.disabled = false;
-                yearDropdown.innerHTML = "<option value=''>-- Seleziona Anno --</option>";
-
-                fetch(`/api/getYears?model=${selectedModel}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            data.forEach(year => {
-                                yearDropdown.innerHTML += `<option value="${year}">${year}</option>`;
-                            });
-                        } else {
-                            yearDropdown.disabled = true;
-                        }
-                    });
-            } else {
-                yearDropdown.disabled = true;
-                versioneDropdown.disabled = true;
-                allestimentoDropdown.disabled = true;
-                tipoAlimentazioneDropdown.disabled = true;
-            }
-        });
-
-        // Evento al cambio dell'Anno
-        yearDropdown.addEventListener("change", function () {
-            const selectedYear = this.value;
-
-            if (selectedYear) {
-                versioneDropdown.disabled = false;
-                versioneDropdown.innerHTML = "<option value=''>-- Seleziona Versione --</option>";
-
-                fetch(`/api/getVersions?year=${selectedYear}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.length > 0) {
-                            data.forEach(version => {
-                                versioneDropdown.innerHTML += `<option value="${version}">${version}</option>`;
-                            });
-                        } else {
-                            versioneDropdown.disabled = true;
-                        }
-                    });
-            } else {
-                versioneDropdown.disabled = true;
-                allestimentoDropdown.disabled = true;
-                tipoAlimentazioneDropdown.disabled = true;
-            }
-        });
-
-        // Evento al cambio dell'Allestimento
-        allestimentoDropdown.addEventListener("change", function () {
-            const selectedAllestimento = this.value;
-
-            if (selectedAllestimento) {
-                tipoAlimentazioneDropdown.disabled = false;
-                tipoAlimentazioneDropdown.innerHTML = "<option value=''>-- Seleziona Tipo di Alimentazione --</option>";
-
-                fetch(`/api/getAlimentazione?allestimento=${selectedAllestimento}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(alimentazione => {
-                            tipoAlimentazioneDropdown.innerHTML += `<option value="${alimentazione.descrizione}">${alimentazione.descrizione}</option>`;
+                        data.forEach(model => {
+                            modelDropdown.innerHTML += `<option value="${model}">${model}</option>`;
                         });
                     });
-            } else {
-                tipoAlimentazioneDropdown.disabled = true;
             }
         });
 
-        // Carica immagine quando tutti i dropdown sono selezionati
-        tipoAlimentazioneDropdown.addEventListener("change", function () {
+        modelDropdown.addEventListener("change", function () {
             const brand = brandDropdown.value;
-            const gamma = gammaDropdown.value;
-            const year = yearDropdown.value;
-            const versione = versioneDropdown.value;
-            const allestimento = allestimentoDropdown.value;
-            const tipoAlimentazione = tipoAlimentazioneDropdown.value;
+            const model = this.value;
 
-            if (brand && gamma && year && versione && allestimento && tipoAlimentazione) {
-                const imageUrl = `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${brand}
+            if (model) {
+                versionDropdown.disabled = false;
+                versionDropdown.innerHTML = "<option value=''>-- Seleziona Versione --</option>";
 
+                fetch(`/api/getVersions?brand=${brand}&model=${model}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(version => {
+                            versionDropdown.innerHTML += `<option value="${version}">${version}</option>`;
+                        });
+                    });
+            }
+        });
+
+        versionDropdown.addEventListener("change", function () {
+            const brand = brandDropdown.value;
+            const model = modelDropdown.value;
+            const version = this.value;
+
+            if (version) {
+                allestimentoDropdown.disabled = false;
+                allestimentoDropdown.innerHTML = "<option value=''>-- Seleziona Allestimento --</option>";
+
+                fetch(`/api/getAllestimenti?brand=${brand}&model=${model}&version=${version}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(allestimento => {
+                            allestimentoDropdown.innerHTML += `<option value="${allestimento}">${allestimento}</option>`;
+                        });
+                    });
+            }
+        });
+    });
 </script>
