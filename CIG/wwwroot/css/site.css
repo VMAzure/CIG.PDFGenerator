@@ -93,7 +93,7 @@ label {
 /* Canvas sopra il video */
 #imageCanvas {
     width: 800px; /* Dimensione fissa fin dall'inizio */
-    height: auto;
+    height: 600px;
     position: relative;
     z-index: 1;
     background-color: transparent;
