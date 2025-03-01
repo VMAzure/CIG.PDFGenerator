@@ -8,23 +8,24 @@
     const marcaDropdown = document.getElementById("marca");
     const modelloDropdown = document.getElementById("modello");
     const versioneDropdown = document.getElementById("versione");
+    const modelVariantDropdown = document.getElementById("modelVariant");
     const angleSlider = document.getElementById("angleSlider");
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
     const backgroundVideo = document.getElementById("backgroundVideo");
 
-    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !angleSlider || !generaBtn || !canvas || !backgroundVideo) {
+    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !modelVariantDropdown ||
+        !angleSlider || !generaBtn || !canvas || !backgroundVideo) {
         console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
         return;
     }
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    let cachedImages = {}; // Cache locale per immagini
+    let cachedImages = {};
     let marcheCaricate = false;
 
-    // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
         if (marcheCaricate) return;
         marcheCaricate = true;
@@ -70,17 +71,16 @@
             });
     }
 
-    // 🎯 Eventi per i dropdown
+    // 🎯 Popolamento dinamico dei dropdown
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
 
         modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
+        modelVariantDropdown.innerHTML = '<option value="" selected>Seleziona una variante</option>';
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily").catch(error => {
-            console.error("❌ Errore durante il caricamento dei modelli:", error);
-        });
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
     });
 
     modelloDropdown.addEventListener("change", function () {
@@ -89,42 +89,34 @@
         if (!selectedMake || !selectedModel) return;
 
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange").catch(error => {
-            console.error("❌ Errore durante il caricamento delle versioni:", error);
-        });
+        modelVariantDropdown.innerHTML = '<option value="" selected>Seleziona una variante</option>';
+
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
 
-    function preloadImages(make, modelFamily, modelRange) {
-        for (let angle = 200; angle <= 231; angle++) {
-            let img = new Image();
-            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+    versioneDropdown.addEventListener("change", function () {
+        let selectedMake = marcaDropdown.value;
+        let selectedModel = modelloDropdown.value;
+        let selectedVersion = versioneDropdown.value;
+        if (!selectedMake || !selectedModel || !selectedVersion) return;
 
-            img.onload = function () {
-                cachedImages[angle] = img;
-                console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
-            };
+        modelVariantDropdown.innerHTML = '<option value="" selected>Seleziona una variante</option>';
 
-            img.onerror = function () {
-                console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
-            };
-
-            cachedImages[angle] = img;
-        }
-    }
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}&modelRange=${selectedVersion}`, modelVariantDropdown, "modelVariant");
+    });
 
     function generateImage() {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
         const modelRange = versioneDropdown.value;
+        const modelVariant = modelVariantDropdown.value;
 
-        if (!make || !modelFamily || !modelRange) {
+        if (!make || !modelFamily || !modelRange || !modelVariant) {
             alert("Seleziona tutti i campi prima di generare l'immagine!");
             return;
         }
 
-        preloadImages(make, modelFamily, modelRange);
-
-        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
         let img = new Image();
         img.crossOrigin = "anonymous";
@@ -140,20 +132,6 @@
             angleSlider.disabled = false;
         };
     }
-
-    // 🎥 Cambia immagine in base allo slider di rotazione
-    angleSlider.addEventListener("input", function () {
-        let angle = angleSlider.value;
-
-        if (!cachedImages[angle] || !cachedImages[angle].complete) {
-            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
-            return;
-        }
-
-        let img = cachedImages[angle];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    });
 
     generaBtn.addEventListener("click", generateImage);
 
