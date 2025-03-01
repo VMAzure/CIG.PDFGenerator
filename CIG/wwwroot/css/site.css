@@ -63,6 +63,7 @@ label {
     max-width: 800px;
     width: 100%;
     overflow: hidden;
+    padding-bottom: 15px; /* Aggiunge spazio extra per lo slider */
 }
 
 /* Video di sfondo */
@@ -88,7 +89,8 @@ label {
 /* 🎚️ Slider Orizzontale per Rotazione 360° */
 #angleSlider {
     width: 100%;
-    margin-top: 10px; /* Slidebar a 10px dal canvas */
+    margin-top: 10px; /* Mantiene spazio tra il canvas e lo slider */
+    padding-bottom: 5px; /* Aggiunge spazio sotto lo slider per evitare tagli */
     -webkit-appearance: none;
     appearance: none;
     background: linear-gradient(90deg, #0099ff 0%, #00ccff 100%);
@@ -97,7 +99,12 @@ label {
     outline: none;
     transition: opacity 0.3s;
     cursor: pointer;
+    position: relative;
+    z-index: 2; /* Assicura che lo slider sia visibile sopra altri elementi */
 }
+
+/
+
 
     /* Stile del "Thumb" (il pallino dello slider) */
     #angleSlider::-webkit-slider-thumb {
