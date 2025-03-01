@@ -35,12 +35,19 @@
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
             marcaDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una marca</option>');
             marcaDropdown.disabled = false;
+        }).catch(error => {
+            console.error("❌ Errore durante il caricamento delle marche:", error);
         });
     }
 
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         fetch(endpoint)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`❌ Errore API (${response.status}): ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (!data.preselect || !data.preselect.options || !data.preselect.options[keyName]) {
                     throw new Error(`❌ La chiave '${keyName}' non esiste nei dati ricevuti.`);
@@ -71,7 +78,9 @@
         modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily").catch(error => {
+            console.error("❌ Errore durante il caricamento dei modelli:", error);
+        });
     });
 
     modelloDropdown.addEventListener("change", function () {
@@ -80,10 +89,11 @@
         if (!selectedMake || !selectedModel) return;
 
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange").catch(error => {
+            console.error("❌ Errore durante il caricamento delle versioni:", error);
+        });
     });
 
-    // 🖼️ Precarica tutte le immagini nella cache locale per rotazione
     function preloadImages(make, modelFamily, modelRange) {
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
@@ -102,7 +112,6 @@
         }
     }
 
-    // 🎨 Genera immagine e abilita slider
     function generateImage() {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
@@ -121,8 +130,8 @@
         img.crossOrigin = "anonymous";
         img.src = imageUrl;
         img.onload = function () {
-            backgroundVideo.style.display = "block"; // Il video rimane sotto
-            canvas.style.display = "block"; // Il canvas appare sopra il video
+            backgroundVideo.style.display = "block";
+            canvas.style.display = "block";
 
             canvas.width = img.width;
             canvas.height = img.height;
@@ -131,20 +140,6 @@
             angleSlider.disabled = false;
         };
     }
-
-    // 🎥 Cambia immagine in base allo slider di rotazione
-    angleSlider.addEventListener("input", function () {
-        let angle = angleSlider.value;
-
-        if (!cachedImages[angle] || !cachedImages[angle].complete) {
-            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
-            return;
-        }
-
-        let img = cachedImages[angle];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    });
 
     generaBtn.addEventListener("click", generateImage);
 
