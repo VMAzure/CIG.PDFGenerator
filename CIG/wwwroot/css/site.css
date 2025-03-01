@@ -76,8 +76,9 @@ label {
     max-width: 800px;
     min-height: 600px;
     overflow: hidden;
-    margin-top: 40px;
+    margin-top: 30px;
     padding-bottom: 10px; /* Aggiunge spazio extra per lo slider */
+    gap: 10px;
 }
 
 /* Video di sfondo */
@@ -286,7 +287,7 @@ label {
 .tabs-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .tab {
