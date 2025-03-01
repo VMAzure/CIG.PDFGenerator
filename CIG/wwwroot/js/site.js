@@ -3,23 +3,28 @@
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
     // Elementi della UI
+    // 🔹 Dichiarazione degli elementi della UI
+    const customerKey = "it-azureautomotive";
+    const baseUrl = "https://cdn.imagin.studio/getImage";
+
     const marcaDropdown = document.getElementById("marca");
     const modelloDropdown = document.getElementById("modello");
     const versioneDropdown = document.getElementById("versione");
-    const coloreDropdown = document.getElementById("colore");
     const zoomTypeDropdown = document.getElementById("zoomType");
 
-    
+    const angleSlider = document.getElementById("angleSlider");
     const zoomSlider = document.getElementById("zoomLevel");
-    const groundSlider = document.getElementById("groundPlane");
+    const verticalSlider = document.getElementById("verticalSlider"); // ✅ Fix slider verticale
 
     const angleValue = document.getElementById("angleValue");
     const zoomValue = document.getElementById("zoomValue");
-    const groundValue = document.getElementById("groundValue");
 
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
+
+    // ✅ Ora gli elementi sono dichiarati prima di essere usati!
+
 
     // 🎯 Carica solo le marche all'inizio
     let marcheCaricate = false; // Flag per evitare doppie chiamate
@@ -82,33 +87,22 @@
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
 
-        modelloDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
+        modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
-        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
-        modelloDropdown.disabled = true;
-        versioneDropdown.disabled = true;
-        coloreDropdown.disabled = true;
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily", () => {
-            modelloDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona un modello</option>');
-        });
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}`, modelloDropdown, "modelFamily");
     });
 
-    // 🎯 Quando cambia il modello, carica le versioni
     modelloDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         let selectedModel = modelloDropdown.value;
         if (!selectedMake || !selectedModel) return;
 
-        versioneDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
-        coloreDropdown.innerHTML = '<option value="" selected>Seleziona un colore</option>';
-        versioneDropdown.disabled = true;
-        coloreDropdown.disabled = true;
+        versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange", () => {
-            versioneDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una versione</option>');
-        });
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
+
 
       // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
@@ -153,7 +147,7 @@
     groundSlider.oninput = () => { groundValue.textContent = groundSlider.value; };
 
     // 🚀 Inizializza
-    const angleSlider = document.getElementById("angleSlider");
+    
     let cachedImages = {}; // 🔹 Oggetto per tenere in cache le immagini di ogni angolo
 
     // 🖼️ Scarica tutte le immagini nella cache locale
