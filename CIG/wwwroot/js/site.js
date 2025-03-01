@@ -118,10 +118,11 @@
     });
 
     // 🖼️ Scarica tutte le immagini nella cache locale per rotazione
+    // 🖼️ Scarica tutte le immagini nella cache locale per rotazione
     function preloadImages(make, modelFamily, modelRange) {
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
-            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
             img.onload = function () {
                 cachedImages[angle] = img;
@@ -141,8 +142,6 @@
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
         const modelRange = versioneDropdown.value;
-        const zoomType = zoomTypeDropdown.value;
-        const zoomLevel = zoomSlider.value;
 
         if (!make || !modelFamily || !modelRange) {
             alert("Seleziona tutti i campi prima di generare l'immagine!");
@@ -152,7 +151,8 @@
         // 📥 Precarica immagini per la rotazione
         preloadImages(make, modelFamily, modelRange);
 
-        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+        // 🖼️ Mostra l'immagine iniziale
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
         let img = new Image();
         img.crossOrigin = "anonymous";
@@ -165,6 +165,7 @@
             angleSlider.disabled = false;
         };
     }
+
 
     // 🚀 Collega il bottone "Genera Immagine"
     generaBtn.addEventListener("click", generateImage);
