@@ -36,9 +36,15 @@
         <input type="range" id="angleSlider" min="0" max="231" value="0" class="slider" disabled>
 
         <!-- Slider verticale accanto al canvas per spostare l'immagine -->
-        <input type="range" id="verticalSlider" min="-50" max="50" value="0"
+        <input type="range" id="verticalSlider" min="-0" max="31" value="15"
                style="writing-mode: vertical-lr; direction: rtl; height: 300px;">
     </div>
+    <!-- Contenitore Canvas -->
+    <div class="canvas-container">
+        <h2>Anteprima Immagine</h2>
+        <canvas id="imageCanvas"></canvas>
+    </div>
+
 </div>
 
 <!-- Script per gestire le API -->

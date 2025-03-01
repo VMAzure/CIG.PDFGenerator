@@ -110,20 +110,7 @@
         });
     });
 
-    // 🎯 Quando cambia la versione, carica i colori
-    versioneDropdown.addEventListener("change", function () {
-        let selectedMake = marcaDropdown.value;
-        if (!selectedMake) return;
-
-        coloreDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
-        coloreDropdown.disabled = true;
-
-        fetchDropdownData(`https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${selectedMake}`, coloreDropdown, "paintId", () => {
-            coloreDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona un colore</option>');
-        });
-    });
-
-    // 🚀 Avvia caricamento iniziale delle marche
+      // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
 
     // 🎨 Genera immagine
@@ -171,7 +158,7 @@
 
     // 🖼️ Scarica tutte le immagini nella cache locale
     function preloadImages(make, modelFamily, modelRange) {
-        for (let angle = 0; angle <= 231; angle++) {
+        for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
             cachedImages[angle] = img;
