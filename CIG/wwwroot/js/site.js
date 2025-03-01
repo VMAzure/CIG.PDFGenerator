@@ -366,16 +366,19 @@
     }
 
     // ✅ Chiude l'app o torna alla schermata precedente
+    // ✅ Chiusura dell'app con la "X"
     function closeApp() {
+        console.log("🔴 Tentativo di chiudere l'app...");
         if (window.navigator.userAgent.includes("Android") || window.navigator.userAgent.includes("iOS")) {
-            window.close(); // Prova a chiudere l'app (potrebbe non funzionare su tutti i browser)
+            window.close(); // Chiude l'app su mobile (potrebbe non funzionare su tutti i browser)
         } else {
             window.history.back(); // Torna alla schermata precedente se la chiusura non è possibile
         }
     }
 
     // ✅ Avvia la modalità schermo intero automaticamente
-    document.addEventListener("DOMContentLoaded", function () {
+    function requestFullScreen() {
+        console.log("🟢 Richiesta modalità fullscreen...");
         if (document.documentElement.requestFullscreen) {
             document.documentElement.requestFullscreen().catch(err => {
                 console.warn("⚠️ Impossibile avviare il fullscreen automaticamente:", err);
@@ -387,6 +390,11 @@
         } else if (document.documentElement.msRequestFullscreen) {
             document.documentElement.msRequestFullscreen();
         }
+    }
+
+    // ✅ Avvia il fullscreen quando la pagina è completamente caricata
+    document.addEventListener("DOMContentLoaded", function () {
+        requestFullScreen();
     });
 
 

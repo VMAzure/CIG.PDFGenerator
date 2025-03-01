@@ -91,15 +91,18 @@ label {
 }
 
 /* 📌 Altezza maggiore per il canvas */
+/* 📌 Altezza maggiore per il canvas */
 #imageCanvas {
     max-width: 800px;
     width: 100%;
     height: auto;
-    min-height: 500px; /* Aumenta l'altezza del canvas */
+    min-height: 600px; /* Aumenta l'altezza per essere più proporzionata */
+    aspect-ratio: 16 / 9; /* Mantiene proporzione rispetto alla larghezza */
     position: relative;
     z-index: 1;
     background-color: transparent;
 }
+
 
 /* 🎚️ Slider Orizzontale per Rotazione 360° */
 #angleSlider {
