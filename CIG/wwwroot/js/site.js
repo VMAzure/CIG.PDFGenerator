@@ -26,6 +26,7 @@
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
+    let cachedImages = {}; // Cache locale per le immagini degli angoli
     let marcheCaricate = false;
 
     // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
@@ -89,14 +90,12 @@
     });
 
     // 🎥 Rotazione Auto
-    // 🎥 Cambia immagine in base allo slider di rotazione
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
 
-        // Verifica se l'immagine è già stata caricata nella cache
         if (!cachedImages[angle] || !cachedImages[angle].complete) {
             console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
-            return; // Non fare nulla se l'immagine non è ancora caricata
+            return;
         }
 
         let img = cachedImages[angle];
@@ -104,11 +103,16 @@
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     });
 
-
     // 🎥 Spostamento Verticale Auto
     verticalSlider.addEventListener("input", function () {
         let offsetY = parseInt(verticalSlider.value);
         let img = cachedImages[angleSlider.value];
+
+        if (!img || !img.complete) {
+            console.warn(`🔄 Immagine per angolo ${angleSlider.value} non ancora pronta.`);
+            return;
+        }
+
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, offsetY, canvas.width, canvas.height);
     });
@@ -118,6 +122,16 @@
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+
+            img.onload = function () {
+                cachedImages[angle] = img;
+                console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
+            };
+
+            img.onerror = function () {
+                console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
+            };
+
             cachedImages[angle] = img;
         }
     }
@@ -136,35 +150,27 @@
         }
 
         // 📥 Precarica immagini per la rotazione
-        let cachedImages = {}; // Cache locale per le immagini degli angoli
+        preloadImages(make, modelFamily, modelRange);
 
-        // 🖼️ Precarica tutte le immagini nella cache locale
-        function preloadImages(make, modelFamily, modelRange) {
-            for (let angle = 200; angle <= 231; angle++) {
-                let img = new Image();
-                img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
 
-                // Quando l'immagine è caricata, salviamola nella cache
-                img.onload = function () {
-                    cachedImages[angle] = img;
-                    console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
-                };
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            angleSlider.disabled = false;
+        };
+    }
 
-                img.onerror = function () {
-                    console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
-                };
-
-                // Salviamo comunque l'oggetto immagine, anche se non è ancora caricata
-                cachedImages[angle] = img;
-            }
-        }
-
-
-    // 🚀 Collega il bottone "Genera Immagine" SOLO DOPO aver dichiarato la funzione
+    // 🚀 Collega il bottone "Genera Immagine"
     generaBtn.addEventListener("click", generateImage);
 
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
-
 });
+
 
