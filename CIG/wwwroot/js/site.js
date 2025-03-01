@@ -1,8 +1,10 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ DOM completamente caricato.");
+
     const customerKey = "it-azureautomotive";
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
-    // 📌 Dichiarazione degli elementi UI
+    // 📌 Recuperiamo gli elementi della UI
     const marcaDropdown = document.getElementById("marca");
     const modelloDropdown = document.getElementById("modello");
     const versioneDropdown = document.getElementById("versione");
@@ -14,19 +16,19 @@
 
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
-    const ctx = canvas.getContext("2d");
 
-    let cachedImages = {}; // Cache immagini per rotazione
-
+    // 🔍 Verifica che tutti gli elementi siano presenti nel DOM
     if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !zoomTypeDropdown ||
         !angleSlider || !zoomSlider || !verticalSlider || !generaBtn || !canvas) {
-        console.error("❌ Errore: Uno o più elementi della UI non sono stati trovati nel DOM.");
+        console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
         return;
     }
 
-    // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
-    let marcheCaricate = false;
+    const ctx = canvas.getContext("2d");
+    let cachedImages = {}; // Cache immagini per rotazione
+    let marcheCaricate = false; // Evita doppie chiamate
 
+    // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
         if (marcheCaricate) return;
         marcheCaricate = true;
@@ -142,12 +144,8 @@
         ctx.drawImage(img, 0, offsetY, canvas.width, canvas.height);
     });
 
-    // 🚀 Assicura che il bottone sia collegato correttamente
-    if (generaBtn) {
-        generaBtn.addEventListener("click", generateImage);
-    } else {
-        console.error("❌ Errore: `generaBtn` non trovato nel DOM.");
-    }
+    // 🚀 Collega il bottone "Genera Immagine"
+    generaBtn.addEventListener("click", generateImage);
 
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
