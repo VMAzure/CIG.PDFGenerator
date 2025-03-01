@@ -194,6 +194,7 @@
 
     // 🎨 Recupera i colori disponibili dall'API di IMAGIN
     // 🎨 Recupera i colori disponibili dall'API di IMAGIN
+    // 🎨 Recupera e raggruppa i colori disponibili dall'API di IMAGIN
     function fetchAvailableColors(make, modelFamily, modelRange, modelVariant) {
         const colorApiUrl = `https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}`;
 
@@ -213,16 +214,31 @@
                     throw new Error("⚠️ Nessun colore disponibile per questa auto.");
                 }
 
-                // Estrarre gli ID dei colori disponibili
-                let colorOptions = Object.keys(data.paintData.paintCombinations).map(paintId => ({
-                    id: paintId,
-                    color: data.paintData.paintCombinations[paintId].paintSwatch.primary.midLight, // Usa la tonalità media per la preview
-                    description: data.paintData.paintCombinations[paintId].mapped
-                        ? Object.values(data.paintData.paintCombinations[paintId].mapped)[0].paintDescription
-                        : "Senza Nome"
-                }));
+                let colorGroups = {}; // Oggetto per raggruppare i colori per famiglia
 
-                return colorOptions;
+                Object.keys(data.paintData.paintCombinations).forEach(paintId => {
+                    let paint = data.paintData.paintCombinations[paintId];
+
+                    if (!paint.paintSwatch || !paint.paintSwatch.primary) return;
+
+                    let colorHex = paint.paintSwatch.primary.midLight; // Usa la tonalità media per la preview
+                    let colorCategory = paint.paintSwatch.primary.colourCluster; // Categoria colore (es: "black", "blue", etc.)
+                    let colorDescription = paint.mapped
+                        ? Object.values(paint.mapped)[0].paintDescription
+                        : "Senza Nome";
+
+                    // Se la categoria di colore non è ancora nel nostro oggetto, la aggiungiamo
+                    if (!colorGroups[colorCategory]) {
+                        colorGroups[colorCategory] = {
+                            id: paintId,
+                            color: colorHex,
+                            description: colorDescription
+                        };
+                    }
+                });
+
+                // Convertiamo l'oggetto in un array per il color picker
+                return Object.values(colorGroups);
             })
             .catch(error => {
                 console.error("❌ Errore nel caricamento dei colori:", error);
@@ -231,7 +247,9 @@
     }
 
 
+
     // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker
+    // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
     // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
     colorCarBtn.addEventListener("click", function () {
         const make = marcaDropdown.value;
@@ -250,7 +268,7 @@
                 return;
             }
 
-            // Creazione dinamica di un color-picker visivo
+            // Creazione dinamica del color picker con categorie raggruppate
             let colorPickerContainer = document.createElement("div");
             colorPickerContainer.id = "colorPickerContainer";
             colorPickerContainer.style.position = "absolute";
@@ -266,16 +284,15 @@
             colorPickerContainer.style.gap = "10px";
             colorPickerContainer.style.zIndex = "1000";
 
-            // Aggiungi ogni colore come bottone selezionabile
             colors.forEach(color => {
                 let colorButton = document.createElement("button");
                 colorButton.style.backgroundColor = color.color;
-                colorButton.style.width = "30px";
-                colorButton.style.height = "30px";
+                colorButton.style.width = "40px";
+                colorButton.style.height = "40px";
                 colorButton.style.border = "2px solid white";
                 colorButton.style.borderRadius = "50%";
                 colorButton.style.cursor = "pointer";
-                colorButton.title = color.description;
+                colorButton.title = color.description; // Mostra il nome del colore al passaggio del mouse
 
                 colorButton.addEventListener("click", function () {
                     document.body.removeChild(colorPickerContainer); // Chiudi il picker dopo la selezione
@@ -289,6 +306,7 @@
             document.body.appendChild(colorPickerContainer);
         });
     });
+
 
 
     // 🎨 Aggiorna l'immagine con il colore selezionato
