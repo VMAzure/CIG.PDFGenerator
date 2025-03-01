@@ -69,30 +69,28 @@ label {
 
 /* 📌 Stile per il Canvas */
 .canvas-container {
-    width: 100%;
-    max-width: 800px;
-    min-height: 600px;
-    overflow: hidden;
+    position: relative; /* Importante per posizionare i figli */
+    width: 800px; /* larghezza fissa del contenitore */
+    height: auto;
     margin-top: 30px;
-    padding-bottom: 10px;
-    gap: 10px;
 }
 
-/* Video di sfondo */
+
 .canvas-background {
+    position: absolute; /* assoluta rispetto al contenitore padre */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Copre tutta l'area del contenitore */
+    z-index: -1;
+    object-fit: cover; /* il video mantiene proporzioni corrette */
+}
+
+#imageCanvas {
     position: relative;
     width: 100%;
     height: auto;
-    max-width: 800px;
-    z-index: -1; /* Mette il video sotto il canvas */
-}
-
-/* Canvas sopra il video */
-#imageCanvas {
-    width: 800px; /* Dimensione fissa fin dall'inizio */
-    height: auto;
-    position: relative;
-    z-index: 1;
+    z-index: 1; /* Sopra al video */
     background-color: transparent;
 }
 
