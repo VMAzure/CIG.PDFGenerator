@@ -78,14 +78,9 @@ label {
     gap: 10px;
 }
 
-
-
-
 /* Video di sfondo */
 .canvas-background {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
     height: auto;
     max-width: 800px;
