@@ -336,7 +336,10 @@
     }
 
     // ✅ Scarica l'immagine attuale dal canvas con sfondo trasparente
-    downloadImageBtn.addEventListener("click", function () {
+    downloadImageBtn.removeEventListener("click", handleDownloadImage); // 🔄 Rimuove eventuali eventi duplicati
+    downloadImageBtn.addEventListener("click", handleDownloadImage);
+
+    function handleDownloadImage() {
         if (!canvas) return;
 
         const tempCanvas = document.createElement("canvas");
@@ -347,6 +350,7 @@
         tempCanvas.height = canvas.height;
 
         // Disegna solo l'immagine dell'auto, escludendo lo sfondo
+        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height); // 🔄 Assicura che lo sfondo sia trasparente
         tempCtx.drawImage(canvas, 0, 0);
 
         // Crea il file PNG
@@ -359,7 +363,27 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-    });
+    }
+    // ✅ Chiude l'app o torna alla schermata precedente
+    function closeApp() {
+        if (window.navigator.userAgent.includes("Android") || window.navigator.userAgent.includes("iOS")) {
+            window.close(); // Prova a chiudere l'app (potrebbe non funzionare su tutti i browser)
+        } else {
+            history.back(); // Torna alla schermata precedente se chiusura non è possibile
+        }
+    }
 
+    // ✅ Richiede la modalità schermo intero automaticamente
+    document.addEventListener("DOMContentLoaded", function () {
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+            document.documentElement.webkitRequestFullscreen();
+        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            document.documentElement.msRequestFullscreen();
+        }
+    });
 
 });

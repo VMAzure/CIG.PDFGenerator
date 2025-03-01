@@ -201,3 +201,37 @@ label {
         opacity: 0.3;
         cursor: not-allowed;
     }
+/* 📌 Stile della barra superiore */
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+}
+
+/* Titolo in bianco */
+.app-title {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Pulsante di chiusura (X) */
+.close-app-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+    .close-app-btn:hover {
+        color: red;
+    }
