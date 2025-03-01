@@ -35,29 +35,27 @@
             <button id="genera" class="btn-generate">Genera Immagine</button>
         </div>
 
-        <!-- Colonna destra: Canvas + Slider -->
+        <!-- Colonna destra: Canvas + Video -->
         <div class="canvas-wrapper">
             <div class="canvas-container">
                 <h2>Anteprima Immagine</h2>
 
                 <!-- Video iniziale -->
                 <video id="previewVideo" autoplay loop muted playsinline style="max-width: 800px;">
-                    <source src="video/preview.mp4" type="video/mp4">
+                    <source src="/video/preview.mp4" type="video/mp4">
                     Il tuo browser non supporta il tag video.
                 </video>
 
-                <!-- Canvas inizialmente nascosto -->
-                <canvas id="imageCanvas" style="max-width: 800px; display: none;"></canvas>
-            </div>
-                <!-- Slider Rotazione (orizzontale sotto al canvas, disattivato inizialmente) -->
-            <label for="angleSlider">Rotazione Auto:</label>
-            <input type="range" id="angleSlider" min="200" max="231" value="203" class="slider" disabled>
+                <!-- Video di sfondo del canvas -->
+                <video id="backgroundVideo" autoplay loop muted playsinline class="canvas-background" style="display: none;">
+                    <source src="/video/canvas.mp4" type="video/mp4">
+                </video>
 
-            <!-- Slider verticale accanto al canvas per spostare l'immagine 
-            <input type="range" id="verticalSlider" min="-50" max="50" value="0"
-                   class="slider-vertical">
-                   -->
+                <!-- Canvas inizialmente nascosto -->
+                <canvas id="imageCanvas" style="max-width: 800px; display: none; position: absolute;"></canvas>
+            </div>
         </div>
+
     </div>
 </div>
 
