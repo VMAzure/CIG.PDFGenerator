@@ -136,11 +136,7 @@
         };
     }
 
-    // 🔄 Aggiorna valori slidebar in tempo reale
-    angleSlider.oninput = () => { angleValue.textContent = angleSlider.value; };
-    zoomSlider.oninput = () => { zoomValue.textContent = zoomSlider.value; };
-    groundSlider.oninput = () => { groundValue.textContent = groundSlider.value; };
-
+    
     // 🚀 Inizializza
     
     let cachedImages = {}; // 🔹 Oggetto per tenere in cache le immagini di ogni angolo
