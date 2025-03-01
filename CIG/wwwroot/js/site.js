@@ -73,10 +73,13 @@
             });
     }
 
-    // 🎯 Popolamento dinamico dei dropdown
+    // 🎯 Popolamento dinamico dei dropdown con aggiornamento del titolo
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
+
+        // ✅ Aggiorna il titolo con la Marca selezionata
+        document.getElementById("selectedMake").textContent = selectedMake.toUpperCase();
 
         modelloDropdown.innerHTML = '<option value="" selected>Seleziona un modello</option>';
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
@@ -90,11 +93,15 @@
         let selectedModel = modelloDropdown.value;
         if (!selectedMake || !selectedModel) return;
 
+        // ✅ Aggiorna il titolo con il Modello selezionato
+        document.getElementById("selectedModel").textContent = selectedModel;
+
         versioneDropdown.innerHTML = '<option value="" selected>Seleziona una versione</option>';
         modelVariantDropdown.innerHTML = '<option value="" selected>Seleziona una variante</option>';
 
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
+
 
     versioneDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
