@@ -120,11 +120,10 @@
                     return;
                 }
 
-                // ✅ Nasconde il video iniziale e mostra il canvas solo alla prima immagine caricata
-                if (angle === 200) {
-                    previewVideo.style.display = "none";
-                    canvas.style.display = "block";
-                }
+                // ✅ Nasconde il video di anteprima e mostra il video di sfondo
+                previewVideo.style.display = "none";
+                backgroundVideo.style.display = "block";
+                canvas.style.display = "block";
 
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -132,6 +131,7 @@
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
             };
+
 
             img.onerror = function () {
                 console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
