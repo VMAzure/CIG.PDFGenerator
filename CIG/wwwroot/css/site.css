@@ -99,7 +99,7 @@ label {
 /* 🎚️ Slider Orizzontale per Rotazione 360° */
 #angleSlider {
     width: 100%;
-    margin-top: 10px; /* Mantiene spazio tra il canvas e lo slider */
+    margin-top: 5px; /* Mantiene spazio tra il canvas e lo slider */
     padding-bottom: 5px; /* Aggiunge spazio sotto lo slider per evitare tagli */
     -webkit-appearance: none;
     appearance: none;
