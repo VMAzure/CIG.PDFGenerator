@@ -72,7 +72,7 @@ label {
     position: relative;
     width: 800px; /* Larghezza fissa iniziale */
     max-width: 100%; /* Responsivo su mobile */
-    height: auto;
+    height: 450px;
     overflow: hidden;
 }
 
