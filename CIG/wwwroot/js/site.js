@@ -105,6 +105,15 @@
         ctx.drawImage(img, 0, offsetY, canvas.width, canvas.height);
     });
 
+    // 🖼️ Scarica tutte le immagini nella cache locale per rotazione
+    function preloadImages(make, modelFamily, modelRange) {
+        for (let angle = 200; angle <= 231; angle++) {
+            let img = new Image();
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+            cachedImages[angle] = img;
+        }
+    }
+
     // 🎨 Genera immagine e abilita slider
     function generateImage() {
         const make = marcaDropdown.value;
