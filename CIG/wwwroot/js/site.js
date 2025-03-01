@@ -448,16 +448,20 @@
 
     // Mostra la vista speciale corrente sul canvas
     function displaySpecialImage(index) {
-        if (!specialImages[index].complete) {
-            specialImages[index].onload = function () {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(specialImages[index], 0, 0, canvas.width, canvas.height);
-            };
-        } else {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(specialImages[index], 0, 0, canvas.width, canvas.height);
-        }
+        const images = document.querySelectorAll("#specialViewContainer img");
+        const total = images.length;
+
+        images.forEach((img, idx) => {
+            img.classList.remove("active", "exit");
+
+            if (idx === index) {
+                img.classList.add("active");
+            } else if (idx === (index - 1 + total) % total) {
+                img.classList.add("exit");
+            }
+        });
     }
+
 
     // Eventi click per i pulsanti di navigazione
     document.getElementById("prevSpecial").addEventListener("click", function () {
