@@ -23,7 +23,7 @@
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    let cachedImages = {};
+    let cachedImages = {}; // Cache locale per immagini degli angoli
     let marcheCaricate = false;
 
     function loadMarche() {
@@ -73,7 +73,6 @@
             });
     }
 
-
     // 🎯 Popolamento dinamico dei dropdown
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
@@ -108,6 +107,24 @@
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}&modelRange=${selectedVersion}`, modelVariantDropdown, "modelVariant");
     });
 
+    function preloadImages(make, modelFamily, modelRange, modelVariant) {
+        for (let angle = 200; angle <= 231; angle++) {
+            let img = new Image();
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+
+            img.onload = function () {
+                cachedImages[angle] = img;
+                console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
+            };
+
+            img.onerror = function () {
+                console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
+            };
+
+            cachedImages[angle] = img;
+        }
+    }
+
     function generateImage() {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
@@ -118,6 +135,8 @@
             alert("Seleziona tutti i campi prima di generare l'immagine!");
             return;
         }
+
+        preloadImages(make, modelFamily, modelRange, modelVariant);
 
         const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
@@ -136,8 +155,20 @@
         };
     }
 
+    angleSlider.addEventListener("input", function () {
+        let angle = angleSlider.value;
+
+        if (!cachedImages[angle] || !cachedImages[angle].complete) {
+            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
+            return;
+        }
+
+        let img = cachedImages[angle];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    });
+
     generaBtn.addEventListener("click", generateImage);
 
     loadMarche();
 });
-
