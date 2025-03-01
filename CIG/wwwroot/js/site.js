@@ -5,28 +5,36 @@
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
     // 📌 Recuperiamo gli elementi della UI
-    const marcaDropdown = document.getElementById("marca");
-    const modelloDropdown = document.getElementById("modello");
-    const versioneDropdown = document.getElementById("versione");
-    const zoomTypeDropdown = document.getElementById("zoomType");
+    const uiElements = {
+        marcaDropdown: document.getElementById("marca"),
+        modelloDropdown: document.getElementById("modello"),
+        versioneDropdown: document.getElementById("versione"),
+        zoomTypeDropdown: document.getElementById("zoomType"),
+        angleSlider: document.getElementById("angleSlider"),
+        zoomSlider: document.getElementById("zoomLevel"),
+        verticalSlider: document.getElementById("verticalSlider"),
+        generaBtn: document.getElementById("genera"),
+        canvas: document.getElementById("imageCanvas")
+    };
 
-    const angleSlider = document.getElementById("angleSlider");
-    const zoomSlider = document.getElementById("zoomLevel");
-    const verticalSlider = document.getElementById("verticalSlider");
-
-    const generaBtn = document.getElementById("genera");
-    const canvas = document.getElementById("imageCanvas");
-
-    // 🔍 Verifica che tutti gli elementi siano presenti nel DOM
-    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !zoomTypeDropdown ||
-        !angleSlider || !zoomSlider || !verticalSlider || !generaBtn || !canvas) {
-        console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
-        return;
+    let missingElements = [];
+    for (const [key, value] of Object.entries(uiElements)) {
+        if (!value) {
+            missingElements.push(key);
+        }
     }
 
-    const ctx = canvas.getContext("2d");
-    let cachedImages = {}; // Cache immagini per rotazione
-    let marcheCaricate = false; // Evita doppie chiamate
+    if (missingElements.length > 0) {
+        console.error(`❌ ERRORE: I seguenti elementi NON sono stati trovati nel DOM: ${missingElements.join(", ")}`);
+        return;
+    } else {
+        console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
+    }
+
+    const ctx = uiElements.canvas.getContext("2d");
+
+    // 🚀 Se nessun errore, possiamo proseguire con il codice normalmente...
+});
 
     // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
