@@ -162,6 +162,8 @@
             angleSlider.disabled = false;  // ✅ Abilita slider rotazione
             colorCarBtn.disabled = false;  // ✅ Abilita il bottone "Colora l'Auto"
         };
+        downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
+
     }
 
 
@@ -324,5 +326,40 @@
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         };
     }
+
+    const downloadImageBtn = document.getElementById("downloadImageBtn");
+    downloadImageBtn.disabled = true; // Disattivato finché non viene generata un'immagine
+
+    // ✅ Abilita il bottone dopo la generazione dell'immagine
+    function enableDownloadButton() {
+        downloadImageBtn.disabled = false;
+    }
+
+    // ✅ Scarica l'immagine attuale dal canvas con sfondo trasparente
+    downloadImageBtn.addEventListener("click", function () {
+        if (!canvas) return;
+
+        const tempCanvas = document.createElement("canvas");
+        const tempCtx = tempCanvas.getContext("2d");
+
+        // Imposta la stessa dimensione del canvas originale
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+
+        // Disegna solo l'immagine dell'auto, escludendo lo sfondo
+        tempCtx.drawImage(canvas, 0, 0);
+
+        // Crea il file PNG
+        const image = tempCanvas.toDataURL("image/png");
+
+        // Crea un link per il download
+        const link = document.createElement("a");
+        link.href = image;
+        link.download = "auto_configurata.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+
 
 });
