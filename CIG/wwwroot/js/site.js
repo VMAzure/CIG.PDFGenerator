@@ -248,11 +248,8 @@
             });
     }
 
-
-
-    // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker
     // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
-    // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
+    // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker con i colori disponibili
     colorCarBtn.addEventListener("click", function () {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
@@ -270,7 +267,13 @@
                 return;
             }
 
-            // Creazione dinamica del color picker con categorie raggruppate
+            // Se esiste già un color picker aperto, rimuovilo
+            const existingColorPicker = document.getElementById("colorPickerContainer");
+            if (existingColorPicker) {
+                existingColorPicker.remove();
+            }
+
+            // Creazione dinamica del color picker
             let colorPickerContainer = document.createElement("div");
             colorPickerContainer.id = "colorPickerContainer";
             colorPickerContainer.style.position = "absolute";
@@ -297,8 +300,8 @@
                 colorButton.title = color.description; // Mostra il nome del colore al passaggio del mouse
 
                 colorButton.addEventListener("click", function () {
-                    document.body.removeChild(colorPickerContainer); // Chiudi il picker dopo la selezione
                     updateCarColor(make, modelFamily, modelRange, modelVariant, color.id);
+                    colorPickerContainer.remove(); // Chiude il color picker immediatamente
                 });
 
                 colorPickerContainer.appendChild(colorButton);
@@ -308,8 +311,6 @@
             document.body.appendChild(colorPickerContainer);
         });
     });
-
-
 
     // 🎨 Aggiorna l'immagine con il colore selezionato
     function updateCarColor(make, modelFamily, modelRange, modelVariant, selectedColor) {
@@ -350,53 +351,25 @@
         tempCanvas.height = canvas.height;
 
         // Disegna solo l'immagine dell'auto, escludendo lo sfondo
-        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height); // 🔄 Assicura che lo sfondo sia trasparente
+        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
         tempCtx.drawImage(canvas, 0, 0);
 
         // Crea il file PNG
         const image = tempCanvas.toDataURL("image/png");
 
-        // Crea un link per il download
+        // Crea un link per il download e rimuove eventuali eventi duplicati
+        const existingLink = document.getElementById("downloadLink");
+        if (existingLink) {
+            existingLink.remove();
+        }
+
         const link = document.createElement("a");
+        link.id = "downloadLink";
         link.href = image;
         link.download = "auto_configurata.png";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     }
-        
+            
 });
-
-// ✅ Chiusura dell'app con la "X"
-window.closeApp = function () {
-    console.log("🔴 Tentativo di chiudere l'app...");
-    if (window.navigator.userAgent.includes("Android") || window.navigator.userAgent.includes("iOS")) {
-        window.close(); // Chiude l'app su mobile (potrebbe non funzionare su tutti i browser)
-    } else {
-        window.history.back(); // Torna alla schermata precedente se la chiusura non è possibile
-    }
-};
-
-
-// ✅ Avvia la modalità schermo intero automaticamente
-// ✅ Avvia la modalità schermo intero automaticamente
-window.requestFullScreen = function () {
-    console.log("🟢 Richiesta modalità fullscreen...");
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.warn("⚠️ Impossibile avviare il fullscreen automaticamente:", err);
-        });
-    } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-    }
-};
-
-// ✅ Chiamata immediata per avviare il fullscreen appena la pagina viene caricata
-window.onload = function () {
-    requestFullScreen();
-};
-
