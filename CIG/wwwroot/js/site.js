@@ -370,13 +370,12 @@
         const link = document.createElement("a");
         link.id = "downloadLink";
         link.href = image;
-        link.download = "auto_configurata.png";
+        link.download = "Azure_CIG.png";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
     }
-
-        
+      
 });
 
 // ✅ Chiusura dell'app con la "X"
