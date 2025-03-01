@@ -1,4 +1,8 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿let make, modelFamily, modelRange, modelVariant;
+let selectedColorId = null;  // Colore scelto
+
+
+document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ DOM completamente caricato.");
 
     const customerKey = "it-azureautomotive";
@@ -133,10 +137,10 @@
     }
 
     function generateImage() {
-        const make = marcaDropdown.value;
-        const modelFamily = modelloDropdown.value;
-        const modelRange = versioneDropdown.value;
-        const modelVariant = modelVariantDropdown.value;
+        make = marcaDropdown.value;
+        modelFamily = modelloDropdown.value;
+        modelRange = versioneDropdown.value;
+        modelVariant = modelVariantDropdown.value;
 
         if (!make || !modelFamily || !modelRange || !modelVariant) {
             alert("Seleziona tutti i campi prima di generare l'immagine!");
@@ -316,6 +320,8 @@
 
     // 🎨 Aggiorna l'immagine con il colore selezionato
     function updateCarColor(make, modelFamily, modelRange, modelVariant, selectedColor) {
+        selectedColorId = selectedColor; // salva il colore scelto globalmente
+
         const loader = document.getElementById("loader");
         loader.style.display = "block"; // ✅ Mostra il loader
 
@@ -448,19 +454,30 @@
 
     // Mostra la vista speciale corrente sul canvas
     function displaySpecialImage(index) {
-        const images = document.querySelectorAll("#specialViewContainer img");
-        const total = images.length;
+        const loader = document.getElementById("loader");
+        loader.style.display = "block"; // ✅ Mostra loader
 
-        images.forEach((img, idx) => {
-            img.classList.remove("active", "exit");
+        const angle = specialImages[index];
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${modelVariantDropdown.value}&paintId=${selectedColorId}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=1200`;
 
-            if (idx === index) {
-                img.classList.add("active");
-            } else if (idx === (index - 1 + total) % total) {
-                img.classList.add("exit");
-            }
-        });
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            loader.style.display = "none"; // ✅ Nascondi loader
+        };
+
+        img.onerror = function () {
+            alert("Errore nel caricamento dell'immagine speciale.");
+            loader.style.display = "none";
+        };
     }
+
 
 
     // Eventi click per i pulsanti di navigazione
