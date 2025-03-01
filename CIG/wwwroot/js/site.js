@@ -105,10 +105,42 @@
         ctx.drawImage(img, 0, offsetY, canvas.width, canvas.height);
     });
 
-    // 🚀 Collega il bottone "Genera Immagine"
+    // 🎨 Genera immagine e abilita slider
+    function generateImage() {
+        const make = marcaDropdown.value;
+        const modelFamily = modelloDropdown.value;
+        const modelRange = versioneDropdown.value;
+        const zoomType = zoomTypeDropdown.value;
+        const zoomLevel = zoomSlider.value;
+
+        if (!make || !modelFamily || !modelRange) {
+            alert("Seleziona tutti i campi prima di generare l'immagine!");
+            return;
+        }
+
+        // 📥 Precarica immagini per la rotazione
+        preloadImages(make, modelFamily, modelRange);
+
+        // 🖼️ Mostra l'immagine iniziale
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
+        };
+    }
+
+    // 🚀 Collega il bottone "Genera Immagine" SOLO DOPO aver dichiarato la funzione
     generaBtn.addEventListener("click", generateImage);
 
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
+
 });
 
