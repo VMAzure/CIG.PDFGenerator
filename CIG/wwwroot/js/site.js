@@ -4,37 +4,30 @@
     const customerKey = "it-azureautomotive";
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
-    // 📌 Recuperiamo gli elementi della UI
-    const uiElements = {
-        marcaDropdown: document.getElementById("marca"),
-        modelloDropdown: document.getElementById("modello"),
-        versioneDropdown: document.getElementById("versione"),
-        zoomTypeDropdown: document.getElementById("zoomType"),
-        angleSlider: document.getElementById("angleSlider"),
-        zoomSlider: document.getElementById("zoomLevel"),
-        verticalSlider: document.getElementById("verticalSlider"),
-        generaBtn: document.getElementById("genera"),
-        canvas: document.getElementById("imageCanvas")
-    };
+    // 📌 Dichiarazione degli elementi UI all'inizio
+    const marcaDropdown = document.getElementById("marca");
+    const modelloDropdown = document.getElementById("modello");
+    const versioneDropdown = document.getElementById("versione");
+    const zoomTypeDropdown = document.getElementById("zoomType");
 
-    let missingElements = [];
-    for (const [key, value] of Object.entries(uiElements)) {
-        if (!value) {
-            missingElements.push(key);
-        }
-    }
+    const angleSlider = document.getElementById("angleSlider");
+    const zoomSlider = document.getElementById("zoomLevel");
+    const verticalSlider = document.getElementById("verticalSlider");
 
-    if (missingElements.length > 0) {
-        console.error(`❌ ERRORE: I seguenti elementi NON sono stati trovati nel DOM: ${missingElements.join(", ")}`);
+    const generaBtn = document.getElementById("genera");
+    const canvas = document.getElementById("imageCanvas");
+    const ctx = canvas.getContext("2d");
+
+    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !zoomTypeDropdown ||
+        !angleSlider || !zoomSlider || !verticalSlider || !generaBtn || !canvas) {
+        console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
         return;
-    } else {
-        console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
     }
 
-    const ctx = uiElements.canvas.getContext("2d");
+    console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    // 🚀 Se nessun errore, possiamo proseguire con il codice normalmente...
-
+    let cachedImages = {};
+    let marcheCaricate = false;
 
     // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
@@ -96,46 +89,6 @@
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
 
-    // 🖼️ Precarica immagini per la rotazione
-    function preloadImages(make, modelFamily, modelRange) {
-        for (let angle = 200; angle <= 231; angle++) {
-            let img = new Image();
-            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
-            cachedImages[angle] = img;
-        }
-    }
-
-    // 🎨 Genera immagine e abilita slider
-    function generateImage() {
-        const make = marcaDropdown.value;
-        const modelFamily = modelloDropdown.value;
-        const modelRange = versioneDropdown.value;
-        const zoomType = zoomTypeDropdown.value;
-        const zoomLevel = zoomSlider.value;
-
-        if (!make || !modelFamily || !modelRange) {
-            alert("Seleziona tutti i campi prima di generare l'immagine!");
-            return;
-        }
-
-        // 📥 Precarica immagini per la rotazione
-        preloadImages(make, modelFamily, modelRange);
-
-        // 🖼️ Mostra l'immagine iniziale
-        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
-
-        let img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = imageUrl;
-        img.onload = function () {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            angleSlider.disabled = false;
-        };
-    }
-
     // 🎥 Rotazione Auto
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
@@ -158,3 +111,4 @@
     // 🚀 Avvia caricamento iniziale delle marche
     loadMarche();
 });
+
