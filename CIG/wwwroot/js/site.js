@@ -107,6 +107,9 @@
 
     // 🖼️ Scarica tutte le immagini nella cache locale per rotazione
     function preloadImages(make, modelFamily, modelRange) {
+        const previewVideo = document.getElementById("previewVideo"); // Video iniziale
+        const canvas = document.getElementById("imageCanvas");
+
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
@@ -117,13 +120,18 @@
                     return;
                 }
 
+                // ✅ Nasconde il video iniziale e mostra il canvas solo alla prima immagine caricata
+                if (angle === 200) {
+                    previewVideo.style.display = "none";
+                    canvas.style.display = "block";
+                }
+
                 canvas.width = img.width;
                 canvas.height = img.height;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
             };
-
 
             img.onerror = function () {
                 console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
@@ -132,6 +140,7 @@
             cachedImages[angle] = img;
         }
     }
+
 
     // 🎨 Genera immagine e abilita slider
     function generateImage() {
