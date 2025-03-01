@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CIG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+96445ad577e591a643cbf4af62ac3e740dcf5961")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5249fe17dc69afdd382e94c2293c561927310213")]
 [assembly: System.Reflection.AssemblyProductAttribute("CIG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CIG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -69,11 +69,11 @@ label {
 
 /* 📌 Stile per il Canvas */
 .canvas-container {
-    position: relative; /* Importante per posizionare i figli */
-    width: 100%; /* larghezza fissa del contenitore */
-    max-width: 800px;
+    position: relative;
+    width: 800px; /* Larghezza fissa iniziale */
+    max-width: 100%; /* Responsivo su mobile */
     height: auto;
-    margin-top: 30px;
+    overflow: hidden;
 }
 
 
@@ -88,13 +88,15 @@ label {
 }
 
 #imageCanvas {
-    position: relative;
+    position: absolute; /* Sovrapposti perfettamente */
+    top: 0;
+    left: 0;
     width: 100%;
     height: auto;
-    z-index: 1; /* Sopra al video */
-    background-color: transparent;
-    display: block; /* elimina spazio sotto il canvas */
+    max-width: 800px;
+    z-index: 0;
 }
+
 
 #angleSlider {
     width: 100%;
@@ -116,16 +118,16 @@ label {
     #angleSlider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 60px;
-        height: 20px;
+        width: 90px;
+        height: 30px;
         background: rgba(0,0,0,0.6);
         border-radius: 5px;
         cursor: pointer;
     }
 
     #angleSlider::-moz-range-thumb {
-        width: 60px;
-        height: 20px;
+        width: 90px;
+        height: 30px;
         background: rgba(0,0,0,0.6);
         border-radius: 5px;
         cursor: pointer;
