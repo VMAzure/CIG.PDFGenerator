@@ -12,12 +12,13 @@
     const angleSlider = document.getElementById("angleSlider"); // Solo questo rimane
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
-    const ctx = canvas ? canvas.getContext("2d") : null;
+    const ctx = canvas.getContext("2d");
 
     if (!ctx) {
         console.error("❌ ERRORE: Il contesto del canvas (`ctx`) non è stato trovato.");
         return;
     }
+
 
     // ❌ RIMOSSO: Verifica se esistono gli slider che abbiamo eliminato
     if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !angleSlider || !generaBtn || !canvas) {
@@ -111,9 +112,18 @@
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
             img.onload = function () {
-                cachedImages[angle] = img;
-                console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
+                if (!ctx) {
+                    console.error("❌ ERRORE: `ctx` non è disponibile nel momento del caricamento dell'immagine.");
+                    return;
+                }
+
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
             };
+
 
             img.onerror = function () {
                 console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
