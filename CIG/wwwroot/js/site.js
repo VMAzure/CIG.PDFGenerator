@@ -178,4 +178,78 @@
     generaBtn.addEventListener("click", generateImage);
 
     loadMarche();
+
+    const colorCarBtn = document.getElementById("colorCarBtn");
+    const colorPicker = document.getElementById("colorPicker");
+
+    colorCarBtn.disabled = true; // Disattivato finché non viene generata un'immagine
+
+    // ✅ Abilita il bottone dopo la generazione dell'immagine
+    function enableColorButton() {
+        colorCarBtn.disabled = false;
+    }
+
+    // 🎨 Recupera i colori disponibili dall'API di IMAGIN
+    function fetchAvailableColors(make, modelFamily, modelRange, modelVariant) {
+        const colorApiUrl = `https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}`;
+
+        return fetch(colorApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.preselect || !data.preselect.options || !data.preselect.options.paintId) {
+                    throw new Error("❌ Nessun colore disponibile per questa auto.");
+                }
+                return data.preselect.options.paintId; // Restituisce la lista dei colori disponibili
+            })
+            .catch(error => {
+                console.error("❌ Errore nel caricamento dei colori:", error);
+                return [];
+            });
+    }
+
+    // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker
+    colorCarBtn.addEventListener("click", function () {
+        const make = marcaDropdown.value;
+        const modelFamily = modelloDropdown.value;
+        const modelRange = versioneDropdown.value;
+        const modelVariant = modelVariantDropdown.value;
+
+        if (!make || !modelFamily || !modelRange || !modelVariant) {
+            alert("⚠️ Seleziona tutti i parametri prima di colorare l'auto!");
+            return;
+        }
+
+        fetchAvailableColors(make, modelFamily, modelRange, modelVariant).then(colors => {
+            if (colors.length === 0) {
+                alert("⚠️ Nessun colore disponibile per questa auto.");
+                return;
+            }
+
+            // Mostra il color picker con il primo colore disponibile come default
+            colorPicker.value = `#${colors[0]}`;
+            colorPicker.click();
+
+            // Quando l'utente seleziona un colore, aggiorna l'immagine
+            colorPicker.addEventListener("input", function () {
+                updateCarColor(make, modelFamily, modelRange, modelVariant, colorPicker.value);
+            });
+        });
+    });
+
+    // 🎨 Aggiorna l'immagine con il colore selezionato
+    function updateCarColor(make, modelFamily, modelRange, modelVariant, selectedColor) {
+        const currentAngle = parseInt(angleSlider.value); // Usa l'angolo attuale della slidebar
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&paintId=${selectedColor}&angle=${currentAngle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+    }
+
 });
