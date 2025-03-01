@@ -15,7 +15,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    padding-top: 60px; /* Aggiunge spazio per evitare sovrapposizioni */
 }
+
+
 
 /* 📌 Struttura del layout */
 .container {
@@ -87,10 +90,12 @@ label {
     z-index: -1; /* Mette il video sotto il canvas */
 }
 
-/* Canvas sopra il video */
+/* 📌 Altezza maggiore per il canvas */
 #imageCanvas {
-    width: 800px; /* Dimensione fissa fin dall'inizio */
+    max-width: 800px;
+    width: 100%;
     height: auto;
+    min-height: 500px; /* Aumenta l'altezza del canvas */
     position: relative;
     z-index: 1;
     background-color: transparent;

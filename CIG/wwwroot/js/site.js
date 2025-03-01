@@ -364,26 +364,30 @@
         link.click();
         document.body.removeChild(link);
     }
+
     // ✅ Chiude l'app o torna alla schermata precedente
     function closeApp() {
         if (window.navigator.userAgent.includes("Android") || window.navigator.userAgent.includes("iOS")) {
             window.close(); // Prova a chiudere l'app (potrebbe non funzionare su tutti i browser)
         } else {
-            history.back(); // Torna alla schermata precedente se chiusura non è possibile
+            window.history.back(); // Torna alla schermata precedente se la chiusura non è possibile
         }
     }
 
-    // ✅ Richiede la modalità schermo intero automaticamente
+    // ✅ Avvia la modalità schermo intero automaticamente
     document.addEventListener("DOMContentLoaded", function () {
         if (document.documentElement.requestFullscreen) {
-            document.documentElement.requestFullscreen();
-        } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            document.documentElement.requestFullscreen().catch(err => {
+                console.warn("⚠️ Impossibile avviare il fullscreen automaticamente:", err);
+            });
+        } else if (document.documentElement.mozRequestFullScreen) {
             document.documentElement.mozRequestFullScreen();
-        } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, Opera
+        } else if (document.documentElement.webkitRequestFullscreen) {
             document.documentElement.webkitRequestFullscreen();
-        } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        } else if (document.documentElement.msRequestFullscreen) {
             document.documentElement.msRequestFullscreen();
         }
     });
+
 
 });
