@@ -165,6 +165,23 @@
         downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
 
     }
+    // Carica le miniature degli angoli speciali
+    function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
+        const angles = [17, 21, 25, 27, 51, 33];
+        const container = document.getElementById("specialThumbsContainer");
+        const thumbs = container.querySelectorAll(".thumb-speciale");
+
+        thumbs.forEach(thumb => {
+            const angle = thumb.getAttribute("data-angle");
+            const thumbUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=400`;
+
+            thumb.src = thumbUrl;
+
+            thumb.onclick = function () {
+                updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle);
+            };
+        });
+    }
 
 
     angleSlider.addEventListener("input", function () {
@@ -411,23 +428,6 @@
         specialThumbsContainer.style.display = "flex";
     });
 
-        // Carica le miniature degli angoli speciali
-    function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
-        const angles = [17, 21, 25, 27, 51, 33];
-        const container = document.getElementById("specialThumbsContainer");
-        const thumbs = container.querySelectorAll(".thumb-speciale");
-
-        thumbs.forEach(thumb => {
-            const angle = thumb.getAttribute("data-angle");
-            const thumbUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=400`;
-
-            thumb.src = thumbUrl;
-
-            thumb.onclick = function () {
-                updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle);
-            };
-        });
-    }
 
     // Aggiorna canvas con l'angolo speciale cliccato
     function updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle) {

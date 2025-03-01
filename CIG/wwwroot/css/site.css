@@ -74,6 +74,7 @@ label {
     max-width: 100%; /* Responsivo su mobile */
     aspect-ratio: 16 / 9;
     overflow: hidden;
+    margin-top: 15px;
 }
 
 
