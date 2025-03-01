@@ -158,9 +158,12 @@
             canvas.height = img.height;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            angleSlider.disabled = false;
+
+            angleSlider.disabled = false;  // ✅ Abilita slider rotazione
+            colorCarBtn.disabled = false;  // ✅ Abilita il bottone "Colora l'Auto"
         };
     }
+
 
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
