@@ -72,7 +72,7 @@ label {
     position: relative;
     width: 800px; /* Larghezza fissa iniziale */
     max-width: 100%; /* Responsivo su mobile */
-    height: 450px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
 }
 
@@ -92,7 +92,7 @@ label {
     top: 0;
     left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     max-width: 800px;
     z-index: 0;
 }
