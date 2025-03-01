@@ -193,24 +193,46 @@
     }
 
     // 🎨 Recupera i colori disponibili dall'API di IMAGIN
+    // 🎨 Recupera i colori disponibili dall'API di IMAGIN
     function fetchAvailableColors(make, modelFamily, modelRange, modelVariant) {
         const colorApiUrl = `https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}`;
 
+        console.log(`📡 Chiamata API per i colori: ${colorApiUrl}`); // Debug URL
+
         return fetch(colorApiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.preselect || !data.preselect.options || !data.preselect.options.paintId) {
-                    throw new Error("❌ Nessun colore disponibile per questa auto.");
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`❌ Errore API (${response.status}): ${response.statusText}`);
                 }
-                return data.preselect.options.paintId; // Restituisce la lista dei colori disponibili
+                return response.json();
+            })
+            .then(data => {
+                console.log("📥 Risposta API colori:", data); // Debug JSON ricevuto
+
+                if (!data.paintData || !data.paintData.paintCombinations) {
+                    throw new Error("⚠️ Nessun colore disponibile per questa auto.");
+                }
+
+                // Estrarre gli ID dei colori disponibili
+                let colorOptions = Object.keys(data.paintData.paintCombinations).map(paintId => ({
+                    id: paintId,
+                    color: data.paintData.paintCombinations[paintId].paintSwatch.primary.midLight, // Usa la tonalità media per la preview
+                    description: data.paintData.paintCombinations[paintId].mapped
+                        ? Object.values(data.paintData.paintCombinations[paintId].mapped)[0].paintDescription
+                        : "Senza Nome"
+                }));
+
+                return colorOptions;
             })
             .catch(error => {
                 console.error("❌ Errore nel caricamento dei colori:", error);
-                return [];
+                return []; // Ritorna un array vuoto per evitare crash
             });
     }
 
+
     // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker
+    // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
     colorCarBtn.addEventListener("click", function () {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
@@ -228,16 +250,46 @@
                 return;
             }
 
-            // Mostra il color picker con il primo colore disponibile come default
-            colorPicker.value = `#${colors[0]}`;
-            colorPicker.click();
+            // Creazione dinamica di un color-picker visivo
+            let colorPickerContainer = document.createElement("div");
+            colorPickerContainer.id = "colorPickerContainer";
+            colorPickerContainer.style.position = "absolute";
+            colorPickerContainer.style.top = "50px";
+            colorPickerContainer.style.left = "50%";
+            colorPickerContainer.style.transform = "translateX(-50%)";
+            colorPickerContainer.style.background = "#333";
+            colorPickerContainer.style.padding = "10px";
+            colorPickerContainer.style.borderRadius = "5px";
+            colorPickerContainer.style.display = "flex";
+            colorPickerContainer.style.flexWrap = "wrap";
+            colorPickerContainer.style.justifyContent = "center";
+            colorPickerContainer.style.gap = "10px";
+            colorPickerContainer.style.zIndex = "1000";
 
-            // Quando l'utente seleziona un colore, aggiorna l'immagine
-            colorPicker.addEventListener("input", function () {
-                updateCarColor(make, modelFamily, modelRange, modelVariant, colorPicker.value);
+            // Aggiungi ogni colore come bottone selezionabile
+            colors.forEach(color => {
+                let colorButton = document.createElement("button");
+                colorButton.style.backgroundColor = color.color;
+                colorButton.style.width = "30px";
+                colorButton.style.height = "30px";
+                colorButton.style.border = "2px solid white";
+                colorButton.style.borderRadius = "50%";
+                colorButton.style.cursor = "pointer";
+                colorButton.title = color.description;
+
+                colorButton.addEventListener("click", function () {
+                    document.body.removeChild(colorPickerContainer); // Chiudi il picker dopo la selezione
+                    updateCarColor(make, modelFamily, modelRange, modelVariant, color.id);
+                });
+
+                colorPickerContainer.appendChild(colorButton);
             });
+
+            // Aggiungi il color picker alla pagina
+            document.body.appendChild(colorPickerContainer);
         });
     });
+
 
     // 🎨 Aggiorna l'immagine con il colore selezionato
     function updateCarColor(make, modelFamily, modelRange, modelVariant, selectedColor) {
