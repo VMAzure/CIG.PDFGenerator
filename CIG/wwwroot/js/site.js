@@ -161,9 +161,11 @@
 
             angleSlider.disabled = false;  // ✅ Abilita slider rotazione
             colorCarBtn.disabled = false;  // ✅ Abilita il bottone "Colora l'Auto"
-        };
-        downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
+            downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
 
+            loadSpecialThumbs(make, modelFamily, modelRange, modelVariant);
+
+        };
     }
     // Carica le miniature degli angoli speciali
     function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
@@ -444,10 +446,5 @@
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         };
     }
-
-    // Carica automaticamente le miniature quando generi l'immagine principale
-    // Aggiorna la funzione generateImage aggiungendo questa chiamata alla fine:
-    loadSpecialThumbs(make, modelFamily, modelRange, modelVariant);
-
 
 });
