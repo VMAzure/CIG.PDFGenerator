@@ -21,9 +21,10 @@
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    let cachedImages = {};
+    let cachedImages = {}; // Cache locale per immagini
     let marcheCaricate = false;
 
+    // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
         if (marcheCaricate) return;
         marcheCaricate = true;
@@ -62,6 +63,7 @@
             });
     }
 
+    // 🎯 Eventi per i dropdown
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
@@ -81,6 +83,7 @@
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
 
+    // 🖼️ Precarica tutte le immagini nella cache locale per rotazione
     function preloadImages(make, modelFamily, modelRange) {
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
@@ -99,6 +102,7 @@
         }
     }
 
+    // 🎨 Genera immagine e abilita slider
     function generateImage() {
         const make = marcaDropdown.value;
         const modelFamily = modelloDropdown.value;
@@ -127,6 +131,20 @@
             angleSlider.disabled = false;
         };
     }
+
+    // 🎥 Cambia immagine in base allo slider di rotazione
+    angleSlider.addEventListener("input", function () {
+        let angle = angleSlider.value;
+
+        if (!cachedImages[angle] || !cachedImages[angle].complete) {
+            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
+            return;
+        }
+
+        let img = cachedImages[angle];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    });
 
     generaBtn.addEventListener("click", generateImage);
 

@@ -20,18 +20,6 @@
             <label for="versione">Versione:</label>
             <select id="versione" class="dropdown"></select>
 
-            <!-- Zoom Type 
-            <label for="zoomType">Tipo di Zoom:</label>
-            <select id="zoomType" class="dropdown">
-                <option value="relative">Relative</option>
-                <option value="fullscreen">Fullscreen</option>
-                <option value="adaptive">Adaptive</option>
-            </select>-->
-            <!-- Zoom Level 
-            <label for="zoomLevel">Livello di Zoom:</label>
-            <input type="range" id="zoomLevel" min="0" max="30" value="15" class="slider">
-            -->
-
             <button id="genera" class="btn-generate">Genera Immagine</button>
         </div>
 
@@ -47,9 +35,14 @@
                 </video>
 
                 <!-- Canvas sopra il video -->
-                <canvas id="imageCanvas" style="max-width: 800px; position: absolute;"></canvas>
+                <canvas id="imageCanvas"></canvas>
+
+                <!-- Slidebar per la rotazione sotto al canvas -->
+                <label for="angleSlider">Rotazione Auto:</label>
+                <input type="range" id="angleSlider" min="200" max="231" value="200" class="slider" disabled>
             </div>
         </div>
+
     </div>
 </div>
 
