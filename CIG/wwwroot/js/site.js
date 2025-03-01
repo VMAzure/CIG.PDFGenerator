@@ -387,17 +387,56 @@
         document.body.removeChild(link);
     }
 
+    const angleSliderContainer = document.getElementById("angleSliderContainer");
+    const specialThumbsContainer = document.getElementById("specialThumbsContainer");
+
     document.getElementById("tab360").addEventListener("click", function () {
-        this.classList.add("active");
-        document.getElementById("tabSpeciali").classList.remove("active");
-        document.getElementById("angleSlider").style.display = "block"; // mostra lo slider
+        angleSliderContainer.style.display = "block";
+        specialThumbsContainer.style.display = "none";
     });
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {
-        this.classList.add("active");
-        document.getElementById("tab360").classList.remove("active");
-        document.getElementById("angleSlider").style.display = "none"; // nasconde lo slider
+        angleSliderContainer.style.display = "none";
+        specialThumbsContainer.style.display = "flex";
     });
 
-      
+    // Carica le miniature degli angoli speciali
+    function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
+        const angles = [17, 21, 25, 27, 51, 33];
+        const container = document.getElementById("specialThumbsContainer");
+        const thumbs = container.querySelectorAll(".thumb-speciale");
+
+        thumbs.forEach(thumb => {
+            const angle = thumb.getAttribute("data-angle");
+            const thumbUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=400`;
+
+            thumb.src = thumbUrl;
+
+            thumb.onclick = function () {
+                updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle);
+            };
+        });
+    }
+
+    // Aggiorna canvas con l'angolo speciale cliccato
+    function updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle) {
+        const specialImageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=1200`;
+
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = specialImageUrl;
+
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        };
+    }
+
+    // Carica automaticamente le miniature quando generi l'immagine principale
+    // Aggiorna la funzione generateImage aggiungendo questa chiamata alla fine:
+    loadSpecialThumbs(make, modelFamily, modelRange, modelVariant);
+
+
 });
