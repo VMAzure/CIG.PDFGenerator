@@ -255,10 +255,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
     // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker con i colori disponibili
     colorCarBtn.addEventListener("click", function () {
-        const make = marcaDropdown.value;
-        const modelFamily = modelloDropdown.value;
-        const modelRange = versioneDropdown.value;
-        const modelVariant = modelVariantDropdown.value;
+        make = marcaDropdown.value;
+        modelFamily = modelloDropdown.value;
+        modelRange = versioneDropdown.value;
+        modelVariant = modelVariantDropdown.value;
 
         if (!make || !modelFamily || !modelRange || !modelVariant) {
             alert("⚠️ Seleziona tutti i parametri prima di colorare l'auto!");
