@@ -12,6 +12,12 @@
     const angleSlider = document.getElementById("angleSlider"); // Solo questo rimane
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
+    const ctx = canvas ? canvas.getContext("2d") : null;
+
+    if (!ctx) {
+        console.error("❌ ERRORE: Il contesto del canvas (`ctx`) non è stato trovato.");
+        return;
+    }
 
     // ❌ RIMOSSO: Verifica se esistono gli slider che abbiamo eliminato
     if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !angleSlider || !generaBtn || !canvas) {
