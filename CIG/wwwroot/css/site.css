@@ -74,9 +74,9 @@ label {
     flex-direction: column;
     align-items: center;
     max-width: 800px;
-    width: 100%;
+    min-height: 600%;
     overflow: hidden;
-    padding-bottom: 15px; /* Aggiunge spazio extra per lo slider */
+    padding-bottom: 10px; /* Aggiunge spazio extra per lo slider */
 }
 
 /* Video di sfondo */
@@ -90,19 +90,14 @@ label {
     z-index: -1; /* Mette il video sotto il canvas */
 }
 
-/* 📌 Altezza maggiore per il canvas */
-/* 📌 Altezza maggiore per il canvas */
+/* Canvas sopra il video */
 #imageCanvas {
-    max-width: 800px;
-    width: 100%;
+    width: 800px; /* Dimensione fissa fin dall'inizio */
     height: auto;
-    min-height: 600px; /* Aumenta l'altezza per essere più proporzionata */
-    aspect-ratio: 16 / 9; /* Mantiene proporzione rispetto alla larghezza */
     position: relative;
     z-index: 1;
     background-color: transparent;
 }
-
 
 /* 🎚️ Slider Orizzontale per Rotazione 360° */
 #angleSlider {
