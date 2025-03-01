@@ -26,7 +26,6 @@
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    let cachedImages = {};
     let marcheCaricate = false;
 
     // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
@@ -90,12 +89,21 @@
     });
 
     // 🎥 Rotazione Auto
+    // 🎥 Cambia immagine in base allo slider di rotazione
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
+
+        // Verifica se l'immagine è già stata caricata nella cache
+        if (!cachedImages[angle] || !cachedImages[angle].complete) {
+            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
+            return; // Non fare nulla se l'immagine non è ancora caricata
+        }
+
         let img = cachedImages[angle];
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     });
+
 
     // 🎥 Spostamento Verticale Auto
     verticalSlider.addEventListener("input", function () {
@@ -128,22 +136,29 @@
         }
 
         // 📥 Precarica immagini per la rotazione
-        preloadImages(make, modelFamily, modelRange);
+        let cachedImages = {}; // Cache locale per le immagini degli angoli
 
-        // 🖼️ Mostra l'immagine iniziale
-        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=${zoomType}&zoomLevel=${zoomLevel}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
+        // 🖼️ Precarica tutte le immagini nella cache locale
+        function preloadImages(make, modelFamily, modelRange) {
+            for (let angle = 200; angle <= 231; angle++) {
+                let img = new Image();
+                img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=${zoomTypeDropdown.value}&zoomLevel=${zoomSlider.value}&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd`;
 
-        let img = new Image();
-        img.crossOrigin = "anonymous";
-        img.src = imageUrl;
-        img.onload = function () {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
-        };
-    }
+                // Quando l'immagine è caricata, salviamola nella cache
+                img.onload = function () {
+                    cachedImages[angle] = img;
+                    console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
+                };
+
+                img.onerror = function () {
+                    console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
+                };
+
+                // Salviamo comunque l'oggetto immagine, anche se non è ancora caricata
+                cachedImages[angle] = img;
+            }
+        }
+
 
     // 🚀 Collega il bottone "Genera Immagine" SOLO DOPO aver dichiarato la funzione
     generaBtn.addEventListener("click", generateImage);
