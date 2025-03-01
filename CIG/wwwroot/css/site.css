@@ -282,3 +282,23 @@ label {
     transform: translate(-50%, -50%);
     z-index: 9999;
 }
+
+.tabs-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.tab {
+    background: #222;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .tab.active {
+        background: #008cff;
+    }

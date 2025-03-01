@@ -386,39 +386,18 @@
         link.click();
         document.body.removeChild(link);
     }
+
+    document.getElementById("tab360").addEventListener("click", function () {
+        this.classList.add("active");
+        document.getElementById("tabSpeciali").classList.remove("active");
+        document.getElementById("angleSlider").style.display = "block"; // mostra lo slider
+    });
+
+    document.getElementById("tabSpeciali").addEventListener("click", function () {
+        this.classList.add("active");
+        document.getElementById("tab360").classList.remove("active");
+        document.getElementById("angleSlider").style.display = "none"; // nasconde lo slider
+    });
+
       
 });
-
-// ✅ Chiusura dell'app con la "X"
-window.closeApp = function () {
-    console.log("🔴 Tentativo di chiudere l'app...");
-    if (window.navigator.userAgent.includes("Android") || window.navigator.userAgent.includes("iOS")) {
-        window.close(); // Chiude l'app su mobile (potrebbe non funzionare su tutti i browser)
-    } else {
-        window.history.back(); // Torna alla schermata precedente se la chiusura non è possibile
-    }
-};
-
-
-// ✅ Avvia la modalità schermo intero automaticamente
-// ✅ Avvia la modalità schermo intero automaticamente
-window.requestFullScreen = function () {
-    console.log("🟢 Richiesta modalità fullscreen...");
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.warn("⚠️ Impossibile avviare il fullscreen automaticamente:", err);
-        });
-    } else if (document.documentElement.mozRequestFullScreen) {
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) {
-        document.documentElement.msRequestFullscreen();
-    }
-};
-
-// ✅ Chiamata immediata per avviare il fullscreen appena la pagina viene caricata
-window.onload = function () {
-    requestFullScreen();
-};
-
