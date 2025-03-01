@@ -33,16 +33,19 @@
         marcaDropdown.innerHTML = '<option value="" selected>Caricamento...</option>';
         marcaDropdown.disabled = true;
 
-        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make", () => {
-            marcaDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una marca</option>');
-            marcaDropdown.disabled = false;
-        }).catch(error => {
-            console.error("❌ Errore durante il caricamento delle marche:", error);
-        });
+        fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make")
+            .then(() => {
+                marcaDropdown.insertAdjacentHTML("afterbegin", '<option value="" selected>Seleziona una marca</option>');
+                marcaDropdown.disabled = false;
+            })
+            .catch(error => {
+                console.error("❌ Errore durante il caricamento delle marche:", error);
+            });
+
     }
 
-    function fetchDropdownData(endpoint, dropdown, keyName, callback) {
-        fetch(endpoint)
+    function fetchDropdownData(endpoint, dropdown, keyName) {
+        return fetch(endpoint)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`❌ Errore API (${response.status}): ${response.statusText}`);
@@ -63,13 +66,13 @@
                 });
 
                 dropdown.disabled = false;
-                if (callback) callback();
             })
             .catch(error => {
                 console.error("❌ Errore nel caricamento dei dati:", error);
                 dropdown.disabled = false;
             });
     }
+
 
     // 🎯 Popolamento dinamico dei dropdown
     marcaDropdown.addEventListener("change", function () {
