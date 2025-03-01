@@ -193,7 +193,7 @@
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
     });
 
-    const verticalSlider = document.getElementById("verticalSlider");
+
 
     verticalSlider.addEventListener("input", function () {
         let offsetY = parseInt(verticalSlider.value);
