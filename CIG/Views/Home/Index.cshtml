@@ -36,26 +36,20 @@
         </div>
 
         <!-- Colonna destra: Canvas + Video -->
+        <!-- Colonna destra: Canvas + Video -->
         <div class="canvas-wrapper">
             <div class="canvas-container">
                 <h2>Anteprima Immagine</h2>
 
-                <!-- Video iniziale -->
-                <video id="previewVideo" autoplay loop muted playsinline style="max-width: 800px;">
-                    <source src="/video/preview.mp4" type="video/mp4">
-                    Il tuo browser non supporta il tag video.
-                </video>
-
                 <!-- Video di sfondo del canvas -->
-                <video id="backgroundVideo" autoplay loop muted playsinline class="canvas-background" style="display: none;">
+                <video id="backgroundVideo" autoplay loop muted playsinline class="canvas-background">
                     <source src="/video/canvas.mp4" type="video/mp4">
                 </video>
 
-                <!-- Canvas inizialmente nascosto -->
-                <canvas id="imageCanvas" style="max-width: 800px; display: none; position: absolute;"></canvas>
+                <!-- Canvas sopra il video -->
+                <canvas id="imageCanvas" style="max-width: 800px; position: absolute;"></canvas>
             </div>
         </div>
-
     </div>
 </div>
 

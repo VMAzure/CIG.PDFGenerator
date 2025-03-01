@@ -4,34 +4,26 @@
     const customerKey = "it-azureautomotive";
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
-    // 📌 Dichiarazione degli elementi UI (RIMOSSI gli slider non più necessari)
+    // 📌 Dichiarazione degli elementi UI
     const marcaDropdown = document.getElementById("marca");
     const modelloDropdown = document.getElementById("modello");
     const versioneDropdown = document.getElementById("versione");
-
-    const angleSlider = document.getElementById("angleSlider"); // Solo questo rimane
+    const angleSlider = document.getElementById("angleSlider");
     const generaBtn = document.getElementById("genera");
     const canvas = document.getElementById("imageCanvas");
     const ctx = canvas.getContext("2d");
+    const backgroundVideo = document.getElementById("backgroundVideo");
 
-    if (!ctx) {
-        console.error("❌ ERRORE: Il contesto del canvas (`ctx`) non è stato trovato.");
-        return;
-    }
-
-
-    // ❌ RIMOSSO: Verifica se esistono gli slider che abbiamo eliminato
-    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !angleSlider || !generaBtn || !canvas) {
+    if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !angleSlider || !generaBtn || !canvas || !backgroundVideo) {
         console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
         return;
     }
 
     console.log("✅ Tutti gli elementi della UI sono stati trovati correttamente.");
 
-    let cachedImages = {}; // Cache locale per le immagini degli angoli
+    let cachedImages = {};
     let marcheCaricate = false;
 
-    // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
         if (marcheCaricate) return;
         marcheCaricate = true;
@@ -45,7 +37,6 @@
         });
     }
 
-    // 🔄 Funzione per popolare dropdown
     function fetchDropdownData(endpoint, dropdown, keyName, callback) {
         fetch(endpoint)
             .then(response => response.json())
@@ -71,7 +62,6 @@
             });
     }
 
-    // 🎯 Eventi per i dropdown
     marcaDropdown.addEventListener("change", function () {
         let selectedMake = marcaDropdown.value;
         if (!selectedMake) return;
@@ -91,47 +81,15 @@
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}`, versioneDropdown, "modelRange");
     });
 
-    // 🎥 Rotazione Auto
-    angleSlider.addEventListener("input", function () {
-        let angle = angleSlider.value;
-
-        if (!cachedImages[angle] || !cachedImages[angle].complete) {
-            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
-            return;
-        }
-
-        let img = cachedImages[angle];
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    });
-
-    // 🖼️ Scarica tutte le immagini nella cache locale per rotazione
     function preloadImages(make, modelFamily, modelRange) {
-        const previewVideo = document.getElementById("previewVideo"); // Video iniziale
-        const canvas = document.getElementById("imageCanvas");
-
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
             img.onload = function () {
-                if (!ctx) {
-                    console.error("❌ ERRORE: `ctx` non è disponibile nel momento del caricamento dell'immagine.");
-                    return;
-                }
-
-                // ✅ Nasconde il video di anteprima e mostra il video di sfondo
-                previewVideo.style.display = "none";
-                backgroundVideo.style.display = "block";
-                canvas.style.display = "block";
-
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                angleSlider.disabled = false; // ✅ Abilita slider dopo il primo caricamento
+                cachedImages[angle] = img;
+                console.log(`✅ Immagine caricata in cache: angolo ${angle}`);
             };
-
 
             img.onerror = function () {
                 console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
@@ -140,6 +98,41 @@
             cachedImages[angle] = img;
         }
     }
+
+    function generateImage() {
+        const make = marcaDropdown.value;
+        const modelFamily = modelloDropdown.value;
+        const modelRange = versioneDropdown.value;
+
+        if (!make || !modelFamily || !modelRange) {
+            alert("Seleziona tutti i campi prima di generare l'immagine!");
+            return;
+        }
+
+        preloadImages(make, modelFamily, modelRange);
+
+        const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+
+        let img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = imageUrl;
+        img.onload = function () {
+            backgroundVideo.style.display = "block"; // Il video rimane sotto
+            canvas.style.display = "block"; // Il canvas appare sopra il video
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            angleSlider.disabled = false;
+        };
+    }
+
+    generaBtn.addEventListener("click", generateImage);
+
+    loadMarche();
+});
+
 
 
     // 🎨 Genera immagine e abilita slider
