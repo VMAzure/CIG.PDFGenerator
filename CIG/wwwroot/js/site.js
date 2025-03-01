@@ -315,7 +315,10 @@
 
     // 🎨 Aggiorna l'immagine con il colore selezionato
     function updateCarColor(make, modelFamily, modelRange, modelVariant, selectedColor) {
-        const currentAngle = parseInt(angleSlider.value); // Usa l'angolo attuale della slidebar
+        const loader = document.getElementById("loader");
+        loader.style.display = "block"; // ✅ Mostra il loader
+
+        const currentAngle = parseInt(angleSlider.value);
         const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&paintId=${selectedColor}&angle=${currentAngle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
         let img = new Image();
@@ -326,8 +329,16 @@
             canvas.height = img.height;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            loader.style.display = "none"; // ✅ Nascondi il loader
+        };
+
+        img.onerror = function () {
+            alert("Errore nel caricamento dell'immagine.");
+            loader.style.display = "none"; // Nasconde il loader in caso di errore
         };
     }
+
 
     const downloadImageBtn = document.getElementById("downloadImageBtn");
     downloadImageBtn.disabled = true; // Disattivato finché non viene generata un'immagine
