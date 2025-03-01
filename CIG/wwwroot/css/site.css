@@ -1,4 +1,14 @@
-﻿/* 🌙 Dark Mode e Stile Moderno */
+﻿/* 🌙 Dark Mode Navbar */
+.navbar {
+    background-color: #1e1e1e !important; /* Colore scuro */
+    border-bottom: 1px solid #444; /* Bordo più visibile */
+}
+
+    .navbar .nav-link {
+        color: white !important;
+    }
+
+/* 🌙 Dark Mode e Stile Moderno */
 body {
     background-color: #121212;
     color: #ffffff;
@@ -103,8 +113,6 @@ label {
     z-index: 2; /* Assicura che lo slider sia visibile sopra altri elementi */
 }
 
-/
-
 
     /* Stile del "Thumb" (il pallino dello slider) */
     #angleSlider::-webkit-slider-thumb {
@@ -148,3 +156,25 @@ label {
     .btn-generate:hover {
         background: linear-gradient(45deg, #007acc, #00aaff);
     }
+
+/* 📱 Responsive: Su mobile, il canvas va sotto ai controlli */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column; /* Disposizione verticale */
+        align-items: center;
+    }
+
+    .controls {
+        width: 100%; /* Adatta la larghezza su mobile */
+        margin-bottom: 20px; /* Aggiunge spazio tra i controlli e il canvas */
+    }
+
+    .canvas-wrapper {
+        width: 100%;
+    }
+
+    #imageCanvas {
+        width: 100%; /* Assicura che il canvas occupi tutta la larghezza disponibile */
+        max-width: 800px;
+    }
+}
