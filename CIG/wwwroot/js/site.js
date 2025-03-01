@@ -34,7 +34,7 @@
     const ctx = uiElements.canvas.getContext("2d");
 
     // 🚀 Se nessun errore, possiamo proseguire con il codice normalmente...
-});
+
 
     // 🎯 Carica solo le marche all'inizio UNA SOLA VOLTA
     function loadMarche() {
