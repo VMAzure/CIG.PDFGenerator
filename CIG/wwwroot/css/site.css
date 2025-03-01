@@ -70,7 +70,8 @@ label {
 /* 📌 Stile per il Canvas */
 .canvas-container {
     position: relative; /* Importante per posizionare i figli */
-    width: 800px; /* larghezza fissa del contenitore */
+    width: 100%; /* larghezza fissa del contenitore */
+    max-width: 800px;
     height: auto;
     margin-top: 30px;
 }
@@ -92,6 +93,7 @@ label {
     height: auto;
     z-index: 1; /* Sopra al video */
     background-color: transparent;
+    display: block; /* elimina spazio sotto il canvas */
 }
 
 #angleSlider {
@@ -111,24 +113,24 @@ label {
 }
 
 
-    /* Stile del "Thumb" (il pallino dello slider) */
     #angleSlider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 16px;
-        height: 16px;
-        background: white;
-        border-radius: 50%;
+        width: 60px;
+        height: 20px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 5px;
         cursor: pointer;
     }
 
     #angleSlider::-moz-range-thumb {
-        width: 16px;
-        height: 16px;
-        background: white;
-        border-radius: 50%;
+        width: 60px;
+        height: 20px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 5px;
         cursor: pointer;
     }
+
 
     /* Disattivato inizialmente */
     #angleSlider:disabled {
