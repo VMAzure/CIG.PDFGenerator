@@ -163,15 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-            angleSlider.disabled = false;  // ✅ Abilita slider rotazione
-            colorCarBtn.disabled = false;  // ✅ Abilita il bottone "Colora l'Auto"
-            downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
+            angleSlider.disabled = false;
+            colorCarBtn.disabled = false;
+            downloadImageBtn.disabled = false;
 
             preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
-
-
         };
     }
+
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
 
@@ -477,8 +476,6 @@ document.addEventListener("DOMContentLoaded", function () {
             loader.style.display = "none";
         };
     }
-
-
 
     // Eventi click per i pulsanti di navigazione
     document.getElementById("prevSpecial").addEventListener("click", function () {
