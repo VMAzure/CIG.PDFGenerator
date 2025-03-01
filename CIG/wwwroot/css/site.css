@@ -65,6 +65,7 @@ label {
     color: #ffffff;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 12px;
 }
 
 /* 📌 Stile per il Canvas */
@@ -300,3 +301,14 @@ label {
     .tab.active {
         background: #008cff;
     }
+
+.gallery-btn {
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 10;
+    transform: translateY(-50%);
+}

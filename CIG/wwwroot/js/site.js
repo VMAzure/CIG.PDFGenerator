@@ -447,4 +447,79 @@
         };
     }
 
+    let specialAngles = [17, 21, 25, 27, 51, 33];
+    let specialImages = [];
+    let currentSpecialIndex = 0;
+
+    // Carica le immagini speciali
+    function preloadSpecialImages(make, modelFamily, modelRange, modelVariant) {
+        specialImages = [];
+
+        specialAngles.forEach(angle => {
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=1200`;
+            specialImages.push(img);
+        });
+    }
+
+    // Mostra la vista speciale corrente sul canvas
+    function displaySpecialImage(index) {
+        if (!specialImages[index].complete) {
+            specialImages[index].onload = function () {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(specialImages[index], 0, 0, canvas.width, canvas.height);
+            };
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(specialImages[index], 0, 0, canvas.width, canvas.height);
+        }
+    }
+
+    // Eventi click per i pulsanti di navigazione
+    document.getElementById("prevSpecial").addEventListener("click", function () {
+        currentSpecialIndex = (currentSpecialIndex - 1 + specialImages.length) % specialImages.length;
+        displaySpecialImage(currentSpecialIndex);
+    });
+
+    document.getElementById("nextSpecial").addEventListener("click", function () {
+        currentSpecialIndex = (currentSpecialIndex + 1) % specialImages.length;
+        displaySpecialImage(currentSpecialIndex);
+    });
+
+    // Gestione tab viste speciali
+    document.getElementById("tabSpeciali").addEventListener("click", function () {
+        if (specialImages.length === 0) {
+            alert("Genera prima un'immagine in Vista 360°");
+            return;
+        }
+
+        document.getElementById("angleSliderContainer").style.display = "none";
+        document.getElementById("prevSpecial").style.display = "block";
+        document.getElementById("nextSpecial").style.display = "block";
+        displaySpecialImage(currentSpecialIndex);
+
+        // Gestione attivazione tab
+        document.getElementById("tabSpeciali").classList.add("active");
+        document.getElementById("tab360").classList.remove("active");
+    });
+
+    // Gestione tab vista 360°
+    document.getElementById("tab360").addEventListener("click", function () {
+        document.getElementById("angleSliderContainer").style.display = "block";
+        document.getElementById("prevSpecial").style.display = "none";
+        document.getElementById("nextSpecial").style.display = "none";
+
+        angleSlider.dispatchEvent(new Event("input"));
+
+        // Gestione attivazione tab
+        document.getElementById("tab360").classList.add("active");
+        document.getElementById("tabSpeciali").classList.remove("active");
+    });
+
+    // Aggiorna la funzione generateImage per precaricare le immagini speciali
+    // dentro "generateImage()", aggiungi alla fine:
+    preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
+
+
 });
