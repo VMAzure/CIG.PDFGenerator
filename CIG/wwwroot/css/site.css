@@ -69,17 +69,17 @@ label {
 
 /* 📌 Stile per il Canvas */
 .canvas-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
     max-width: 800px;
     min-height: 600px;
     overflow: hidden;
     margin-top: 30px;
-    padding-bottom: 10px; /* Aggiunge spazio extra per lo slider */
+    padding-bottom: 10px;
     gap: 10px;
 }
+
+
+
 
 /* Video di sfondo */
 .canvas-background {
@@ -101,11 +101,10 @@ label {
     background-color: transparent;
 }
 
-/* 🎚️ Slider Orizzontale per Rotazione 360° */
 #angleSlider {
     width: 100%;
-    margin-top: 5px; /* Mantiene spazio tra il canvas e lo slider */
-    padding-bottom: 5px; /* Aggiunge spazio sotto lo slider per evitare tagli */
+    margin-top: 5px;
+    padding-bottom: 5px;
     -webkit-appearance: none;
     appearance: none;
     background: linear-gradient(90deg, #0099ff 0%, #00ccff 100%);
@@ -115,7 +114,7 @@ label {
     transition: opacity 0.3s;
     cursor: pointer;
     position: relative;
-    z-index: 2; /* Assicura che lo slider sia visibile sopra altri elementi */
+    z-index: 2;
 }
 
 

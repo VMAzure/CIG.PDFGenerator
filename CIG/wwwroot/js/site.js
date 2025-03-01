@@ -390,6 +390,17 @@
     const angleSliderContainer = document.getElementById("angleSliderContainer");
     const specialThumbsContainer = document.getElementById("specialThumbsContainer");
 
+    document.getElementById('tab360').addEventListener('click', function () {
+        document.getElementById('tab360').classList.add('active');
+        document.getElementById('tabSpeciali').classList.remove('active');
+    });
+
+    document.getElementById('tabSpeciali').addEventListener('click', function () {
+        document.getElementById('tabSpeciali').classList.add('active');
+        document.getElementById('tab360').classList.remove('active');
+    });
+
+
     document.getElementById("tab360").addEventListener("click", function () {
         angleSliderContainer.style.display = "block";
         specialThumbsContainer.style.display = "none";
@@ -400,7 +411,7 @@
         specialThumbsContainer.style.display = "flex";
     });
 
-    // Carica le miniature degli angoli speciali
+        // Carica le miniature degli angoli speciali
     function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
         const angles = [17, 21, 25, 27, 51, 33];
         const container = document.getElementById("specialThumbsContainer");
