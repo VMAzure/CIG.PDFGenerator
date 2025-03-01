@@ -141,6 +141,20 @@
         };
     }
 
+    // 🎥 Cambia immagine in base allo slider di rotazione
+    angleSlider.addEventListener("input", function () {
+        let angle = angleSlider.value;
+
+        if (!cachedImages[angle] || !cachedImages[angle].complete) {
+            console.warn(`🔄 Immagine per angolo ${angle} non ancora pronta.`);
+            return;
+        }
+
+        let img = cachedImages[angle];
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    });
+
     generaBtn.addEventListener("click", generateImage);
 
     loadMarche();
