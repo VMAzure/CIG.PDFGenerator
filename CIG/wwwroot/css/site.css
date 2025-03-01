@@ -99,14 +99,16 @@ label {
         cursor: pointer;
     }
 
-.slider-vertical {
+#verticalSlider {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
     height: 300px;
     writing-mode: vertical-lr;
-    -webkit-appearance: slider-vertical;
+    direction: rtl;
+}
+
 }
 
 /* 🎚️ Stile Slider Orizzontale per Rotazione 360° */

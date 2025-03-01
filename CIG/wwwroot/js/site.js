@@ -2,11 +2,6 @@
     const customerKey = "it-azureautomotive"; // 🔴 Inserisci la tua chiave API
     const baseUrl = "https://cdn.imagin.studio/getImage";
 
-    // Elementi della UI
-    // 🔹 Dichiarazione degli elementi della UI
-    const customerKey = "it-azureautomotive";
-    const baseUrl = "https://cdn.imagin.studio/getImage";
-
     const marcaDropdown = document.getElementById("marca");
     const modelloDropdown = document.getElementById("modello");
     const versioneDropdown = document.getElementById("versione");
