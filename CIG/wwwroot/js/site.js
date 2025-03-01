@@ -163,29 +163,11 @@
             colorCarBtn.disabled = false;  // ✅ Abilita il bottone "Colora l'Auto"
             downloadImageBtn.disabled = false;  // ✅ Abilita il bottone "Scarica l'Immagine"
 
-            loadSpecialThumbs(make, modelFamily, modelRange, modelVariant);
+            preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
+
 
         };
     }
-    // Carica le miniature degli angoli speciali
-    function loadSpecialThumbs(make, modelFamily, modelRange, modelVariant) {
-        const angles = [17, 21, 25, 27, 51, 33];
-        const container = document.getElementById("specialThumbsContainer");
-        const thumbs = container.querySelectorAll(".thumb-speciale");
-
-        thumbs.forEach(thumb => {
-            const angle = thumb.getAttribute("data-angle");
-            const thumbUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=400`;
-
-            thumb.src = thumbUrl;
-
-            thumb.onclick = function () {
-                updateCanvasSpecialView(make, modelFamily, modelRange, modelVariant, angle);
-            };
-        });
-    }
-
-
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
 
@@ -407,7 +389,8 @@
     }
 
     const angleSliderContainer = document.getElementById("angleSliderContainer");
-    const specialThumbsContainer = document.getElementById("specialThumbsContainer");
+    const specialViewContainer = document.getElementById("specialViewContainer");
+
 
     document.getElementById('tab360').addEventListener('click', function () {
         document.getElementById('tab360').classList.add('active');
@@ -422,12 +405,12 @@
 
     document.getElementById("tab360").addEventListener("click", function () {
         angleSliderContainer.style.display = "block";
-        specialThumbsContainer.style.display = "none";
+        specialViewContainer.style.display = "flex";
     });
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {
         angleSliderContainer.style.display = "none";
-        specialThumbsContainer.style.display = "flex";
+        specialViewContainer.style.display = "flex";
     });
 
 
