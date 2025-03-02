@@ -83,8 +83,7 @@ label {
 /* 📌 Stile per il Canvas */
 .canvas-container {
     position: relative;
-    width: 900px; /* Larghezza fissa iniziale */
-    max-width: 100%; /* Responsivo su mobile */
+    width: 100%; /* Larghezza fissa iniziale */
     aspect-ratio: 16 / 9;
     margin-top: 0px;
     display: inline-block; /* aggiunto */
@@ -120,6 +119,7 @@ label {
 
 .canvas-wrapper {
     flex-grow: 1; /* occupa tutto lo spazio disponibile */
+    width: 100%; /* Garantisce l'espansione al 100% del contenitore */
     display: flex;
     justify-content: center; /* centra il canvas orizzontalmente */
     align-items: center; /* centra verticalmente se necessario */
