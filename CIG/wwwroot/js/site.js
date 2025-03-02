@@ -319,6 +319,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 colorButton.title = color.description; // Mostra il nome del colore al passaggio del mouse
 
                 colorButton.addEventListener("click", function () {
+                    console.log("Colore cliccato:", color.id);  // Debug rapido
+
                     updateCarColor(make, modelFamily, modelRange, modelVariant, color.id);
                     colorPickerContainer.remove(); // Chiude il color picker immediatamente
                 });

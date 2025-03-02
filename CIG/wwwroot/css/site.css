@@ -74,10 +74,16 @@ label {
     width: 800px; /* Larghezza fissa iniziale */
     max-width: 100%; /* Responsivo su mobile */
     aspect-ratio: 16 / 10;
-    overflow: hidden;
     margin-top: 15px;
+    display: inline-block; /* aggiunto */
 }
-
+#angleSliderContainer {
+    position: absolute;
+    top: calc(100% + 10px); /* posizionato precisamente 10px sotto il canvas */
+    left: 0;
+    width: 100%;
+    z-index: 5; /* per sicurezza visibilità */
+}
 
 .canvas-background {
     position: absolute; /* assoluta rispetto al contenitore padre */
