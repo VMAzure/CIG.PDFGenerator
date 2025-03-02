@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EIcg7HEU8tEg6loO8gXWYHKBvYk+SR0IRE7MvkvVlJ8=",
+  "Hash": "vFJ1WWjhi7dAcJuQwPdpzbM3Vy6pPXFKH8qMssI+xQg=",
   "Source": "CIG",
   "BasePath": "_content/CIG",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "i1noymf00n",
-      "Integrity": "pvSwfXO67YQmqtTAng/LTvTT5MNdIzPmyDEM0AM6IcQ=",
+      "Fingerprint": "9pk57r1892",
+      "Integrity": "DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -136,8 +136,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "e4o1ygu8sx",
-      "Integrity": "XrJIPfVhzP1A4g1ksWQDZzjotre+Wl+uHIDrWH+5LNU=",
+      "Fingerprint": "c8mjgpjznr",
+      "Integrity": "TPulJLXsxXVeaOdg5orBdDI5pKbet2wOqosQ5rvGARY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -1548,6 +1548,51 @@
       ]
     },
     {
+      "Route": "css/site.9pk57r1892.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8747"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 02 Mar 2025 10:21:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9pk57r1892"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs="
+        }
+      ]
+    },
+    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1558,7 +1603,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "7596"
+          "Value": "8747"
         },
         {
           "Name": "Content-Type",
@@ -1566,11 +1611,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pvSwfXO67YQmqtTAng/LTvTT5MNdIzPmyDEM0AM6IcQ=\""
+          "Value": "\"DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 09:33:09 GMT"
+          "Value": "Sun, 02 Mar 2025 10:21:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1580,52 +1625,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pvSwfXO67YQmqtTAng/LTvTT5MNdIzPmyDEM0AM6IcQ="
-        }
-      ]
-    },
-    {
-      "Route": "css/site.i1noymf00n.css",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "7596"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pvSwfXO67YQmqtTAng/LTvTT5MNdIzPmyDEM0AM6IcQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 09:33:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "i1noymf00n"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pvSwfXO67YQmqtTAng/LTvTT5MNdIzPmyDEM0AM6IcQ="
+          "Value": "sha256-DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs="
         }
       ]
     },
@@ -1794,7 +1794,7 @@
       ]
     },
     {
-      "Route": "js/site.e4o1ygu8sx.js",
+      "Route": "js/site.c8mjgpjznr.js",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1804,7 +1804,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24368"
+          "Value": "24715"
         },
         {
           "Name": "Content-Type",
@@ -1812,11 +1812,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XrJIPfVhzP1A4g1ksWQDZzjotre+Wl+uHIDrWH+5LNU=\""
+          "Value": "\"TPulJLXsxXVeaOdg5orBdDI5pKbet2wOqosQ5rvGARY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 09:42:47 GMT"
+          "Value": "Sun, 02 Mar 2025 10:29:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1826,7 +1826,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "e4o1ygu8sx"
+          "Value": "c8mjgpjznr"
         },
         {
           "Name": "label",
@@ -1834,7 +1834,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-XrJIPfVhzP1A4g1ksWQDZzjotre+Wl+uHIDrWH+5LNU="
+          "Value": "sha256-TPulJLXsxXVeaOdg5orBdDI5pKbet2wOqosQ5rvGARY="
         }
       ]
     },
@@ -1849,7 +1849,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24368"
+          "Value": "24715"
         },
         {
           "Name": "Content-Type",
@@ -1857,11 +1857,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XrJIPfVhzP1A4g1ksWQDZzjotre+Wl+uHIDrWH+5LNU=\""
+          "Value": "\"TPulJLXsxXVeaOdg5orBdDI5pKbet2wOqosQ5rvGARY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 09:42:47 GMT"
+          "Value": "Sun, 02 Mar 2025 10:29:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1871,7 +1871,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XrJIPfVhzP1A4g1ksWQDZzjotre+Wl+uHIDrWH+5LNU="
+          "Value": "sha256-TPulJLXsxXVeaOdg5orBdDI5pKbet2wOqosQ5rvGARY="
         }
       ]
     },

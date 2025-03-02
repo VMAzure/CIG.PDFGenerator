@@ -150,6 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     function generateImage() {
+        cachedImages = {}; // Resetta completamente la cache immagini 360
+
         make = marcaDropdown.value;
         modelFamily = modelloDropdown.value;
         modelRange = versioneDropdown.value;
@@ -417,6 +419,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const loader = document.getElementById("loader");
         loader.style.display = "block"; // Mostra subito il loader
+        console.log("Loader mostrato:", loader.style.display);
+
 
         angleSlider.disabled = true;
 
