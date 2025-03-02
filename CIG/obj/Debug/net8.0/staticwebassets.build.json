@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "vFJ1WWjhi7dAcJuQwPdpzbM3Vy6pPXFKH8qMssI+xQg=",
+  "Hash": "tshslUWd614XISP948G/ye9ELbUzwpeGLymFmoxuKro=",
   "Source": "CIG",
   "BasePath": "_content/CIG",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9pk57r1892",
-      "Integrity": "DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=",
+      "Fingerprint": "xwnyfrd7dc",
+      "Integrity": "kfjcZTA7H4EtRRp2a+MjUWAGDAMghhkQqF/W2A5bfpE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -1548,51 +1548,6 @@
       ]
     },
     {
-      "Route": "css/site.9pk57r1892.css",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "8747"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 10:21:19 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9pk57r1892"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1611,11 +1566,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs=\""
+          "Value": "\"kfjcZTA7H4EtRRp2a+MjUWAGDAMghhkQqF/W2A5bfpE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 02 Mar 2025 10:21:19 GMT"
+          "Value": "Sun, 02 Mar 2025 22:32:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1625,7 +1580,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-DbtYZFY/4MAr+vCLx1LXjx9IBja8EVCGe0nKEpEzvLs="
+          "Value": "sha256-kfjcZTA7H4EtRRp2a+MjUWAGDAMghhkQqF/W2A5bfpE="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.xwnyfrd7dc.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8747"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kfjcZTA7H4EtRRp2a+MjUWAGDAMghhkQqF/W2A5bfpE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 02 Mar 2025 22:32:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xwnyfrd7dc"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kfjcZTA7H4EtRRp2a+MjUWAGDAMghhkQqF/W2A5bfpE="
         }
       ]
     },
