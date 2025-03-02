@@ -19,13 +19,16 @@ body {
 }
 
 
-
 /* 📌 Struttura del layout */
 .container {
     min-height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .content-wrapper {
@@ -34,7 +37,7 @@ body {
     width: 100%;
     max-width: 1400px; /* spazio massimo più largo per layout migliore */
     margin: 0 auto; /* centrato */
-    padding: 20px; /* spazio laterale per evitare margini eccessivi */
+    padding: 0px; /* spazio laterale per evitare margini eccessivi */
     box-sizing: border-box; /* assicura che il padding non causi scroll orizzontali */
 }
 
