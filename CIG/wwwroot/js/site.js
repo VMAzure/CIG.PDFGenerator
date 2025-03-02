@@ -186,8 +186,12 @@ document.addEventListener("DOMContentLoaded", function () {
             specialImages[0].onload = function () {
                 currentSpecialIndex = 0;
                 displaySpecialImage(currentSpecialIndex);
-                loader.style.display = "none";  // nasconde il loader dopo il caricamento
+                loader.style.display = "none";
+
+                // Riattiva qui la possibilità di cliccare la tab 360
+                document.getElementById("tab360").disabled = false;
             };
+
         };
     }
 
@@ -410,23 +414,24 @@ document.addEventListener("DOMContentLoaded", function () {
         angleSliderContainer.style.display = "block";
         specialViewContainer.style.display = "flex";
 
-        angleSlider.disabled = true; // blocca slider fino a caricamento completato
+        const loader = document.getElementById("loader");
+        loader.style.display = "block"; // Mostra subito il loader
+
+        angleSlider.disabled = true;
 
         if (Object.keys(cachedImages).length === 0) {
-            const loader = document.getElementById("loader");
-            loader.style.display = "block"; // Mostra loader durante caricamento
-
             preloadImages(make, modelFamily, modelRange, modelVariant, selectedColorId);
 
             let checkInterval = setInterval(() => {
                 if (cachedImages[200] && cachedImages[200].complete) {
                     clearInterval(checkInterval);
+                    loader.style.display = "none"; // nasconde il loader
                     angleSlider.disabled = false;
                     angleSlider.dispatchEvent(new Event("input"));
-                    loader.style.display = "none"; // Nasconde loader
                 }
             }, 100);
         } else {
+            loader.style.display = "none"; // nasconde subito il loader se già caricato
             angleSlider.disabled = false;
             angleSlider.dispatchEvent(new Event("input"));
         }
@@ -434,6 +439,7 @@ document.addEventListener("DOMContentLoaded", function () {
         prevSpecial.style.display = "none";
         nextSpecial.style.display = "none";
     });
+
 
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {

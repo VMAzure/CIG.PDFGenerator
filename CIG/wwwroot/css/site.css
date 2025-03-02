@@ -83,6 +83,7 @@ label {
     left: 0;
     width: 100%;
     z-index: 5; /* per sicurezza visibilità */
+    display: none; /* nascosto inizialmente */
 }
 
 .canvas-background {
