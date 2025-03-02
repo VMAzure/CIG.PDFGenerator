@@ -30,19 +30,27 @@ body {
 
 .content-wrapper {
     display: flex;
-    gap: 20px;
+    gap: 10px; /* spazio tra i controlli e il video */
     width: 100%;
-    max-width: 1200px;
-    padding: 20px;
+    max-width: 1400px; /* spazio massimo più largo per layout migliore */
+    margin: 0 auto; /* centrato */
+    padding: 20px; /* spazio laterale per evitare margini eccessivi */
+    box-sizing: border-box; /* assicura che il padding non causi scroll orizzontali */
 }
+
 
 /* 🎛️ Stile per i Controlli */
 .controls {
     background: #1e1e1e;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
-    width: 450px;
+    width: 400px; /* larghezza definita */
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* evita che diventi troppo stretto */
 }
+
+
 
 h2 {
     font-size: 18px;
@@ -106,6 +114,14 @@ label {
     object-fit: cover; /* il video mantiene proporzioni corrette */
     z-index: 0;
 }
+
+.canvas-wrapper {
+    flex-grow: 1; /* occupa tutto lo spazio disponibile */
+    display: flex;
+    justify-content: center; /* centra il canvas orizzontalmente */
+    align-items: center; /* centra verticalmente se necessario */
+}
+
 
 
 #angleSlider {
@@ -171,24 +187,25 @@ label {
 /* 📱 Responsive: Su mobile, il canvas va sotto ai controlli */
 @media (max-width: 1024px) {
     .content-wrapper {
-        flex-direction: column; /* Disposizione verticale */
-        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        padding: 10px;
     }
 
     .controls {
-        width: 100%; /* Adatta la larghezza su mobile */
-        margin-bottom: 20px; /* Aggiunge spazio tra i controlli e il canvas */
+        width: 100%;
     }
 
     .canvas-wrapper {
         width: 100%;
     }
 
-    #imageCanvas {
-        width: 100%; /* Assicura che il canvas occupi tutta la larghezza disponibile */
-        max-width: 800px;
+    .canvas-container {
+        width: 100%;
+        max-width: 100%; /* tutto lo spazio disponibile */
     }
 }
+
 /* 🚗 Bottone per colorare l'auto */
 /* 🎨 Bottone Arcobaleno Animato */
 .btn-color {
