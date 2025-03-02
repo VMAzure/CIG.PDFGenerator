@@ -147,7 +147,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        preloadImages(make, modelFamily, modelRange, modelVariant);
+        const loader = document.getElementById("loader");
+        loader.style.display = "block";  // mostra il loader
 
         const imageUrl = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=0&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
@@ -168,8 +169,11 @@ document.addEventListener("DOMContentLoaded", function () {
             downloadImageBtn.disabled = false;
 
             preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
+
+            loader.style.display = "none";  // nasconde il loader
         };
     }
+
 
     angleSlider.addEventListener("input", function () {
         let angle = angleSlider.value;
@@ -193,13 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     colorCarBtn.disabled = true; // Disattivato finché non viene generata un'immagine
 
-    // ✅ Abilita il bottone dopo la generazione dell'immagine
-    function enableColorButton() {
-        colorCarBtn.disabled = false;
-    }
-
-    // 🎨 Recupera i colori disponibili dall'API di IMAGIN
-    // 🎨 Recupera i colori disponibili dall'API di IMAGIN
+   
     // 🎨 Recupera e raggruppa i colori disponibili dall'API di IMAGIN
     function fetchAvailableColors(make, modelFamily, modelRange, modelVariant) {
         const colorApiUrl = `https://cdn.imagin.studio/getPaints?customer=${customerKey}&target=make&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}`;
@@ -252,7 +250,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     }
 
-    // ✅ Quando clicchi su "Colora l'Auto", mostra un color picker con i colori disponibili
     // ✅ Quando clicchi su "Colora l'Auto", mostra il color picker con i colori disponibili
     colorCarBtn.addEventListener("click", function () {
         make = marcaDropdown.value;
@@ -349,16 +346,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const downloadImageBtn = document.getElementById("downloadImageBtn");
     downloadImageBtn.disabled = true; // Disattivato finché non viene generata un'immagine
 
-    // ✅ Abilita il bottone dopo la generazione dell'immagine
-    function enableDownloadButton() {
-        downloadImageBtn.disabled = false;
-    }
+    downloadImageBtn.addEventListener("click", handleDownloadImage);
 
-    // ✅ Scarica l'immagine attuale dal canvas con sfondo trasparente
-    if (!downloadImageBtn.hasListenerAttached) {
-        downloadImageBtn.addEventListener("click", handleDownloadImage);
-        downloadImageBtn.hasListenerAttached = true;
-    }
 
 
     function handleDownloadImage() {
@@ -397,25 +386,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const specialViewContainer = document.getElementById("specialViewContainer");
 
 
-    document.getElementById('tab360').addEventListener('click', function () {
-        document.getElementById('tab360').classList.add('active');
-        document.getElementById('tabSpeciali').classList.remove('active');
-    });
-
-    document.getElementById('tabSpeciali').addEventListener('click', function () {
-        document.getElementById('tabSpeciali').classList.add('active');
-        document.getElementById('tab360').classList.remove('active');
-    });
-
-
     document.getElementById("tab360").addEventListener("click", function () {
+        this.classList.add('active');
+        document.getElementById('tabSpeciali').classList.remove('active');
+
         angleSliderContainer.style.display = "block";
         specialViewContainer.style.display = "flex";
+
+        angleSlider.dispatchEvent(new Event("input"));
+        document.getElementById("prevSpecial").style.display = "none";
+        document.getElementById("nextSpecial").style.display = "none";
     });
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {
+        this.classList.add('active');
+        document.getElementById('tab360').classList.remove('active');
+
         angleSliderContainer.style.display = "none";
         specialViewContainer.style.display = "flex";
+
+        document.getElementById("prevSpecial").style.display = "block";
+        document.getElementById("nextSpecial").style.display = "block";
     });
 
 
@@ -456,7 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const loader = document.getElementById("loader");
         loader.style.display = "block"; // ✅ Mostra loader
 
-        const angle = specialImages[index];
+        const angle = specialAngles[index];
         const imageUrl = `${baseUrl}?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${modelVariantDropdown.value}&paintId=${selectedColorId}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=1200`;
 
         let img = new Image();
@@ -476,6 +467,9 @@ document.addEventListener("DOMContentLoaded", function () {
             loader.style.display = "none";
         };
     }
+
+    document.getElementById("prevSpecial").style.display = "block";
+    document.getElementById("nextSpecial").style.display = "block";
 
     // Eventi click per i pulsanti di navigazione
     document.getElementById("prevSpecial").addEventListener("click", function () {
@@ -517,10 +511,5 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("tab360").classList.add("active");
         document.getElementById("tabSpeciali").classList.remove("active");
     });
-
-    // Aggiorna la funzione generateImage per precaricare le immagini speciali
-    // dentro "generateImage()", aggiungi alla fine:
-    preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
-
 
 });
