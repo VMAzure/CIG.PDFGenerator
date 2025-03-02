@@ -25,7 +25,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0;
+    padding: 10;
     margin: 0;
     width: 100%;
     box-sizing: border-box;
@@ -86,7 +86,7 @@ label {
     width: 900px; /* Larghezza fissa iniziale */
     max-width: 100%; /* Responsivo su mobile */
     aspect-ratio: 16 / 9;
-    margin-top: 10px;
+    margin-top: 0px;
     display: inline-block; /* aggiunto */
 }
 #angleSliderContainer {
@@ -410,7 +410,7 @@ label {
     padding: 20px;
     border-radius: 8px;
     width: 100%; /* occupa tutto lo spazio disponibile */
-    width: 400px; /* larghezza massima definita */
+    width: 360px; /* larghezza massima definita */
     display: flex;
     flex-direction: column;
 }
