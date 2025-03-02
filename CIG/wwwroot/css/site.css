@@ -31,8 +31,9 @@ body {
 .content-wrapper {
     display: flex;
     gap: 20px;
-    width: 90%;
+    width: 100;
     max-width: 1200px;
+    padding: 20px;
 }
 
 /* 🎛️ Stile per i Controlli */
@@ -40,7 +41,7 @@ body {
     background: #1e1e1e;
     padding: 20px;
     border-radius: 8px;
-    width: 300px;
+    width: 360px;
 }
 
 h2 {
