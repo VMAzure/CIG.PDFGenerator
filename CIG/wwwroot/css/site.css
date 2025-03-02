@@ -39,9 +39,9 @@ body {
 /* 🎛️ Stile per i Controlli */
 .controls {
     background: #1e1e1e;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
-    width: 360px;
+    width: 450px;
 }
 
 h2 {
