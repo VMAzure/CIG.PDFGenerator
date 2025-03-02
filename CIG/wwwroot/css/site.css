@@ -71,9 +71,9 @@ label {
 /* 📌 Stile per il Canvas */
 .canvas-container {
     position: relative;
-    width: 900px; /* Larghezza fissa iniziale */
-    max-width: 100%; /* Responsivo su mobile */
-    aspect-ratio: 16 / 10;
+    width: 1200px; /* Larghezza fissa iniziale */
+    max-width: 750px; /* Responsivo su mobile */
+    /*aspect-ratio: 16 / 10;*/
     margin-top: 10px;
     display: inline-block; /* aggiunto */
 }
