@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
+            img.crossOrigin = "anonymous"; // <-- AGGIUNGI QUESTA RIGA
             let colorParam = selectedColorId ? `&paintId=${selectedColorId}` : '';
 
             img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}${colorParam}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
