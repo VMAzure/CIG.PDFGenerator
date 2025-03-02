@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gPJcpCyzwOBni7CKIWVgXpsP9KjkBa13dNCYj4bIZeY=",
+  "Hash": "ax85WZKCZvHKIWJ4F9Rf2kYklTiBViGivIG/XlKaWNY=",
   "Source": "CIG",
   "BasePath": "_content/CIG",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3wxna1hfr8",
-      "Integrity": "rTZzlQANVzW8crujhKEVAQ7Gtsf5qWMZVgqdiZ9lWN0=",
+      "Fingerprint": "gew910fzgy",
+      "Integrity": "SF29Z5vo49V/80Q9F8pU8dejfrAT6cR7s8AUjks1T6A=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -101,6 +101,27 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\images\\default-car.png",
+      "SourceId": "CIG",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG",
+      "RelativePath": "images/default-car#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "dved4xkmac",
+      "Integrity": "dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\default-car.png"
+    },
+    {
       "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\js\\site.js",
       "SourceId": "CIG",
       "SourceType": "Discovered",
@@ -115,8 +136,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "4xw7tu3c05",
-      "Integrity": "mLgnwWxlkLn6D5O9973A0isbG4ZYRLFN65zqLHzTUso=",
+      "Fingerprint": "d8qhz23vop",
+      "Integrity": "DdoVzn0LHPRHoZt0qQ+UhRf2vbv93dL+yd/oolKaON0=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
@@ -1317,6 +1338,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\canvas.mp4",
+      "SourceId": "CIG",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG",
+      "RelativePath": "video/canvas#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ygwc9moupu",
+      "Integrity": "ng9QTjkIj+je9YQ4yyiLFSpo7VD9seo9hmcBWe6YWno=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\video\\canvas.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\preview.mp4",
+      "SourceId": "CIG",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG",
+      "RelativePath": "video/preview#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ean6vl5rzy",
+      "Integrity": "mkF6I8ltp4baFuANVCzCIVXukrCNPvzRmgaM0qsDP+4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\video\\preview.mp4"
     }
   ],
   "Endpoints": [
@@ -1485,51 +1548,6 @@
       ]
     },
     {
-      "Route": "css/site.3wxna1hfr8.css",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2785"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"rTZzlQANVzW8crujhKEVAQ7Gtsf5qWMZVgqdiZ9lWN0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 22:21:28 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "3wxna1hfr8"
-        },
-        {
-          "Name": "label",
-          "Value": "css/site.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-rTZzlQANVzW8crujhKEVAQ7Gtsf5qWMZVgqdiZ9lWN0="
-        }
-      ]
-    },
-    {
       "Route": "css/site.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
       "Selectors": [],
@@ -1540,7 +1558,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2785"
+          "Value": "7363"
         },
         {
           "Name": "Content-Type",
@@ -1548,11 +1566,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rTZzlQANVzW8crujhKEVAQ7Gtsf5qWMZVgqdiZ9lWN0=\""
+          "Value": "\"SF29Z5vo49V/80Q9F8pU8dejfrAT6cR7s8AUjks1T6A=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 22:21:28 GMT"
+          "Value": "Sat, 01 Mar 2025 22:57:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1562,7 +1580,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rTZzlQANVzW8crujhKEVAQ7Gtsf5qWMZVgqdiZ9lWN0="
+          "Value": "sha256-SF29Z5vo49V/80Q9F8pU8dejfrAT6cR7s8AUjks1T6A="
+        }
+      ]
+    },
+    {
+      "Route": "css/site.gew910fzgy.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\css\\site.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "7363"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SF29Z5vo49V/80Q9F8pU8dejfrAT6cR7s8AUjks1T6A=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 22:57:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gew910fzgy"
+        },
+        {
+          "Name": "label",
+          "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SF29Z5vo49V/80Q9F8pU8dejfrAT6cR7s8AUjks1T6A="
         }
       ]
     },
@@ -1649,8 +1712,8 @@
       ]
     },
     {
-      "Route": "js/site.4xw7tu3c05.js",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\js\\site.js",
+      "Route": "images/default-car.dved4xkmac.png",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\images\\default-car.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1659,19 +1722,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4373"
+          "Value": "23914"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/javascript"
+          "Value": "image/png"
         },
         {
           "Name": "ETag",
-          "Value": "\"mLgnwWxlkLn6D5O9973A0isbG4ZYRLFN65zqLHzTUso=\""
+          "Value": "\"dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 22:22:20 GMT"
+          "Value": "Sat, 01 Mar 2025 21:43:18 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1681,7 +1744,89 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4xw7tu3c05"
+          "Value": "dved4xkmac"
+        },
+        {
+          "Name": "label",
+          "Value": "images/default-car.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M="
+        }
+      ]
+    },
+    {
+      "Route": "images/default-car.png",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\images\\default-car.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "23914"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 21:43:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M="
+        }
+      ]
+    },
+    {
+      "Route": "js/site.d8qhz23vop.js",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\js\\site.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24140"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DdoVzn0LHPRHoZt0qQ+UhRf2vbv93dL+yd/oolKaON0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 02 Mar 2025 09:16:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d8qhz23vop"
         },
         {
           "Name": "label",
@@ -1689,7 +1834,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-mLgnwWxlkLn6D5O9973A0isbG4ZYRLFN65zqLHzTUso="
+          "Value": "sha256-DdoVzn0LHPRHoZt0qQ+UhRf2vbv93dL+yd/oolKaON0="
         }
       ]
     },
@@ -1704,7 +1849,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "4373"
+          "Value": "24140"
         },
         {
           "Name": "Content-Type",
@@ -1712,11 +1857,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"mLgnwWxlkLn6D5O9973A0isbG4ZYRLFN65zqLHzTUso=\""
+          "Value": "\"DdoVzn0LHPRHoZt0qQ+UhRf2vbv93dL+yd/oolKaON0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 28 Feb 2025 22:22:20 GMT"
+          "Value": "Sun, 02 Mar 2025 09:16:20 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1726,7 +1871,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-mLgnwWxlkLn6D5O9973A0isbG4ZYRLFN65zqLHzTUso="
+          "Value": "sha256-DdoVzn0LHPRHoZt0qQ+UhRf2vbv93dL+yd/oolKaON0="
         }
       ]
     },
@@ -6401,6 +6546,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "video/canvas.mp4",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\canvas.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3855604"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ng9QTjkIj+je9YQ4yyiLFSpo7VD9seo9hmcBWe6YWno=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 13:02:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ng9QTjkIj+je9YQ4yyiLFSpo7VD9seo9hmcBWe6YWno="
+        }
+      ]
+    },
+    {
+      "Route": "video/canvas.ygwc9moupu.mp4",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\canvas.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3855604"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ng9QTjkIj+je9YQ4yyiLFSpo7VD9seo9hmcBWe6YWno=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 13:02:59 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ygwc9moupu"
+        },
+        {
+          "Name": "label",
+          "Value": "video/canvas.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ng9QTjkIj+je9YQ4yyiLFSpo7VD9seo9hmcBWe6YWno="
+        }
+      ]
+    },
+    {
+      "Route": "video/preview.ean6vl5rzy.mp4",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\preview.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4437816"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mkF6I8ltp4baFuANVCzCIVXukrCNPvzRmgaM0qsDP+4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 10:53:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ean6vl5rzy"
+        },
+        {
+          "Name": "label",
+          "Value": "video/preview.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mkF6I8ltp4baFuANVCzCIVXukrCNPvzRmgaM0qsDP+4="
+        }
+      ]
+    },
+    {
+      "Route": "video/preview.mp4",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\preview.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4437816"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mkF6I8ltp4baFuANVCzCIVXukrCNPvzRmgaM0qsDP+4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 01 Mar 2025 10:53:29 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mkF6I8ltp4baFuANVCzCIVXukrCNPvzRmgaM0qsDP+4="
         }
       ]
     }

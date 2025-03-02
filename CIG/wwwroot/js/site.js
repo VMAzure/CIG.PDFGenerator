@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const angleSliderContainer = document.getElementById("angleSliderContainer");
     const specialViewContainer = document.getElementById("specialViewContainer");
+    const prevSpecial = document.getElementById("prevSpecial");
+    const nextSpecial = document.getElementById("nextSpecial");
+
+    document.getElementById("tabSpeciali").click();
+
+    console.log(angleSliderContainer, specialViewContainer, prevSpecial, nextSpecial);
 
     if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !modelVariantDropdown ||
         !angleSlider || !generaBtn || !canvas || !backgroundVideo) {
@@ -121,10 +127,14 @@ document.addEventListener("DOMContentLoaded", function () {
         fetchDropdownData(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${selectedMake}&modelFamily=${selectedModel}&modelRange=${selectedVersion}`, modelVariantDropdown, "modelVariant");
     });
 
-    function preloadImages(make, modelFamily, modelRange, modelVariant) {
+    function preloadImages(make, modelFamily, modelRange, modelVariant, selectedColorId = null) {
+        cachedImages = {}; // ripulisci la cache precedente
+
         for (let angle = 200; angle <= 231; angle++) {
             let img = new Image();
-            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
+            let colorParam = selectedColorId ? `&paintId=${selectedColorId}` : '';
+
+            img.src = `${baseUrl}?customer=${customerKey}&make=${make}&modelFamily=${modelFamily}&modelRange=${modelRange}&modelVariant=${modelVariant}&angle=${angle}${colorParam}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&safeMode=true&countryCode=IT&billingTag=CIG&steering=lhd&width=1200`;
 
             img.onload = function () {
                 cachedImages[angle] = img;
@@ -134,10 +144,9 @@ document.addEventListener("DOMContentLoaded", function () {
             img.onerror = function () {
                 console.warn(`⚠️ Errore nel caricamento dell'immagine per angolo ${angle}`);
             };
-
-            cachedImages[angle] = img;
         }
     }
+
 
     function generateImage() {
         make = marcaDropdown.value;
@@ -158,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let img = new Image();
         img.crossOrigin = "anonymous";
         img.src = imageUrl;
+
         img.onload = function () {
             backgroundVideo.style.display = "block";
             canvas.style.display = "block";
@@ -173,9 +183,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             preloadSpecialImages(make, modelFamily, modelRange, modelVariant);
 
-            loader.style.display = "none";  // nasconde il loader
+            specialImages[0].onload = function () {
+                currentSpecialIndex = 0;
+                displaySpecialImage(currentSpecialIndex);
+                loader.style.display = "none";  // nasconde il loader dopo il caricamento
+            };
         };
     }
+
 
 
     angleSlider.addEventListener("input", function () {
@@ -393,10 +408,31 @@ document.addEventListener("DOMContentLoaded", function () {
         angleSliderContainer.style.display = "block";
         specialViewContainer.style.display = "flex";
 
-        angleSlider.dispatchEvent(new Event("input"));
+        angleSlider.disabled = true; // blocca slider fino a caricamento completato
+
+        if (Object.keys(cachedImages).length === 0) {
+            const loader = document.getElementById("loader");
+            loader.style.display = "block"; // Mostra loader durante caricamento
+
+            preloadImages(make, modelFamily, modelRange, modelVariant, selectedColorId);
+
+            let checkInterval = setInterval(() => {
+                if (cachedImages[200] && cachedImages[200].complete) {
+                    clearInterval(checkInterval);
+                    angleSlider.disabled = false;
+                    angleSlider.dispatchEvent(new Event("input"));
+                    loader.style.display = "none"; // Nasconde loader
+                }
+            }, 100);
+        } else {
+            angleSlider.disabled = false;
+            angleSlider.dispatchEvent(new Event("input"));
+        }
+
         prevSpecial.style.display = "none";
         nextSpecial.style.display = "none";
     });
+
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {
         this.classList.add('active');
@@ -442,6 +478,7 @@ document.addEventListener("DOMContentLoaded", function () {
             specialImages.push(img);
         });
     }
+
 
     // Mostra la vista speciale corrente sul canvas
     function displaySpecialImage(index) {

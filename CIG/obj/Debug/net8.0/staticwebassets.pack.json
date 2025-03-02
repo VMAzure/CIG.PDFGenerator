@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\images\\default-car.png",
+      "PackagePath": "staticwebassets\\images\\default-car.png"
+    },
+    {
       "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
@@ -243,6 +247,14 @@
     {
       "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\canvas.mp4",
+      "PackagePath": "staticwebassets\\video\\canvas.mp4"
+    },
+    {
+      "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\wwwroot\\video\\preview.mp4",
+      "PackagePath": "staticwebassets\\video\\preview.mp4"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CIG.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
