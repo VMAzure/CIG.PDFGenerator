@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const ctx = canvas.getContext("2d");
     const backgroundVideo = document.getElementById("backgroundVideo");
 
+    const angleSliderContainer = document.getElementById("angleSliderContainer");
+    const specialViewContainer = document.getElementById("specialViewContainer");
+
     if (!marcaDropdown || !modelloDropdown || !versioneDropdown || !modelVariantDropdown ||
         !angleSlider || !generaBtn || !canvas || !backgroundVideo) {
         console.error("❌ ERRORE: Uno o più elementi della UI NON sono stati trovati nel DOM.");
@@ -382,10 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.removeChild(link);
     }
 
-    const angleSliderContainer = document.getElementById("angleSliderContainer");
-    const specialViewContainer = document.getElementById("specialViewContainer");
-
-
+    
     document.getElementById("tab360").addEventListener("click", function () {
         this.classList.add('active');
         document.getElementById('tabSpeciali').classList.remove('active');
@@ -394,8 +394,8 @@ document.addEventListener("DOMContentLoaded", function () {
         specialViewContainer.style.display = "flex";
 
         angleSlider.dispatchEvent(new Event("input"));
-        document.getElementById("prevSpecial").style.display = "none";
-        document.getElementById("nextSpecial").style.display = "none";
+        prevSpecial.style.display = "none";
+        nextSpecial.style.display = "none";
     });
 
     document.getElementById("tabSpeciali").addEventListener("click", function () {
@@ -405,9 +405,10 @@ document.addEventListener("DOMContentLoaded", function () {
         angleSliderContainer.style.display = "none";
         specialViewContainer.style.display = "flex";
 
-        document.getElementById("prevSpecial").style.display = "block";
-        document.getElementById("nextSpecial").style.display = "block";
+        prevSpecial.style.display = "block";
+        nextSpecial.style.display = "block";
     });
+
 
 
     // Aggiorna canvas con l'angolo speciale cliccato
