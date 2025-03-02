@@ -389,7 +389,7 @@ label {
     padding: 20px;
     border-radius: 8px;
     width: 100%; /* occupa tutto lo spazio disponibile */
-    width: 350px; /* larghezza massima definita */
+    width: 400px; /* larghezza massima definita */
     display: flex;
     flex-direction: column;
 }
