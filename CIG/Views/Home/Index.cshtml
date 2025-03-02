@@ -6,44 +6,36 @@
     <div class="content-wrapper">
         <!-- Colonna sinistra: Controlli -->
         <!-- Titolo Dinamico -->
-        <div id="imageTitle">
-            <span id="selectedMake" style="font-weight: bold; font-size: 18px;">Brand </span>
-            <span id="selectedModel" style="font-weight: normal; font-size: 18px;">Model</span>
-        
-            <!-- Marca -->
+        <div class="controls">
+            <div id="imageTitle">
+                <span id="selectedMake" style="font-weight: bold; font-size: 16px;">Brand </span>
+                <span id="selectedModel" style="font-weight: normal; font-size: 14px;">Model</span>
+            </div>
+
             <label for="marca">Marca:</label>
             <select id="marca" class="dropdown"></select>
 
-            <!-- Modello -->
             <label for="modello">Modello:</label>
             <select id="modello" class="dropdown"></select>
 
-            <!-- Versione -->
             <label for="versione">Versione:</label>
             <select id="versione" class="dropdown"></select>
 
-            <!-- Model Variant -->
             <label for="modelVariant">Variante:</label>
             <select id="modelVariant" class="dropdown"></select>
 
-
             <button id="genera" class="btn-generate">Genera Immagine</button>
-
-            <!-- Bottone per colorare l'auto -->
             <button id="colorCarBtn" class="btn-color" disabled>Colora l'Auto</button>
 
-            <!-- Color Picker -->
-            <input type="color" id="colorPicker" style="display: none;">
-
+            <!-- Tabs integrate qui -->
             <div class="tabs-container">
                 <button id="tabSpeciali" class="tab active">Viste Speciali</button>
-                <button id="tab360" class="tab">Vista 360°</button>
+                <button id="tab360" class="tab" disabled>Vista 360°</button>
             </div>
 
-            <!-- Bottone per scaricare l'immagine -->
             <button id="downloadImageBtn" class="btn-generate" disabled>Scarica l'Immagine</button>
-
         </div>
+
 
         <!-- Colonna destra: Canvas + Video -->
         <div class="canvas-wrapper">

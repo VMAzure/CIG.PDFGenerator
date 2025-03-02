@@ -343,3 +343,46 @@ label {
             opacity: 0;
             transform: translateX(-20px);
         }
+/* 🌙 Tab integrati nella colonna controlli */
+.tabs-container {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+.tab {
+    flex: 1;
+    background: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+    .tab:hover {
+        background: #2c2c2c;
+    }
+
+    .tab.active {
+        background: linear-gradient(45deg, #007acc, #00aaff);
+        border-color: #007acc;
+    }
+
+/* 🔽 Aumenta il font dei dropdown per leggibilità */
+.dropdown {
+    font-size: 16px;
+}
+
+/* 🎛️ Colonna controlli migliorata */
+.controls {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%; /* occupa tutto lo spazio disponibile */
+    max-width: 350px; /* larghezza massima definita */
+    display: flex;
+    flex-direction: column;
+}
