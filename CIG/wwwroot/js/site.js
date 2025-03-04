@@ -148,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-
     function generateImage() {
         cachedImages = {}; // Resetta completamente la cache immagini 360
 

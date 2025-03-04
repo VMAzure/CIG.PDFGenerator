@@ -500,11 +500,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj",
-      "projectName": "CIG",
-      "projectPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj",
+      "projectUniqueName": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.PDFGenerator.csproj",
+      "projectName": "CIG.PDFGenerator",
+      "projectPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.PDFGenerator.csproj",
       "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\obj\\",
+      "outputPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

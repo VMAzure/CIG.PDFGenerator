@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj": {}
+    "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.csproj": {}
   },
   "projects": {
-    "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj": {
+    "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj",
+        "projectUniqueName": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.csproj",
         "projectName": "CIG",
-        "projectPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\CIG.csproj",
+        "projectPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\CIG.csproj",
         "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG\\CIG\\obj\\",
+        "outputPath": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
