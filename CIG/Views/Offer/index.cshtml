@@ -15,6 +15,13 @@
     <img id="anteprimaAuto" src="" alt="Anteprima Auto" style="max-width:400px;margin-top:20px;">
 </div>
 
+<div style="margin-top:20px;">
+    <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
+    <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
+</div>
+
+
+
 @section Scripts {
     <script>
         const customerKey = "it-azureautomotive";
@@ -95,4 +102,56 @@
             }
         });
     </script>
-}
+
+    <script>
+
+                const customerInput = document.getElementById('customerInput');
+        const customerResults = document.getElementById('customerResults');
+
+        // Recupero del token direttamente dalla URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+
+        customerInput.addEventListener('input', function () {
+            const query = customerInput.value.trim();
+
+            if (query.length < 3) {
+                customerResults.style.display = 'none';
+                return;
+            }
+
+            fetch('https://coreapi-production-ca29.up.railway.app/customers/clienti', {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+            .then(res => res.json())
+            .then(clienti => {
+                customerResults.innerHTML = '';
+                const filteredCustomers = clienti.filter(cliente =>
+                    cliente.nome.toLowerCase().includes(query.toLowerCase()) ||
+                    cliente.cognome.toLowerCase().includes(query.toLowerCase()) ||
+                    cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase()) ||
+                    cliente.email.toLowerCase().includes(query.toLowerCase()) ||
+                    cliente.telefono.includes(query)
+                );
+
+                filteredCustomers.forEach(cliente => {
+                    const li = document.createElement('li');
+                    li.textContent = cliente.nome + ' ' + cliente.cognome + ' (' + cliente.email + ')';
+                    li.addEventListener('click', function () {
+                        customerInput.value = cliente.nome + ' ' + cliente.cognome;
+                        customerResults.style.display = 'none';
+                    });
+                    customerResults.appendChild(li);
+                });
+
+                customerResults.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
+        });
+
+</script>
+
