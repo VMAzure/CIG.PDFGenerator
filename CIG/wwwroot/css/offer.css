@@ -12,37 +12,17 @@ h2 {
 
 select, input[type="text"] {
     width: 100%;
-    max-width: 400px;
     padding: 8px 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    select, input[type="text"] {
-        max-width: 100%;
-    }
-    .car-selection-container {
-        flex-direction: column; /* dropdown e immagine incolonnati */
-    }
-
-    .car-preview {
-        margin-left: 0; /* nessun margine su mobile */
-        margin-top: 20px;
-        width: 100%; /* piena larghezza su mobile */
-    }
-}
-
+/* Dropdown risultati ricerca cliente */
 #customerResults {
-    width: 100%; /* larghezza uguale all'input */
-    max-width: 400px;
+    width: 100%;
     background-color: white;
     list-style: none;
     margin-top: 0;
@@ -52,61 +32,57 @@ select, input[type="text"] {
 }
 
     #customerResults li {
-        padding: 8px 12px;
-        cursor: pointer; /* cambia il puntatore del mouse */
+        padding: 8px;
+        cursor: pointer;
     }
 
         #customerResults li:hover {
             background-color: #f0f0f0;
         }
 
+/* Layout principale auto */
 .car-selection-container {
     display: flex;
-    justify-content: flex-start;
     gap: 20px;
-    flex-wrap: nowrap;
     margin-bottom: 20px;
 }
 
-.car-preview {
-    flex: none;
-    margin-left: 20px;
-    width: 400px; /* larghezza fissa per evitare movimento */
-    height: 220px; /* altezza uguale al placeholder per stabilità */
-    position: relative; /* necessario per loader */
-}
-
-
-
 .dropdowns {
-    display: flex;
-    flex-direction: column;
-    flex: none;
+    width: 100%;
     max-width: 400px;
 }
-#anteprimaAuto {
+
+.car-preview {
+    width: 400px;
+    height: 220px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+/* Immagine auto e Placeholder */
+#anteprimaAuto, #imagePlaceholder {
     width: 100%;
-    height: 100%; /* immagine prende tutta l'altezza disponibile */
-    object-fit: contain; /* mantiene proporzioni */
-    display: none;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 8px;
+}
+
+#anteprimaAuto {
+    object-fit: contain;
+    display: none;
 }
 
 #imagePlaceholder {
     border: 2px dashed #ccc;
-    border-radius: 8px;
-    width: 100%; /* stessa larghezza del contenitore */
-    height: 100%; /* stessa altezza del contenitore */
+    background-color: #f8f8f8;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute; /* sovrappone immagine e placeholder */
-    top: 0;
-    left: 0;
-    background-color: #f8f8f8;
+    text-align: center;
 }
+
 #loader {
     position: absolute;
     width: 40px;
@@ -114,12 +90,30 @@ select, input[type="text"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 4px solid #ddd;
-    border-top-color: #333;
-    border-radius: 50%;
-    animation: spin 1s infinite linear;
+    z-index: 10;
 }
 
+/* Responsive: dispositivi mobili/tablet */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .car-selection-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .car-preview {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+
+    select, input[type="text"], #customerResults {
+        max-width: 100%;
+    }
+}
 
 @keyframes spin {
     to {
