@@ -39,3 +39,83 @@ select, input[type="text"] {
         max-width: 100%;
     }
 }
+
+#customerResults {
+    width: 100%; /* larghezza uguale all'input */
+    max-width: 400px;
+    background-color: white;
+    list-style: none;
+    margin-top: 0;
+    padding-left: 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+    #customerResults li {
+        padding: 8px 12px;
+        cursor: pointer; /* cambia il puntatore del mouse */
+    }
+
+        #customerResults li:hover {
+            background-color: #f0f0f0;
+        }
+
+.car-selection-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.dropdowns {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: 400px;
+}
+
+.car-preview {
+    flex: 1;
+    position: relative;
+    max-width: 400px;
+}
+
+#anteprimaAuto {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none; /* nascosta di default */
+}
+
+#imagePlaceholder {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #aaa;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.02);
+}
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: #333;
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -20px 0 0 -20px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
