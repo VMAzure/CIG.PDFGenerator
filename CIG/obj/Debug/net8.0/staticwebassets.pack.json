@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\CIG.PDFGenerator.fp1mvenvj0.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "PackagePath": "staticwebassets\\css\\offer.css"
+    },
+    {
       "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

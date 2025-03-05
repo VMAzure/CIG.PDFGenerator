@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yaXuy80Bvk6mxwk77flCJ7V9LaSIDJTn2L80aewe6QU=",
+  "Hash": "t3VyGotTWISzGKq+b4K3laa2PnbU0JteG848QRAt2tc=",
   "Source": "CIG.PDFGenerator",
   "BasePath": "_content/CIG.PDFGenerator",
   "Mode": "Default",
@@ -57,6 +57,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CIG.PDFGenerator.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "css/offer#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6o3umkr135",
+      "Integrity": "6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\offer.css"
     },
     {
       "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\site.css",
@@ -1544,6 +1565,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-3aaZ5GChFK3rSGILOuvtnT+qoFBrC+Atxl8Uf/jMKV0="
+        }
+      ]
+    },
+    {
+      "Route": "css/offer.6o3umkr135.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "724"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Mar 2025 22:19:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6o3umkr135"
+        },
+        {
+          "Name": "label",
+          "Value": "css/offer.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw="
+        }
+      ]
+    },
+    {
+      "Route": "css/offer.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "724"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 05 Mar 2025 22:19:25 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw="
         }
       ]
     },
