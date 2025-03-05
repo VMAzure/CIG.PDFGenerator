@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "Crea Offerta PDF";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <select id="marca"></select>
+    <select id="modello"></select>
+    <select id="versione"></select>
+    <select id="variante"></select>
+</div>
+
+<div>
+    <img id="anteprimaAuto" src="" alt="Anteprima Auto" style="max-width:400px;margin-top:20px;">
+</div>
+
+@section Scripts {
+    <script>
+        const customerKey = "it-azureautomotive";
+
+        const marcaDropdown = document.getElementById("marca");
+        const modelloDropdown = document.getElementById("modello");
+        const versioneDropdown = document.getElementById("versione");
+        const varianteDropdown = document.getElementById("variante");
+        const anteprimaAuto = document.getElementById("anteprimaAuto");
+
+        // Funzione generica per popolare dropdown
+        async function fetchDropdown(url, dropdown, keyName) {
+            dropdown.innerHTML = '<option value="">Caricamento...</option>';
+            dropdown.disabled = true;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                dropdown.innerHTML = `<option value="">Seleziona ${keyName}</option>`;
+                data.preselect.options[keyName].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item.toUpperCase();
+                    dropdown.appendChild(option);
+                });
+
+                dropdown.disabled = false;
+            } catch (error) {
+                console.error('Errore nel recupero dati:', error);
+                dropdown.innerHTML = `<option value="">Errore caricamento</option>`;
+            }
+        }
+
+        // Carica marche al caricamento della pagina
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make");
+        });
+
+        // Eventi collegati per caricare modelli, versioni e varianti
+        marcaDropdown.addEventListener("change", () => {
+            modelloDropdown.innerHTML = '';
+            versioneDropdown.innerHTML = '';
+            varianteDropdown.innerHTML = '';
+            anteprimaAuto.src = '';
+
+            if (marcaDropdown.value) {
+                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily");
+            }
+        });
+
+        modelloDropdown.addEventListener("change", () => {
+            versioneDropdown.innerHTML = '';
+            varianteDropdown.innerHTML = '';
+            anteprimaAuto.src = '';
+
+            if (modelloDropdown.value) {
+                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
+            }
+        });
+
+        versioneDropdown.addEventListener("change", () => {
+            varianteDropdown.innerHTML = '';
+            anteprimaAuto.src = '';
+
+            if (versioneDropdown.value) {
+                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}`, varianteDropdown, "modelVariant");
+            }
+        });
+
+        // Mostra anteprima immagine auto quando selezioni la variante
+        varianteDropdown.addEventListener("change", () => {
+            if (varianteDropdown.value) {
+                const imageUrl = `https://cdn.imagin.studio/getImage?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=203&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`;
+                anteprimaAuto.src = imageUrl;
+            } else {
+                anteprimaAuto.src = '';
+            }
+        });
+    </script>
+}
