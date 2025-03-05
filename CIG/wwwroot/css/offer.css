@@ -20,15 +20,6 @@ select, input[type="text"] {
     font-size: 14px;
 }
 
-#anteprimaAuto {
-    display: block;
-    margin: 20px auto;
-    max-width: 50%;
-    height: auto;
-    border-radius: 8px;
-    /*box-shadow: 0 4px 8px rgba(0,0,0,0.1);*/
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     body {
@@ -39,12 +30,13 @@ select, input[type="text"] {
         max-width: 100%;
     }
     .car-selection-container {
-        flex-direction: column; /* Impila verticalmente su mobile */
+        flex-direction: column; /* dropdown e immagine incolonnati */
     }
 
     .car-preview {
-        margin-left: 0; /* Annulla margine sinistro su mobile */
-        margin-top: 20px; /* Aggiungi margine sopra per separare dai dropdown */
+        margin-left: 0; /* nessun margine su mobile */
+        margin-top: 20px;
+        width: 100%; /* piena larghezza su mobile */
     }
 }
 
@@ -79,7 +71,11 @@ select, input[type="text"] {
 .car-preview {
     flex: none;
     margin-left: 20px;
+    width: 400px; /* larghezza fissa per evitare movimento */
+    height: 220px; /* altezza uguale al placeholder per stabilità */
+    position: relative; /* necessario per loader */
 }
+
 
 
 .dropdowns {
@@ -90,36 +86,40 @@ select, input[type="text"] {
 }
 #anteprimaAuto {
     width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none; /* nascosta di default */
+    height: 100%; /* immagine prende tutta l'altezza disponibile */
+    object-fit: contain; /* mantiene proporzioni */
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #imagePlaceholder {
     border: 2px dashed #ccc;
     border-radius: 8px;
-    height: 220px;
+    width: 100%; /* stessa larghezza del contenitore */
+    height: 100%; /* stessa altezza del contenitore */
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: #aaa;
-    padding: 10px;
-    background-color: rgba(0,0,0,0.02);
+    position: absolute; /* sovrappone immagine e placeholder */
+    top: 0;
+    left: 0;
+    background-color: #f8f8f8;
 }
-.loader {
+#loader {
+    position: absolute;
     width: 40px;
     height: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border: 4px solid #ddd;
     border-top-color: #333;
     border-radius: 50%;
     animation: spin 1s infinite linear;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -20px 0 0 -20px;
 }
+
 
 @keyframes spin {
     to {
