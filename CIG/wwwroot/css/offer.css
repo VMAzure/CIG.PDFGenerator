@@ -6,7 +6,7 @@ body {
 }
 
 h2 {
-    text-align: right;
+    text-align: left;
     margin-bottom: 30px;
 }
 
@@ -65,7 +65,7 @@ select, input[type="text"] {
     justify-content: flex-start; /* Allinea tutto a sinistra */
     gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .car-preview {
