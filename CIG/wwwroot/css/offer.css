@@ -38,6 +38,14 @@ select, input[type="text"] {
     select, input[type="text"] {
         max-width: 100%;
     }
+    .car-selection-container {
+        flex-direction: column; /* Impila verticalmente su mobile */
+    }
+
+    .car-preview {
+        margin-left: 0; /* Annulla margine sinistro su mobile */
+        margin-top: 20px; /* Aggiungi margine sopra per separare dai dropdown */
+    }
 }
 
 #customerResults {
@@ -62,31 +70,24 @@ select, input[type="text"] {
 
 .car-selection-container {
     display: flex;
-    justify-content: flex-start; /* Allinea tutto a sinistra */
+    justify-content: flex-start;
     gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
 }
 
 .car-preview {
-    flex: none; /* Non prendere tutto lo spazio rimanente */
-    margin-left: 20px; /* Aggiungi margine a sinistra di 20px */
+    flex: none;
+    margin-left: 20px;
 }
 
 
 .dropdowns {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: none;
     max-width: 400px;
 }
-
-.car-preview {
-    flex: 1;
-    position: relative;
-    max-width: 400px;
-}
-
 #anteprimaAuto {
     width: 100%;
     height: auto;
