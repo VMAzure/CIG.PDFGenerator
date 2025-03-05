@@ -125,29 +125,33 @@
                     "Authorization": "Bearer " + token
                 }
             })
-            .then(res => res.json())
-            .then(clienti => {
-                customerResults.innerHTML = '';
-                const filteredCustomers = clienti.filter(cliente =>
-                    cliente.nome.toLowerCase().includes(query.toLowerCase()) ||
-                    cliente.cognome.toLowerCase().includes(query.toLowerCase()) ||
-                    cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase()) ||
-                    cliente.email.toLowerCase().includes(query.toLowerCase()) ||
-                    cliente.telefono.includes(query)
-                );
+                    .then(res => res.json())
+        .then(clienti => {
+            customerResults.innerHTML = '';
 
-                filteredCustomers.forEach(cliente => {
-                    const li = document.createElement('li');
-                    li.textContent = cliente.nome + ' ' + cliente.cognome + ' (' + cliente.email + ')';
-                    li.addEventListener('click', function () {
-                        customerInput.value = cliente.nome + ' ' + cliente.cognome;
-                        customerResults.style.display = 'none';
-                    });
-                    customerResults.appendChild(li);
+            const filteredCustomers = clienti.filter(cliente =>
+                (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.ragione_sociale && cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.email && cliente.email.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.telefono && cliente.telefono.includes(query))
+            );
+
+            filteredCustomers.forEach(cliente => {
+                const li = document.createElement('li');
+                const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
+
+                li.textContent = nomeCompleto + ' (' + cliente.email + ')';
+                li.addEventListener('click', function () {
+                    customerInput.value = nomeCompleto;
+                    customerResults.style.display = 'none';
                 });
+                customerResults.appendChild(li);
+            });
 
-                customerResults.style.display = 'block';
-            })
+            customerResults.style.display = 'block';
+        })
+
             .catch(error => {
                 console.error('Errore:', error);
             });
