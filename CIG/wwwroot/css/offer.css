@@ -6,7 +6,7 @@ body {
 }
 
 h2 {
-    text-align: center;
+    text-align: right;
     margin-bottom: 30px;
 }
 
@@ -62,11 +62,17 @@ select, input[type="text"] {
 
 .car-selection-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Allinea tutto a sinistra */
     gap: 20px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+
+.car-preview {
+    flex: none; /* Non prendere tutto lo spazio rimanente */
+    margin-left: 20px; /* Aggiungi margine a sinistra di 20px */
+}
+
 
 .dropdowns {
     display: flex;
