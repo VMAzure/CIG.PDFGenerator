@@ -16,7 +16,7 @@ COPY ["CIG/CIG.PDFGenerator.csproj", "CIG/"]
 RUN dotnet restore "./CIG/CIG.PDFGenerator.csproj"
 COPY . .
 WORKDIR "/src/CIG"
-RUN dotnet build "./CIG.PDFGenerator.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./CIG/CIG.PDFGenerator.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # Questa fase viene usata per pubblicare il progetto di servizio da copiare nella fase finale
 FROM build AS publish
