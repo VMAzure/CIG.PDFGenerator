@@ -87,6 +87,59 @@
 
 @section Scripts {
     <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+            adminInfo = await getAdminInfo();
+
+                    let adminInfo = null;
+
+        async function fetchAdminInfo() {
+            const token = new URLSearchParams(window.location.search).get('token');
+
+            try {
+                const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+
+                if (!res.ok) throw new Error('Errore caricamento dati Admin');
+
+                const adminData = await res.json();
+
+                return {
+                    Id: adminData.id,
+                    Email: adminData.email,
+                    FirstName: adminData.nome,
+                    LastName: adminData.cognome,
+                    CompanyName: adminData.ragione_sociale,
+                    VatNumber: adminData.partita_iva,
+                    Address: adminData.indirizzo,
+                    PostalCode: adminData.cap,
+                    City: adminData.citta,
+                    SDICode: adminData.codice_sdi,
+                    MobilePhone: adminData.cellulare,
+                    LogoUrl: adminData.logo_url
+                };
+            } catch(error){
+                console.error(error);
+                alert("Errore caricamento dati Admin.");
+                return null;
+            }
+        }
+
+                let selectedCustomer = {};
+
+        li.addEventListener('click', function () {
+            customerInput.value = nomeCompleto;
+            customerResults.style.display = 'none';
+
+            selectedCustomer = cliente; // ✅ salva cliente completo qui
+            document.getElementById('nextStepBtn').style.display = 'inline-block';
+        });
+
+        });
+
+    
+    </script>
+    <script>
         const customerKey = "it-azureautomotive";
         const marcaDropdown = document.getElementById("marca");
         const modelloDropdown = document.getElementById("modello");
@@ -169,6 +222,7 @@
                 anteprimaAuto.onload = function(){
                     loader.style.display = "none";
                     anteprimaAuto.style.display = "block";
+                        carMainImageUrl = imageUrl; //🔴 Salva subito qui
                 };
                 anteprimaAuto.onerror = function(){
                     loader.style.display = "none";
@@ -393,28 +447,35 @@
         document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
-            const payload = {
-                Auto: {
-                    Marca: marcaDropdown.value,
-                    Modello: modelloDropdown.value,
-                    Versione: versioneDropdown.value,
-                    Variante: varianteDropdown.value
-                },
-                CustomerFirstName: customerInput.value,
-                // aggiungi eventualmente gli altri dati corretti del cliente
-                Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
-                    Id: checkbox.value,
-                    Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
-                })),
-                DatiEconomici: {
-                    Durata: document.getElementById('durataMesi').value,
-                    KmTotali: document.getElementById('kmTotali').value,
-                    Anticipo: document.getElementById('anticipo').value,
-                    Canone: document.getElementById('canone').value
-                },
-                Cliente: customerInput.value
-            };
+                    const payload = {
+            CustomerFirstName: selectedCustomer.nome || "",
+            CustomerLastName: selectedCustomer.cognome || "",
+            CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+            CustomerIcon: "icona_default.png", // da scegliere dalla gallery
+            CarMainImageUrl: carMainImageUrl,
+            CarThumbnailUrl: carMainImageUrl, // stessa immagine per semplicità
+            AdminInfo: adminInfo, // 🔴 usa questa variabile già caricata (verifica nome corretto!)
+            DealerInfo: null, // ora impostalo a null, poi lo vediamo
+            Auto: {
+                Marca: marcaDropdown.value,
+                Modello: modelloDropdown.value,
+                Versione: versioneDropdown.value,
+                Variante: varianteDropdown.value
+            },
+            Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
+                Id: checkbox.value,
+                Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
+            })),
+            DatiEconomici: {
+                Durata: parseInt(document.getElementById('durataMesi').value),
+                KmTotali: parseInt(document.getElementById('kmTotali').value),
+                Anticipo: parseFloat(document.getElementById('anticipo').value),
+                Canone: parseFloat(document.getElementById('canone').value)
+            }
+        };
 
+
+    
             fetch('/api/Pdf/GenerateOffer', {
                 method: 'POST',
                 headers: {
