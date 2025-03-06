@@ -3,16 +3,6 @@
 }
 <link rel="stylesheet" href="~/css/offer.css" />
 <hr />  
-<div class="step-progress-container">
-    <div class="step-progress-bar">
-        <div class="step active" data-step="1">Auto e Cliente</div>
-        <div class="step" data-step="2">Servizi</div>
-        <div class="step" data-step="3">Offerta</div>
-        <div class="step" data-step="4">Riepilogo</div>
-    </div>
-</div>
-
-
 
 <div id="stepsContainer">
     <!-- STEP 1: Scelta auto e cliente -->
@@ -273,13 +263,7 @@
 
                 currentStep = stepNumber;
 
-                       // aggiorna la progress bar quando cambia step
-                document.querySelectorAll('.step-progress-bar .step').forEach(step => {
-                    step.classList.toggle('active', parseInt(step.getAttribute('data-step')) === stepNumber);
-                });
-
-
-                // Gestione pulsanti navigazione
+               // Gestione pulsanti navigazione
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
                 document.getElementById('nextStepBtn').textContent = currentStep < 4 ? `Step ${currentStep + 1} →` : '📄 Genera PDF';
 

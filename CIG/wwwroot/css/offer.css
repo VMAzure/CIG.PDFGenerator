@@ -3,6 +3,7 @@
     padding: 20px;
     background-color: #f9f9f9;
     color: #333;
+    padding-bottom: 80px; /* spazio per i bottoni */
 }
 
 h2 {
@@ -158,11 +159,19 @@ select, input[type="text"] {
     }
 
 .navigation-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    gap: 15px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    z-index: 1000;
 }
+
 
     .navigation-buttons button {
         padding: 8px 16px;
@@ -182,36 +191,3 @@ select, input[type="text"] {
     color: #fff;
 }
 
-.step-progress-container {
-    width: 100%;
-    margin-bottom: 30px;
-}
-
-.step-progress-bar {
-    display: flex;
-    width: 100%;
-    border-radius: 8px;
-    background-color: #e0f0ff;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-    .step-progress-bar .step {
-        flex: 1;
-        padding: 10px;
-        text-align: center;
-        background-color: #cfe8ff;
-        color: #00213b;
-        font-size: 14px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-
-        .step-progress-bar .step.active {
-            background-color: #007bff;
-            color: #fff;
-        }
-
-        .step-progress-bar .step:not(:last-child) {
-            border-right: 2px solid #fff;
-        }
