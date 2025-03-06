@@ -2,8 +2,12 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using QuestPDF.Infrastructure; // <-- Assicurati che sia presente!
+
 
 var builder = WebApplication.CreateBuilder(args); // 🔹 Sposta questa riga qui in alto
+QuestPDF.Settings.License = LicenseType.Community;
+
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
@@ -51,6 +55,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Offer}/{action=Index}/{id?}");
 
+builder.Services.AddControllers();
 
+
+app.MapControllers();
 
 app.Run();
+
