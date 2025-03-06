@@ -87,17 +87,21 @@
 
     <script>
 
-                let adminInfo = null;
+        let adminInfo = null;
+        let marcaDropdown, modelloDropdown, versioneDropdown, varianteDropdown, anteprimaAuto;
 
-        document.addEventListener("DOMContentLoaded", async () => {
+        document.addEventListener("DOMContentLoaded", () => {
             adminInfo = await fetchAdminInfo();
 
-            const customerKey = "it-azureautomotive";
-            const marcaDropdown = document.getElementById("marca");
-            const modelloDropdown = document.getElementById("modello");
-            const versioneDropdown = document.getElementById("versione");
-            const varianteDropdown = document.getElementById("variante");
-            const anteprimaAuto = document.getElementById("anteprimaAuto");
+        
+            marcaDropdown = document.getElementById("marca");
+            modelloDropdown = document.getElementById("modello");
+            versioneDropdown = document.getElementById("versione");
+            varianteDropdown = document.getElementById("variante");
+            anteprimaAuto = document.getElementById("anteprimaAuto");
+
+            
+        
             const loader = document.getElementById("loader");
             const imagePlaceholder = document.getElementById("imagePlaceholder");
             let carMainImageUrl = "";
