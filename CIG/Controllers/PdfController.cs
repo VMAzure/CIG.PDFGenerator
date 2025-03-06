@@ -14,6 +14,12 @@ namespace CIG.PDFGenerator.Controllers
         [HttpPost("GenerateOffer")]
         public IActionResult GenerateOffer([FromBody] OfferPdfPage1 offer)
         {
+            if (!ModelState.IsValid)
+            {
+                // 🔴 aggiungi subito questo log per capire l'errore
+                return BadRequest(ModelState);
+            }
+
             var pdf = Document.Create(document =>
             {
                 document.Page(page =>
@@ -28,26 +34,19 @@ namespace CIG.PDFGenerator.Controllers
                             cliente = offer.CustomerCompanyName;
 
                         column.Item().Text($"Cliente: {cliente}");
+                        column.Item().Text($"Admin: {offer.AdminInfo.CompanyName}");
 
-                        column.Item().Text($"{offer.Auto.Marca} {offer.Auto.Modello} {offer.Auto.Versione} {offer.Auto.Variante}");
-
-                        column.Item().Text("Servizi selezionati:");
-                        foreach (var servizio in offer.Servizi)
+                        if (offer.DealerInfo != null)
                         {
-                            column.Item().Text($"{servizio.Id} - Opzione: {servizio.Opzione}");
+                            column.Item().Text($"Dealer: {offer.DealerInfo.CompanyName}");
                         }
 
-                        column.Item().Text("Dati economici:");
-                        column.Item().Text($"Durata: {offer.DatiEconomici.Durata} mesi");
-                        column.Item().Text($"Km totali: {offer.DatiEconomici.KmTotali}");
-                        column.Item().Text($"Anticipo: € {offer.DatiEconomici.Anticipo}");
-                        column.Item().Text($"Canone mensile: € {offer.DatiEconomici.Canone}");
+                        column.Item().Image(offer.CarMainImageUrl);
                     });
                 });
             }).GeneratePdf();
 
             return File(pdf, "application/pdf", "Offerta.pdf");
         }
-
     }
 }
