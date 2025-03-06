@@ -125,8 +125,6 @@
             }
         }
 
-                let selectedCustomer = {}; //✅ definizione globale
-
         filteredCustomers.forEach(cliente => {
             const li = document.createElement('li'); //✅ Definizione elemento li chiaramente prima dell'uso
             const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
