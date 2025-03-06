@@ -274,11 +274,20 @@
 
                 currentStep = stepNumber;
 
+                    // Gestione pulsanti navigazione
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
-                document.getElementById('nextStepBtn').textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Genera PDF';
+                document.getElementById('nextStepBtn').textContent = currentStep < 4 ? `Step ${currentStep + 1} →` : '📄 Genera PDF';
 
-                if (stepNumber === 2) {
-                    caricaServizi();
+                document.getElementById(`step${stepNumber}`).style.display = 'block';
+
+                if (currentStep === 4) {
+                    document.getElementById('nextStepBtn').style.display = 'none';
+                } else {
+                    document.getElementById('nextStepBtn').style.display = 'inline-block';
+                }
+
+                if (currentStep === 4) {
+                    generaRiepilogo();
                 }
 
                 // 🔴 Genera riepilogo se siamo allo step 4
