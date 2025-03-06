@@ -12,8 +12,6 @@
     </div>
 </div>
 
-<hr />
-
 <div id="stepsContainer">
     <!-- STEP 1: Scelta auto e cliente -->
     <div id="step1" class="step-content active">
@@ -228,75 +226,10 @@
 
 </script>
 
-<script>
-         document.getElementById('step2Btn').addEventListener('click', () => {
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-
-            // Inizia la transizione (effetto slider)
-            step1.classList.remove('active');
-            step1.classList.add('exit-left');
-
-            setTimeout(() => {
-                step1.style.display = 'none';
-                step2.style.display = 'block';
-                setTimeout(() => step2.classList.add('active'), 10);
-            }, 300);
-
-            const token = new URLSearchParams(window.location.search).get("token");
-
-            fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                const servicesList = document.getElementById('servicesList');
-                servicesList.innerHTML = '';
-
-                data.services.forEach(service => {
-                    const div = document.createElement('div');
-                    div.className = 'service-item';
-
-                    let html = `
-                        <label>
-                            <input type="checkbox" value="${service.id}">
-                            <strong>${service.name}</strong><br>
-                            <small>${service.description}</small>
-                        </label>
-                    `;
-
-                    if (service.conditions && service.conditions.options) {
-                        let htmlOptions = '<div class="service-options">';
-                        service.conditions.options.forEach(option => {
-                            htmlOptions += `
-                                <label style="margin-right:10px;">
-                                    <input type="radio" name="option_${service.id}" value="${option}"> ${option}
-                                </label>
-                            `;
-                        });
-                        htmlOptions += '</div>';
-
-                        html += htmlOptions;
-                    }
-
-                    div.innerHTML = html;
-
-                    servicesList.appendChild(div);
-                });
-            })
-            .catch(error => {
-                document.getElementById('servicesList').textContent = 'Errore caricamento servizi.';
-                console.error('Errore:', error);
-            });
-        });
-
-</script>
 
 
 <script>
-             let currentStep = 1;
+        let currentStep = 1;
         const totalSteps = 4;
 
         document.getElementById('nextStepBtn').addEventListener('click', () => {
@@ -306,13 +239,7 @@
         document.getElementById('backBtn').addEventListener('click', () => {
             if (currentStep > 1) goToStep(currentStep - 1);
         });
-
-        function goToStep(stepNumber) {
-            // Gestione step progress bar
-            document.querySelector('.step-progress-bar .step.active').classList.remove('active');
-            document.querySelector(`.step-progress-bar .step[data-step="${stepNumber}"]`).classList.add('active');
-
-            // Gestione step content
+                function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
@@ -323,16 +250,23 @@
 
                 const next = document.getElementById(`step${stepNumber}`);
                 next.style.display = 'block';
-                setTimeout(() => next.classList.add('active'), 10);
+
+                setTimeout(() => {
+                    next.classList.add('active');
+
+                    if (stepNumber === 2) {
+                        caricaServizi(); //✅ corretto e coerente con il tuo codice
+                    }
+                }, 10);
 
                 currentStep = stepNumber;
 
-                // Aggiorna bottoni
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
                 document.getElementById('nextStepBtn').textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Genera PDF';
 
             }, 300);
         }
+
 
 </script>
 }
