@@ -123,25 +123,7 @@
                 return null;
             }
         }
-
-        filteredCustomers.forEach(cliente => {
-            const li = document.createElement('li'); //✅ Definizione elemento li chiaramente prima dell'uso
-            const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
-
-            li.textContent = nomeCompleto + ' (' + cliente.email + ')';
-
-            // ✅ Ora l'addEventListener è applicato correttamente a "li"
-            li.addEventListener('click', function () {
-                customerInput.value = nomeCompleto;
-                customerResults.style.display = 'none';
-                selectedCustomer = cliente;
-                document.getElementById('nextStepBtn').style.display = 'inline-block';
-            });
-
-            customerResults.appendChild(li);
-        });
-
-              
+             
         const customerKey = "it-azureautomotive";
         const marcaDropdown = document.getElementById("marca");
         const modelloDropdown = document.getElementById("modello");
