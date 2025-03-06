@@ -210,7 +210,8 @@
                 customerResults.style.display = 'none';
 
                 // ✅ Mostra bottone step 2
-                document.getElementById('step2Btn').style.display = 'inline-block';
+                document.getElementById('nextStepBtn').style.display = 'inline-block';
+
             });
             customerResults.appendChild(li);
         });
@@ -265,6 +266,54 @@
                 document.getElementById('nextStepBtn').textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Genera PDF';
 
             }, 300);
+        }
+        function caricaServizi() {
+            const token = new URLSearchParams(window.location.search).get("token");
+            const servicesList = document.getElementById('servicesList');
+            servicesList.innerHTML = 'Caricamento servizi...';
+
+            fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                servicesList.innerHTML = '';
+
+                data.services.forEach(service => {
+                    const div = document.createElement('div');
+                    div.className = 'service-item';
+
+                    let html = `
+                        <label>
+                            <input type="checkbox" value="${service.id}">
+                            <strong>${service.name}</strong><br>
+                            <small>${service.description}</small>
+                        </label>
+                    `;
+
+                    if (service.conditions && service.conditions.options) {
+                        let htmlOptions = '<div class="service-options">';
+                        service.conditions.options.forEach(option => {
+                            htmlOptions += `
+                                <label style="margin-right:10px;">
+                                    <input type="radio" name="option_${service.id}" value="${option}"> ${option}
+                                </label>
+                            `;
+                        });
+                        htmlOptions += '</div>';
+                        html += htmlOptions;
+                    }
+
+                    div.innerHTML = html;
+                    servicesList.appendChild(div);
+                });
+            })
+            .catch(error => {
+                servicesList.textContent = 'Errore caricamento servizi.';
+                console.error('Errore:', error);
+            });
         }
 
 
