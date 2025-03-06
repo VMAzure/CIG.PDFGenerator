@@ -159,6 +159,8 @@ select, input[type="text"] {
 
 .step-progress-container {
     margin-bottom: 30px;
+    width: 100%;
+    overflow: hidden; /* evita che la barra vada oltre la larghezza del contenitore */
 }
 
 .step-progress-bar {
@@ -169,6 +171,8 @@ select, input[type="text"] {
     padding: 10px;
     background-color: #e0f0ff;
     border-radius: 8px;
+    max-width: 100%; /* Impedisce che la barra esca dal contenitore */
+    box-sizing: border-box; /* Include padding e bordo nella larghezza totale */
 }
 
     .step-progress-bar .step {
