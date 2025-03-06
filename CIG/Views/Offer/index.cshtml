@@ -423,10 +423,9 @@
             `;
         }
 
-                document.getElementById('generatePdfBtn').addEventListener('click', () => {
+            document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
-            // 🔴 Controllo obbligatorio sulle variabili
             if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
                 alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
                 return;
@@ -436,7 +435,7 @@
                 CustomerFirstName: selectedCustomer.nome || "",
                 CustomerLastName: selectedCustomer.cognome || "",
                 CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-                CustomerIcon: "icona_default.png", // Placeholder momentaneo
+                CustomerIcon: "icona_default.png",
                 CarMainImageUrl: carMainImageUrl,
                 CarThumbnailUrl: carMainImageUrl,
                 AdminInfo: adminInfo,
@@ -459,61 +458,33 @@
                 }
             };
 
-            const token = new URLSearchParams(window.location.search).get("token");
+            fetch('/api/Pdf/GenerateOffer', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Errore generazione PDF");
+                return res.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Offerta.pdf';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch(error => {
+                console.error("Errore generazione PDF:", error);
+                alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
+            });
+        });
 
-            fetch('/api/Pdf/GenerateOffer', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => {
-                if (!res.ok) throw new Error("Errore generazione PDF");
-                return res.blob();
-            })
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Offerta.pdf';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            })
-            .catch(error => {
-                console.error("Errore generazione PDF:", error);
-                alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
-            });
-        });
-    
-            fetch('/api/Pdf/GenerateOffer', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => {
-                if (!res.ok) throw new Error("Errore generazione PDF");
-                return res.blob();
-            })
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Offerta.pdf';
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            })
-            .catch(error => {
-                console.error("Errore generazione PDF:", error);
-                alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
-            });
-        });
 
     </script>
 }
