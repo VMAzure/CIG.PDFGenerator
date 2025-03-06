@@ -14,5 +14,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CIG.PDFGenerator.Controllers.PdfController",
+    "Method": "GenerateOffer",
+    "RelativePath": "api/Pdf/GenerateOffer",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "offer",
+        "Type": "CIG.PDFGenerator.Models.OfferPdfPage1",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

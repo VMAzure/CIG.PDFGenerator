@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "t3VyGotTWISzGKq+b4K3laa2PnbU0JteG848QRAt2tc=",
+  "Hash": "V02v6LRDqRteRq3au0eRDv907Y4oI6PEK3Xezhg/ARc=",
   "Source": "CIG.PDFGenerator",
   "BasePath": "_content/CIG.PDFGenerator",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6o3umkr135",
-      "Integrity": "6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=",
+      "Fingerprint": "d1kmgu96qy",
+      "Integrity": "D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\offer.css"
@@ -1569,51 +1569,6 @@
       ]
     },
     {
-      "Route": "css/offer.6o3umkr135.css",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "724"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 22:19:25 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6o3umkr135"
-        },
-        {
-          "Name": "label",
-          "Value": "css/offer.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw="
-        }
-      ]
-    },
-    {
       "Route": "css/offer.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
       "Selectors": [],
@@ -1624,7 +1579,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "724"
+          "Value": "5387"
         },
         {
           "Name": "Content-Type",
@@ -1632,11 +1587,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw=\""
+          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 05 Mar 2025 22:19:25 GMT"
+          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1646,7 +1601,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6vulolFKr4XNa6MXwKyyahdHHDyR0ve8sGEtec5cLPw="
+          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
+        }
+      ]
+    },
+    {
+      "Route": "css/offer.d1kmgu96qy.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5387"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "d1kmgu96qy"
+        },
+        {
+          "Name": "label",
+          "Value": "css/offer.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
         }
       ]
     },

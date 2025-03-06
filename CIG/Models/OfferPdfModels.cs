@@ -3,11 +3,10 @@
     public class OfferPdfPage1
     {
         // Cliente finale
-        public string CustomerFirstName { get; set; } // Null se società
-        public string CustomerLastName { get; set; }  // Null se società
-        public string CustomerCompanyName { get; set; } // Null se privato o professionista
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string CustomerCompanyName { get; set; }
 
-        // Icona cliente (selezionata dalla gallery)
         public string CustomerIcon { get; set; }
 
         // Immagini auto
@@ -17,8 +16,36 @@
         // Dati Admin (sempre presenti)
         public AdminDealerData AdminInfo { get; set; }
 
-        // Dati Dealer (se diverso dall'Admin, altrimenti null)
-        public AdminDealerData DealerInfo { get; set; } // può essere null
+        // Dati Dealer (se diverso dall'Admin)
+        public AdminDealerData DealerInfo { get; set; }
+
+        // 🔴 AGGIUNGI SUBITO QUESTE PROPRIETÀ
+        public Auto Auto { get; set; }
+        public List<Servizio> Servizi { get; set; }
+        public DatiEconomici DatiEconomici { get; set; }
+    }
+
+    // 🔴 Aggiungi subito anche queste classi di supporto mancanti:
+    public class Auto
+    {
+        public string Marca { get; set; }
+        public string Modello { get; set; }
+        public string Versione { get; set; }
+        public string Variante { get; set; }
+    }
+
+    public class Servizio
+    {
+        public string Id { get; set; }
+        public string Opzione { get; set; }
+    }
+
+    public class DatiEconomici
+    {
+        public int Durata { get; set; }
+        public int KmTotali { get; set; }
+        public decimal Anticipo { get; set; }
+        public decimal Canone { get; set; }
     }
 
     public class AdminDealerData
