@@ -133,3 +133,26 @@ select, input[type="text"] {
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
+#stepsContainer {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.step {
+    position: absolute;
+    top: 0;
+    left: 100%; /* inizialmente fuori dallo schermo */
+    width: 100%;
+    transition: left 0.3s ease-in-out;
+}
+
+    .step.active {
+        left: 0; /* attiva visibile */
+    }
+
+    .step.exit-left {
+        left: -100%; /* esce verso sinistra */
+    }
+

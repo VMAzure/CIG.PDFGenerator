@@ -201,9 +201,19 @@
 </script>
 
 <script>
-                    document.getElementById('step2Btn').addEventListener('click', () => {
-            document.getElementById('step2Btn').style.display = 'none';
-            document.getElementById('servicesSection').style.display = 'block';
+         document.getElementById('step2Btn').addEventListener('click', () => {
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+
+            // Inizia la transizione (effetto slider)
+            step1.classList.remove('active');
+            step1.classList.add('exit-left');
+
+            setTimeout(() => {
+                step1.style.display = 'none';
+                step2.style.display = 'block';
+                setTimeout(() => step2.classList.add('active'), 10);
+            }, 300);
 
             const token = new URLSearchParams(window.location.search).get("token");
 
@@ -230,7 +240,7 @@
                     `;
 
                     if (service.conditions && service.conditions.options) {
-                        htmlOptions = '<div class="service-options">';
+                        let htmlOptions = '<div class="service-options">';
                         service.conditions.options.forEach(option => {
                             htmlOptions += `
                                 <label style="margin-right:10px;">
@@ -238,17 +248,6 @@
                                 </label>
                             `;
                         });
-                        htmlOptions += '</div>';
-                        htmlOptions += '<br>';
-
-                        htmlOptions += '</div>';
-                        htmlOptions += '</div>';
-                        htmlOptions += '</div>';
-                        htmlOptions += '</div>';
-
-                        htmlOptions += '</div>';
-
-                        htmlOptions += '</div>';
                         htmlOptions += '</div>';
 
                         html += htmlOptions;
@@ -264,8 +263,6 @@
                 console.error('Errore:', error);
             });
         });
-
-
 
 </script>
 
