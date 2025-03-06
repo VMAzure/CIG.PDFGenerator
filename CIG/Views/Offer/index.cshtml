@@ -200,12 +200,7 @@
 </script>
 
 <script>
-            document.getElementById('step2Btn').addEventListener('click', () => {
-            document.getElementById('step2Btn').style.display = 'none'; // nasconde il bottone step2
-            document.getElementById('servicesSection').style.display = 'block'; // mostra sezione servizi
-        });
-
-                document.getElementById('step2Btn').addEventListener('click', () => {
+                    document.getElementById('step2Btn').addEventListener('click', () => {
             document.getElementById('step2Btn').style.display = 'none';
             document.getElementById('servicesSection').style.display = 'block';
 
@@ -225,7 +220,7 @@
                     const div = document.createElement('div');
                     div.className = 'service-item';
 
-                    div.innerHTML = `
+                    let html = `
                         <label>
                             <input type="checkbox" value="${service.id}">
                             <strong>${service.name}</strong><br>
@@ -233,14 +228,42 @@
                         </label>
                     `;
 
+                    if (service.conditions && service.conditions.options) {
+                        htmlOptions = '<div class="service-options">';
+                        service.conditions.options.forEach(option => {
+                            htmlOptions += `
+                                <label style="margin-right:10px;">
+                                    <input type="radio" name="option_${service.id}" value="${option}"> ${option}
+                                </label>
+                            `;
+                        });
+                        htmlOptions += '</div>';
+                        htmlOptions += '<br>';
+
+                        htmlOptions += '</div>';
+                        htmlOptions += '</div>';
+                        htmlOptions += '</div>';
+                        htmlOptions += '</div>';
+
+                        htmlOptions += '</div>';
+
+                        htmlOptions += '</div>';
+                        htmlOptions += '</div>';
+
+                        html += htmlOptions;
+                    }
+
+                    div.innerHTML = html;
+
                     servicesList.appendChild(div);
                 });
             })
             .catch(error => {
-                document.getElementById('servicesList').textContent = 'Errore nel caricamento dei servizi.';
+                document.getElementById('servicesList').textContent = 'Errore caricamento servizi.';
                 console.error('Errore:', error);
             });
         });
+
 
 
 </script>
