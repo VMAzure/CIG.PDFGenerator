@@ -4,34 +4,33 @@
 
 }
 
-<hr />  
+<div class="car-configurator">
+    <div class="car-selection">
+        <div id="step1">
+            <div class="car-selection">
+                <div class="dropdowns">
+                    <select id="marca"></select>
+                    <select id="modello"></select>
+                    <select id="versione"></select>
+                    <select id="variante"></select>
+                </div>
+                <div class="car-preview">
+                    <img id="anteprimaAuto" src="" alt="Anteprima Auto">
+                    <div id="imagePlaceholder">Seleziona una variante per visualizzare l'anteprima auto</div>
+                </div>
+                <div style="margin-top:10px;">
+                    <input type="text" id="searchCustomer" placeholder="Cerca cliente">
+                    <ul id="customerResults" style="border:1px solid #ccc; padding:5px; max-height:200px; overflow:auto; display:none;"></ul>
+                </div>
+                <button id="step2Btn" style="display:none; margin-top:10px;">Procedi allo Step 2 →</button>
+            </div>
 
-<div class="car-selection-container">
-    <div class="dropdowns">
-        <select id="marca"></select>
-        <select id="modello"></select>
-        <select id="versione"></select>
-        <select id="variante"></select>
+            <div id="serviziDisponibili" style="display:none;">
+                <h3>Servizi disponibili</h3>
+                <ul id="serviziDisponibili"></ul>
+            </div>
+        </div>
     </div>
-    <div class="car-preview">
-        <img id="anteprimaAuto" src="" alt="Anteprima Auto">
-        <div id="imagePlaceholder">Seleziona una variante per visualizzare l'anteprima</div>
-        <div id="loader" style="display:none;" class="loader"></div>
-
-    </div>
-</div>
-
-
-<div style="margin-top:20px;">
-    <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
-    <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
-</div>
-<button id="step2Btn" style="display:none; margin-top:10px;">Procedi allo Step 2 →</button>
-
-<!-- Sezione Servizi NLT -->
-<div id="servicesSection" style="display:none; margin-top:30px;">
-    <h3>Scegli i servizi per l'offerta:</h3>
-    <div id="servicesList">Caricamento servizi...</div>
 </div>
 
 
