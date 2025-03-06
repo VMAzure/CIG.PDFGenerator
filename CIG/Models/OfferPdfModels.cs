@@ -17,7 +17,7 @@
         public AdminDealerData AdminInfo { get; set; }
 
         // Dati Dealer (se diverso dall'Admin)
-        public AdminDealerData DealerInfo { get; set; }
+        public AdminDealerData? DealerInfo { get; set; }
 
         // 🔴 AGGIUNGI SUBITO QUESTE PROPRIETÀ
         public Auto Auto { get; set; }
