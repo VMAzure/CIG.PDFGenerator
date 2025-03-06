@@ -157,47 +157,6 @@ select, input[type="text"] {
         transform: translateX(-100%); /* 🔴 esce a sinistra */
     }
 
-.step-progress-container {
-    margin-bottom: 30px;
-    width: 100%;
-    overflow: hidden; /* evita che la barra vada oltre la larghezza del contenitore */
-}
-
-.step-progress-bar {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px;
-    background-color: #e0f0ff;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-    .step-progress-bar .step {
-        flex: 1; /* Occupa tutta la larghezza disponibile */
-        text-align: center;
-        padding: 8px;
-        margin: 0 5px;
-        background-color: #f0f8ff;
-        border-radius: 4px;
-        color: #00213b;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-        .step-progress-bar .step.active {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .step-progress-bar .step:not(:last-child)::after {
-            content: '';
-            width: 100%;
-            height: 2px;
-            background: #007bff;
-            display: block;
-            margin: 8px auto;
-        }
-
 .navigation-buttons {
     display: flex;
     justify-content: center;
@@ -222,3 +181,49 @@ select, input[type="text"] {
     background-color: #007bff;
     color: #fff;
 }
+
+.step-progress-container {
+    width: 100%;
+    overflow: hidden; /* evita che la barra esca dal contenitore */
+    box-sizing: border-box;
+}
+
+.step-progress-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%; /* forza larghezza massima al 100% */
+    padding: 10px;
+    background-color: #e0f0ff;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+    .step-progress-bar .step {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        white-space: nowrap; /* impedisce di andare a capo */
+        overflow: hidden;
+        text-overflow: ellipsis; /* testo abbreviato se troppo lungo */
+        position: relative;
+    }
+
+        .step-progress-bar .step::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: -2px;
+            width: 2px;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .step-progress-bar .step:last-child::after {
+            display: none;
+        }
+
+        .step-progress-bar .step.active {
+            background-color: #007bff;
+            color: #fff;
+        }

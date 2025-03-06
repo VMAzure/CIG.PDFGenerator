@@ -87,7 +87,6 @@
 @section Scripts {
     <script>
         const customerKey = "it-azureautomotive";
-
         const marcaDropdown = document.getElementById("marca");
         const modelloDropdown = document.getElementById("modello");
         const versioneDropdown = document.getElementById("versione");
@@ -155,8 +154,8 @@
         });
 
         // Mostra anteprima immagine auto quando selezioni la variante
-                // Quando selezioni la variante finale:
-                varianteDropdown.addEventListener("change", () => {
+        // Quando selezioni la variante finale:
+            varianteDropdown.addEventListener("change", () => {
             const loader = document.getElementById("loader");
             loader.style.display = "block";
             anteprimaAuto.style.display = "none";
@@ -187,7 +186,7 @@
 
     <script>
 
-                const customerInput = document.getElementById('customerInput');
+        const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
 
         // Recupero del token direttamente dalla URL
@@ -219,7 +218,7 @@
                 (cliente.telefono && cliente.telefono.includes(query))
             );
 
-                    filteredCustomers.forEach(cliente => {
+            filteredCustomers.forEach(cliente => {
             const li = document.createElement('li');
             const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
 
@@ -260,7 +259,7 @@
             if (currentStep > 1) goToStep(currentStep - 1);
         });
 
-                function goToStep(stepNumber) {
+        function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
