@@ -55,9 +55,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Offer}/{action=Index}/{id?}");
 
-builder.Services.AddControllers();
-
-
 app.MapControllers();
 
 app.Run();
