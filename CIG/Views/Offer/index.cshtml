@@ -125,15 +125,25 @@
             }
         }
 
-                let selectedCustomer = {};
+                let selectedCustomer = {}; //✅ definizione globale
 
-        li.addEventListener('click', function () {
-            customerInput.value = nomeCompleto;
-            customerResults.style.display = 'none';
+        filteredCustomers.forEach(cliente => {
+            const li = document.createElement('li'); //✅ Definizione elemento li chiaramente prima dell'uso
+            const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
 
-            selectedCustomer = cliente; // ✅ salva cliente completo qui
-            document.getElementById('nextStepBtn').style.display = 'inline-block';
+            li.textContent = nomeCompleto + ' (' + cliente.email + ')';
+
+            // ✅ Ora l'addEventListener è applicato correttamente a "li"
+            li.addEventListener('click', function () {
+                customerInput.value = nomeCompleto;
+                customerResults.style.display = 'none';
+                selectedCustomer = cliente;
+                document.getElementById('nextStepBtn').style.display = 'inline-block';
+            });
+
+            customerResults.appendChild(li);
         });
+
 
         });
 
@@ -240,11 +250,12 @@
     </script>
 
     <script>
-
         const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
 
-        // Recupero del token direttamente dalla URL
+        // variabile globale chiaramente definita
+        let selectedCustomer = {};
+
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
 
@@ -261,44 +272,42 @@
                     "Authorization": "Bearer " + token
                 }
             })
-                    .then(res => res.json())
-        .then(clienti => {
-            customerResults.innerHTML = '';
+            .then(res => res.json())
+            .then(clienti => {
+                customerResults.innerHTML = '';
 
-            const filteredCustomers = clienti.filter(cliente =>
-                (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
-                (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
-                (cliente.ragione_sociale && cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase())) ||
-                (cliente.email && cliente.email.toLowerCase().includes(query.toLowerCase())) ||
-                (cliente.telefono && cliente.telefono.includes(query))
-            );
+                const filteredCustomers = clienti.filter(cliente =>
+                    (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
+                    (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
+                    (cliente.ragione_sociale && cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase())) ||
+                    (cliente.email && cliente.email.toLowerCase().includes(query.toLowerCase())) ||
+                    (cliente.telefono && cliente.telefono.includes(query))
+                );
 
-            filteredCustomers.forEach(cliente => {
-            const li = document.createElement('li');
-            const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
+                filteredCustomers.forEach(cliente => {
+                    const li = document.createElement('li');  //✅ li definito chiaramente qui
+                    const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
 
-            li.textContent = nomeCompleto + ' (' + cliente.email + ')';
-            li.addEventListener('click', function () {
-                customerInput.value = nomeCompleto;
-                customerResults.style.display = 'none';
+                    li.textContent = nomeCompleto + ' (' + cliente.email + ')';
+                    li.addEventListener('click', function () {
+                        customerInput.value = nomeCompleto;
+                        customerResults.style.display = 'none';
 
-                // ✅ Mostra bottone step 2
-                document.getElementById('nextStepBtn').style.display = 'inline-block';
+                        selectedCustomer = cliente; // ✅ salvo cliente
 
-            });
-            customerResults.appendChild(li);
-        });
+                        document.getElementById('nextStepBtn').style.display = 'inline-block';
+                    });
+                    customerResults.appendChild(li);
+                });
 
-
-            customerResults.style.display = 'block';
-        })
-
+                customerResults.style.display = 'block';
+            })
             .catch(error => {
                 console.error('Errore:', error);
             });
         });
+    </script>
 
-</script>
 
 <script>
         let currentStep = 1;
