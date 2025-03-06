@@ -61,11 +61,17 @@
     </div>
 
 
-    <!-- STEP 4: Conferma e PDF -->
+    <!-- STEP 4: Riepilogo e Conferma -->
     <div id="step4" class="step-content" style="display:none;">
-        <h2>Conferma e genera PDF</h2>
-        <!-- Contenuto futuro -->
+        <h2>Riepilogo Offerta</h2>
+
+        <div id="riepilogoOfferta">
+            <!-- Riepilogo generato via JS -->
+        </div>
+
+        <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
     </div>
+
 </div>
 
 <!-- Bottoni navigazione STEP -->
@@ -252,6 +258,7 @@
         document.getElementById('backBtn').addEventListener('click', () => {
             if (currentStep > 1) goToStep(currentStep - 1);
         });
+
                 function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
@@ -263,22 +270,25 @@
 
                 const next = document.getElementById(`step${stepNumber}`);
                 next.style.display = 'block';
-
-                setTimeout(() => {
-                    next.classList.add('active');
-
-                    if (stepNumber === 2) {
-                        caricaServizi(); //✅ corretto e coerente con il tuo codice
-                    }
-                }, 10);
+                setTimeout(() => next.classList.add('active'), 10);
 
                 currentStep = stepNumber;
 
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
                 document.getElementById('nextStepBtn').textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Genera PDF';
 
+                if (stepNumber === 2) {
+                    caricaServizi();
+                }
+
+                // 🔴 Genera riepilogo se siamo allo step 4
+                if (stepNumber === 4) {
+                    generaRiepilogo();
+                }
+
             }, 300);
         }
+
         function caricaServizi() {
             const token = new URLSearchParams(window.location.search).get("token");
             const servicesList = document.getElementById('servicesList');
@@ -328,6 +338,52 @@
             });
         }
 
+        function generaRiepilogo() {
+            const riepilogo = document.getElementById('riepilogoOfferta');
+
+            // Recupera dati selezionati
+            const auto = {
+                marca: marcaDropdown.value,
+                modello: modelloDropdown.value,
+                versione: versioneDropdown.value,
+                variante: varianteDropdown.value
+            };
+
+            const cliente = document.getElementById('customerInput').value;
+
+            // Servizi selezionati
+            const serviziSelezionati = [];
+            document.querySelectorAll('#servicesList input[type="checkbox"]:checked').forEach(checkbox => {
+                const servizio = checkbox.nextElementSibling.textContent;
+                const opzione = document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || 'Nessuna opzione';
+                serviziSelezionati.push(`${servizio} (${opzione})`);
+            });
+
+            // Dati economici
+            const durata = document.getElementById('durataMesi').value;
+            const km = document.getElementById('kmTotali').value;
+            const anticipo = document.getElementById('anticipo').value;
+            const canone = document.getElementById('canone').value;
+
+            riepilogo.innerHTML = `
+                <h4>🚗 Auto selezionata</h4>
+                <p>${auto.marca} ${auto.modello} ${auto.versione} ${auto.variante}</p>
+
+                <h4>👤 Cliente</h4>
+                <p>${cliente}</p>
+
+                <h4>🛠️ Servizi selezionati</h4>
+                <ul>${serviziSelezionati.map(s => `<li>${s}</li>`).join('')}</ul>
+
+                <h4>💶 Dati economici</h4>
+                <ul>
+                    <li>Durata: ${durata} mesi</li>
+                    <li>Km previsti: ${km}</li>
+                    <li>Anticipo: € ${anticipo}</li>
+                    <li>Canone: € ${canone}</li>
+                </ul>
+            `;
+        }
 
 </script>
 }
