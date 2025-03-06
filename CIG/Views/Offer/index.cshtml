@@ -237,19 +237,15 @@
                 imagePlaceholder.style.display = "flex";
             }
         });
-    
+
         const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
 
-        // variabile globale chiaramente definita
         let selectedCustomer = {};
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get('token');
-
-                customerInput.addEventListener('input', function () {
+        customerInput.addEventListener('input', function () {
             const query = customerInput.value.trim();
-            customerResults.innerHTML = ''; // 🔴 svuota risultati precedenti
+            customerResults.innerHTML = ''; // svuota risultati precedenti
 
             if (query.length < 3) {
                 customerResults.style.display = 'none';
@@ -265,7 +261,6 @@
             })
             .then(res => res.json())
             .then(clienti => {
-                // 🔴 dichiarazione esplicita della variabile
                 const filteredCustomers = clienti.filter(cliente =>
                     (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
                     (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
@@ -274,7 +269,6 @@
                     (cliente.telefono && cliente.telefono.includes(query))
                 );
 
-                // 🔴 gestione caso nessun risultato
                 if (filteredCustomers.length === 0) {
                     customerResults.innerHTML = '<li>Nessun risultato trovato</li>';
                 } else {
@@ -304,12 +298,6 @@
             });
         });
 
-
-            customerResults.style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Errore:', error);
-        });
 
 
         let currentStep = 1;
