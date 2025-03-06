@@ -276,9 +276,6 @@
             .then(clienti => {
                 customerResults.innerHTML = '';
 
-                let selectedCustomer = {}; // ✅ globale
-
-
                 const filteredCustomers = clienti.filter(cliente =>
                     (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
                     (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
