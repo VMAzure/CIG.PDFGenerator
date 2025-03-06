@@ -39,27 +39,40 @@
     <div id="step3" class="step-content" style="display:none;">
         <h2>Dati Economici Offerta</h2>
 
-        <label>Durata (mesi):</label>
-        <input type="number" id="durataMesi" placeholder="es. 36">
+        <div class="economic-data-form">
+            <div class="form-group">
+                <label for="durataMesi">Durata (mesi):</label>
+                <input type="number" id="durataMesi" placeholder="es. 36">
+            </div>
 
-        <label for="chilometraggio">Km totali previsti</label>
-        <input type="number" id="kmTotali" placeholder="es. 60000">
+            <div class="form-group">
+                <label for="kmTotali">Km totali previsti:</label>
+                <input type="number" id="kmTotali" placeholder="es. 60000">
+            </div>
 
-        <label for="anticipo">Anticipo (€):</label>
-        <input type="number" id="anticipo" placeholder="es. 1000">
+            <div class="form-group">
+                <label for="anticipo">Anticipo (€):</label>
+                <input type="number" id="anticipo" placeholder="es. 1000">
+            </div>
 
-        <label for="canone">Canone Mensile (€):</label>
-        <input type="number" id="canone" placeholder="es. 350">
+            <div class="form-group">
+                <label for="canone">Canone Mensile (€):</label>
+                <input type="number" id="canone" placeholder="es. 350">
+            </div>
+        </div>
     </div>
+
 
 
     <!-- STEP 4: Riepilogo e Conferma -->
     <div id="step4" class="step-content" style="display:none;">
         <h2>Riepilogo Offerta</h2>
 
-        <div id="riepilogoOfferta">
+        <div id="riepilogoOfferta" class="summary-container">
             <!-- Riepilogo generato via JS -->
         </div>
+    </div>
+
 
         <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
     </div>

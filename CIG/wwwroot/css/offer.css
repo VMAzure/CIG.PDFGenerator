@@ -191,3 +191,66 @@ select, input[type="text"] {
     color: #fff;
 }
 
+.economic-data-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+    .economic-data-form .form-group {
+        flex: 1 1 calc(50% - 20px);
+        min-width: 250px;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .economic-data-form .form-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #00213b;
+        }
+
+        .economic-data-form .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+            .economic-data-form .form-group input:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 5px rgba(0,123,255,0.3);
+            }
+.summary-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 14px;
+    color: #333;
+}
+
+    .summary-container h4 {
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #00213b;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 5px;
+    }
+
+    .summary-container ul {
+        padding-left: 20px;
+        margin-bottom: 20px;
+    }
+
+        .summary-container ul li {
+            margin-bottom: 6px;
+        }
+
