@@ -13,6 +13,7 @@
 </div>
 
 
+
 <div id="stepsContainer">
     <!-- STEP 1: Scelta auto e cliente -->
     <div id="step1" class="step-content active">
@@ -245,8 +246,6 @@
 
 </script>
 
-
-
 <script>
         let currentStep = 1;
         const totalSteps = 4;
@@ -274,10 +273,11 @@
 
                 currentStep = stepNumber;
 
-                // 🔥 Aggiungi questa parte per aggiornare la progress bar
-                document.querySelectorAll('.step-progress-bar .step').forEach((step, index) => {
-                    step.classList.toggle('active', index + 1 === currentStep);
+                       // aggiorna la progress bar quando cambia step
+                document.querySelectorAll('.step-progress-bar .step').forEach(step => {
+                    step.classList.toggle('active', parseInt(step.getAttribute('data-step')) === stepNumber);
                 });
+
 
                 // Gestione pulsanti navigazione
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
