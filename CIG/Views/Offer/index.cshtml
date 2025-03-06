@@ -441,37 +441,68 @@
             `;
         }
 
-        document.getElementById('generatePdfBtn').addEventListener('click', () => {
+                document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
-                    const payload = {
-            CustomerFirstName: selectedCustomer.nome || "",
-            CustomerLastName: selectedCustomer.cognome || "",
-            CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-            CustomerIcon: "icona_default.png", // da scegliere dalla gallery
-            CarMainImageUrl: carMainImageUrl,
-            CarThumbnailUrl: carMainImageUrl, // stessa immagine per semplicità
-            AdminInfo: adminInfo, // 🔴 usa questa variabile già caricata (verifica nome corretto!)
-            DealerInfo: null, // ora impostalo a null, poi lo vediamo
-            Auto: {
-                Marca: marcaDropdown.value,
-                Modello: modelloDropdown.value,
-                Versione: versioneDropdown.value,
-                Variante: varianteDropdown.value
-            },
-            Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
-                Id: checkbox.value,
-                Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
-            })),
-            DatiEconomici: {
-                Durata: parseInt(document.getElementById('durataMesi').value),
-                KmTotali: parseInt(document.getElementById('kmTotali').value),
-                Anticipo: parseFloat(document.getElementById('anticipo').value),
-                Canone: parseFloat(document.getElementById('canone').value)
+            // 🔴 Controllo obbligatorio sulle variabili
+            if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
+                alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
+                return;
             }
-        };
 
+            const payload = {
+                CustomerFirstName: selectedCustomer.nome || "",
+                CustomerLastName: selectedCustomer.cognome || "",
+                CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+                CustomerIcon: "icona_default.png", // Placeholder momentaneo
+                CarMainImageUrl: carMainImageUrl,
+                CarThumbnailUrl: carMainImageUrl,
+                AdminInfo: adminInfo,
+                DealerInfo: null,
+                Auto: {
+                    Marca: marcaDropdown.value || "",
+                    Modello: modelloDropdown.value || "",
+                    Versione: versioneDropdown.value || "",
+                    Variante: varianteDropdown.value || ""
+                },
+                Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
+                    Id: checkbox.value,
+                    Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
+                })),
+                DatiEconomici: {
+                    Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                    KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                    Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                    Canone: parseFloat(document.getElementById('canone').value) || 0
+                }
+            };
 
+            fetch('/api/Pdf/GenerateOffer', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Errore generazione PDF");
+                return res.blob();
+            })
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Offerta.pdf';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch(error => {
+                console.error("Errore generazione PDF:", error);
+                alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
+            });
+        });
     
             fetch('/api/Pdf/GenerateOffer', {
                 method: 'POST',
