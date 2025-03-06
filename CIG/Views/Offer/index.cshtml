@@ -459,6 +459,8 @@
                 }
             };
 
+            const token = new URLSearchParams(window.location.search).get("token");
+
             fetch('/api/Pdf/GenerateOffer', {
                 method: 'POST',
                 headers: {
