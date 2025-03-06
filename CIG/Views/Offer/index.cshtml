@@ -87,110 +87,148 @@
 
     <script>
 
-        let adminInfo = null;
+                let adminInfo = null;
+
         document.addEventListener("DOMContentLoaded", async () => {
             adminInfo = await fetchAdminInfo();
-                    
-        async function fetchAdminInfo() {
-            const token = new URLSearchParams(window.location.search).get('token');
 
-            try {
-                const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
-                    headers: { "Authorization": "Bearer " + token }
-                });
-
-                if (!res.ok) throw new Error('Errore caricamento dati Admin');
-
-                const adminData = await res.json();
-
-                return {
-                    Id: adminData.id,
-                    Email: adminData.email,
-                    FirstName: adminData.nome,
-                    LastName: adminData.cognome,
-                    CompanyName: adminData.ragione_sociale,
-                    VatNumber: adminData.partita_iva,
-                    Address: adminData.indirizzo,
-                    PostalCode: adminData.cap,
-                    City: adminData.citta,
-                    SDICode: adminData.codice_sdi,
-                    MobilePhone: adminData.cellulare,
-                    LogoUrl: adminData.logo_url
-                };
-            } catch(error){
-                console.error(error);
-                alert("Errore caricamento dati Admin.");
-                return null;
-            }
-        }
-
-                async function fetchDropdown(url, dropdown, keyName) {
-            dropdown.innerHTML = '<option value="">Caricamento...</option>';
-            dropdown.disabled = true;
-
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-
-                dropdown.innerHTML = `<option value="">Seleziona ${keyName}</option>`;
-
-                let items = [];
-
-                if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
-                    // Caso: dati successivi (modelFamily, modelRange, modelVariant)
-                    items = data.preselect.options[keyName];
-                } else if (data[keyName]) {
-                    // Caso: dati iniziali (make)
-                    items = data[keyName];
-                } else {
-                    console.error("Struttura dati imprevista", data);
-                    dropdown.innerHTML = `<option value="">Nessun dato disponibile</option>`;
-                    return;
-                }
-
-                items.forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item;
-                    option.textContent = item.toUpperCase();
-                    dropdown.appendChild(option);
-                });
-
-                dropdown.disabled = false;
-            } catch (error) {
-                console.error('Errore nel recupero dati:', error);
-                dropdown.innerHTML = `<option value="">Errore caricamento</option>`;
-            }
-        }
-
-
-        // Mostra anteprima immagine auto quando selezioni la variante
-        // Quando selezioni la variante finale:
-            varianteDropdown.addEventListener("change", () => {
+            const customerKey = "it-azureautomotive";
+            const marcaDropdown = document.getElementById("marca");
+            const modelloDropdown = document.getElementById("modello");
+            const versioneDropdown = document.getElementById("versione");
+            const varianteDropdown = document.getElementById("variante");
+            const anteprimaAuto = document.getElementById("anteprimaAuto");
             const loader = document.getElementById("loader");
-            loader.style.display = "block";
-            anteprimaAuto.style.display = "none";
-            imagePlaceholder.style.display = "none";
+            const imagePlaceholder = document.getElementById("imagePlaceholder");
+            let carMainImageUrl = "";
 
-            if (varianteDropdown.value) {
-                const imageUrl = `https://cdn.imagin.studio/getImage?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=203&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`;
+            async function fetchAdminInfo() {
+                const token = new URLSearchParams(window.location.search).get('token');
+                try {
+                    const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
+                        headers: { "Authorization": "Bearer " + token }
+                    });
 
-                anteprimaAuto.src = imageUrl;
-                anteprimaAuto.onload = function(){
-                    loader.style.display = "none";
-                    anteprimaAuto.style.display = "block";
-                        carMainImageUrl = imageUrl; //🔴 Salva subito qui
-                };
-                anteprimaAuto.onerror = function(){
-                    loader.style.display = "none";
-                    imagePlaceholder.textContent = "Anteprima non disponibile";
-                    imagePlaceholder.style.display = "flex";
-                };
-            } else {
-                loader.style.display = "none";
-                imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
-                imagePlaceholder.style.display = "flex";
+                    if (!res.ok) throw new Error('Errore caricamento dati Admin');
+
+                    const adminData = await res.json();
+
+                    return {
+                        Id: adminData.id,
+                        Email: adminData.email,
+                        FirstName: adminData.nome,
+                        LastName: adminData.cognome,
+                        CompanyName: adminData.ragione_sociale,
+                        VatNumber: adminData.partita_iva,
+                        Address: adminData.indirizzo,
+                        PostalCode: adminData.cap,
+                        City: adminData.citta,
+                        SDICode: adminData.codice_sdi,
+                        MobilePhone: adminData.cellulare,
+                        LogoUrl: adminData.logo_url
+                    };
+                } catch(error){
+                    console.error(error);
+                    alert("Errore caricamento dati Admin.");
+                    return null;
+                }
             }
+
+            async function fetchDropdown(url, dropdown, keyName) {
+                dropdown.innerHTML = '<option value="">Caricamento...</option>';
+                dropdown.disabled = true;
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+
+                    dropdown.innerHTML = `<option value="">Seleziona ${keyName}</option>`;
+
+                    let items = [];
+                    if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
+                        items = data.preselect.options[keyName];
+                    } else if (data[keyName]) {
+                        items = data[keyName];
+                    } else {
+                        console.error("Struttura dati imprevista", data);
+                        dropdown.innerHTML = `<option value="">Nessun dato disponibile</option>`;
+                        return;
+                    }
+
+                    items.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item;
+                        option.textContent = item.toUpperCase();
+                        dropdown.appendChild(option);
+                    });
+
+                    dropdown.disabled = false;
+                } catch (error) {
+                    console.error('Errore nel recupero dati:', error);
+                    dropdown.innerHTML = `<option value="">Errore caricamento</option>`;
+                }
+            }
+
+            // Carica inizialmente le marche
+            fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}`, marcaDropdown, "make");
+
+            marcaDropdown.addEventListener("change", () => {
+                modelloDropdown.innerHTML = '';
+                versioneDropdown.innerHTML = '';
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
+
+                if (marcaDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily");
+                }
+            });
+
+            modelloDropdown.addEventListener("change", () => {
+                versioneDropdown.innerHTML = '';
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
+
+                if (modelloDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
+                }
+            });
+
+            versioneDropdown.addEventListener("change", () => {
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
+
+                if (versioneDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}`, varianteDropdown, "modelVariant");
+                }
+            });
+
+            varianteDropdown.addEventListener("change", () => {
+                loader.style.display = "block";
+                anteprimaAuto.style.display = "none";
+                imagePlaceholder.style.display = "none";
+
+                if (varianteDropdown.value) {
+                    const imageUrl = `https://cdn.imagin.studio/getImage?customer=${customerKey}&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=203&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`;
+
+                    anteprimaAuto.src = imageUrl;
+                    anteprimaAuto.onload = function(){
+                        loader.style.display = "none";
+                        anteprimaAuto.style.display = "block";
+                        carMainImageUrl = imageUrl;
+                    };
+                    anteprimaAuto.onerror = function(){
+                        loader.style.display = "none";
+                        imagePlaceholder.textContent = "Anteprima non disponibile";
+                        imagePlaceholder.style.display = "flex";
+                    };
+                } else {
+                    loader.style.display = "none";
+                    imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
+                    imagePlaceholder.style.display = "flex";
+                }
+            });
         });
+
 
         const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
