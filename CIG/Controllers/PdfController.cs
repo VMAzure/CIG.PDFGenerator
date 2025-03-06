@@ -16,37 +16,51 @@ namespace CIG.PDFGenerator.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // 🔴 aggiungi subito questo log per capire l'errore
                 return BadRequest(ModelState);
             }
 
-            var pdf = Document.Create(document =>
+            try
             {
-                document.Page(page =>
+                var pdf = Document.Create(document =>
                 {
-                    page.Margin(30);
-                    page.Size(PageSizes.A4);
-
-                    page.Content().Column(column =>
+                    document.Page(page =>
                     {
-                        var cliente = $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
-                        if (string.IsNullOrWhiteSpace(cliente))
-                            cliente = offer.CustomerCompanyName;
+                        page.Margin(30);
+                        page.Size(PageSizes.A4);
 
-                        column.Item().Text($"Cliente: {cliente}");
-                        column.Item().Text($"Admin: {offer.AdminInfo.CompanyName}");
-
-                        if (offer.DealerInfo != null)
+                        page.Content().Column(column =>
                         {
-                            column.Item().Text($"Dealer: {offer.DealerInfo.CompanyName}");
-                        }
+                            var cliente = $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+                            if (string.IsNullOrWhiteSpace(cliente))
+                                cliente = offer.CustomerCompanyName;
 
-                        column.Item().Image(offer.CarMainImageUrl);
+                            column.Item().Text($"Cliente: {cliente}");
+                            column.Item().Text($"Admin: {offer.AdminInfo?.CompanyName ?? "N/A"}");
+
+                            if (offer.DealerInfo != null)
+                                column.Item().Text($"Dealer: {offer.DealerInfo.CompanyName}");
+
+                            // ✅ Aggiungi controllo immagine
+                            if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
+                            {
+                                column.Item().Image(offer.CarMainImageUrl);
+                            }
+                            else
+                            {
+                                column.Item().Text("Immagine auto non disponibile!");
+                            }
+                        });
                     });
-                });
-            }).GeneratePdf();
+                }).GeneratePdf();
 
-            return File(pdf, "application/pdf", "Offerta.pdf");
+                return File(pdf, "application/pdf", "Offerta.pdf");
+            }
+            catch (Exception ex)
+            {
+                // 🔴 Log preciso dell'errore
+                return StatusCode(500, ex.Message);
+            }
         }
+
     }
 }

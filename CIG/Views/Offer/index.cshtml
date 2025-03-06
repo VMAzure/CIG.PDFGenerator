@@ -233,17 +233,17 @@
 
 
 
-        const customerInput = document.getElementById('customerInput');
+                const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
-
         let selectedCustomer = {};
 
         customerInput.addEventListener('input', function () {
             const query = customerInput.value.trim();
-            customerResults.innerHTML = ''; // svuota risultati precedenti
 
+            // Nascondi risultati se query troppo corta
             if (query.length < 3) {
                 customerResults.style.display = 'none';
+                customerResults.innerHTML = '';
                 return;
             }
 
@@ -256,6 +256,9 @@
             })
             .then(res => res.json())
             .then(clienti => {
+                // ✅ fondamentale pulire i risultati precedenti qui:
+                customerResults.innerHTML = '';
+
                 const filteredCustomers = clienti.filter(cliente =>
                     (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
                     (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
@@ -264,6 +267,7 @@
                     (cliente.telefono && cliente.telefono.includes(query))
                 );
 
+                // gestione caso nessun risultato
                 if (filteredCustomers.length === 0) {
                     customerResults.innerHTML = '<li>Nessun risultato trovato</li>';
                 } else {
@@ -292,6 +296,7 @@
                 customerResults.style.display = 'block';
             });
         });
+
 
 
 
