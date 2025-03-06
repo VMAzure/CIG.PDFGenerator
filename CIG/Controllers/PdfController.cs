@@ -12,19 +12,35 @@ namespace CIG.PDFGenerator.Controllers
     public class PdfController : ControllerBase
     {
         [HttpPost("GenerateOffer")]
-        public IActionResult GenerateOffer([FromBody] OfferPdfPage1 offer)
+        public async Task<IActionResult> GenerateOffer([FromBody] OfferPdfPage1 offer)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                var pdf = Document.Create(document =>
+                byte[] imageBytes = null;
+
+                if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
+                {
+                    using var client = new HttpClient();
+                    try
+                    {
+                        imageBytes = await client.GetByteArrayAsync(offer.CarMainImageUrl);
+                    }
+                    catch (Exception imgEx)
+                    {
+                        Console.WriteLine($"Errore caricamento immagine: {imgEx.Message}");
+                        // ignora immagine se non disponibile
+                    }
+                }
+
+                var pdf = QuestPDF.Fluent.Document.Create(document =>
                 {
                     document.Page(page =>
                     {
                         page.Margin(30);
-                        page.Size(PageSizes.A4);
+                        page.Size(QuestPDF.Helpers.PageSizes.A4);
 
                         page.Content().Column(column =>
                         {
@@ -38,10 +54,10 @@ namespace CIG.PDFGenerator.Controllers
                             if (offer.DealerInfo != null)
                                 column.Item().Text($"Dealer: {offer.DealerInfo.CompanyName}");
 
-                            if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
-                                column.Item().Image(offer.CarMainImageUrl);
+                            if (imageBytes != null)
+                                column.Item().Image(imageBytes);
                             else
-                                column.Item().Text("Immagine auto non disponibile!");
+                                column.Item().Text("⚠️ Immagine auto non disponibile o non raggiungibile.");
                         });
                     });
                 }).GeneratePdf();
@@ -50,14 +66,12 @@ namespace CIG.PDFGenerator.Controllers
             }
             catch (Exception ex)
             {
-                // 🔴 LOG ESPERTO ESPLICITO NEI LOG DI RAILWAY
                 Console.WriteLine("🔥 ERRORE PDF GENERATION: " + ex.Message);
                 Console.WriteLine(ex.StackTrace);
-
-                // Ritorna messaggio dettagliato al frontend
-                return StatusCode(500, new { message = ex.Message, detail = ex.StackTrace });
+                return StatusCode(500, ex.Message);
             }
         }
+
 
 
     }
