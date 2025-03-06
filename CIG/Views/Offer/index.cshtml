@@ -265,45 +265,46 @@
                 return;
             }
 
-            fetch('https://coreapi-production-ca29.up.railway.app/customers/clienti', {
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
-            .then(res => res.json())
-            .then(clienti => {
-                customerResults.innerHTML = '';
+                    fetch('https://coreapi-production-ca29.up.railway.app/customers/clienti', {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then(res => res.json())
+        .then(clienti => {
 
-                const filteredCustomers = clienti.filter(cliente =>
-                    (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
-                    (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
-                    (cliente.ragione_sociale && cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase())) ||
-                    (cliente.email && cliente.email.toLowerCase().includes(query.toLowerCase())) ||
-                    (cliente.telefono && cliente.telefono.includes(query))
-                );
+            // 🔴 definizione di filteredCustomers sempre all'inizio di questo blocco:
+            const filteredCustomers = clienti.filter(cliente =>
+                (cliente.nome && cliente.nome.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.cognome && cliente.cognome.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.ragione_sociale && cliente.ragione_sociale.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.email && cliente.email.toLowerCase().includes(query.toLowerCase())) ||
+                (cliente.telefono && cliente.telefono.includes(query))
+            );
 
-                filteredCustomers.forEach(cliente => {
-                    const li = document.createElement('li');  //✅ li definito chiaramente qui
-                    const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
+            // 🔴 ciclo forEach subito dopo:
+            filteredCustomers.forEach(cliente => {
+                const li = document.createElement('li');
+                const nomeCompleto = [cliente.nome, cliente.cognome].filter(Boolean).join(' ') || cliente.ragione_sociale;
 
-                    li.textContent = nomeCompleto + ' (' + cliente.email + ')';
-                    li.addEventListener('click', function () {
-                        customerInput.value = nomeCompleto;
-                        customerResults.style.display = 'none';
+                li.textContent = nomeCompleto + ' (' + cliente.email + ')';
 
-                        selectedCustomer = cliente; // ✅ salvo cliente
-
-                        document.getElementById('nextStepBtn').style.display = 'inline-block';
-                    });
-                    customerResults.appendChild(li);
+                li.addEventListener('click', function () {
+                    customerInput.value = nomeCompleto;
+                    customerResults.style.display = 'none';
+                    selectedCustomer = cliente;
+                    document.getElementById('nextStepBtn').style.display = 'inline-block';
                 });
 
-                customerResults.style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Errore:', error);
+                customerResults.appendChild(li);
             });
+
+            customerResults.style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Errore:', error);
         });
+
     </script>
 
 
