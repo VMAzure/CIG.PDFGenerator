@@ -28,6 +28,13 @@
 </div>
 <button id="step2Btn" style="display:none; margin-top:10px;">Procedi allo Step 2 →</button>
 
+<!-- Sezione Servizi NLT -->
+<div id="servicesSection" style="display:none; margin-top:30px;">
+    <h3>Scegli i servizi per l'offerta:</h3>
+    <div id="servicesList">Caricamento servizi...</div>
+</div>
+
+
 
 
 
@@ -189,6 +196,52 @@
                 console.error('Errore:', error);
             });
         });
+
+</script>
+
+<script>
+            document.getElementById('step2Btn').addEventListener('click', () => {
+            document.getElementById('step2Btn').style.display = 'none'; // nasconde il bottone step2
+            document.getElementById('servicesSection').style.display = 'block'; // mostra sezione servizi
+        });
+
+                document.getElementById('step2Btn').addEventListener('click', () => {
+            document.getElementById('step2Btn').style.display = 'none';
+            document.getElementById('servicesSection').style.display = 'block';
+
+            const token = new URLSearchParams(window.location.search).get("token");
+
+            fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const servicesList = document.getElementById('servicesList');
+                servicesList.innerHTML = '';
+
+                data.services.forEach(service => {
+                    const div = document.createElement('div');
+                    div.className = 'service-item';
+
+                    div.innerHTML = `
+                        <label>
+                            <input type="checkbox" value="${service.id}">
+                            <strong>${service.name}</strong><br>
+                            <small>${service.description}</small>
+                        </label>
+                    `;
+
+                    servicesList.appendChild(div);
+                });
+            })
+            .catch(error => {
+                document.getElementById('servicesList').textContent = 'Errore nel caricamento dei servizi.';
+                console.error('Errore:', error);
+            });
+        });
+
 
 </script>
 

@@ -120,3 +120,16 @@ select, input[type="text"] {
         transform: rotate(360deg);
     }
 }
+#servicesSection {
+    margin-top: 30px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.service-item {
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
