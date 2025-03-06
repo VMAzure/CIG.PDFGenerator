@@ -87,11 +87,11 @@
 
 @section Scripts {
     <script>
-            document.addEventListener("DOMContentLoaded", async () => {
+
+        let adminInfo = null;
+        document.addEventListener("DOMContentLoaded", async () => {
             adminInfo = await fetchAdminInfo();
-
-                    let adminInfo = null;
-
+                    
         async function fetchAdminInfo() {
             const token = new URLSearchParams(window.location.search).get('token');
 
