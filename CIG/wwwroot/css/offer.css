@@ -1,4 +1,4 @@
-body {
+﻿body {
     font-family: Arial, sans-serif;
     padding: 20px;
     background-color: #f9f9f9;
@@ -133,4 +133,27 @@ select, input[type="text"] {
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+#stepsContainer {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    min-height: 400px; /* 🔴 aggiungi altezza minima iniziale */
+}
+
+.step {
+    position: absolute;
+    top: 0;
+    left: 0; /* 🔴 inizialmente posiziona a sinistra per visualizzazione iniziale */
+    width: 100%;
+    transition: transform 0.3s ease-in-out; /* usa transform invece di left */
+    transform: translateX(100%); /* 🔴 inizialmente spostato fuori a destra */
+}
+
+    .step.active {
+        transform: translateX(0); /* 🔴 lo step attivo è visibile */
+    }
+
+    .step.exit-left {
+        transform: translateX(-100%); /* 🔴 esce a sinistra */
+    }
 
