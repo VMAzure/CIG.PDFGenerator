@@ -3,35 +3,65 @@
 }
 <link rel="stylesheet" href="~/css/offer.css" />
 <hr />  
+<div class="step-progress-container">
+    <div class="step-progress-bar">
+        <div class="step active" data-step="1">1</div>
+        <div class="step" data-step="2">2</div>
+        <div class="step" data-step="3">3</div>
+        <div class="step" data-step="4">4</div>
+    </div>
+</div>
+
+<hr />
+
 <div id="stepsContainer">
-    <div id="step1" class="step active">
-<div class="car-selection-container">
-    <div class="dropdowns">
-        <select id="marca"></select>
-        <select id="modello"></select>
-        <select id="versione"></select>
-        <select id="variante"></select>
-    </div>
-    <div class="car-preview">
-        <img id="anteprimaAuto" src="" alt="Anteprima Auto">
-        <div id="imagePlaceholder">Seleziona una variante per visualizzare l'anteprima</div>
-        <div id="loader" style="display:none;" class="loader"></div>
+    <!-- STEP 1: Scelta auto e cliente -->
+    <div id="step1" class="step-content active">
+        <div class="car-selection-container">
+            <div class="dropdowns">
+                <select id="marca"></select>
+                <select id="modello"></select>
+                <select id="versione"></select>
+                <select id="variante"></select>
+            </div>
+            <div class="car-preview">
+                <img id="anteprimaAuto" src="" alt="Anteprima Auto">
+                <div id="imagePlaceholder">Seleziona una variante per visualizzare l'anteprima</div>
+                <div id="loader" style="display:none;" class="loader"></div>
+            </div>
+        </div>
 
+        <div style="margin-top:20px;">
+            <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
+            <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
+        </div>
+    </div>
+
+    <!-- STEP 2: Scelta servizi -->
+    <div id="step2" class="step-content" style="display:none;">
+        <div id="servicesSection">
+            <h2>Scegli i servizi per l'offerta:</h2>
+            <div id="servicesList">Caricamento servizi...</div>
+        </div>
+    </div>
+
+    <!-- STEP 3: Dati economici -->
+    <div id="step3" class="step-content" style="display:none;">
+        <h2>Inserisci i dati economici</h2>
+        <!-- Contenuto futuro -->
+    </div>
+
+    <!-- STEP 4: Conferma e PDF -->
+    <div id="step4" class="step-content" style="display:none;">
+        <h2>Conferma e genera PDF</h2>
+        <!-- Contenuto futuro -->
     </div>
 </div>
 
-
-<div style="margin-top:20px;">
-    <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
-    <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
-</div>
-<button id="step2Btn" style="display:none; margin-top:10px;">Procedi allo Step 2 →</button>
-    </div>
-<!-- Sezione Servizi NLT -->
-<div id="servicesSection" style="display:none; margin-top:30px;">
-    <h2>Scegli i servizi per l'offerta:</h2>
-    <div id="servicesList">Caricamento servizi...</div>
-</div>
+<!-- Bottoni navigazione STEP -->
+<div class="navigation-buttons">
+    <button id="backBtn" style="display:none;">← Indietro</button>
+    <button id="nextStepBtn">Step 2 →</button>
 </div>
 
 
@@ -264,4 +294,45 @@
 
 </script>
 
+
+<script>
+             let currentStep = 1;
+        const totalSteps = 4;
+
+        document.getElementById('nextStepBtn').addEventListener('click', () => {
+            if (currentStep < totalSteps) goToStep(currentStep + 1);
+        });
+
+        document.getElementById('backBtn').addEventListener('click', () => {
+            if (currentStep > 1) goToStep(currentStep - 1);
+        });
+
+        function goToStep(stepNumber) {
+            // Gestione step progress bar
+            document.querySelector('.step-progress-bar .step.active').classList.remove('active');
+            document.querySelector(`.step-progress-bar .step[data-step="${stepNumber}"]`).classList.add('active');
+
+            // Gestione step content
+            const current = document.getElementById(`step${currentStep}`);
+            current.classList.remove('active');
+            current.classList.add('exit-left');
+
+            setTimeout(() => {
+                current.style.display = 'none';
+                current.classList.remove('exit-left');
+
+                const next = document.getElementById(`step${stepNumber}`);
+                next.style.display = 'block';
+                setTimeout(() => next.classList.add('active'), 10);
+
+                currentStep = stepNumber;
+
+                // Aggiorna bottoni
+                document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
+                document.getElementById('nextStepBtn').textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Genera PDF';
+
+            }, 300);
+        }
+
+</script>
 }
