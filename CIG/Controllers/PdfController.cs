@@ -38,8 +38,10 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     document.Page(page =>
                     {
-                        page.Margin(30);
+                        page.Margin(0);
                         page.Size(PageSizes.A4.Landscape());
+                        page.Background().Image("images/offer_pag_1.jpg", ImageScaling.FillArea);
+
 
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
@@ -62,7 +64,7 @@ namespace CIG.PDFGenerator.Controllers
 
                                 if (logoBytes != null)
                                 {
-                                    row.ConstantItem(100).Image(logoBytes, ImageScaling.FitWidth);
+                                    row.ConstantItem(100).Image(logoBytes).FitWidth();
                                 }
 
                                 var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
@@ -87,6 +89,8 @@ namespace CIG.PDFGenerator.Controllers
 
                         page.Content().Column(column =>
                         {
+                            column.Spacing(5);
+
                             var cliente = $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
                             if (string.IsNullOrWhiteSpace(cliente))
                                 cliente = offer.CustomerCompanyName;
