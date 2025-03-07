@@ -6,7 +6,6 @@
         public string? CustomerFirstName { get; set; }
         public string? CustomerLastName { get; set; }
         public string? CustomerCompanyName { get; set; }
-
         public string? CustomerIcon { get; set; }
 
         // Immagini auto
@@ -19,13 +18,16 @@
         // Dati Dealer (se diverso dall'Admin)
         public AdminDealerData? DealerInfo { get; set; }
 
-        // 🔴 AGGIUNGI SUBITO QUESTE PROPRIETÀ
+        // Proprietà aggiornate correttamente
         public Auto Auto { get; set; }
         public List<Servizio> Servizi { get; set; }
         public DatiEconomici DatiEconomici { get; set; }
 
+        // NUOVA PROPRIETÀ PER LE IMMAGINI AUTO
         public List<CarImageDetail> CarImages { get; set; } = new();
     }
+
+    // Classe supporto immagini auto
     public class CarImageDetail
     {
         public string Url { get; set; }
@@ -33,25 +35,26 @@
         public int Angle { get; set; }
     }
 
-    // 🔴 Aggiungi subito anche queste classi di supporto mancanti:
+    // Classe supporto auto
     public class Auto
     {
         public string? Marca { get; set; }
         public string? Modello { get; set; }
         public string? Versione { get; set; }
         public string? Variante { get; set; }
-        public string? DescrizioneVersione { get; set; } 
-        public string? Note { get; set; }               
+        public string? DescrizioneVersione { get; set; }
+        public string? Note { get; set; }
     }
 
+    // Classe supporto servizi
     public class Servizio
     {
         public string? Id { get; set; }
-        public string? Nome { get; set; } 
-
+        public string? Nome { get; set; }
         public string? Opzione { get; set; }
     }
 
+    // Classe supporto dati economici
     public class DatiEconomici
     {
         public int Durata { get; set; }
@@ -60,6 +63,7 @@
         public decimal Canone { get; set; }
     }
 
+    // Classe supporto dati Admin/Dealer
     public class AdminDealerData
     {
         public int Id { get; set; }
@@ -76,3 +80,4 @@
         public string? LogoUrl { get; set; }
     }
 }
+

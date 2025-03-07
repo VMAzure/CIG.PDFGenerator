@@ -26,6 +26,16 @@ namespace CIG.PDFGenerator.Controllers
         [HttpPost("GenerateOffer")]
         public async Task<IActionResult> GenerateOffer([FromBody] OfferPdfPage1 offer)
         {
+            Console.WriteLine("CarImages ricevute: " + (offer.CarImages?.Count ?? 0));
+
+            if (offer.CarImages != null)
+            {
+                foreach (var img in offer.CarImages)
+                {
+                    Console.WriteLine($"URL: {img.Url} - Colore: {img.Color} - Angolo: {img.Angle}");
+                }
+            }
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 

@@ -479,7 +479,7 @@
             `;
         }
 
-            document.getElementById('generatePdfBtn').addEventListener('click', () => {
+        document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
             if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
@@ -488,7 +488,7 @@
             }
 
                     descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
-        noteAuto = document.getElementById('noteAuto').value || "";
+                    noteAuto = document.getElementById('noteAuto').value || "";
 
         const payload = {
             CustomerFirstName: selectedCustomer.nome || "",
