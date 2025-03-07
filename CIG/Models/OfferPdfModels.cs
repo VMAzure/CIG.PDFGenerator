@@ -32,6 +32,8 @@
         public string Modello { get; set; }
         public string Versione { get; set; }
         public string Variante { get; set; }
+        public string DescrizioneVersione { get; set; } 
+        public string Note { get; set; }               
     }
 
     public class Servizio

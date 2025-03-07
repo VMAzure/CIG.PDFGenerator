@@ -58,9 +58,18 @@ namespace CIG.PDFGenerator.Controllers
                             else
                                 column.Item().Text("⚠️ Immagine auto non disponibile o non raggiungibile.");
 
-                            // Auto selezionata
-                            column.Item().PaddingTop(10).Text("Auto selezionata:").Bold();
-                            column.Item().Text($"{offer.Auto.Marca} {offer.Auto.Modello} {offer.Auto.Versione} {offer.Auto.Variante}");
+                            // Dati Auto
+                            column.Item().PaddingTop(10).Text("Dati Auto:").FontSize(14).Bold();
+                            column.Item().PaddingLeft(10).Column(auto =>
+                            {
+                                auto.Item().Text($"• Marca: {offer.Auto.Marca}");
+                                auto.Item().Text($"• Modello: {offer.Auto.Modello}");
+                                auto.Item().Text($"• Versione: {offer.Auto.Versione}");
+                                auto.Item().Text($"• Variante: {offer.Auto.Variante}");
+                                auto.Item().Text($"• Descrizione Versione: {offer.Auto.DescrizioneVersione}");
+                                auto.Item().Text($"• Note: {offer.Auto.Note}");
+                            });
+
 
                             // Servizi selezionati
                             column.Item().PaddingTop(10).Text("Servizi selezionati:").Bold();

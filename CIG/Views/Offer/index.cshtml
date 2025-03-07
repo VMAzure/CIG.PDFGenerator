@@ -19,6 +19,18 @@
                 <div id="imagePlaceholder">Seleziona una variante per visualizzare l'anteprima</div>
                 <div id="loader" style="display:none;" class="loader"></div>
             </div>
+            <!-- NUOVI CAMPI: Descrizione Versione e Note -->
+            <div class="additional-car-info" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label for="descrizioneVersione">Descrizione versione:</label>
+                    <input type="text" id="descrizioneVersione" placeholder="Inserisci descrizione versione">
+                </div>
+                <div class="form-group">
+                    <label for="noteAuto">Note:</label>
+                    <textarea id="noteAuto" placeholder="Inserisci eventuali note sull'auto"></textarea>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -82,8 +94,11 @@
 
     <script>
 
-                let adminInfo = null;
+        let adminInfo = null;
         let marcaDropdown, modelloDropdown, versioneDropdown, varianteDropdown, anteprimaAuto, loader, imagePlaceholder, carMainImageUrl;
+        let descrizioneVersione = "";
+        let noteAuto = "";
+
 
         document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
@@ -94,6 +109,9 @@
             loader = document.getElementById("loader");
             imagePlaceholder = document.getElementById("imagePlaceholder");
             carMainImageUrl = "";
+            descrizioneVersione = document.getElementById('descrizioneVersione').value;
+            noteAuto = document.getElementById('noteAuto').value;
+
 
             adminInfo = await fetchAdminInfo();
 
@@ -464,7 +482,9 @@
                     Marca: marcaDropdown.value || "",
                     Modello: modelloDropdown.value || "",
                     Versione: versioneDropdown.value || "",
-                    Variante: varianteDropdown.value || ""
+                    Variante: varianteDropdown.value || "",
+                    DescrizioneVersione: descrizioneVersione || "",
+                    Note: noteAuto || ""
                 },
                 Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
                     Id: checkbox.value,
