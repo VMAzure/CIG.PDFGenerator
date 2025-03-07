@@ -5,7 +5,7 @@
 <hr />  
 
 <div id="stepsContainer">
-    <!-- STEP 1: Scelta auto e cliente -->
+    <!-- STEP 1: Scelta Auto -->
     <div id="step1" class="step-content active">
         <div class="car-selection-container">
             <div class="dropdowns">
@@ -20,41 +20,41 @@
                 <div id="loader" style="display:none;" class="loader"></div>
             </div>
         </div>
+    </div>
 
+    <!-- STEP 2: Scelta Cliente (NUOVO STEP) -->
+    <div id="step2" class="step-content" style="display:none;">
+        <h2>Seleziona Cliente</h2>
         <div style="margin-top:20px;">
             <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
             <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
         </div>
     </div>
 
-    <!-- STEP 2: Scelta servizi -->
-    <div id="step2" class="step-content" style="display:none;">
+    <!-- STEP 3: Scelta servizi -->
+    <div id="step3" class="step-content" style="display:none;">
         <div id="servicesSection">
             <h2>Scegli i servizi per l'offerta:</h2>
             <div id="servicesList">Caricamento servizi...</div>
         </div>
     </div>
 
-    <!-- STEP 3: Dati Economici -->
-    <div id="step3" class="step-content" style="display:none;">
+    <!-- STEP 4: Dati Economici -->
+    <div id="step4" class="step-content" style="display:none;">
         <h2>Dati Economici Offerta</h2>
-
         <div class="economic-data-form">
             <div class="form-group">
                 <label for="durataMesi">Durata (mesi):</label>
                 <input type="number" id="durataMesi" placeholder="es. 36">
             </div>
-
             <div class="form-group">
                 <label for="kmTotali">Km totali previsti:</label>
                 <input type="number" id="kmTotali" placeholder="es. 60000">
             </div>
-
             <div class="form-group">
                 <label for="anticipo">Anticipo (€):</label>
                 <input type="number" id="anticipo" placeholder="es. 1000">
             </div>
-
             <div class="form-group">
                 <label for="canone">Canone Mensile (€):</label>
                 <input type="number" id="canone" placeholder="es. 350">
@@ -62,18 +62,14 @@
         </div>
     </div>
 
-
-
-    <!-- STEP 4: Riepilogo e Conferma -->
-    <div id="step4" class="step-content" style="display:none;">
+    <!-- STEP 5: Riepilogo e Conferma -->
+    <div id="step5" class="step-content" style="display:none;">
         <h2>Riepilogo Offerta</h2>
-
         <div id="riepilogoOfferta" class="summary-container">
             <!-- Riepilogo generato via JS -->
         </div>
         <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
     </div>
-  
 </div>
 
 <!-- Bottoni navigazione STEP -->
@@ -81,7 +77,6 @@
     <button id="backBtn" style="display:none;">← Indietro</button>
     <button id="nextStepBtn">Step 2 →</button>
 </div>
-
 
 @section Scripts {
 
@@ -301,7 +296,7 @@
 
 
         let currentStep = 1;
-        const totalSteps = 4;
+        const totalSteps = 5;
 
         document.getElementById('nextStepBtn').addEventListener('click', () => {
             if (currentStep < totalSteps) goToStep(currentStep + 1);
@@ -311,7 +306,7 @@
             if (currentStep > 1) goToStep(currentStep - 1);
         });
 
-            function goToStep(stepNumber) {
+                function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
@@ -326,24 +321,31 @@
 
                 currentStep = stepNumber;
 
-               // Gestione pulsanti navigazione
+                // Gestione pulsanti navigazione
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
-                document.getElementById('nextStepBtn').textContent = currentStep < 4 ? `Step ${currentStep + 1} →` : '📄 Genera PDF';
 
-                if (currentStep === 4) {
-                    generaRiepilogo();
-                    document.getElementById('nextStepBtn').style.display = 'none';
+                const nextStepBtn = document.getElementById('nextStepBtn');
+                if (currentStep < 5) {
+                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+                    nextStepBtn.style.display = 'inline-block';
                 } else {
-                    document.getElementById('nextStepBtn').style.display = 'inline-block';
+                    nextStepBtn.textContent = '📄 Genera PDF';
+                    nextStepBtn.style.display = 'none';
                 }
 
-                // ✅ Carica servizi SOLO quando entri nello STEP 2
-                if (currentStep === 2) {
+                // ✅ Carica servizi SOLO quando entri nello STEP 3
+                if (currentStep === 3) {
                     caricaServizi();
+                }
+
+                // ✅ Genera riepilogo SOLO nello STEP 5
+                if (currentStep === 5) {
+                    generaRiepilogo();
                 }
 
             }, 300);
         }
+
 
         function caricaServizi() {
             const token = new URLSearchParams(window.location.search).get("token");

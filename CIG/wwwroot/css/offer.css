@@ -167,11 +167,11 @@ select, input[type="text"] {
     padding: 10px;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* ✅ Modificato qui */
+    gap: 10px; /* ✅ aggiunto per spazio */
     box-sizing: border-box;
     z-index: 1000;
 }
-
 
     .navigation-buttons button {
         padding: 8px 16px;
@@ -190,6 +190,7 @@ select, input[type="text"] {
     background-color: #007bff;
     color: #fff;
 }
+
 
 .economic-data-form {
     display: flex;
