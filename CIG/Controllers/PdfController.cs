@@ -83,14 +83,14 @@ namespace CIG.PDFGenerator.Controllers
                             {
                                 column.Item()
                                     .PaddingTop(-70) // sposta in alto (aumenta per più vicinanza)
-                                    .PaddingLeft(20) // sposta a destra (aumenta o diminuisci per posizione)
+                                    .PaddingLeft(80) // sposta a destra (aumenta o diminuisci per posizione)
                                     .AlignLeft()
                                     .Height(350)
                                     .Image(carImageBytes).FitHeight();
                             }
 
                             // Spazio verticale
-                            column.Item().PaddingVertical(1);
+                            column.Item().PaddingVertical(-5);
 
                             // Terza riga: Titolo offerta economica
                             column.Item().AlignLeft().Text("Offerta economica")
@@ -100,8 +100,8 @@ namespace CIG.PDFGenerator.Controllers
                             column.Item().AlignLeft().Text(text =>
                             {
                                 text.Span("NOLEGGIO ").FontSize(36).FontColor("#FFFFFF");
-                                text.Span("LUNGO").FontSize(20).FontColor("#FFFFFF").Bold();
-                                text.Span("TERMINE").FontSize(20).FontColor("#FF7100").Bold();
+                                text.Span("LUNGO").FontSize(36).FontColor("#FFFFFF").Bold();
+                                text.Span("TERMINE").FontSize(36).FontColor("#FF7100").Bold();
 
                             });
 
