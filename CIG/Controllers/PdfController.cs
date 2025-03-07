@@ -38,72 +38,104 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     document.Page(page =>
                     {
-                        page.Margin(0);
                         page.Size(PageSizes.A4.Landscape());
+                        page.Margin(0);
 
+                        // Immagine di sfondo
                         var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "offer_pag_1.jpg");
                         page.Background().Image(imagePath).FitArea();
-                        
+
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                        page.Header()
-                            .Row(row =>
-                            {
-                                // Logo Admin o Dealer
-                                var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
+                        page.Content().Padding(30).Column(column =>
+                        {
+                            column.Spacing(10);
 
+                            // Prima riga: Logo + "&" Cliente (Ragione sociale o Nome Cognome)
+                            column.Item().Row(row =>
+                            {
+                                // Logo
+                                var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
                                 byte[] logoBytes = null;
                                 if (!string.IsNullOrEmpty(logoUrl))
                                 {
                                     using var client = new HttpClient();
-                                    try
-                                    {
-                                        logoBytes = client.GetByteArrayAsync(logoUrl).Result;
-                                    }
-                                    catch { }
+                                    try { logoBytes = client.GetByteArrayAsync(logoUrl).Result; } catch { }
                                 }
 
                                 if (logoBytes != null)
-                                {
-                                    row.ConstantItem(100).Image(logoBytes).FitWidth();
-                                }
+                                    row.ConstantItem(250).Image(logoBytes).FitWidth();
 
-                                var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
-                                var specialistaNome = $"{offer.DealerInfo?.FirstName ?? offer.AdminInfo.FirstName} {offer.DealerInfo?.LastName ?? offer.AdminInfo.LastName}";
-                                var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+                                // Carattere "&"
+                                row.AutoItem().AlignMiddle().Text("&")
+                                    .FontSize(40).Bold().FontColor("#00213b").PaddingHorizontal(10);
 
-                                row.RelativeItem().Column(col =>
-                                {
-                                    col.Item().AlignRight().Text(aziendaNome)
-                                        .FontSize(16).Bold().FontColor("#00213b");
+                                // Nome Cliente (Ragione Sociale o Nome e Cognome)
+                                var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
+                                              ? offer.CustomerCompanyName
+                                              : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
-                                    col.Item().AlignRight().Text("Offerta Noleggio a Lungo Termine")
-                                        .FontSize(14).Bold().FontColor("#FF7100");
-
-                                    col.Item().AlignRight().Text($"{specialistaNome} – NLT Specialist")
-                                        .FontSize(10).FontColor("#00213b");
-
-                                    col.Item().AlignRight().Text(specialistaEmail)
-                                        .FontSize(10).FontColor("#00213b");
-                                });
+                                row.RelativeItem().AlignMiddle().Text(cliente)
+                                    .FontSize(28).Bold().FontColor("#00213b");
                             });
 
-                        page.Content().Column(column =>
-                        {
-                            column.Spacing(5);
+                            // Contenuto della pagina
+                            columnSpacing(10);
 
-                            var cliente = $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
-                            if (string.IsNullOrWhiteSpace(cliente))
-                                cliente = offer.CustomerCompanyName;
+                            page.Content().Padding(30).Column(column =>
+                            {
+                                column.Spacing(15);
 
-                            column.Item().Text($"Cliente: {cliente}")
-                                .FontSize(12).Bold();
+                                // Seconda riga (immagine auto a destra)
+                                if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
+                                {
+                                    using var client = new HttpClient();
+                                    byte[] carImageBytes = null;
 
-                            // Resto del contenuto successivamente...
+                                    try { carImageBytes = client.GetByteArrayAsync(offer.CarMainImageUrl).Result; } catch { }
+
+                                    if (carImageBytes != null)
+                                    {
+                                        column.Item().AlignRight().Height(400).Image(carImageBytes).FitHeight();
+                                    }
+                                }
+
+                                // Terza riga vuota (spazio)
+                                column.Item().PaddingVertical(10);
+
+                                // Quarta riga (testo "Offerta Noleggio Lungo Termine")
+                                column.Item().AlignLeft().Text(text =>
+                                {
+                                    text.Span("Offerta Noleggio ").FontSize(22).Bold().FontColor("#FFFFFF");
+                                    text.Span("Lungo Termine").FontSize(24).Bold().FontColor("#FFFFFF");
+                                });
+
+                                // Riga personalizzata come da richiesta
+                                column.Item().AlignLeft().Text(text =>
+                                {
+                                    text.Span("NOLEGGIO ").FontSize(20).FontColor("#FFFFFF").FontWeight(FontWeight.Normal);
+                                    text.Span("LUNGO").FontSize(20).FontColor("#FFFFFF").FontWeight(FontWeight.Bold);
+                                    text.Span("TERMINE").FontSize(20).FontColor("#FF7100").FontWeight(FontWeight.Bold);
+                                });
+
+                                // Doppio spazio
+                                column.Item().PaddingVertical(20);
+
+                                // Quinta riga: Nome Admin o Dealer (14px, bianco)
+                                var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
+                                column.Item().AlignLeft().Text(aziendaNome)
+                                    .FontSize(14).FontColor("#FFFFFF");
+
+                                // Sesta riga: Email Admin o Dealer (12px, bianco)
+                                var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+                                column.Item().AlignLeft().Text(specialistaEmail)
+                                    .FontSize(12).FontColor("#FFFFFF");
+                            });
                         });
-                    });
 
-                }).GeneratePdf();
+
+                    }).GeneratePdf();
+
 
                 return File(pdf, "application/pdf", "Offerta.pdf");
             }
