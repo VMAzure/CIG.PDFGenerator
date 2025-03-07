@@ -64,10 +64,10 @@ namespace CIG.PDFGenerator.Controllers
                                 }
 
                                 if (logoBytes != null)
-                                    row.ConstantItem(250).Image(logoBytes).FitWidth();
+                                    row.ConstantItem(200).Image(logoBytes).FitWidth();
 
                                 row.AutoItem().AlignMiddle().PaddingHorizontal(10)
-                                .Text("&").FontSize(40).Bold().FontColor("#00213b");
+                                .Text("&").FontSize(30).Bold().FontColor("#00213b");
 
 
                                 var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
@@ -75,13 +75,18 @@ namespace CIG.PDFGenerator.Controllers
                                               : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                                 row.RelativeItem().AlignMiddle().Text(cliente)
-                                    .FontSize(28).Bold().FontColor("#00213b");
+                                    .FontSize(34).Bold().FontColor("#00213b");
                             });
 
                             // Seconda riga: Immagine auto a destra
                             if (carImageBytes != null)
                             {
-                                column.Item().AlignRight().Height(400).Image(carImageBytes).FitHeight();
+                                column.Item()
+                                    .PaddingTop(-30) // sposta in alto (aumenta per più vicinanza)
+                                    .PaddingLeft(50) // sposta a destra (aumenta o diminuisci per posizione)
+                                    .AlignRight()
+                                    .Height(400)
+                                    .Image(carImageBytes).FitHeight();
                             }
 
                             // Spazio verticale
