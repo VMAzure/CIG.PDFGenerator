@@ -3,6 +3,11 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using CIG.PDFGenerator.Models;
+using Microsoft.AspNetCore.Http;
+using QuestPDF;
+using QuestPDF.Previewer;
+using QuestPDF.Drawing;
+using System.IO;
 
 
 namespace CIG.PDFGenerator.Controllers
@@ -32,9 +37,19 @@ namespace CIG.PDFGenerator.Controllers
                         Console.WriteLine($"Errore caricamento immagine: {imgEx.Message}");
                     }
                 }
+                // Registra il font Montserrat Regular
+                using var regularFontStream = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/fonts/Montserrat-Regular.ttf"));
+                FontManager.RegisterFont(regularFontStream);
+
+                // Registra il font Montserrat Bold
+                using var boldFontStream = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/fonts/Montserrat-Bold.ttf"));
+                FontManager.RegisterFont(boldFontStream);
+
+
 
                 var pdf = QuestPDF.Fluent.Document.Create(document =>
                 {
+
                     document.Page(page =>
                     {
                         page.Size(PageSizes.A4.Landscape());
@@ -67,15 +82,15 @@ namespace CIG.PDFGenerator.Controllers
                                     row.ConstantItem(200).Image(logoBytes).FitWidth();
 
                                 row.AutoItem().AlignMiddle().PaddingHorizontal(10)
-                                .Text("&").FontSize(30).Bold().FontColor("#00213b");
+                                .Text("&").FontSize(30).FontColor("#00213b");
 
 
                                 var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
-                                              ? offer.CustomerCompanyName
-                                              : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+                                              ? offer.CustomerCompanyName.ToUpper()
+                                              : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim().ToUpper();
 
                                 row.RelativeItem().AlignMiddle().Text(cliente)
-                                    .FontSize(34).Bold().FontColor("#00213b");
+                                    .FontSize(34).FontColor("#00213b");
                             });
 
                             // Seconda riga: Immagine auto a destra
@@ -121,7 +136,7 @@ namespace CIG.PDFGenerator.Controllers
                     });
                 }).GeneratePdf();
 
-                return File(pdf, "application/pdf", "Offerta.pdf");
+                return base.File(pdf, "application/pdf", "Offerta.pdf");
             }
             catch (Exception ex)
             {
