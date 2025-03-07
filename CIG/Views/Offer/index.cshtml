@@ -83,6 +83,10 @@
         <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
     </div>
 </div>
+<div id="pdfLoader" style="display:none;">
+    Generazione PDF in corso...
+</div>
+
 
 <!-- Bottoni navigazione STEP -->
 <div class="navigation-buttons">
@@ -468,6 +472,8 @@
                 alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
                 return;
             }
+                const loader = document.getElementById('pdfLoader');
+                loader.style.display = 'block'; // Mostra loader
 
                     descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
                     noteAuto = document.getElementById('noteAuto').value || "";
@@ -540,6 +546,9 @@
             .catch(error => {
                 console.error("Errore generazione PDF:", error);
                 alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
+            });
+
+            loader.style.display = 'none'; // nasconde il loader alla fine
             });
         });
         
