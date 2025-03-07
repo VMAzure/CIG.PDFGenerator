@@ -39,7 +39,8 @@ namespace CIG.PDFGenerator.Controllers
                     document.Page(page =>
                     {
                         page.Margin(30);
-                        page.Size(QuestPDF.Helpers.PageSizes.A4);
+                        page.Size(QuestPDF.Helpers.PageSizes.A4.Landscape());
+
 
                         page.Content().Column(column =>
                         {
@@ -80,7 +81,7 @@ namespace CIG.PDFGenerator.Controllers
                                 {
                                     foreach (var servizio in offer.Servizi)
                                     {
-                                        servizi.Item().Text($"• Servizio: {servizio.Id} - Opzione scelta: {servizio.Opzione}");
+                                        servizi.Item().Text($"• Servizio: {servizio.Nome} - Opzione scelta: {servizio.Opzione}");
                                     }
                                 });
                             }

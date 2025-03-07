@@ -25,7 +25,7 @@
                     <label for="descrizioneVersione">Descrizione versione:</label>
                     <input type="text" id="descrizioneVersione" placeholder="Inserisci descrizione versione">
                 </div>
-               
+       
             </div>
             <div class="form-group">
                 <label for="noteAuto">Note:</label>
@@ -385,7 +385,7 @@
 
                     let html = `
                         <label>
-                            <input type="checkbox" value="${service.id}">
+                            <input type="checkbox" value="${service.id}" data-service-name="${service.name}">
                             <strong>${service.name}</strong><br>
                             <small>${service.description}</small>
                         </label>
@@ -489,10 +489,12 @@
                     DescrizioneVersione: descrizioneVersione || "",
                     Note: noteAuto || ""
                 },
-                Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
+                    Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
                     Id: checkbox.value,
+                    Nome: checkbox.getAttribute('data-service-name'), // ✅ aggiunto chiaramente qui
                     Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
                 })),
+
                 DatiEconomici: {
                     Durata: parseInt(document.getElementById('durataMesi').value) || 0,
                     KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
