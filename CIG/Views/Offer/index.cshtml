@@ -479,7 +479,7 @@
             `;
         }
 
-        document.getElementById('generatePdfBtn').addEventListener('click', () => {
+                document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
             if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
@@ -487,39 +487,67 @@
                 return;
             }
 
-                    descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
-                    noteAuto = document.getElementById('noteAuto').value || "";
-
-        const payload = {
-            CustomerFirstName: selectedCustomer.nome || "",
-            CustomerLastName: selectedCustomer.cognome || "",
-            CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-            CustomerIcon: "icona_default.png",
-            CarMainImageUrl: carMainImageUrl,
-            CarThumbnailUrl: carMainImageUrl,
-            AdminInfo: adminInfo,
-            DealerInfo: null,
-            Auto: {
-                Marca: marcaDropdown.value || "",
-                Modello: modelloDropdown.value || "",
-                Versione: versioneDropdown.value || "",
-                Variante: varianteDropdown.value || "",
-                DescrizioneVersione: descrizioneVersione,
-                Note: noteAuto
-            },
-            CarImages: carImagesUrls, // Array di oggetti {url, angle, color}
-            Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
-                Id: checkbox.value,
-                Nome: checkbox.getAttribute('data-service-name'),
-                Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
-            })),
-            DatiEconomici: {
-                Durata: parseInt(document.getElementById('durataMesi').value) || 0,
-                KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
-                Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
-                Canone: parseFloat(document.getElementById('canone').value) || 0
+            if (!carImagesUrls.length) {
+                alert("CarImagesUrls è vuoto! Devi selezionare una variante prima di generare il PDF.");
+                return;
             }
-        };
+
+            const payload = {
+                CustomerFirstName: selectedCustomer.nome || "",
+                CustomerLastName: selectedCustomer.cognome || "",
+                CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+                CustomerIcon: "icona_default.png",
+                CarMainImageUrl: carMainImageUrl,
+                CarThumbnailUrl: carMainImageUrl,
+                AdminInfo: adminInfo,
+                DealerInfo: null,
+                Auto: {
+                    Marca: marcaDropdown.value || "",
+                    Modello: modelloDropdown.value || "",
+                    Versione: versioneDropdown.value || "",
+                    Variante: varianteDropdown.value || "",
+                    DescrizioneVersione: descrizioneVersione,
+                    Note: noteAuto
+                },
+                CarImages: carImagesUrls, // Deve essere valorizzato!
+                Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
+                    Id: checkbox.value,
+                    Nome: checkbox.getAttribute('data-service-name'),
+                    Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
+                })),
+                DatiEconomici: {
+                    Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                    KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                    Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                    Canone: parseFloat(document.getElementById('canone').value) || 0
+                }
+            };
+
+            console.log("Payload:", payload); // 🔴 debug importante!
+
+            fetch('/api/Pdf/GenerateOffer', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.blob())
+            .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = getUniqueFileName();
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch(error => {
+                console.error("Errore generazione PDF:", error);
+            });
+        });
+
 
 
             function getUniqueFileName(){
