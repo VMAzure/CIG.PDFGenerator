@@ -383,10 +383,10 @@
         }
 
 
-        function caricaServizi() {
+                function caricaServizi() { // 👈 mancava questa apertura!
+
             const token = new URLSearchParams(window.location.search).get("token");
-            const servicesList = document.getElementById('servicesList');
-            servicesList.innerHTML = 'Caricamento servizi...';
+            const servicesList = document.getElementById("servicesList");
 
             fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
                 headers: {
@@ -398,9 +398,6 @@
                 servicesList.innerHTML = '';
 
                 data.services.forEach(service => {
-                    const div = document.createElement('div');
-                    div.className = 'service-item';
-
                     let html = `
                         <label>
                             <input type="checkbox" value="${service.id}" data-service-name="${service.name}">
@@ -410,27 +407,31 @@
                     `;
 
                     if (service.conditions && service.conditions.options) {
-                        let htmlOptions = '<div class="service-options">';
+                        html += '<div class="service-options">';
                         service.conditions.options.forEach(option => {
-                            htmlOptions += `
+                            html += `
                                 <label style="margin-right:10px;">
-                                    <input type="radio" name="option_${service.id}" value="${option}"> ${option}
+                                    <input type="radio" name="option_${service.id}" value="${option}">
+                                    ${option}
                                 </label>
                             `;
                         });
-                        htmlOptions += '</div>';
-                        html += htmlOptions;
+                        html += '</div>';
                     }
 
-                    div.innerHTML = html;
-                    servicesList.appendChild(div);
+                    const serviceItem = document.createElement('div');
+                    serviceOptions.className = "service-item";
+                    serviceItem.innerHTML = html;
+
+                    servicesList.appendChild(serviceItem);
                 });
             })
             .catch(error => {
                 servicesList.textContent = 'Errore caricamento servizi.';
                 console.error('Errore:', error);
             });
-        }
+        
+
 
         function generaRiepilogo() {
             const riepilogo = document.getElementById('riepilogoOfferta');
@@ -479,7 +480,7 @@
             `;
         }
 
-                document.getElementById('generatePdfBtn').addEventListener('click', () => {
+        document.getElementById('generatePdfBtn').addEventListener('click', () => {
             const token = new URLSearchParams(window.location.search).get("token");
 
             if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
@@ -509,7 +510,7 @@
                     DescrizioneVersione: descrizioneVersione,
                     Note: noteAuto
                 },
-                CarImages: carImagesUrls, // Deve essere valorizzato!
+                CarImages: carImagesUrls,
                 Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
                     Id: checkbox.value,
                     Nome: checkbox.getAttribute('data-service-name'),
@@ -523,7 +524,7 @@
                 }
             };
 
-            console.log("Payload:", payload); // 🔴 debug importante!
+            console.log("Payload:", payload);
 
             fetch('/api/Pdf/GenerateOffer', {
                 method: 'POST',
@@ -548,8 +549,6 @@
             });
         });
 
-
-
             function getUniqueFileName(){
             const now = new Date();
             const dateTimeString = now.getFullYear().toString() +
@@ -560,7 +559,7 @@
                 ('0' + now.getSeconds()).slice(-2);
 
             return `NLT_Offer_${dateTimeString}.pdf`;
-        }
+            }
 
 
             fetch('/api/Pdf/GenerateOffer', {
@@ -588,7 +587,7 @@
                 console.error("Errore generazione PDF:", error);
                 alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
             });
-             
+        };
 
     </script>
 }
