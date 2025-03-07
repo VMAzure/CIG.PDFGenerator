@@ -149,49 +149,50 @@
                 }
             });
 
-            varianteDropdown.addEventListener("change", () => {
-                loader.style.display = "block";
-                anteprimaAuto.style.display = "none";
-                imagePlaceholder.style.display = "none";
+                    varianteDropdown.addEventListener("change", () => {
+            loader.style.display = "block";
+            anteprimaAuto.style.display = "none";
+            imagePlaceholder.style.display = "none";
 
-                if (varianteDropdown.value) {
-                    const angles = [203, 29, 17, 9, 21, 13];
-                    const colors = ["White", "Black", "Red", "Blue", "Green"];
+            if (varianteDropdown.value) {
+                const angles = [203, 29, 17, 9, 21, 13];
+                const colors = ["White", "Black", "Red", "Blue", "Green"];
 
-                    // Funzione helper per scegliere un colore casuale
-                    function getRandomColor() {
-                        return colors[Math.floor(Math.random() * colors.length)];
-                    }
-
-                    const carImagesUrls = angles.map(angle => {
-                        const color = colors[Math.floor(Math.random() * colors.length)];
-                        return {
-                            url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`,
-                            color: color,
-                            angle: angle
-                        };
-                    });
-
-                    anteprimaAuto.src = carImagesUrls[0].url;
-
-                    anteprimaAuto.onload = function() {
-                        loader.style.display = "none";
-                        anteprimaAuto.style.display = "block";
-                        carMainImageUrl = carImagesUrls[0].url;
-                    };
-
-                    anteprimaAuto.onerror = function() {
-                        loader.style.display = "none";
-                        imagePlaceholder.textContent = "Anteprima non disponibile";
-                        imagePlaceholder.style.display = "flex";
-                    };
-                } else {
-                    loader.style.display = "none";
-                    imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
-                    imagePlaceholder.style.display = "flex";
+                // Funzione helper per scegliere un colore casuale
+                function getRandomColor() {
+                    return colors[Math.floor(Math.random() * colors.length)];
                 }
-            });
+
+                carImagesUrls = angles.map(angle => {  // ⚠️ Qui era l'errore (no const)
+                    const color = getRandomColor();
+                    return {
+                        url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`,
+                        color: color,
+                        angle: angle
+                    };
+                });
+
+                anteprimaAuto.src = carImagesUrls[0].url;
+
+                anteprimaAuto.onload = function() {
+                    loader.style.display = "none";
+                    anteprimaAuto.style.display = "block";
+                    carMainImageUrl = carImagesUrls[0].url;
+                };
+
+                anteprimaAuto.onerror = function() {
+                    loader.style.display = "none";
+                    imagePlaceholder.textContent = "Anteprima non disponibile";
+                    imagePlaceholder.style.display = "flex";
+                };
+            } else {
+                loader.style.display = "none";
+                imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
+                imagePlaceholder.style.display = "flex";
+            }
         });
+
+    });
 
 
         // Funzioni esterne dichiarate correttamente fuori dall'evento DOMContentLoaded
