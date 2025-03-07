@@ -90,7 +90,7 @@ namespace CIG.PDFGenerator.Controllers
                             }
 
                             // Spazio verticale
-                            column.Item().PaddingVertical(-17);
+                            column.Item().PaddingVertical(-30);
 
                             // Terza riga: Titolo offerta economica
                             column.Item().AlignLeft().Text("Offerta economica")
