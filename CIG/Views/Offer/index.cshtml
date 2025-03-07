@@ -102,7 +102,7 @@
 
 
 
-                document.addEventListener("DOMContentLoaded", async () => {
+        document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
             modelloDropdown = document.getElementById("modello");
             versioneDropdown = document.getElementById("versione");
@@ -561,34 +561,6 @@
 
             return `NLT_Offer_${dateTimeString}.pdf`;
             }
-
-
-            fetch('/api/Pdf/GenerateOffer', {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + token
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => {
-                if (!res.ok) throw new Error("Errore generazione PDF");
-                return res.blob();
-            })
-            .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = getUniqueFileName();
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            })
-            .catch(error => {
-                console.error("Errore generazione PDF:", error);
-                alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
-            });
         
-
     </script>
 }
