@@ -19,14 +19,13 @@ namespace CIG.PDFGenerator.Controllers
 
             try
             {
-                byte[] imageBytes = null;
-
+                byte[] carImageBytes = null;
                 if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
                 {
                     using var client = new HttpClient();
                     try
                     {
-                        imageBytes = await client.GetByteArrayAsync(offer.CarMainImageUrl);
+                        carImageBytes = await client.GetByteArrayAsync(offer.CarMainImageUrl);
                     }
                     catch (Exception imgEx)
                     {
@@ -41,22 +40,23 @@ namespace CIG.PDFGenerator.Controllers
                         page.Size(PageSizes.A4.Landscape());
                         page.Margin(0);
 
-                        // Immagine di sfondo
+                        // Sfondo
                         var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "offer_pag_1.jpg");
                         page.Background().Image(imagePath).FitArea();
 
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
+                        // Un solo Content() per pagina!
                         page.Content().Padding(30).Column(column =>
                         {
                             column.Spacing(10);
 
-                            // Prima riga: Logo + "&" Cliente (Ragione sociale o Nome Cognome)
+                            // Prima riga: Logo + "&" + Cliente
                             column.Item().Row(row =>
                             {
-                                // Logo
                                 var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
                                 byte[] logoBytes = null;
+
                                 if (!string.IsNullOrEmpty(logoUrl))
                                 {
                                     using var client = new HttpClient();
@@ -66,11 +66,10 @@ namespace CIG.PDFGenerator.Controllers
                                 if (logoBytes != null)
                                     row.ConstantItem(250).Image(logoBytes).FitWidth();
 
-                                // Carattere "&"
-                                row.AutoItem().AlignMiddle().Text("&")
-                                    .FontSize(40).Bold().FontColor("#00213b").PaddingHorizontal(10);
+                                row.AutoItem().AlignMiddle().PaddingHorizontal(10)
+                                .Text("&").FontSize(40).Bold().FontColor("#00213b");
 
-                                // Nome Cliente (Ragione Sociale o Nome e Cognome)
+
                                 var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                               ? offer.CustomerCompanyName
                                               : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
@@ -79,63 +78,43 @@ namespace CIG.PDFGenerator.Controllers
                                     .FontSize(28).Bold().FontColor("#00213b");
                             });
 
-                            // Contenuto della pagina
-                            columnSpacing(10);
-
-                            page.Content().Padding(30).Column(column =>
+                            // Seconda riga: Immagine auto a destra
+                            if (carImageBytes != null)
                             {
-                                column.Spacing(15);
+                                column.Item().AlignRight().Height(400).Image(carImageBytes).FitHeight();
+                            }
 
-                                // Seconda riga (immagine auto a destra)
-                                if (!string.IsNullOrWhiteSpace(offer.CarMainImageUrl))
-                                {
-                                    using var client = new HttpClient();
-                                    byte[] carImageBytes = null;
+                            // Spazio verticale
+                            column.Item().PaddingVertical(10);
 
-                                    try { carImageBytes = client.GetByteArrayAsync(offer.CarMainImageUrl).Result; } catch { }
+                            // Terza riga: Titolo offerta economica
+                            column.Item().AlignLeft().Text("Offerta economica")
+                                .FontSize(36).FontColor("#FFFFFF");
 
-                                    if (carImageBytes != null)
-                                    {
-                                        column.Item().AlignRight().Height(400).Image(carImageBytes).FitHeight();
-                                    }
-                                }
+                            // Quarta riga: "NOLEGGIO LUNGOTERMINE" formattato
+                            column.Item().AlignLeft().Text(text =>
+                            {
+                                text.Span("NOLEGGIO ").FontSize(20).FontColor("#FFFFFF");
+                                text.Span("LUNGO").FontSize(20).FontColor("#FFFFFF").Bold();
+                                text.Span("TERMINE").FontSize(20).FontColor("#FF7100").Bold();
 
-                                // Terza riga vuota (spazio)
-                                column.Item().PaddingVertical(10);
-
-                                // Quarta riga (testo "Offerta Noleggio Lungo Termine")
-                                column.Item().AlignLeft().Text(text =>
-                                {
-                                    text.Span("Offerta Noleggio ").FontSize(22).Bold().FontColor("#FFFFFF");
-                                    text.Span("Lungo Termine").FontSize(24).Bold().FontColor("#FFFFFF");
-                                });
-
-                                // Riga personalizzata come da richiesta
-                                column.Item().AlignLeft().Text(text =>
-                                {
-                                    text.Span("NOLEGGIO ").FontSize(20).FontColor("#FFFFFF").FontWeight(FontWeight.Normal);
-                                    text.Span("LUNGO").FontSize(20).FontColor("#FFFFFF").FontWeight(FontWeight.Bold);
-                                    text.Span("TERMINE").FontSize(20).FontColor("#FF7100").FontWeight(FontWeight.Bold);
-                                });
-
-                                // Doppio spazio
-                                column.Item().PaddingVertical(20);
-
-                                // Quinta riga: Nome Admin o Dealer (14px, bianco)
-                                var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
-                                column.Item().AlignLeft().Text(aziendaNome)
-                                    .FontSize(14).FontColor("#FFFFFF");
-
-                                // Sesta riga: Email Admin o Dealer (12px, bianco)
-                                var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
-                                column.Item().AlignLeft().Text(specialistaEmail)
-                                    .FontSize(12).FontColor("#FFFFFF");
                             });
+
+                            // Doppio spazio
+                            column.Item().PaddingVertical(20);
+
+                            // Quinta riga: Nome Admin o Dealer (14px bianco)
+                            var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
+                            column.Item().AlignLeft().Text(aziendaNome)
+                                .FontSize(14).FontColor("#FFFFFF");
+
+                            // Sesta riga: Email Admin o Dealer (12px bianco)
+                            var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+                            column.Item().AlignLeft().Text(specialistaEmail)
+                                .FontSize(12).FontColor("#FFFFFF");
                         });
-
-
-                    }).GeneratePdf();
-
+                    });
+                }).GeneratePdf();
 
                 return File(pdf, "application/pdf", "Offerta.pdf");
             }
@@ -146,6 +125,7 @@ namespace CIG.PDFGenerator.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
 
 
 
