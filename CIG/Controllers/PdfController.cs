@@ -170,6 +170,7 @@ namespace CIG.PDFGenerator.Controllers
 
                         var imagePathPag2 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_2.jpg");
                         page.Background().Image(imagePathPag2).FitArea();
+                        page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
                         page.Content().Padding(30).Column(column =>
                         {
@@ -183,8 +184,8 @@ namespace CIG.PDFGenerator.Controllers
                             });
 
                             // 2 - Servizi compresi nell'offerta
-                            column.Item().PaddingTop(15).Text("# Servizi compresi nell'offerta")
-                                .FontSize(30).FontColor("#FFFFFF");
+                            column.Item().PaddingTop(35).Text("# Servizi compresi nell'offerta")
+                                .FontSize(28).FontColor("#FFFFFF");
 
                             // 3 - La nostra proposta per [Cliente]
                             var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
