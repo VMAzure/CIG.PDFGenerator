@@ -9,13 +9,20 @@ using QuestPDF.Previewer;
 using QuestPDF.Drawing;
 using System.IO;
 
-
 namespace CIG.PDFGenerator.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class PdfController : ControllerBase
     {
+        private readonly IWebHostEnvironment _environment;
+
+        // Costruttore aggiornato
+        public PdfController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         [HttpPost("GenerateOffer")]
         public async Task<IActionResult> GenerateOffer([FromBody] OfferPdfPage1 offer)
         {
@@ -37,14 +44,16 @@ namespace CIG.PDFGenerator.Controllers
                         Console.WriteLine($"Errore caricamento immagine: {imgEx.Message}");
                     }
                 }
-                // Registra il font Montserrat Regular
-                using var regularFontStream = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/fonts/Montserrat-Regular.ttf"));
-                FontManager.RegisterFont(regularFontStream);
+                    // Percorso corretto per wwwroot (funziona su Docker/Linux e Windows)
+                    var regularFontPath = Path.Combine(_environment.WebRootPath, "fonts", "Montserrat-Regular.ttf");
+                    var boldFontPath = Path.Combine(_environment.WebRootPath, "fonts", "Montserrat-Bold.ttf");
 
-                // Registra il font Montserrat Bold
-                using var boldFontStream = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/fonts/Montserrat-Bold.ttf"));
-                FontManager.RegisterFont(boldFontStream);
+                    // Registrazione font
+                    using var regularFontStream = System.IO.File.OpenRead(regularFontPath);
+                    FontManager.RegisterFont(regularFontStream);
 
+                    using var boldFontStream = System.IO.File.OpenRead(boldFontPath);
+                    FontManager.RegisterFont(boldFontStream);
 
 
                 var pdf = QuestPDF.Fluent.Document.Create(document =>
@@ -58,7 +67,6 @@ namespace CIG.PDFGenerator.Controllers
                         // Sfondo
                         var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "offer_pag_1.jpg");
                         page.Background().Image(imagePath).FitArea();
-
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
                         // Un solo Content() per pagina!
@@ -117,7 +125,6 @@ namespace CIG.PDFGenerator.Controllers
                                 text.Span("NOLEGGIO ").FontSize(36).FontColor("#FFFFFF");
                                 text.Span("LUNGO").FontSize(36).FontColor("#FFFFFF").Bold();
                                 text.Span("TERMINE").FontSize(36).FontColor("#FF7100").Bold();
-
                             });
 
                             // Doppio spazio
@@ -145,10 +152,6 @@ namespace CIG.PDFGenerator.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
-
-
-
 
     }
 }
