@@ -214,7 +214,7 @@ namespace CIG.PDFGenerator.Controllers
                                 {
                                     var img29Bytes = await client.GetByteArrayAsync(angolo29.Url);
                                     colImmagini.Item()
-                                        .Height(250)
+                                        .Height(100)
                                         .AlignRight()
                                         .Image(img29Bytes).FitWidth();
                                 }
@@ -223,7 +223,7 @@ namespace CIG.PDFGenerator.Controllers
                                 {
                                     var img13Bytes = await client.GetByteArrayAsync(angolo13.Url);
                                     colImmagini.Item().PaddingTop(10)
-                                        .Height(200)
+                                        .Height(100)
                                         .AlignRight()
                                         .Image(img13Bytes).FitHeight();
                                 }
