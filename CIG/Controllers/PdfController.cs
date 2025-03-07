@@ -40,7 +40,10 @@ namespace CIG.PDFGenerator.Controllers
                     {
                         page.Margin(0);
                         page.Size(PageSizes.A4.Landscape());
-                        page.Background().Image("images/offer_pag_1.jpg").FitArea();
+
+                        var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "offer_pag_1.jpg");
+                        page.Background().Image(imagePath).FitArea();
+                        
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
                         page.Header()
