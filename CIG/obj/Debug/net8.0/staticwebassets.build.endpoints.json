@@ -99,7 +99,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5387"
+          "Value": "5453"
         },
         {
           "Name": "Content-Type",
@@ -107,22 +107,22 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
+          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
+          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
+          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
         }
       ]
     },
     {
-      "Route": "css/offer.d1kmgu96qy.css",
+      "Route": "css/offer.kbyuvwaxam.css",
       "AssetFile": "css/offer.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -136,7 +136,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5387"
+          "Value": "5453"
         },
         {
           "Name": "Content-Type",
@@ -144,21 +144,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
+          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
+          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d1kmgu96qy"
+          "Value": "kbyuvwaxam"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
+          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
         },
         {
           "Name": "label",
@@ -409,6 +409,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_1.jpg",
+      "AssetFile": "images/offer_pag_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "740559"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_1.o8ff28ocx3.jpg",
+      "AssetFile": "images/offer_pag_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "740559"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o8ff28ocx3"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
+        },
+        {
+          "Name": "label",
+          "Value": "images/offer_pag_1.jpg"
         }
       ]
     },

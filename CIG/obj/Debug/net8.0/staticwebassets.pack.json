@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\default-car.png"
     },
     {
+      "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "PackagePath": "staticwebassets\\images\\offer_pag_1.jpg"
+    },
+    {
       "Id": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

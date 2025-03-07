@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "V02v6LRDqRteRq3au0eRDv907Y4oI6PEK3Xezhg/ARc=",
+  "Hash": "jD8QslLoBClu2dI09gynCxPwN1/ID/JpTSMsFzJwAbw=",
   "Source": "CIG.PDFGenerator",
   "BasePath": "_content/CIG.PDFGenerator",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "d1kmgu96qy",
-      "Integrity": "D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=",
+      "Fingerprint": "kbyuvwaxam",
+      "Integrity": "wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\offer.css"
@@ -141,6 +141,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\default-car.png"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/offer_pag_1#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o8ff28ocx3",
+      "Integrity": "GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\offer_pag_1.jpg"
     },
     {
       "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\js\\site.js",
@@ -1579,7 +1600,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5387"
+          "Value": "5453"
         },
         {
           "Name": "Content-Type",
@@ -1587,11 +1608,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
+          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
+          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1601,12 +1622,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
+          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
         }
       ]
     },
     {
-      "Route": "css/offer.d1kmgu96qy.css",
+      "Route": "css/offer.kbyuvwaxam.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1616,7 +1637,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5387"
+          "Value": "5453"
         },
         {
           "Name": "Content-Type",
@@ -1624,11 +1645,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c=\""
+          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 06 Mar 2025 19:17:08 GMT"
+          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1638,7 +1659,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "d1kmgu96qy"
+          "Value": "kbyuvwaxam"
         },
         {
           "Name": "label",
@@ -1646,7 +1667,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-D5nnraizxhf8PyUc0uVa0/kThd/gjOUg5SPQ47Uh26c="
+          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
         }
       ]
     },
@@ -1893,6 +1914,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-dwtgdsv+ZpXx1ZdOq+druBoJf/q68+sMvTChAU7Ef+M="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_1.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "740559"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_1.o8ff28ocx3.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "740559"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o8ff28ocx3"
+        },
+        {
+          "Name": "label",
+          "Value": "images/offer_pag_1.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
         }
       ]
     },
