@@ -85,7 +85,7 @@ namespace CIG.PDFGenerator.Controllers
                                     .PaddingTop(-70) // sposta in alto (aumenta per più vicinanza)
                                     .PaddingLeft(160) // sposta a destra (aumenta o diminuisci per posizione)
                                     .AlignLeft()
-                                    .Height(450)
+                                    .Height(400)
                                     .Image(carImageBytes).FitHeight();
                             }
 
