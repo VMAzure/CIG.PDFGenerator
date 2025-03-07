@@ -39,8 +39,51 @@ namespace CIG.PDFGenerator.Controllers
                     document.Page(page =>
                     {
                         page.Margin(30);
-                        page.Size(QuestPDF.Helpers.PageSizes.A4.Landscape());
+                        page.Size(PageSizes.A4.Landscape());
 
+                        page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
+
+                        page.Header()
+                            .Row(row =>
+                            {
+                                // Logo Admin o Dealer
+                                var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
+
+                                byte[] logoBytes = null;
+                                if (!string.IsNullOrEmpty(logoUrl))
+                                {
+                                    using var client = new HttpClient();
+                                    try
+                                    {
+                                        logoBytes = client.GetByteArrayAsync(logoUrl).Result;
+                                    }
+                                    catch { }
+                                }
+
+                                if (logoBytes != null)
+                                {
+                                    row.ConstantItem(100).Image(logoBytes, ImageScaling.FitWidth);
+                                }
+
+                                var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
+                                var specialistaNome = $"{offer.DealerInfo?.FirstName ?? offer.AdminInfo.FirstName} {offer.DealerInfo?.LastName ?? offer.AdminInfo.LastName}";
+                                var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+
+                                row.RelativeItem().Column(col =>
+                                {
+                                    col.Item().AlignRight().Text(aziendaNome)
+                                        .FontSize(16).Bold().FontColor("#00213b");
+
+                                    col.Item().AlignRight().Text("Offerta Noleggio a Lungo Termine")
+                                        .FontSize(14).Bold().FontColor("#FF7100");
+
+                                    col.Item().AlignRight().Text($"{specialistaNome} – NLT Specialist")
+                                        .FontSize(10).FontColor("#00213b");
+
+                                    col.Item().AlignRight().Text(specialistaEmail)
+                                        .FontSize(10).FontColor("#00213b");
+                                });
+                            });
 
                         page.Content().Column(column =>
                         {
@@ -48,59 +91,13 @@ namespace CIG.PDFGenerator.Controllers
                             if (string.IsNullOrWhiteSpace(cliente))
                                 cliente = offer.CustomerCompanyName;
 
-                            column.Item().Text($"Cliente: {cliente}");
-                            column.Item().Text($"Admin: {offer.AdminInfo?.CompanyName ?? "N/A"}");
+                            column.Item().Text($"Cliente: {cliente}")
+                                .FontSize(12).Bold();
 
-                            if (offer.DealerInfo != null)
-                                column.Item().Text($"Dealer: {offer.DealerInfo.CompanyName}");
-
-                            if (imageBytes != null)
-                                column.Item().Image(imageBytes);
-                            else
-                                column.Item().Text("⚠️ Immagine auto non disponibile o non raggiungibile.");
-
-                            // Dati Auto
-                            column.Item().PaddingTop(10).Text("Dati Auto:").FontSize(14).Bold();
-                            column.Item().PaddingLeft(10).Column(auto =>
-                            {
-                                auto.Item().Text($"• Marca: {offer.Auto.Marca}");
-                                auto.Item().Text($"• Modello: {offer.Auto.Modello}");
-                                auto.Item().Text($"• Versione: {offer.Auto.Versione}");
-                                auto.Item().Text($"• Variante: {offer.Auto.Variante}");
-                                auto.Item().Text($"• Descrizione Versione: {offer.Auto.DescrizioneVersione}");
-                                auto.Item().Text($"• Note: {offer.Auto.Note}");
-                            });
-
-
-                            // Servizi selezionati
-                            column.Item().PaddingTop(10).Text("Servizi selezionati:").Bold();
-
-                            if (offer.Servizi != null && offer.Servizi.Any())
-                            {
-                                column.Item().PaddingLeft(10).Column(servizi =>
-                                {
-                                    foreach (var servizio in offer.Servizi)
-                                    {
-                                        servizi.Item().Text($"• Servizio: {servizio.Nome} - Opzione scelta: {servizio.Opzione}");
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                column.Item().Text("Nessun servizio selezionato.");
-                            }
-
-                            // Dati Economici
-                            column.Item().PaddingTop(10).Text("Dati economici:").Bold();
-                            column.Item().PaddingLeft(10).Column(dati =>
-                            {
-                                dati.Item().Text($"• Durata: {offer.DatiEconomici.Durata} mesi");
-                                dati.Item().Text($"• Km totali: {offer.DatiEconomici.KmTotali}");
-                                dati.Item().Text($"• Anticipo: € {offer.DatiEconomici.Anticipo}");
-                                dati.Item().Text($"• Canone mensile: € {offer.DatiEconomici.Canone}");
-                            });
+                            // Resto del contenuto successivamente...
                         });
                     });
+
                 }).GeneratePdf();
 
                 return File(pdf, "application/pdf", "Offerta.pdf");
