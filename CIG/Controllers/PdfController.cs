@@ -118,7 +118,7 @@ namespace CIG.PDFGenerator.Controllers
                                     row.ConstantItem(200).Image(logoBytes).FitWidth();
 
                                 row.AutoItem().AlignMiddle().PaddingHorizontal(10)
-                                    .Text("&").FontSize(30).FontColor("#00213b");
+                                    .Text("& ").FontSize(30).FontColor("#00213b");
 
                                 var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                     ? offer.CustomerCompanyName.ToUpper()
@@ -175,26 +175,77 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             column.Spacing(10);
 
-                            column.Item().Row(row =>
+                            // Prima riga: "QUICKVIEW"
+                            column.Item().AlignLeft().Text(text =>
                             {
-                                foreach (var carImg in carImagesDetails)
-                                {
-                                    row.RelativeItem().Column(imgColumn =>
-                                    {
-                                        imgColumn.Item()
-                                            .Height(50)
-                                            .PaddingHorizontal(5)
-                                            .Image(carImg.bytes).FitHeight();
-
-                                        imgColumn.Item()
-                                            .AlignCenter()
-                                            .Text($"{carImg.color} - Angolo {carImg.angle}")
-                                            .FontSize(12).FontColor("#00213b");
-                                    });
-                                }
+                                text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
+                                text.Span("VIEW").FontSize(36).Bold().FontColor("#FFFFFF");
                             });
+
+                            // Seconda riga: "Offerta economica"
+                            column.Item().AlignLeft().Text("Offerta economica")
+                                .FontSize(30).FontColor("#FFFFFF");
+
+                            // Terza riga: "NOLEGGIO LUNGOTERMINE"
+                            column.Item().AlignLeft().Text(text =>
+                            {
+                                text.Span("NOLEGGIO ").FontSize(24).FontColor("#FFFFFF");
+                                text.Span("LUNGO").FontSize(24).Bold().FontColor("#FFFFFF");
+                                text.Span("TERMINE").FontSize(24).Bold().FontColor("#FF7100");
+                            });
+
+                            column.Item().PaddingVertical(10);
+
+                            // Quarta riga: Nome Dealer o Admin
+                            var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
+                            column.Item().AlignLeft().Text($"Nome azienda: {aziendaNome}")
+                                .FontSize(14).FontColor("#FFFFFF");
+
+                            var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+                            column.Item().AlignLeft().Text($"Email: {specialistaEmail}")
+                                .FontSize(12).FontColor("#FFFFFF");
+
+                            // Righe aggiuntive da inserire come da tua richiesta:
+                            column.Item().PaddingVertical(15).Text("Servizi compresi nell'offerta")
+                                .FontSize(18).Bold().FontColor("#FFFFFF");
+
+                            column.Item().AlignLeft().Text("Offerta economica")
+                                .FontSize(36).FontColor("#FFFFFF");
+
+                            column.Item().AlignLeft().Text(text =>
+                            {
+                                text.Span("NOLEGGIO ").FontSize(32).FontColor("#FFFFFF");
+                                text.Span("LUNGO").FontSize(32).Bold().FontColor("#FFFFFF");
+                                text.Span("TERMINE").FontSize(32).Bold().FontColor("#FF7100");
+                            });
+
+                            // Testo personalizzato come richiesto da te (le 4 righe nuove):
+                            column.Item().PaddingTop(20).AlignLeft().Text(text =>
+                            {
+                                text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
+                                text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
+                            });
+
+                            column.Item().AlignLeft().Text("Offerta economica")
+                                .FontSize(36).FontColor("#FFFFFF");
+
+                            column.Item().AlignLeft().Text(text =>
+                            {
+                                text.Span("NOLEGGIO ").FontSize(24).FontColor("#FFFFFF");
+                                text.Span("LUNGO").FontSize(24).Bold().FontColor("#FFFFFF");
+                                text.Span("TERMINE").FontSize(24).Bold().FontColor("#FF7100");
+                            });
+
+                            column.Item().PaddingVertical(5);
+
+                            column.Item().AlignLeft().Text(aziendaNome)
+                                .FontSize(14).FontColor("#FFFFFF");
+
+                            column.Item().AlignLeft().Text(specialistaEmail)
+                                .FontSize(12).FontColor("#FFFFFF");
                         });
                     });
+
 
                 }).GeneratePdf();
 
