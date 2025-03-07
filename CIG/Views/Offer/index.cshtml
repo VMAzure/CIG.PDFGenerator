@@ -503,6 +503,19 @@
                 }
             };
 
+            function getUniqueFileName(){
+            const now = new Date();
+            const dateTimeString = now.getFullYear().toString() +
+                ('0' + (now.getMonth() + 1)).slice(-2) +
+                ('0' + now.getDate()).slice(-2) + '_' +
+                ('0' + now.getHours()).slice(-2) +
+                ('0' + now.getMinutes()).slice(-2) +
+                ('0' + now.getSeconds()).slice(-2);
+
+            return `NLT_Offer_${dateTimeString}.pdf`;
+        }
+
+
             fetch('/api/Pdf/GenerateOffer', {
                 method: 'POST',
                 headers: {
@@ -519,7 +532,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'Offerta.pdf';
+                a.download = getUniqueFileName();
                 document.body.appendChild(a);
                 a.click();
                 a.remove();
