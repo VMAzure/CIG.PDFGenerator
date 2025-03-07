@@ -82,24 +82,24 @@ namespace CIG.PDFGenerator.Controllers
                             if (carImageBytes != null)
                             {
                                 column.Item()
-                                    .PaddingTop(-50) // sposta in alto (aumenta per più vicinanza)
-                                    .PaddingLeft(70) // sposta a destra (aumenta o diminuisci per posizione)
-                                    .AlignRight()
+                                    .PaddingTop(-70) // sposta in alto (aumenta per più vicinanza)
+                                    .PaddingLeft(20) // sposta a destra (aumenta o diminuisci per posizione)
+                                    .AlignLeft()
                                     .Height(350)
                                     .Image(carImageBytes).FitHeight();
                             }
 
                             // Spazio verticale
-                            column.Item().PaddingVertical(10);
+                            column.Item().PaddingVertical(1);
 
                             // Terza riga: Titolo offerta economica
                             column.Item().AlignLeft().Text("Offerta economica")
-                                .FontSize(36).FontColor("#FFFFFF");
+                                .FontSize(28).FontColor("#FFFFFF");
 
                             // Quarta riga: "NOLEGGIO LUNGOTERMINE" formattato
                             column.Item().AlignLeft().Text(text =>
                             {
-                                text.Span("NOLEGGIO ").FontSize(20).FontColor("#FFFFFF");
+                                text.Span("NOLEGGIO ").FontSize(36).FontColor("#FFFFFF");
                                 text.Span("LUNGO").FontSize(20).FontColor("#FFFFFF").Bold();
                                 text.Span("TERMINE").FontSize(20).FontColor("#FF7100").Bold();
 
