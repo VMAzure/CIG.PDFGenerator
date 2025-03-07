@@ -23,6 +23,14 @@
         public Auto Auto { get; set; }
         public List<Servizio> Servizi { get; set; }
         public DatiEconomici DatiEconomici { get; set; }
+
+        public List<CarImageDetail> CarImages { get; set; } = new();
+    }
+    public class CarImageDetail
+    {
+        public string Url { get; set; }
+        public string Color { get; set; }
+        public int Angle { get; set; }
     }
 
     // 🔴 Aggiungi subito anche queste classi di supporto mancanti:

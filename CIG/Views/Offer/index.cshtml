@@ -100,7 +100,7 @@
         let noteAuto = "";
 
 
-        document.addEventListener("DOMContentLoaded", async () => {
+                document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
             modelloDropdown = document.getElementById("modello");
             versioneDropdown = document.getElementById("versione");
@@ -112,13 +112,11 @@
             descrizioneVersione = document.getElementById('descrizioneVersione').value;
             noteAuto = document.getElementById('noteAuto').value;
 
-
             adminInfo = await fetchAdminInfo();
 
             // Carica inizialmente le marche
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
 
-            // Event listeners dropdown
             marcaDropdown.addEventListener("change", () => {
                 modelloDropdown.innerHTML = '';
                 versioneDropdown.innerHTML = '';
@@ -155,15 +153,32 @@
                 imagePlaceholder.style.display = "none";
 
                 if (varianteDropdown.value) {
-                    const imageUrl = `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=203&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`;
+                    const angles = [203, 29, 17, 9, 21, 13];
+                    const colors = ["White", "Black", "Red", "Blue", "Green"];
 
-                    anteprimaAuto.src = imageUrl;
-                    anteprimaAuto.onload = function(){
+                    // Funzione helper per scegliere un colore casuale
+                    function getRandomColor() {
+                        return colors[Math.floor(Math.random() * colors.length)];
+                    }
+
+                    const carImagesUrls = angles.map(angle => {
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        return {
+                            url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`,
+                            color: color,
+                            angle: angle
+                        };
+                    });
+
+                    anteprimaAuto.src = carImagesUrls[0].url;
+
+                    anteprimaAuto.onload = function() {
                         loader.style.display = "none";
                         anteprimaAuto.style.display = "block";
-                        carMainImageUrl = imageUrl;
+                        carMainImageUrl = carImagesUrls[0].url;
                     };
-                    anteprimaAuto.onerror = function(){
+
+                    anteprimaAuto.onerror = function() {
                         loader.style.display = "none";
                         imagePlaceholder.textContent = "Anteprima non disponibile";
                         imagePlaceholder.style.display = "flex";
@@ -175,6 +190,7 @@
                 }
             });
         });
+
 
         // Funzioni esterne dichiarate correttamente fuori dall'evento DOMContentLoaded
         async function fetchAdminInfo() {
@@ -468,40 +484,41 @@
                 alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
                 return;
             }
-                
-                    descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
-                    noteAuto = document.getElementById('noteAuto').value || "";
-            
-            const payload = {
-                CustomerFirstName: selectedCustomer.nome || "",
-                CustomerLastName: selectedCustomer.cognome || "",
-                CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-                CustomerIcon: "icona_default.png",
-                CarMainImageUrl: carMainImageUrl,
-                CarThumbnailUrl: carMainImageUrl,
-                AdminInfo: adminInfo,
-                DealerInfo: null,
-                Auto: {
-                    Marca: marcaDropdown.value || "",
-                    Modello: modelloDropdown.value || "",
-                    Versione: versioneDropdown.value || "",
-                    Variante: varianteDropdown.value || "",
-                    DescrizioneVersione: descrizioneVersione || "",
-                    Note: noteAuto || ""
-                },
-                    Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
-                    Id: checkbox.value,
-                    Nome: checkbox.getAttribute('data-service-name'), // ✅ aggiunto chiaramente qui
-                    Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
-                })),
 
-                DatiEconomici: {
-                    Durata: parseInt(document.getElementById('durataMesi').value) || 0,
-                    KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
-                    Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
-                    Canone: parseFloat(document.getElementById('canone').value) || 0
-                }
-            };
+                    descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
+        noteAuto = document.getElementById('noteAuto').value || "";
+
+        const payload = {
+            CustomerFirstName: selectedCustomer.nome || "",
+            CustomerLastName: selectedCustomer.cognome || "",
+            CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+            CustomerIcon: "icona_default.png",
+            CarMainImageUrl: carMainImageUrl,
+            CarThumbnailUrl: carMainImageUrl,
+            AdminInfo: adminInfo,
+            DealerInfo: null,
+            Auto: {
+                Marca: marcaDropdown.value || "",
+                Modello: modelloDropdown.value || "",
+                Versione: versioneDropdown.value || "",
+                Variante: varianteDropdown.value || "",
+                DescrizioneVersione: descrizioneVersione,
+                Note: noteAuto
+            },
+            CarImages: carImagesUrls, // Array di oggetti {url, angle, color}
+            Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
+                Id: checkbox.value,
+                Nome: checkbox.getAttribute('data-service-name'),
+                Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
+            })),
+            DatiEconomici: {
+                Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                Canone: parseFloat(document.getElementById('canone').value) || 0
+            }
+        };
+
 
             function getUniqueFileName(){
             const now = new Date();
