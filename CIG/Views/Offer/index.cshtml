@@ -25,12 +25,12 @@
                     <label for="descrizioneVersione">Descrizione versione:</label>
                     <input type="text" id="descrizioneVersione" placeholder="Inserisci descrizione versione">
                 </div>
-                <div class="form-group">
-                    <label for="noteAuto">Note:</label>
-                    <textarea id="noteAuto" placeholder="Inserisci eventuali note sull'auto"></textarea>
-                </div>
+               
             </div>
-
+            <div class="form-group">
+                <label for="noteAuto">Note:</label>
+                <textarea id="noteAuto" placeholder="Inserisci eventuali note sull'auto"></textarea>
+            </div>
         </div>
     </div>
 
@@ -469,6 +469,9 @@
                 return;
             }
 
+                    descrizioneVersione = document.getElementById('descrizioneVersione').value || "";
+                    noteAuto = document.getElementById('noteAuto').value || "";
+            
             const payload = {
                 CustomerFirstName: selectedCustomer.nome || "",
                 CustomerLastName: selectedCustomer.cognome || "",
