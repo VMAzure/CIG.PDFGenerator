@@ -182,7 +182,7 @@ namespace CIG.PDFGenerator.Controllers
                                     row.RelativeItem().Column(imgColumn =>
                                     {
                                         imgColumn.Item()
-                                            .Height(200)
+                                            .Height(50)
                                             .PaddingHorizontal(5)
                                             .Image(carImg.bytes).FitHeight();
 
