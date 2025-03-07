@@ -184,8 +184,8 @@ namespace CIG.PDFGenerator.Controllers
                             });
 
                             // 2 - Servizi compresi nell'offerta
-                            column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
-                                .FontSize(20).FontColor("#FFFFFF");
+                            column.Item().PaddingTop(75).Text("# Servizi compresi nell'offerta")
+                                .FontSize(30).FontColor("#FFFFFF");
 
                             // 3 - La nostra proposta per [Cliente]
                             var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
@@ -193,11 +193,11 @@ namespace CIG.PDFGenerator.Controllers
                                           : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                             column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                                .FontSize(20).FontColor("#FFFFFF");
+                                .FontSize(30).FontColor("#FFFFFF");
 
                             // 4 - Prossimi passi
                             column.Item().PaddingTop(15).Text("# Prossimi passi")
-                                .FontSize(20).FontColor("#FFFFFF");
+                                .FontSize(30).FontColor("#FFFFFF");
                         });
                     });
 
