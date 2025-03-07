@@ -172,9 +172,11 @@ namespace CIG.PDFGenerator.Controllers
                         page.Background().Image(imagePathPag2).FitArea();
                         page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                        page.Content().Padding(30).Column(column =>
+                        page.Content().Padding(30).Row(row => 
                         {
-                            column.Spacing(10);
+                            row.RelativeItem().Column(column =>
+                            {
+                                column.Spacing(10);
 
                             // 1 - QUICKVIEW
                             column.Item().Text(text =>
@@ -185,21 +187,50 @@ namespace CIG.PDFGenerator.Controllers
 
                             // 2 - Servizi compresi nell'offerta
                             column.Item().PaddingTop(75).Text("# Servizi compresi nell'offerta")
-                                .FontSize(30).FontColor("#FFFFFF");
+                                .FontSize(20).FontColor("#FFFFFF");
 
                             // 3 - La nostra proposta per [Cliente]
                             var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                           ? offer.CustomerCompanyName
                                           : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
-                            column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                                .FontSize(30).FontColor("#FFFFFF");
+                            column.Item().PaddingTop(20).Text($"# La nostra proposta per {cliente}")
+                                .FontSize(20).FontColor("#FFFFFF");
 
                             // 4 - Prossimi passi
-                            column.Item().PaddingTop(15).Text("# Prossimi passi")
-                                .FontSize(30).FontColor("#FFFFFF");
+                            column.Item().PaddingTop(20).Text("# Prossimi passi")
+                                .FontSize(20).FontColor("#FFFFFF");
+                            });
+
+                            // Colonna DESTRA (immagini auto)
+                            row.RelativeItem().Column(async colImmagini =>
+                            {
+                                using var client = new HttpClient();
+
+                                var angolo29 = offer.CarImages.FirstOrDefault(i => i.Angle == 29);
+                                var angolo13 = offer.CarImages.FirstOrDefault(i => i.Angle == 13);
+
+                                if (angolo29 != null)
+                                {
+                                    var img29Bytes = await client.GetByteArrayAsync(angolo29.Url);
+                                    colImmagini.Item()
+                                        .Height(250)
+                                        .AlignRight()
+                                        .Image(img29Bytes).FitWidth();
+                                }
+
+                                if (angolo13 != null)
+                                {
+                                    var img13Bytes = await client.GetByteArrayAsync(angolo13.Url);
+                                    colImmagini.Item().PaddingTop(10)
+                                        .Height(200)
+                                        .AlignRight()
+                                        .Image(img13Bytes).FitHeight();
+                                }
+                            });
                         });
                     });
+
 
 
 
