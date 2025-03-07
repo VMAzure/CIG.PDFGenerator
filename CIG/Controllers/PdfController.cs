@@ -90,7 +90,7 @@ namespace CIG.PDFGenerator.Controllers
                             }
 
                             // Spazio verticale
-                            column.Item().PaddingVertical(-30);
+                            column.Item().PaddingVertical(-35);
 
                             // Terza riga: Titolo offerta economica
                             column.Item().AlignLeft().Text("Offerta economica")
@@ -106,7 +106,7 @@ namespace CIG.PDFGenerator.Controllers
                             });
 
                             // Doppio spazio
-                            column.Item().PaddingVertical(0);
+                            column.Item().PaddingVertical(1);
 
                             // Quinta riga: Nome Admin o Dealer (14px bianco)
                             var aziendaNome = offer.DealerInfo?.CompanyName ?? offer.AdminInfo.CompanyName;
