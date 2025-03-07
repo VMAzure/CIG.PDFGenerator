@@ -82,15 +82,15 @@ namespace CIG.PDFGenerator.Controllers
                             if (carImageBytes != null)
                             {
                                 column.Item()
-                                    .PaddingTop(-50) // sposta in alto (aumenta per più vicinanza)
-                                    .PaddingLeft(140) // sposta a destra (aumenta o diminuisci per posizione)
+                                    .PaddingTop(-70) // sposta in alto (aumenta per più vicinanza)
+                                    .PaddingLeft(160) // sposta a destra (aumenta o diminuisci per posizione)
                                     .AlignLeft()
-                                    .Height(400)
+                                    .Height(450)
                                     .Image(carImageBytes).FitHeight();
                             }
 
                             // Spazio verticale
-                            column.Item().PaddingVertical(-5);
+                            column.Item().PaddingVertical(-7);
 
                             // Terza riga: Titolo offerta economica
                             column.Item().AlignLeft().Text("Offerta economica")
