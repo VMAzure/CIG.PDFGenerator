@@ -383,7 +383,7 @@
         }
 
 
-                function caricaServizi() { // 👈 mancava questa apertura!
+        function caricaServizi() { // 👈 mancava questa apertura!
 
             const token = new URLSearchParams(window.location.search).get("token");
             const servicesList = document.getElementById("servicesList");
@@ -430,6 +430,7 @@
                 servicesList.textContent = 'Errore caricamento servizi.';
                 console.error('Errore:', error);
             });
+        }
         
 
 
@@ -587,7 +588,7 @@
                 console.error("Errore generazione PDF:", error);
                 alert("Errore durante la generazione del PDF. Verifica i dati inseriti.");
             });
-        };
+        
 
     </script>
 }
