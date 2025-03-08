@@ -199,7 +199,7 @@ namespace CIG.PDFGenerator.Controllers
                 page.Content().Padding(20).Row(row =>
                 {
                     // Testo (circa 40% larghezza)
-                    row.RelativeItem(4).Column(column =>
+                    row.RelativeItem(5).Column(column =>
                     {
                         column.Spacing(10);
 
@@ -226,7 +226,7 @@ namespace CIG.PDFGenerator.Controllers
                     });
 
                     // Colonna con le immagini - ben ottimizzata
-                    row.RelativeItem(6).AlignRight().Column(colImmagini =>
+                    row.RelativeItem(5).AlignRight().Column(colImmagini =>
                     {
                         colImmagini.Spacing(5);
 
