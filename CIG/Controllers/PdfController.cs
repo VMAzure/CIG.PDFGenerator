@@ -58,6 +58,8 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     CreatePage1(container, offer, carImageBytes, logoBytes);
                     CreatePage2(container, img29Bytes, img09Bytes, offer);
+                    CreatePage3(container, offer); // <-- Aggiungi questo
+
                 }).GeneratePdf();
 
                 return File(pdfBytes, "application/pdf", "Offerta.pdf");
@@ -265,6 +267,54 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+        private void CreatePage3(IDocumentContainer container, OfferPdfPage1 offer)
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4.Landscape());
+                page.Margin(0);
+
+                var imagePathPag3 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_3.jpg");
+                page.Background().Image(imagePathPag3).FitArea();
+                page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
+
+                page.Content().Padding(30).Column(column =>
+                {
+                    column.Spacing(10);
+
+                    column.Item().Text("Servizi Inclusi nell'Offerta")
+                        .FontSize(28)
+                        .Bold()
+                        .FontColor("#00213b");
+
+                    column.Item().PaddingTop(10).Table(table =>
+                    {
+                        // Definizione colonne
+                        table.ColumnsDefinition(columns =>
+                        {
+                            columns.RelativeColumn(3); // Nome servizio
+                            columns.RelativeColumn(2); // Opzione (se presente)
+                        });
+
+                        // Intestazione tabella
+                        table.Header(header =>
+                        {
+                            header.Cell().Background("#00213b").Padding(10).Text("Nome Servizio").FontColor("#FFFFFF").Bold();
+                            header.Cell().Background("#00213b").Padding(10).Text("Opzione").FontColor("#FFFFFF").Bold();
+                        });
+
+                        // Contenuto della tabella
+                        foreach (var servizio in offer.Servizi)
+                        {
+                            table.Cell().BorderBottom(1).BorderColor("#CCC").Padding(5).Text(servizio.Nome ?? "-").FontSize(14);
+                            table.Cell().BorderBottom(1).BorderColor("#CCC").Padding(5).Text(string.IsNullOrWhiteSpace(servizio.Opzione) ? "-" : servizio.Opzione).FontSize(14);
+                        }
+                    });
+                });
+            });
+        }
+
+
 
     }
 }
