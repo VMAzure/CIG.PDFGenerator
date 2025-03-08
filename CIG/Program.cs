@@ -4,10 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using QuestPDF.Infrastructure; // <-- Assicurati che sia presente!
 
-
 var builder = WebApplication.CreateBuilder(args); // 🔹 Sposta questa riga qui in alto
 QuestPDF.Settings.License = LicenseType.Community;
-
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 builder.WebHost.UseUrls($"http://*:{port}");
@@ -30,18 +28,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient(); // Aggiungi questa riga per registrare IHttpClientFactory
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseStatusCodePagesWithReExecute("/Home/Error404");
-
     app.UseHsts();
 }
-
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -58,4 +54,3 @@ app.MapControllerRoute(
 app.MapControllers();
 
 app.Run();
-
