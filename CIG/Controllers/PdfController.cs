@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 
 
 namespace CIG.PDFGenerator.Controllers
@@ -211,18 +212,36 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().PaddingBottom(50); // 👈 Aggiungi questo
 
-                        column.Item().PaddingTop(10).Text("# 1 - Servizi compresi nell'offerta")
-                            .FontSize(16).FontColor("#FFFFFF");
+                        column.Item().PaddingTop(10).Text(text =>
+                        {
+                            text.Span("# 1 - ").FontSize(16).FontColor("#FFFFFF").Bold();
+                            text.Span("Servizi compresi nell'offerta").FontSize(16).FontColor("#FFFFFF");
+                        });
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                       ? offer.CustomerCompanyName
                                       : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
-                        column.Item().PaddingTop(15).Text($"# 2 - La nostra proposta per {cliente}")
-                            .FontSize(16).FontColor("#FFFFFF");
+                        column.Item().PaddingTop(15).Text(text =>
+                        {
+                            text.Span("# 2 - ").FontSize(16).FontColor("#FFFFFF").Bold();
+                            text.Span($"La nostra proposta per {cliente}").FontSize(16).FontColor("#FFFFFF");
+                        });
 
-                        column.Item().PaddingTop(15).Text("# 3 - Prossimi passi")
-                            .FontSize(16).FontColor("#FFFFFF");
+                        column.Item().PaddingTop(15).Text(text =>
+                        {
+                            text.Span("# 3 - ").FontSize(16).FontColor("#FFFFFF").Bold();
+                            text.Span("Prossimi passi").FontSize(16).FontColor("#FFFFFF");
+                        });
+
+                        column.Item().PaddingTop(15).Text(text =>
+                        {
+                            text.Span("# 4 - ").FontSize(16).FontColor("#FFFFFF").Bold();
+                            text.Span("i nostri contatti").FontSize(16).FontColor("#FFFFFF");
+                        });
+
+
+
                     });
 
                     // Colonna con le immagini - ben ottimizzata
