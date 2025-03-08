@@ -135,7 +135,6 @@ namespace CIG.PDFGenerator.Controllers
 
                     column.Item().Row(row =>
                     {
-                        // NON scaricare più l'immagine qui!
                         if (logoBytes != null)
                             row.ConstantItem(200).Image(logoBytes).FitWidth();
 
@@ -153,7 +152,7 @@ namespace CIG.PDFGenerator.Controllers
                     if (carImageBytes != null)
                     {
                         column.Item()
-                            .PaddingTop(-50)
+                            .PaddingTop(-40)
                             .PaddingLeft(140)
                             .AlignLeft()
                             .Height(400)
@@ -242,7 +241,7 @@ namespace CIG.PDFGenerator.Controllers
                     });
 
                     // Colonna con le immagini - ben ottimizzata
-                    row.RelativeItem(5).AlignRight().Column(colImmagini =>
+                    row.RelativeItem(10).AlignRight().Column(colImmagini =>
                     {
                         colImmagini.Spacing(0);
 
