@@ -196,57 +196,68 @@ namespace CIG.PDFGenerator.Controllers
                 page.Background().Image(imagePathPag2).FitArea();
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                page.Content().Padding(0).Row(row =>
+                container.Page(page =>
                 {
-                    row.RelativeItem().Column(column =>
-                    {
-                        column.Spacing(10);
+                    page.Size(PageSizes.A4.Landscape());
+                    page.Margin(0);
 
-                        column.Item().Text(text =>
+                    var imagePathPag2 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_2.jpg");
+                    page.Background().Image(imagePathPag2).FitArea();
+                    page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
+
+                    page.Content().Padding(30).Row(row => // Usa lo stesso padding della prima pagina
+                    {
+                        row.RelativeItem().Column(column =>
                         {
-                            text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
-                            text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
+                            column.Spacing(10);
+
+                            column.Item().Text(text =>
+                            {
+                                text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
+                                text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
+                            });
+
+                            column.Item().PaddingTop(25).Text("# Servizi compresi nell'offerta")
+                                .FontSize(24).FontColor("#FFFFFF");
+
+                            var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
+                                          ? offer.CustomerCompanyName
+                                          : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+
+                            column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
+                                .FontSize(24).FontColor("#FFFFFF");
+
+                            column.Item().PaddingTop(15).Text("# Prossimi passi")
+                                .FontSize(24).FontColor("#FFFFFF");
                         });
 
-                        column.Item().PaddingTop(25).Text("# Servizi compresi nell'offerta")
-                            .FontSize(24).FontColor("#FFFFFF");
-
-                        var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
-                                      ? offer.CustomerCompanyName
-                                      : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
-
-                        column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                            .FontSize(24).FontColor("#FFFFFF");
-
-                        column.Item().PaddingTop(15).Text("# Prossimi passi")
-                            .FontSize(24).FontColor("#FFFFFF");
-                    });
-
-                    row.ConstantItem(500).Padding(0).Column(colImmagini => // Aumenta la larghezza del contenitore delle immagini
-                    {
-                        colImmagini.Spacing(5);
-
-                        if (img29Bytes != null)
+                        row.ConstantItem(500).Padding(0).Column(colImmagini =>
                         {
-                            colImmagini.Item()
-                                .PaddingTop(15)
-                                .PaddingLeft(70) // Aumenta il padding per spostare a destra
-                                .Width(420) // Aumenta la larghezza dell'immagine
-                                .Image(img29Bytes)
-                                .FitWidth();
-                        }
+                            colImmagini.Spacing(5);
 
-                        if (img13Bytes != null)
-                        {
-                            colImmagini.Item()
-                                .PaddingTop(10)
-                                .PaddingLeft(70) // Aumenta il padding per spostare a destra
-                                .Width(450) // Aumenta la larghezza dell'immagine
-                                .Image(img13Bytes)
-                                .FitWidth();
-                        }
+                            if (img29Bytes != null)
+                            {
+                                colImmagini.Item()
+                                    .PaddingTop(15)
+                                    .PaddingLeft(30) // Riduci il padding per utilizzare più spazio
+                                    .Width(420) // Riduci la larghezza minima se necessario
+                                    .Image(img29Bytes)
+                                    .FitWidth();
+                            }
+
+                            if (img13Bytes != null)
+                            {
+                                colImmagini.Item()
+                                    .PaddingTop(10)
+                                    .PaddingLeft(30) // Riduci il padding per utilizzare più spazio
+                                    .Width(420) // Riduci la larghezza minima se necessario
+                                    .Image(img13Bytes)
+                                    .FitWidth();
+                            }
+                        });
                     });
                 });
+
             });
 
 
