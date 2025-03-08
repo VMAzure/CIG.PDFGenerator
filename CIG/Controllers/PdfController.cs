@@ -35,9 +35,8 @@ namespace CIG.PDFGenerator.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            
-            QuestPDF.Settings.EnableDebugging = true;
 
+            QuestPDF.Settings.EnableDebugging = true;
 
             try
             {
@@ -47,6 +46,8 @@ namespace CIG.PDFGenerator.Controllers
                 var img29Bytes = await DownloadImageAsync(carImage29?.Url);
                 var img13Bytes = await DownloadImageAsync(carImage13?.Url);
                 var carImageBytes = await DownloadImageAsync(offer.CarMainImageUrl);
+                var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
+                var logoBytes = await DownloadImageAsync(logoUrl);
 
                 var carImagesDetails = await DownloadCarImagesAsync(offer.CarImages);
 
@@ -54,7 +55,7 @@ namespace CIG.PDFGenerator.Controllers
 
                 var pdfBytes = Document.Create(container =>
                 {
-                    CreatePage1(container, offer, carImageBytes);
+                    CreatePage1(container, offer, carImageBytes, logoBytes);
                     CreatePage2(container, img29Bytes, img13Bytes, offer);
                 }).GeneratePdf();
 
@@ -64,11 +65,11 @@ namespace CIG.PDFGenerator.Controllers
             {
                 Console.WriteLine("🔥 ERRORE PDF GENERATION: " + ex.Message);
                 Console.WriteLine(ex.StackTrace);
-
-                // 👉 AGGIUNGI questa linea per dettagli massimi
                 return StatusCode(500, new { ex.Message, ex.StackTrace });
             }
         }
+
+
 
         private async Task<byte[]> DownloadImageAsync(string url)
         {
@@ -116,7 +117,8 @@ namespace CIG.PDFGenerator.Controllers
             FontManager.RegisterFont(boldFontStream);
         }
 
-        private void CreatePage1(IDocumentContainer container, OfferPdfPage1 offer, byte[] carImageBytes)
+        private void CreatePage1(IDocumentContainer container, OfferPdfPage1 offer, byte[] carImageBytes, byte[] logoBytes)
+
         {
             container.Page(page =>
             {
