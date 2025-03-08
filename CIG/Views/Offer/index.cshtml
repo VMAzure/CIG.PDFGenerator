@@ -166,7 +166,7 @@
                 carImagesUrls = angles.map(angle => {  // ⚠️ Qui era l'errore (no const)
                     const color = getRandomColor();
                     return {
-                        url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=Adaptive&groundPlaneAdjustment=0&fileType=png&width=800`,
+                        url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
                         color: color,
                         angle: angle
                     };
