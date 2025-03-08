@@ -195,7 +195,7 @@ namespace CIG.PDFGenerator.Controllers
                 page.Background().Image(imagePathPag2).FitArea();
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                page.Content().Padding(30).Row(row =>
+                page.Content().Padding(0).Row(row =>
                 {
                     row.RelativeItem().Column(column =>
                     {
@@ -223,34 +223,33 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.ConstantItem(450).Padding(0).Column(colImmagini =>
                     {
-                        colImmagini.Spacing(5); // Riduci lo spazio tra gli elementi
+                        colImmagini.Spacing(5);
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(15) // Riduci il padding
-                                .PaddingLeft(0) // Riduci il padding
+                                .PaddingTop(15)
+                                .PaddingLeft(0)
                                 .Width(370)
                                 .Image(img29Bytes)
-                                .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
+                                .FitWidth();
                         }
 
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(10) // Riduci il padding
-                                .PaddingLeft(5) // Riduci il padding
+                                .PaddingTop(10)
+                                .PaddingLeft(5)
                                 .Width(400)
                                 .Image(img13Bytes)
-                                .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
+                                .FitWidth();
                         }
                     });
-
-
-
                 });
-               
             });
+
+
+        });
         }
     }
 }
