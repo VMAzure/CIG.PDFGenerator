@@ -356,10 +356,13 @@ namespace CIG.PDFGenerator.Controllers
                         column.Item().Text(text =>
                         {
                             text.Span("# 2 - ").FontSize(28).FontColor("#FF7100").Bold();
-                            text.Span("LA NOSTRA SOLUZIONE").FontSize(28).FontColor("#00213b").Bold();
+                            text.Span("LA NOSTRA SOLUZIONE").FontSize(28).FontColor("#FFFFFF").Bold();
                         });
 
-                        // Spazio per i dati economici
+                        infoItem(column, "Durata:", $"{offer.DatiEconomici.Durata} mesi");
+                        infoItem(column, "Chilometraggio totale:", $"{offer.DatiEconomici.KmTotali} km");
+                        infoItem(column, "Anticipo:", $"{offer.DatiEconomici.Anticipo:C}");
+                        infoItem(column, "Canone Mensile:", $"{offer.DatiEconomici.Canone:C}");
                     });
 
                     row.RelativeItem(6).AlignRight().Column(column =>
@@ -373,9 +376,19 @@ namespace CIG.PDFGenerator.Controllers
                                   .FitWidth();
                         }
 
-                        // Spazio sotto l'immagine per il canone
+                        column.Item().PaddingTop(10).AlignCenter().Text($"Canone mensile: {offer.DatiEconomici.Canone:C}").FontSize(20).Bold().FontColor("#FF7100");
                     });
                 });
+            });
+        }
+
+        // Metodo di supporto per informazioni economiche (da aggiungere nello stesso controller)
+        private void infoItem(ColumnDescriptor column, string titolo, string valore)
+        {
+            column.Item().Row(row =>
+            {
+                row.ConstantItem(150).Text(titolo).FontSize(14).FontColor("#FFFFFF").Bold();
+                row.RelativeItem().Text(valore).FontSize(14).FontColor("#FFFFFF");
             });
         }
 
