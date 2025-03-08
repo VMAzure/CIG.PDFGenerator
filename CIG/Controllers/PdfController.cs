@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace CIG.PDFGenerator.Controllers
 {
     [ApiController]
@@ -221,28 +222,31 @@ namespace CIG.PDFGenerator.Controllers
                     });
 
                     row.ConstantItem(450).Padding(0).Column(colImmagini =>
-
                     {
                         colImmagini.Spacing(10);
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(20)    // 👈 Sposta verso il basso (aumenta il valore per più spostamento)
-                                .PaddingLeft(30)   // 👈 Sposta verso destra (aumenta per spostare ulteriormente a destra)
+                                .PaddingTop(20)
+                                .PaddingLeft(30)
                                 .Width(300)
-                                .Image(img29Bytes).FitArea();
+                                .Image(img29Bytes)
+                                .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
                         }
 
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(35)    // 👈 spazio dalla prima immagine verso il basso
-                                .PaddingLeft(40)   // 👈 Sposta a destra ulteriormente
+                                .PaddingTop(35)
+                                .PaddingLeft(40)
                                 .Width(450)
-                                .Image(img13Bytes).FitArea();
+                                .Image(img13Bytes)
+                                .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
                         }
                     });
+
+
                 });
                
             });
