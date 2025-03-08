@@ -14,6 +14,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
+using static System.Net.Mime.MediaTypeNames;
 
 
 namespace CIG.PDFGenerator.Controllers
@@ -216,7 +217,7 @@ namespace CIG.PDFGenerator.Controllers
                         column.Item().PaddingTop(10).Text(text =>
                         {
                             text.Span("# 1 - ").FontSize(18).FontColor("#FFFFFF").Bold();
-                            text.Span("Servizi compresi nell'offerta").FontSize(18).FontColor("#FFFFFF");
+                            text.Span("Servizi inclusi nell'offerta").FontSize(18).FontColor("#FFFFFF");
                         });
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
@@ -282,10 +283,11 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     column.Spacing(10);
 
-                    column.Item().Text("Servizi Inclusi nell'Offerta")
-                        .FontSize(28)
-                        .Bold()
-                        .FontColor("#00213b");
+                    column.Item().PaddingTop(10).Text(text =>
+                    {
+                        text.Span("# 1 - ").FontSize(28).FontColor("#FFFFFF").Bold();
+                        text.Span("Servizi inclusi nell'offerta").FontSize(28).FontColor("#FFFFFF");
+                    });
 
                     column.Item().PaddingTop(10).Table(table =>
                     {
