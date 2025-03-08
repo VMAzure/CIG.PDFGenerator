@@ -159,7 +159,7 @@ namespace CIG.PDFGenerator.Controllers
                             .Image(carImageBytes).FitHeight();
                     }
 
-                    column.Item().PaddingVertical(-30);
+                    column.Item().PaddingVertical(-50);
 
                     column.Item().AlignLeft().Text("Offerta economica")
                         .FontSize(28).FontColor("#FFFFFF");
