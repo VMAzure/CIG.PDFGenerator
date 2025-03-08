@@ -220,7 +220,8 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(24).FontColor("#FFFFFF");
                     });
 
-                    row.RelativeItem().Column(colImmagini =>
+                    row.ConstantItem(450).Padding(0).Column(colImmagini =>
+
                     {
                         colImmagini.Spacing(10);
 
@@ -228,7 +229,7 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(20)    // 👈 Sposta verso il basso (aumenta il valore per più spostamento)
-                                .PaddingLeft(40)   // 👈 Sposta verso destra (aumenta per spostare ulteriormente a destra)
+                                .PaddingLeft(30)   // 👈 Sposta verso destra (aumenta per spostare ulteriormente a destra)
                                 .Width(300)
                                 .Image(img29Bytes).FitArea();
                         }
@@ -237,8 +238,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(35)    // 👈 spazio dalla prima immagine verso il basso
-                                .PaddingLeft(50)   // 👈 Sposta a destra ulteriormente
-                                .Width(350)
+                                .PaddingLeft(40)   // 👈 Sposta a destra ulteriormente
+                                .Width(450)
                                 .Image(img13Bytes).FitArea();
                         }
                     });
