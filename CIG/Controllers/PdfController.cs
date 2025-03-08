@@ -229,7 +229,7 @@ namespace CIG.PDFGenerator.Controllers
                             colImmagini.Item()
                                 .PaddingTop(20)    // 👈 Sposta verso il basso (aumenta il valore per più spostamento)
                                 .PaddingLeft(40)   // 👈 Sposta verso destra (aumenta per spostare ulteriormente a destra)
-                                .Width(350)
+                                .Width(300)
                                 .Image(img29Bytes).FitWidth();
                         }
 
@@ -238,7 +238,7 @@ namespace CIG.PDFGenerator.Controllers
                             colImmagini.Item()
                                 .PaddingTop(35)    // 👈 spazio dalla prima immagine verso il basso
                                 .PaddingLeft(50)   // 👈 Sposta a destra ulteriormente
-                                .Width(400)
+                                .Width(350)
                                 .Image(img13Bytes).FitWidth();
                         }
                     });
