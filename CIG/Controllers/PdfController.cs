@@ -12,6 +12,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 
 namespace CIG.PDFGenerator.Controllers
@@ -229,8 +230,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(15)
-                                .PaddingLeft(0)
-                                .Width(370)
+                                .PaddingLeft(50) // Aumenta il padding per spostare a destra
+                                .Width(400) // Aumenta la larghezza dell'immagine
                                 .Image(img29Bytes)
                                 .FitWidth();
                         }
@@ -239,17 +240,16 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
-                                .PaddingLeft(5)
-                                .Width(400)
+                                .PaddingLeft(50) // Aumenta il padding per spostare a destra
+                                .Width(450) // Aumenta la larghezza dell'immagine
                                 .Image(img13Bytes)
                                 .FitWidth();
                         }
                     });
                 });
+
+
             });
-
-
-        
         }
     }
 }
