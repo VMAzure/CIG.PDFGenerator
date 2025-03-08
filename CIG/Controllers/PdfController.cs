@@ -223,13 +223,13 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.ConstantItem(450).Padding(0).Column(colImmagini =>
                     {
-                        colImmagini.Spacing(10);
+                        colImmagini.Spacing(5); // Riduci lo spazio tra gli elementi
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(20)
-                                .PaddingLeft(30)
+                                .PaddingTop(10) // Riduci il padding
+                                .PaddingLeft(0) // Riduci il padding
                                 .Width(300)
                                 .Image(img29Bytes)
                                 .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
@@ -238,13 +238,14 @@ namespace CIG.PDFGenerator.Controllers
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(35)
-                                .PaddingLeft(40)
+                                .PaddingTop(10) // Riduci il padding
+                                .PaddingLeft(0) // Riduci il padding
                                 .Width(450)
                                 .Image(img13Bytes)
                                 .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
                         }
                     });
+
 
 
                 });
