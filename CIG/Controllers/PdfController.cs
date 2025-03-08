@@ -218,22 +218,22 @@ namespace CIG.PDFGenerator.Controllers
                             });
 
                             column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
-                                .FontSize(20).FontColor("#FFFFFF");
+                                .FontSize(16).FontColor("#FFFFFF");
 
                             var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                           ? offer.CustomerCompanyName
                                           : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                             column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                                .FontSize(20).FontColor("#FFFFFF");
+                                .FontSize(16).FontColor("#FFFFFF");
 
                             column.Item().PaddingTop(15).Text("# Prossimi passi")
-                                .FontSize(20).FontColor("#FFFFFF");
+                                .FontSize(16).FontColor("#FFFFFF");
                         });
 
                         row.ConstantItem(500).Padding(0).Column(colImmagini =>
                         {
-                            colImmagini.Spacing(5);
+                            colImmagini.Spacing(0);
 
                             if (img29Bytes != null)
                             {
