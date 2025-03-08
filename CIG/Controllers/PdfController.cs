@@ -200,18 +200,18 @@ namespace CIG.PDFGenerator.Controllers
                             text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                         });
 
-                        column.Item().PaddingTop(15).Text("# Servizi compresi nell'offerta")
-                            .FontSize(30).FontColor("#FFFFFF");
+                        column.Item().PaddingTop(25).Text("# Servizi compresi nell'offerta")
+                            .FontSize(24).FontColor("#FFFFFF");
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                       ? offer.CustomerCompanyName
                                       : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                         column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                            .FontSize(30).FontColor("#FFFFFF");
+                            .FontSize(24).FontColor("#FFFFFF");
 
                         column.Item().PaddingTop(15).Text("# Prossimi passi")
-                            .FontSize(30).FontColor("#FFFFFF");
+                            .FontSize(24).FontColor("#FFFFFF");
                     });
 
                     row.RelativeItem().Column(colImmagini =>
@@ -221,19 +221,22 @@ namespace CIG.PDFGenerator.Controllers
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .Width(250)
-                                .AlignRight()
+                                .PaddingTop(20)    // 👈 Sposta verso il basso (aumenta il valore per più spostamento)
+                                .PaddingLeft(50)   // 👈 Sposta verso destra (aumenta per spostare ulteriormente a destra)
+                                .Width(350)
                                 .Image(img29Bytes).FitWidth();
                         }
 
                         if (img13Bytes != null)
                         {
-                            colImmagini.Item().PaddingTop(10)
-                                .Width(250)
-                                .AlignRight()
+                            colImmagini.Item()
+                                .PaddingTop(35)    // 👈 spazio dalla prima immagine verso il basso
+                                .PaddingLeft(60)   // 👈 Sposta a destra ulteriormente
+                                .Width(450)
                                 .Image(img13Bytes).FitWidth();
                         }
                     });
+                });
                 });
             });
         }
