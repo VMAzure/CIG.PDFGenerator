@@ -198,7 +198,7 @@ namespace CIG.PDFGenerator.Controllers
 
                 page.Content().Padding(30).Row(row =>
                 {
-                    row.RelativeItem(600).Column(column =>
+                    row.RelativeItem(400).Column(column =>
                     {
                         column.Spacing(10);
 
@@ -249,6 +249,7 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+
 
     }
 }
