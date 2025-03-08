@@ -301,11 +301,16 @@ namespace CIG.PDFGenerator.Controllers
                         });
 
                         // Intestazione tabella
+                        // Intestazione tabella
                         table.Header(header =>
                         {
-                            header.Cell().Background("#00213b").Padding(10).Text("Nome Servizio").FontColor("#FFFFFF").Bold();
-                            header.Cell().Background("#00213b").Padding(10).Text("Opzione").FontColor("#FFFFFF").Bold();
+                            header.Cell().Background("#00213b").PaddingVertical(10).PaddingHorizontal(5)
+                                .Text("Servizio").FontColor("#FFFFFF").Bold().FontSize(14);
+
+                            header.Cell().Background("#00213b").PaddingVertical(10).PaddingHorizontal(5)
+                                .Text("Dettaglio").FontColor("#FFFFFF").Bold().FontSize(14);
                         });
+
 
                         // Contenuto della tabella
 
