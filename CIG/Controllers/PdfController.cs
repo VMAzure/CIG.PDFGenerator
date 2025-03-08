@@ -207,7 +207,7 @@ namespace CIG.PDFGenerator.Controllers
 
                     page.Content().Padding(30).Row(row => // Usa lo stesso padding della prima pagina
                     {
-                        row.RelativeItem(700).Column(column =>
+                        row.RelativeItem(600).Column(column =>
                         {
                             column.Spacing(10);
 
