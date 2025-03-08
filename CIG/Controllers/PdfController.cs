@@ -241,9 +241,9 @@ namespace CIG.PDFGenerator.Controllers
                     });
 
                     // Colonna con le immagini - ben ottimizzata
-                    row.RelativeItem(10).AlignRight().Column(colImmagini =>
+                    row.RelativeItem(5).AlignRight().Column(colImmagini =>
                     {
-                        colImmagini.Spacing(0);
+                        colImmagini.Spacing(5);
 
                         if (img29Bytes != null)
                         {
