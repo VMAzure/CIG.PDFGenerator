@@ -237,7 +237,7 @@ namespace CIG.PDFGenerator.Controllers
                         }
                     });
                 });
-                });
+               
             });
         }
     }
