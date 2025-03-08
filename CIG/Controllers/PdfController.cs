@@ -41,10 +41,10 @@ namespace CIG.PDFGenerator.Controllers
             try
             {
                 var carImage29 = offer.CarImages?.FirstOrDefault(i => i.Angle == 29);
-                var carImage13 = offer.CarImages?.FirstOrDefault(i => i.Angle == 13);
+                var carImage09 = offer.CarImages?.FirstOrDefault(i => i.Angle == 9);
 
                 var img29Bytes = await DownloadImageAsync(carImage29?.Url);
-                var img13Bytes = await DownloadImageAsync(carImage13?.Url);
+                var img09Bytes = await DownloadImageAsync(carImage09?.Url);
                 var carImageBytes = await DownloadImageAsync(offer.CarMainImageUrl);
                 var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
                 var logoBytes = await DownloadImageAsync(logoUrl);
@@ -56,7 +56,7 @@ namespace CIG.PDFGenerator.Controllers
                 var pdfBytes = Document.Create(container =>
                 {
                     CreatePage1(container, offer, carImageBytes, logoBytes);
-                    CreatePage2(container, img29Bytes, img13Bytes, offer);
+                    CreatePage2(container, img29Bytes, img09Bytes, offer);
                 }).GeneratePdf();
 
                 return File(pdfBytes, "application/pdf", "Offerta.pdf");
@@ -185,7 +185,7 @@ namespace CIG.PDFGenerator.Controllers
         }
 
 
-        private void CreatePage2(IDocumentContainer container, byte[] img29Bytes, byte[] img13Bytes, OfferPdfPage1 offer)
+        private void CreatePage2(IDocumentContainer container, byte[] img29Bytes, byte[] img09Bytes, OfferPdfPage1 offer)
         {
             container.Page(page =>
             {
@@ -211,17 +211,17 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().PaddingBottom(50); // 👈 Aggiungi questo
 
-                        column.Item().PaddingTop(10).Text("# Servizi compresi nell'offerta")
+                        column.Item().PaddingTop(10).Text("# 1 - Servizi compresi nell'offerta")
                             .FontSize(16).FontColor("#FFFFFF");
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                       ? offer.CustomerCompanyName
                                       : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
-                        column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
+                        column.Item().PaddingTop(15).Text($"# 2 - La nostra proposta per {cliente}")
                             .FontSize(16).FontColor("#FFFFFF");
 
-                        column.Item().PaddingTop(15).Text("# Prossimi passi")
+                        column.Item().PaddingTop(15).Text("# 3 - Prossimi passi")
                             .FontSize(16).FontColor("#FFFFFF");
                     });
 
@@ -238,12 +238,12 @@ namespace CIG.PDFGenerator.Controllers
                                 .FitWidth();
                         }
 
-                        if (img13Bytes != null)
+                        if (img09Bytes != null)
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
                                 .Width(380)
-                                .Image(img13Bytes)
+                                .Image(img09Bytes)
                                 .FitWidth();
                         }
                     });
