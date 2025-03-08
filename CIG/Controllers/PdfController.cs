@@ -33,6 +33,9 @@ namespace CIG.PDFGenerator.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            
+            QuestPDF.Settings.EnableDebugging = true;
+
 
             try
             {
@@ -57,8 +60,11 @@ namespace CIG.PDFGenerator.Controllers
             }
             catch (Exception ex)
             {
-                // Log the error using a logging framework
-                return StatusCode(500, "Errore durante la generazione del PDF.");
+                Console.WriteLine("🔥 ERRORE PDF GENERATION: " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
+
+                // 👉 AGGIUNGI questa linea per dettagli massimi
+                return StatusCode(500, new { ex.Message, ex.StackTrace });
             }
         }
 
