@@ -52,6 +52,7 @@ namespace CIG.PDFGenerator.Controllers
                 var logoBytes = await DownloadImageAsync(logoUrl);
 
                 var carImagesDetails = await DownloadCarImagesAsync(offer.CarImages);
+                var serviceIconBytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_environment.WebRootPath, "images", "Services_icon.png"));
 
                 RegisterFonts();
 
@@ -59,7 +60,7 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     CreatePage1(container, offer, carImageBytes, logoBytes);
                     CreatePage2(container, img29Bytes, img09Bytes, offer);
-                    CreatePage3(container, offer); // <-- Aggiungi questo
+                    CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
 
                 }).GeneratePdf();
 
@@ -268,7 +269,8 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
-        private void CreatePage3(IDocumentContainer container, OfferPdfPage1 offer)
+        private void CreatePage3(IDocumentContainer container, OfferPdfPage1 offer, byte[] serviceIconBytes)
+
         {
             container.Page(page =>
             {
@@ -306,17 +308,20 @@ namespace CIG.PDFGenerator.Controllers
                         });
 
                         // Contenuto della tabella
+
+
                         foreach (var servizio in offer.Servizi)
                         {
                             table.Cell().BorderBottom(1).BorderColor("#CCC").PaddingVertical(10).PaddingHorizontal(5).Row(row =>
                             {
-                                row.ConstantItem(20).Image(Path.Combine(_environment.WebRootPath, "images", "Services_icon.png")).FitHeight();
+                                row.ConstantItem(20).Image(serviceIconBytes).FitHeight();
                                 row.RelativeItem().PaddingLeft(5).AlignMiddle().Text(servizio.Nome ?? "-").FontSize(14);
                             });
 
                             table.Cell().BorderBottom(1).BorderColor("#CCC").PaddingVertical(10).PaddingHorizontal(5)
                                  .AlignMiddle().Text(string.IsNullOrWhiteSpace(servizio.Opzione) ? "-" : servizio.Opzione).FontSize(14);
                         }
+
 
                     });
                 });
