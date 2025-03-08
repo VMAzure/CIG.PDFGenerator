@@ -289,7 +289,7 @@ namespace CIG.PDFGenerator.Controllers
                         text.Span("Servizi inclusi nell'offerta").FontSize(28).FontColor("#FFFFFF");
                     });
 
-                    column.Item().PaddingTop(30).Table(table =>
+                    column.Item().PaddingTop(50).Table(table =>
                     {
                         // Definizione colonne
                         table.ColumnsDefinition(columns =>
@@ -308,9 +308,16 @@ namespace CIG.PDFGenerator.Controllers
                         // Contenuto della tabella
                         foreach (var servizio in offer.Servizi)
                         {
-                            table.Cell().BorderBottom(1).BorderColor("#CCC").Padding(5).Text(servizio.Nome ?? "-").FontSize(14);
-                            table.Cell().BorderBottom(1).BorderColor("#CCC").Padding(5).Text(string.IsNullOrWhiteSpace(servizio.Opzione) ? "-" : servizio.Opzione).FontSize(14);
+                            table.Cell().BorderBottom(1).BorderColor("#CCC").PaddingVertical(10).PaddingHorizontal(5).Row(row =>
+                            {
+                                row.ConstantItem(20).Image(Path.Combine(_environment.WebRootPath, "images", "Services_icon.png")).FitHeight();
+                                row.RelativeItem().PaddingLeft(5).AlignMiddle().Text(servizio.Nome ?? "-").FontSize(14);
+                            });
+
+                            table.Cell().BorderBottom(1).BorderColor("#CCC").PaddingVertical(10).PaddingHorizontal(5)
+                                 .AlignMiddle().Text(string.IsNullOrWhiteSpace(servizio.Opzione) ? "-" : servizio.Opzione).FontSize(14);
                         }
+
                     });
                 });
             });
