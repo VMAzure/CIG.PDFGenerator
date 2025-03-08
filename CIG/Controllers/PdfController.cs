@@ -118,7 +118,6 @@ namespace CIG.PDFGenerator.Controllers
         }
 
         private void CreatePage1(IDocumentContainer container, OfferPdfPage1 offer, byte[] carImageBytes, byte[] logoBytes)
-
         {
             container.Page(page =>
             {
@@ -135,9 +134,7 @@ namespace CIG.PDFGenerator.Controllers
 
                     column.Item().Row(row =>
                     {
-                        var logoUrl = offer.DealerInfo?.LogoUrl ?? offer.AdminInfo.LogoUrl;
-                        var logoBytes = DownloadImageAsync(logoUrl).Result;
-
+                        // NON scaricare più l'immagine qui!
                         if (logoBytes != null)
                             row.ConstantItem(200).Image(logoBytes).FitWidth();
 
@@ -186,6 +183,7 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+
 
         private void CreatePage2(IDocumentContainer container, byte[] img29Bytes, byte[] img13Bytes, OfferPdfPage1 offer)
         {
