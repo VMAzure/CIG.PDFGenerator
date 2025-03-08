@@ -190,78 +190,66 @@ namespace CIG.PDFGenerator.Controllers
             container.Page(page =>
             {
                 page.Size(PageSizes.A4.Landscape());
-                page.Margin(0); // Assicurati che i margini siano impostati a 0
+                page.Margin(0);
 
                 var imagePathPag2 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_2.jpg");
                 page.Background().Image(imagePathPag2).FitArea();
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                container.Page(page =>
+                page.Content().Padding(30).Row(row =>
                 {
-                    page.Size(PageSizes.A4.Landscape());
-                    page.Margin(0);
-
-                    var imagePathPag2 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_2.jpg");
-                    page.Background().Image(imagePathPag2).FitArea();
-                    page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
-
-                    page.Content().Padding(30).Row(row => // Usa lo stesso padding della prima pagina
+                    row.RelativeItem(600).Column(column =>
                     {
-                        row.RelativeItem(600).Column(column =>
+                        column.Spacing(10);
+
+                        column.Item().Text(text =>
                         {
-                            column.Spacing(10);
-
-                            column.Item().Text(text =>
-                            {
-                                text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
-                                text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
-                            });
-
-                            column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
-                                .FontSize(16).FontColor("#FFFFFF");
-
-                            var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
-                                          ? offer.CustomerCompanyName
-                                          : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
-
-                            column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                                .FontSize(16).FontColor("#FFFFFF");
-
-                            column.Item().PaddingTop(15).Text("# Prossimi passi")
-                                .FontSize(16).FontColor("#FFFFFF");
+                            text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
+                            text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                         });
 
-                        row.ConstantItem(500).Padding(0).Column(colImmagini =>
+                        column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
+                            .FontSize(16).FontColor("#FFFFFF");
+
+                        var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
+                                      ? offer.CustomerCompanyName
+                                      : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+
+                        column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
+                            .FontSize(16).FontColor("#FFFFFF");
+
+                        column.Item().PaddingTop(15).Text("# Prossimi passi")
+                            .FontSize(16).FontColor("#FFFFFF");
+                    });
+
+                    row.ConstantItem(500).Padding(0).Column(colImmagini =>
+                    {
+                        colImmagini.Spacing(0);
+
+                        if (img29Bytes != null)
                         {
-                            colImmagini.Spacing(0);
+                            colImmagini.Item()
+                                .PaddingTop(15)
+                                .PaddingLeft(20)
+                                .Width(500)
+                                .Image(img29Bytes)
+                                .FitWidth();
+                        }
 
-                            if (img29Bytes != null)
-                            {
-                                colImmagini.Item()
-                                    .PaddingTop(15)
-                                    .PaddingLeft(20) // Riduci il padding per utilizzare più spazio
-                                    .Width(500) // Riduci la larghezza minima se necessario
-                                    .Image(img29Bytes)
-                                    .FitWidth();
-                            }
-
-                            if (img13Bytes != null)
-                            {
-                                colImmagini.Item()
-                                    .PaddingTop(00)
-                                    .PaddingLeft(30) // Riduci il padding per utilizzare più spazio
-                                    .Width(420) // Riduci la larghezza minima se necessario
-                                    .Image(img13Bytes)
-                                    .FitWidth();
-                            }
-                        });
+                        if (img13Bytes != null)
+                        {
+                            colImmagini.Item()
+                                .PaddingTop(0)
+                                .PaddingLeft(30)
+                                .Width(420)
+                                .Image(img13Bytes)
+                                .FitWidth();
+                        }
                     });
                 });
-
             });
-
-
         }
+
     }
 }
 
