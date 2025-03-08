@@ -198,8 +198,8 @@ namespace CIG.PDFGenerator.Controllers
 
                 page.Content().Padding(20).Row(row =>
                 {
-                    // Column per il testo (metà pagina)
-                    row.RelativeItem().Column(column =>
+                    // Colonna per il testo (40% circa)
+                    row.RelativeItem(4).Column(column =>
                     {
                         column.Spacing(10);
 
@@ -223,15 +223,15 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(16).FontColor("#FFFFFF");
                     });
 
-                    // Column per le immagini (l'altra metà)
-                    row.RelativeItem().Column(colImmagini =>
+                    // Colonna immagini più grande (60% circa)
+                    row.RelativeItem(6).Column(colImmagini =>
                     {
-                        colImmagini.Spacing(5);
+                        colImmagini.Spacing(10);
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .Height(200)
+                                .Height(400) // dimensione raddoppiata
                                 .Image(img29Bytes)
                                 .FitArea();
                         }
@@ -239,7 +239,7 @@ namespace CIG.PDFGenerator.Controllers
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .Height(200)
+                                .Height(320) // dimensione raddoppiata
                                 .Image(img13Bytes)
                                 .FitArea();
                         }
@@ -247,6 +247,7 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+
 
 
 
