@@ -206,7 +206,7 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().Text(text =>
                         {
-                            text.Span("QUICK").FontSize(36).FontColor("#FFFFFF");
+                            text.Span("QUICK").FontSize(36).Bold().FontColor("#FFFFFF");
                             text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                         });
 
@@ -214,8 +214,8 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().PaddingTop(10).Text(text =>
                         {
-                            text.Span("# 1 - ").FontSize(16).FontColor("#FFFFFF").Bold();
-                            text.Span("Servizi compresi nell'offerta").FontSize(16).FontColor("#FFFFFF");
+                            text.Span("# 1 - ").FontSize(18).FontColor("#FFFFFF").Bold();
+                            text.Span("Servizi compresi nell'offerta").FontSize(18).FontColor("#FFFFFF");
                         });
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
@@ -224,24 +224,21 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().PaddingTop(15).Text(text =>
                         {
-                            text.Span("# 2 - ").FontSize(16).FontColor("#FFFFFF").Bold();
-                            text.Span($"La nostra proposta per {cliente}").FontSize(16).FontColor("#FFFFFF");
+                            text.Span("# 2 - ").FontSize(18).FontColor("#FFFFFF").Bold();
+                            text.Span($"La nostra proposta per {cliente}").FontSize(18).FontColor("#FFFFFF");
                         });
 
                         column.Item().PaddingTop(15).Text(text =>
                         {
-                            text.Span("# 3 - ").FontSize(16).FontColor("#FFFFFF").Bold();
-                            text.Span("Prossimi passi").FontSize(16).FontColor("#FFFFFF");
+                            text.Span("# 3 - ").FontSize(18).FontColor("#FFFFFF").Bold();
+                            text.Span("Prossimi passi").FontSize(18).FontColor("#FFFFFF");
                         });
 
                         column.Item().PaddingTop(15).Text(text =>
                         {
-                            text.Span("# 4 - ").FontSize(16).FontColor("#FFFFFF").Bold();
-                            text.Span("i nostri contatti").FontSize(16).FontColor("#FFFFFF");
+                            text.Span("# 4 - ").FontSize(18).FontColor("#FFFFFF").Bold();
+                            text.Span("i nostri contatti").FontSize(18).FontColor("#FFFFFF");
                         });
-
-
-
                     });
 
                     // Colonna con le immagini - ben ottimizzata
@@ -252,7 +249,7 @@ namespace CIG.PDFGenerator.Controllers
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .Width(380)
+                                .Width(400)
                                 .Image(img29Bytes)
                                 .FitWidth();
                         }
@@ -261,7 +258,7 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
-                                .Width(380)
+                                .Width(400)
                                 .Image(img09Bytes)
                                 .FitWidth();
                         }
