@@ -61,6 +61,8 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage1(container, offer, carImageBytes, logoBytes);
                     CreatePage2(container, img29Bytes, img09Bytes, offer);
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
+                    CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
+
 
                 }).GeneratePdf();
 
