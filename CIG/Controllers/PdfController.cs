@@ -228,9 +228,9 @@ namespace CIG.PDFGenerator.Controllers
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(10) // Riduci il padding
+                                .PaddingTop(15) // Riduci il padding
                                 .PaddingLeft(0) // Riduci il padding
-                                .Width(300)
+                                .Width(400)
                                 .Image(img29Bytes)
                                 .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
                         }
@@ -239,8 +239,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10) // Riduci il padding
-                                .PaddingLeft(0) // Riduci il padding
-                                .Width(450)
+                                .PaddingLeft(5) // Riduci il padding
+                                .Width(470)
                                 .Image(img13Bytes)
                                 .FitWidth(); // Adatta l'immagine alla larghezza del contenitore
                         }
