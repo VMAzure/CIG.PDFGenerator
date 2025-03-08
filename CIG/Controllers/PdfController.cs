@@ -258,7 +258,7 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
-                                .Width(400)
+                                .Width(430)
                                 .Image(img09Bytes)
                                 .FitWidth();
                         }
