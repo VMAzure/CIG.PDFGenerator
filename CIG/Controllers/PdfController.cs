@@ -56,7 +56,7 @@ namespace CIG.PDFGenerator.Controllers
                 var pdfBytes = Document.Create(container =>
                 {
                     CreatePage1(container, offer, carImageBytes, logoBytes);
-                    CreatePage2(container, img29Bytes, img13Bytes, offer);
+                    //CreatePage2(container, img29Bytes, img13Bytes, offer);
                 }).GeneratePdf();
 
                 return File(pdfBytes, "application/pdf", "Offerta.pdf");
