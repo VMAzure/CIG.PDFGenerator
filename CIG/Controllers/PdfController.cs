@@ -190,7 +190,7 @@ namespace CIG.PDFGenerator.Controllers
             container.Page(page =>
             {
                 page.Size(PageSizes.A4.Landscape());
-                page.Margin(0);
+                page.Margin(0); // Assicurati che i margini siano impostati a 0
 
                 var imagePathPag2 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_2.jpg");
                 page.Background().Image(imagePathPag2).FitArea();
@@ -222,7 +222,7 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(24).FontColor("#FFFFFF");
                     });
 
-                    row.ConstantItem(450).Padding(0).Column(colImmagini =>
+                    row.ConstantItem(500).Padding(0).Column(colImmagini => // Aumenta la larghezza del contenitore delle immagini
                     {
                         colImmagini.Spacing(5);
 
@@ -230,8 +230,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(15)
-                                .PaddingLeft(50)
-                                .Width(370) // Riduci la larghezza minima se necessario
+                                .PaddingLeft(70) // Aumenta il padding per spostare a destra
+                                .Width(420) // Aumenta la larghezza dell'immagine
                                 .Image(img29Bytes)
                                 .FitWidth();
                         }
@@ -240,14 +240,15 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
-                                .PaddingLeft(50)
-                                .Width(400) // Riduci la larghezza minima se necessario
+                                .PaddingLeft(70) // Aumenta il padding per spostare a destra
+                                .Width(450) // Aumenta la larghezza dell'immagine
                                 .Image(img13Bytes)
                                 .FitWidth();
                         }
                     });
                 });
             });
+
 
         }
     }
