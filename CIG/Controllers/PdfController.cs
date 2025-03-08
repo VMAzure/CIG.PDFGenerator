@@ -56,7 +56,7 @@ namespace CIG.PDFGenerator.Controllers
                 var pdfBytes = Document.Create(container =>
                 {
                     CreatePage1(container, offer, carImageBytes, logoBytes);
-                    //CreatePage2(container, img29Bytes, img13Bytes, offer);
+                    CreatePage2(container, img29Bytes, img13Bytes, offer);
                 }).GeneratePdf();
 
                 return File(pdfBytes, "application/pdf", "Offerta.pdf");
@@ -196,9 +196,10 @@ namespace CIG.PDFGenerator.Controllers
                 page.Background().Image(imagePathPag2).FitArea();
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
-                page.Content().Padding(30).Row(row =>
+                page.Content().Padding(20).Row(row =>
                 {
-                    row.RelativeItem(400).Column(column =>
+                    // Column per il testo (metà pagina)
+                    row.RelativeItem().Column(column =>
                     {
                         column.Spacing(10);
 
@@ -208,12 +209,12 @@ namespace CIG.PDFGenerator.Controllers
                             text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                         });
 
-                        column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
+                        column.Item().PaddingTop(20).Text("# Servizi compresi nell'offerta")
                             .FontSize(16).FontColor("#FFFFFF");
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
-                                      ? offer.CustomerCompanyName
-                                      : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+                            ? offer.CustomerCompanyName
+                            : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                         column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
                             .FontSize(16).FontColor("#FFFFFF");
@@ -222,33 +223,31 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(16).FontColor("#FFFFFF");
                     });
 
-                    row.ConstantItem(500).Padding(0).Column(colImmagini =>
+                    // Column per le immagini (l'altra metà)
+                    row.RelativeItem().Column(colImmagini =>
                     {
-                        colImmagini.Spacing(0);
+                        colImmagini.Spacing(5);
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(15)
-                                .PaddingLeft(20)
-                                .Width(500)
+                                .Height(200)
                                 .Image(img29Bytes)
-                                .FitWidth();
+                                .FitArea();
                         }
 
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .PaddingTop(0)
-                                .PaddingLeft(30)
-                                .Width(420)
+                                .Height(200)
                                 .Image(img13Bytes)
-                                .FitWidth();
+                                .FitArea();
                         }
                     });
                 });
             });
         }
+
 
 
     }
