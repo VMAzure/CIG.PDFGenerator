@@ -209,7 +209,9 @@ namespace CIG.PDFGenerator.Controllers
                             text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                         });
 
-                        column.Item().PaddingTop(20).Text("# Servizi compresi nell'offerta")
+                        column.Item().PaddingBottom(50); // 👈 Aggiungi questo
+
+                        column.Item().PaddingTop(10).Text("# Servizi compresi nell'offerta")
                             .FontSize(16).FontColor("#FFFFFF");
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
