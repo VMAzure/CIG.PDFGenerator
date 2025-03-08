@@ -288,7 +288,8 @@ namespace CIG.PDFGenerator.Controllers
                     column.Item().PaddingTop(10).Text(text =>
                     {
                         text.Span("# 1 - ").FontSize(28).FontColor("#FF7100").Bold();
-                        text.Span("Servizi inclusi nell'offerta").FontSize(28).FontColor("#FFFFFF");
+                        text.Span("SERVIZI ").FontSize(28).FontColor("#FFFFFF").Bold();
+                        text.Span("INCLUSI NELL'OFFERTA").FontSize(28).FontColor("#FFFFFF");
                     });
 
                     column.Item().PaddingTop(50).Table(table =>
