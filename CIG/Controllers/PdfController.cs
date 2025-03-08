@@ -230,8 +230,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(15)
-                                .PaddingLeft(50) // Aumenta il padding per spostare a destra
-                                .Width(400) // Aumenta la larghezza dell'immagine
+                                .PaddingLeft(50)
+                                .Width(370) // Riduci la larghezza minima se necessario
                                 .Image(img29Bytes)
                                 .FitWidth();
                         }
@@ -240,16 +240,15 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             colImmagini.Item()
                                 .PaddingTop(10)
-                                .PaddingLeft(50) // Aumenta il padding per spostare a destra
-                                .Width(450) // Aumenta la larghezza dell'immagine
+                                .PaddingLeft(50)
+                                .Width(400) // Riduci la larghezza minima se necessario
                                 .Image(img13Bytes)
                                 .FitWidth();
                         }
                     });
                 });
-
-
             });
+
         }
     }
 }
