@@ -198,7 +198,7 @@ namespace CIG.PDFGenerator.Controllers
 
                 page.Content().Padding(20).Row(row =>
                 {
-                    // Colonna per il testo (40% circa)
+                    // Testo (circa 40% larghezza)
                     row.RelativeItem(4).Column(column =>
                     {
                         column.Spacing(10);
@@ -213,8 +213,8 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(16).FontColor("#FFFFFF");
 
                         var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
-                            ? offer.CustomerCompanyName
-                            : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+                                      ? offer.CustomerCompanyName
+                                      : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                         column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
                             .FontSize(16).FontColor("#FFFFFF");
@@ -223,33 +223,31 @@ namespace CIG.PDFGenerator.Controllers
                             .FontSize(16).FontColor("#FFFFFF");
                     });
 
-                    // Colonna immagini più grande (60% circa)
-                    row.RelativeItem(6).Column(colImmagini =>
+                    // Colonna con le immagini - ben ottimizzata
+                    row.RelativeItem(6).AlignRight().Column(colImmagini =>
                     {
-                        colImmagini.Spacing(10);
+                        colImmagini.Spacing(5);
 
                         if (img29Bytes != null)
                         {
                             colImmagini.Item()
-                                .Height(400) // dimensione raddoppiata
+                                .Width(380)
                                 .Image(img29Bytes)
-                                .FitArea();
+                                .FitWidth();
                         }
 
                         if (img13Bytes != null)
                         {
                             colImmagini.Item()
-                                .Height(320) // dimensione raddoppiata
+                                .PaddingTop(10)
+                                .Width(380)
                                 .Image(img13Bytes)
-                                .FitArea();
+                                .FitWidth();
                         }
                     });
                 });
             });
         }
-
-
-
 
     }
 }
