@@ -334,6 +334,48 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+        private void CreatePage4(IDocumentContainer container, OfferPdfPage1 offer, byte[] img203Bytes)
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4.Landscape());
+                page.Margin(0);
+
+                var imagePathPag4 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_4.jpg");
+                page.Background().Image(imagePathPag4).FitArea();
+                page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
+
+                page.Content().Padding(30).Row(row =>
+                {
+                    row.RelativeItem(4).Column(column =>
+                    {
+                        column.Spacing(10);
+
+                        column.Item().Text(text =>
+                        {
+                            text.Span("# 2 - ").FontSize(28).FontColor("#FF7100").Bold();
+                            text.Span("LA NOSTRA SOLUZIONE").FontSize(28).FontColor("#00213b").Bold();
+                        });
+
+                        // Spazio per i dati economici
+                    });
+
+                    row.RelativeItem(6).AlignRight().Column(column =>
+                    {
+                        if (img203Bytes != null)
+                        {
+                            column.Item()
+                                  .AlignCenter()
+                                  .Width(450)
+                                  .Image(img203Bytes)
+                                  .FitWidth();
+                        }
+
+                        // Spazio sotto l'immagine per il canone
+                    });
+                });
+            });
+        }
 
 
 
