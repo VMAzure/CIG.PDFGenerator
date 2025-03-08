@@ -314,7 +314,8 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             table.Cell().BorderBottom(1).BorderColor("#CCC").PaddingVertical(10).PaddingHorizontal(5).Row(row =>
                             {
-                                row.ConstantItem(20).Image(serviceIconBytes).FitHeight();
+                                row.ConstantItem(25).Height(20).Image(serviceIconBytes).FitArea();
+
                                 row.RelativeItem().PaddingLeft(5).AlignMiddle().Text(servizio.Nome ?? "-").FontSize(14);
                             });
 
