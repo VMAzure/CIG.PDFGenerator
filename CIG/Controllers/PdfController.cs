@@ -207,7 +207,7 @@ namespace CIG.PDFGenerator.Controllers
 
                     page.Content().Padding(30).Row(row => // Usa lo stesso padding della prima pagina
                     {
-                        row.RelativeItem().Column(column =>
+                        row.RelativeItem(452).Column(column =>
                         {
                             column.Spacing(10);
 
@@ -231,7 +231,7 @@ namespace CIG.PDFGenerator.Controllers
                                 .FontSize(16).FontColor("#FFFFFF");
                         });
 
-                        row.ConstantItem(500).Padding(0).Column(colImmagini =>
+                        row.ConstantItem(678).Padding(0).Column(colImmagini =>
                         {
                             colImmagini.Spacing(0);
 
@@ -240,7 +240,7 @@ namespace CIG.PDFGenerator.Controllers
                                 colImmagini.Item()
                                     .PaddingTop(15)
                                     .PaddingLeft(20) // Riduci il padding per utilizzare più spazio
-                                    .Width(420) // Riduci la larghezza minima se necessario
+                                    .Width(500) // Riduci la larghezza minima se necessario
                                     .Image(img29Bytes)
                                     .FitWidth();
                             }
