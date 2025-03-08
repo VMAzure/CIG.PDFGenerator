@@ -217,18 +217,18 @@ namespace CIG.PDFGenerator.Controllers
                                 text.Span("VIEW").FontSize(36).Bold().FontColor("#FF7100");
                             });
 
-                            column.Item().PaddingTop(25).Text("# Servizi compresi nell'offerta")
-                                .FontSize(24).FontColor("#FFFFFF");
+                            column.Item().PaddingTop(55).Text("# Servizi compresi nell'offerta")
+                                .FontSize(20).FontColor("#FFFFFF");
 
                             var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                           ? offer.CustomerCompanyName
                                           : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
 
                             column.Item().PaddingTop(15).Text($"# La nostra proposta per {cliente}")
-                                .FontSize(24).FontColor("#FFFFFF");
+                                .FontSize(20).FontColor("#FFFFFF");
 
                             column.Item().PaddingTop(15).Text("# Prossimi passi")
-                                .FontSize(24).FontColor("#FFFFFF");
+                                .FontSize(20).FontColor("#FFFFFF");
                         });
 
                         row.ConstantItem(500).Padding(0).Column(colImmagini =>
@@ -239,7 +239,7 @@ namespace CIG.PDFGenerator.Controllers
                             {
                                 colImmagini.Item()
                                     .PaddingTop(15)
-                                    .PaddingLeft(30) // Riduci il padding per utilizzare più spazio
+                                    .PaddingLeft(20) // Riduci il padding per utilizzare più spazio
                                     .Width(420) // Riduci la larghezza minima se necessario
                                     .Image(img29Bytes)
                                     .FitWidth();
@@ -248,7 +248,7 @@ namespace CIG.PDFGenerator.Controllers
                             if (img13Bytes != null)
                             {
                                 colImmagini.Item()
-                                    .PaddingTop(10)
+                                    .PaddingTop(00)
                                     .PaddingLeft(30) // Riduci il padding per utilizzare più spazio
                                     .Width(420) // Riduci la larghezza minima se necessario
                                     .Image(img13Bytes)
