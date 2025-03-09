@@ -517,10 +517,11 @@
 
             // Servizi selezionati
             const serviziSelezionati = [];
-            document.querySelectorAll('#servicesList input[type="checkbox"]:checked').forEach(checkbox => {
-                const servizio = checkbox.nextElementSibling.textContent;
-                const opzione = document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || 'Nessuna opzione';
-                serviziSelezionati.push(`${servizio} (${opzione})`);
+            document.querySelectorAll('.service-item').forEach(serviceItem => {
+                const nomeServizio = serviceItem.querySelector('strong').textContent;
+                const opzioneSelezionata = serviceItem.querySelector('input[type="radio"]:checked')?.value || 'Nessuna opzione';
+
+                serviziSelezionati.push(`${nomeServizio} (${opzioneSelezionata})`);
             });
 
             // Dati economici
