@@ -388,7 +388,7 @@ namespace CIG.PDFGenerator.Controllers
                             });
                         });
 
-                        column.Item().PaddingTop(12).Column(innerColumn =>
+                        column.Item().PaddingTop(14).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text("Anticipo:")
                                 .FontSize(16).FontColor("#00213b");
@@ -409,13 +409,27 @@ namespace CIG.PDFGenerator.Controllers
                         if (img203Bytes != null)
                         {
                             column.Item()
+                                  .PaddingTop(100)
                                   .AlignCenter()
                                   .Width(450)
                                   .Image(img203Bytes)
                                   .FitWidth();
                         }
 
-                        column.Item().PaddingTop(10).AlignCenter().Text($"Canone mensile: {offer.DatiEconomici.Canone:C}").FontSize(20).Bold().FontColor("#FF7100");
+                        column.Item().PaddingTop(10).Column(innerColumn =>
+                        {
+                            innerColumn.Item().AlignCenter().Text($"Canone mensile")
+                                .FontSize(16).FontColor("#FF7100");
+
+                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
+                            {
+                                text.Span($"{offer.DatiEconomici.Canone}")
+                                    .FontSize(20).FontColor("#FFFFFF").Bold();
+                                text.Span(" euro i.e.")
+                                    .FontSize(20).FontColor("#FFFFFF").Bold();
+                            });
+                        });
+
                     });
                 });
             });
