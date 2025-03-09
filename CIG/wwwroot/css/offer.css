@@ -255,3 +255,26 @@ select, input[type="text"] {
             margin-bottom: 6px;
         }
 
+/* Intestazione tabella */
+#customerTable thead tr {
+    background-color: #00213b;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+/* Corpo tabella - righe pari e dispari alternate */
+#customerTable tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+    color: #00213b;
+}
+
+#customerTable tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+    color: #00213b;
+}
+
+/* Effetto hover (mouse over) */
+#customerTable tbody tr:hover {
+    background-color: #ddeeff;
+    cursor: pointer;
+}
