@@ -412,6 +412,7 @@ namespace CIG.PDFGenerator.Controllers
                             { 
                                 text.Span($"{offer.Auto}")
                                 .FontSize(24).FontColor("#FF7100").Bold();
+                            });
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
