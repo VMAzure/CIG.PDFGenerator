@@ -388,7 +388,7 @@ namespace CIG.PDFGenerator.Controllers
                             });
                         });
 
-                        column.Item().PaddingTop(14).Column(innerColumn =>
+                        column.Item().PaddingTop(18).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text("Anticipo:")
                                 .FontSize(16).FontColor("#00213b");
@@ -409,14 +409,14 @@ namespace CIG.PDFGenerator.Controllers
                         if (img203Bytes != null)
                         {
                             column.Item()
-                                  .PaddingTop(100)
+                                  .PaddingTop(130)
                                   .AlignCenter()
                                   .Width(450)
                                   .Image(img203Bytes)
                                   .FitWidth();
                         }
 
-                        column.Item().PaddingTop(10).PaddingLeft(30).Column(innerColumn =>
+                        column.Item().PaddingTop(10).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
                                 .FontSize(16).FontColor("#FF7100").Bold();
