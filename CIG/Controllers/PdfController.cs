@@ -435,7 +435,7 @@ namespace CIG.PDFGenerator.Controllers
                             if (img203Bytes != null)
                             {
                                 column.Item()
-                                      .PaddingTop(15)
+                                      .PaddingTop(25)
                                       .AlignCenter()
                                       .Width(450)
                                       .Image(img203Bytes)
@@ -443,7 +443,7 @@ namespace CIG.PDFGenerator.Controllers
                             }
                         });
 
-                        column.Item().PaddingTop(-20).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(-10).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
                                 .FontSize(16).FontColor("#FF7100").Bold();
