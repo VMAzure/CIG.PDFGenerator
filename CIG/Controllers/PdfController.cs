@@ -416,7 +416,7 @@ namespace CIG.PDFGenerator.Controllers
                                   .FitWidth();
                         }
 
-                        column.Item().PaddingTop(10).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
                                 .FontSize(16).FontColor("#FF7100").Bold();
