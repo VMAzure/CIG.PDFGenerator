@@ -147,7 +147,7 @@
                 }
             });
 
-                    varianteDropdown.addEventListener("change", () => {
+            varianteDropdown.addEventListener("change", () => {
             loader.style.display = "block";
             anteprimaAuto.style.display = "none";
             imagePlaceholder.style.display = "none";
@@ -507,8 +507,8 @@
                     Modello: modelloDropdown.value || "",
                     Versione: versioneDropdown.value || "",
                     Variante: varianteDropdown.value || "",
-                    DescrizioneVersione: descrizioneVersione || "",
-                    Note: noteAuto || ""
+                    DescrizioneVersione: descrizioneVersione.value || "",
+                    Note: noteAuto.value || ""
                 },
                 CarImages: carImagesUrls,
                 Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
