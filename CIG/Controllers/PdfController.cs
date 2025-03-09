@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static Npgsql.Replication.PgOutput.Messages.RelationMessage;
 using static System.Net.Mime.MediaTypeNames;
+using System.Globalization;
 
 
 namespace CIG.PDFGenerator.Controllers
@@ -381,7 +382,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.KmTotali:N}")
+                                text.Span($"{offer.DatiEconomici.KmTotali.ToString("N0", new CultureInfo("it-IT"))}")
                                     .FontSize(40).FontColor("#00213b").Bold();
                                 text.Span(" km")
                                     .FontSize(40).FontColor("#00213b").Bold();
@@ -395,7 +396,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Anticipo:N}")
+                                text.Span($"{offer.DatiEconomici.Anticipo.ToString("N0", new CultureInfo("it-IT"))}")
                                     .FontSize(20).FontColor("#00213b").Bold();
                                 text.Span(" euro i.e.")
                                     .FontSize(20).FontColor("#00213b").Bold();
@@ -459,7 +460,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Canone:N}")
+                                text.Span($"{offer.DatiEconomici.Canone.ToString("N0", new CultureInfo("it-IT"))}")
                                     .FontSize(24).FontColor("#FFFFFF").Bold();
                                 text.Span(" € i.e.")
                                     .FontSize(20).FontColor("#FFFFFF");
