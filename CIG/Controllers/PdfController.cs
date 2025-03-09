@@ -361,15 +361,15 @@ namespace CIG.PDFGenerator.Controllers
 
                         column.Item().PaddingTop(50).Column(innerColumn =>
                         {
-                            innerColumn.Item().AlignCenter().Text("Durata")
+                            innerColumn.Item().AlignCenter().Text("Durata del noleggio")
                                 .FontSize(16).FontColor("#00213b");
 
-                            innerColumn.Item().AlignCenter().Text(text =>
+                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
                                 text.Span($"{offer.DatiEconomici.Durata}")
-                                    .FontSize(38).FontColor("#00213b").Bold();
+                                    .FontSize(40).FontColor("#00213b").Bold();
                                 text.Span(" mesi")
-                                    .FontSize(16).FontColor("#00213b");
+                                    .FontSize(40).FontColor("#00213b");
                             });
                         });
 
