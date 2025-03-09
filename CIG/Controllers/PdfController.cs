@@ -402,6 +402,15 @@ namespace CIG.PDFGenerator.Controllers
                             });
                         });
 
+                        column.Item().PaddingTop(22).Column(innerColumn =>
+                        {
+                            innerColumn.Item().PaddingTop(0).AlignCenter().Text(text =>
+                        {
+                            text.Span($"{offer.Auto.Note}")
+                                .FontSize(14).FontColor("#00213b");
+
+                            });
+                        });
                     });
 
                     row.RelativeItem(6).AlignRight().Column(column =>
