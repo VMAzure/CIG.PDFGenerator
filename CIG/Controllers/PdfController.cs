@@ -395,7 +395,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Anticipo:}")
+                                text.Span($"{offer.DatiEconomici.Anticipo}")
                                     .FontSize(20).FontColor("#00213b").Bold();
                                 text.Span(" euro i.e.")
                                     .FontSize(20).FontColor("#00213b").Bold();
