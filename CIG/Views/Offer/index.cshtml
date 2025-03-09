@@ -342,7 +342,7 @@
             });
         });
 
-                async function loadCustomersTable() {
+            async function loadCustomersTable() {
             const token = new URLSearchParams(window.location.search).get('token');
             const customerTableBody = document.getElementById('customerTableBody');
 
@@ -466,11 +466,9 @@
 
                 data.services.forEach(service => {
                     let html = `
-                        <label>
-                            <input type="checkbox" value="${service.id}" data-service-name="${service.name}">
+                        <div class="service-item">
                             <strong>${service.name}</strong><br>
                             <small>${service.description}</small>
-                        </label>
                     `;
 
                     if (service.conditions && service.conditions.options) {
@@ -486,12 +484,13 @@
                         html += '</div>';
                     }
 
-                    const serviceItem = document.createElement('div');
-                    serviceItem.className = "service-item";
-                    serviceItem.innerHTML = html;
+                    html += '</div>';
 
+                    const serviceItem = document.createElement('div');
+                    serviceItem.innerHTML = html;
                     servicesList.appendChild(serviceItem);
                 });
+
             })
             .catch(error => {
                 servicesList.textContent = 'Errore caricamento servizi.';

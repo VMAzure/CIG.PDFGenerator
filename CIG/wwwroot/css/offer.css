@@ -278,3 +278,57 @@ select, input[type="text"] {
     background-color: #ddeeff;
     cursor: pointer;
 }
+
+/* Contenitore principale servizio */
+.service-item {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+}
+
+    /* Nome del servizio */
+    .service-item strong {
+        font-size: 16px;
+        color: #00213b;
+    }
+
+    /* Descrizione del servizio */
+    .service-item small {
+        font-size: 13px;
+        color: #606060;
+        display: block;
+        margin-top: 5px;
+    }
+
+/* Opzioni servizio */
+.service-options {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+    .service-options label {
+        cursor: pointer;
+        font-size: 14px;
+        color: #00213b;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Radio button */
+    .service-options input[type="radio"] {
+        margin-right: 5px;
+        accent-color: #00213b;
+    }
+
+/* Responsività per dispositivi mobili */
+@media (max-width: 600px) {
+    .service-options {
+        flex-direction: column;
+    }
+
+        .service-options label {
+            margin-bottom: 8px;
+        }
+}
