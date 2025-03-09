@@ -396,22 +396,33 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Anticipo.ToString("N0", new CultureInfo("it-IT"))}")
+                                var anticipoText = offer.DatiEconomici.Anticipo == 0
+                                    ? "Zero"
+                                    : offer.DatiEconomici.Anticipo.ToString("N0", new CultureInfo("it-IT"));
+
+                                text.Span(anticipoText)
                                     .FontSize(20).FontColor("#00213b").Bold();
-                                text.Span(" euro i.e.")
-                                    .FontSize(20).FontColor("#00213b").Bold();
+
+                                if (offer.DatiEconomici.Anticipo != 0)
+                                {
+                                    text.Span(" euro i.e.")
+                                        .FontSize(20).FontColor("#00213b").Bold();
+                                }
                             });
                         });
 
-                        column.Item().PaddingTop(22).Column(innerColumn =>
-                        {
-                            innerColumn.Item().PaddingTop(0).AlignCenter().Text(text =>
-                        {
-                            text.Span($"{offer.Auto.Note}")
-                                .FontSize(14).FontColor("#00213b");
 
+                        if (!string.IsNullOrWhiteSpace(offer.Auto.Note))
+                        {
+                            column.Item().PaddingTop(22).Column(innerColumn =>
+                            {
+                                innerColumn.Item().PaddingTop(0).AlignCenter().Text(text =>
+                                {
+                                    text.Span($"{offer.Auto.Note}")
+                                        .FontSize(14).FontColor("#00213b");
+                                });
                             });
-                        });
+                        }
                     });
 
                     row.RelativeItem(6).AlignRight().Column(column =>
