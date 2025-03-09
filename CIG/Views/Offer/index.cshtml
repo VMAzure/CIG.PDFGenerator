@@ -41,6 +41,21 @@
             <input type="text" id="customerInput" placeholder="Cerca cliente..." autocomplete="off" />
             <ul id="customerResults" style="border:1px solid #ccc;padding:5px;max-height:200px;overflow:auto;display:none;"></ul>
         </div>
+        <div style="margin-top:30px;">
+            <table id="customerTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Cognome / Ragione Sociale</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                    </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                    <!-- i clienti verranno inseriti qui da JavaScript -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <!-- STEP 3: Scelta servizi -->
@@ -263,7 +278,7 @@
 
 
 
-                const customerInput = document.getElementById('customerInput');
+        const customerInput = document.getElementById('customerInput');
         const customerResults = document.getElementById('customerResults');
         let selectedCustomer = {};
 
@@ -327,6 +342,59 @@
             });
         });
 
+                async function loadCustomersTable() {
+            const token = new URLSearchParams(window.location.search).get('token');
+            const customerTableBody = document.getElementById('customerTableBody');
+
+            try {
+                const response = await fetch('https://coreapi-production-ca29.up.railway.app/customers/clienti', {
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                });
+
+                const clienti = await response.json();
+
+                // Pulisco la tabella prima di inserire nuovi dati
+                customerTableBody.innerHTML = '';
+
+                clienti.forEach(cliente => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td>${cliente.nome || '-'}</td>
+                        <td>${cliente.cognome || cliente.ragione_sociale || '-'}</td>
+                        <td>${cliente.email || '-'}</td>
+                        <td>${cliente.telefono || '-'}</td>
+                    `;
+
+                    // Evento click per selezionare il cliente
+                            // Evento click per selezionare il cliente dalla tabella
+                    tr.addEventListener('click', () => {
+                        selectedCustomer = cliente;
+
+                        // Uniforma il comportamento:
+                        customerInput.value = `${cliente.nome || ''} ${cliente.cognome || cliente.ragione_sociale || ''}`.trim();
+
+                        // Nasconde i risultati di ricerca (se aperti)
+                        customerResults.style.display = 'none';
+
+                        // Mostra bottone prossimo step
+                        document.getElementById('nextStepBtn').style.display = 'inline-block';
+                    });
+
+
+                    customerTableBody.appendChild(tr);
+                });
+
+            } catch (error) {
+                console.error('Errore nel caricamento clienti:', error);
+                customerTableBody.innerHTML = '<tr><td colspan="4">Errore nel caricamento dei clienti.</td></tr>';
+            }
+        }
+
+        // Chiama la funzione al caricamento della pagina:
+        document.addEventListener("DOMContentLoaded", loadCustomersTable);
 
 
 
