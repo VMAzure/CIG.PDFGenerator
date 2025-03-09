@@ -95,17 +95,16 @@
         <div id="riepilogoOfferta" class="summary-container">
             <!-- Riepilogo generato via JS -->
         </div>
-        <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
+        
     </div>
 </div>
 
 <!-- Bottoni navigazione STEP -->
 <div class="navigation-buttons">
     <button id="backBtn" style="display:none;">← Indietro</button>
-    <button id="nextStepBtn">Avanti →</button>
-    <button id="generatePdfBtn" style="display:none;">📄 Genera PDF</button>
+    <button id="nextStepBtn">Step 2 →</button>
+    <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
 </div>
-
 
 @section Scripts {
 
@@ -412,40 +411,47 @@
         });
 
                 function goToStep(stepNumber) {
-                const current = document.getElementById(`step${currentStep}`);
-                current.classList.remove('active');
-                currentStep = stepNumber;
+            const current = document.getElementById(`step${currentStep}`);
+            current.classList.remove('active');
+            current.classList.add('exit-left');
 
-                const next = document.getElementById(`step${currentStep}`);
-                next.classList.add('active');
+            setTimeout(() => {
+                current.style.display = 'none';
+                current.classList.remove('exit-left');
+
+                const next = document.getElementById(`step${stepNumber}`);
+                next.style.display = 'block';
+                setTimeout(() => next.classList.add('active'), 10);
+
+                currentStep = stepNumber;
 
                 // Gestione pulsanti navigazione
                 document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
 
                 const nextStepBtn = document.getElementById('nextStepBtn');
-                const generatePdfBtn = document.getElementById('generatePdfBtn');
-
-                if (currentStep === 5) {
-                    nextStepBtn.style.display = 'none';
-                    generatePdfBtn.style.display = 'inline-block';
-                } else {
+                if (currentStep < 5) {
+                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
                     nextStepBtn.style.display = 'inline-block';
-                    document.getElementById('generatePdfBtn').style.display = 'none';
-                    nextStepBtn.textContent = `Avanti →`;
+                } else {
+                    nextStepBtn.textContent = '📄 Genera PDF';
+                    nextStepBtn.style.display = 'none';
                 }
 
-                // Carica servizi solo nello STEP 3
+                // ✅ Carica servizi SOLO quando entri nello STEP 3
                 if (currentStep === 3) {
                     caricaServizi();
                 }
 
-                // Genera riepilogo solo nello STEP 5
+                // ✅ Genera riepilogo SOLO nello STEP 5
                 if (currentStep === 5) {
                     generaRiepilogo();
                 }
-            }
 
-            function caricaServizi() { // 👈 mancava questa apertura!
+            }, 300);
+        }
+
+
+        function caricaServizi() { // 👈 mancava questa apertura!
 
             const token = new URLSearchParams(window.location.search).get("token");
             const servicesList = document.getElementById("servicesList");
