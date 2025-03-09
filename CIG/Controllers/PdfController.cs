@@ -359,10 +359,38 @@ namespace CIG.PDFGenerator.Controllers
                             text.Span("LA NOSTRA SOLUZIONE").FontSize(28).FontColor("#FFFFFF").Bold();
                         });
 
-                        infoItem(column, "Durata:", $"{offer.DatiEconomici.Durata} mesi");
-                        infoItem(column, "Chilometraggio totale:", $"{offer.DatiEconomici.KmTotali} km");
-                        infoItem(column, "Anticipo:", $"{offer.DatiEconomici.Anticipo:C}");
-                        infoItem(column, "Canone Mensile:", $"{offer.DatiEconomici.Canone:C}");
+                        column.Item().Row(row =>
+                        {
+                            row.ConstantItem(180).Text("Durata:").FontSize(16).FontColor("#00213b").Bold();
+                            row.RelativeItem().Text(text =>
+                            {
+                                text.Span($"{offer.DatiEconomici.Durata}").FontSize(18).FontColor("#00213b").Bold();
+                                text.Span(" mesi").FontSize(16).FontColor("#00213b");
+                            });
+                        });
+
+                        column.Item().Row(row =>
+                        {
+                            row.ConstantItem(180).Text("Chilometraggio totale:").FontSize(16).FontColor("#00213b").Bold();
+                            row.RelativeItem().Text(text =>
+                            {
+                                text.Span($"{offer.DatiEconomici.KmTotali}").FontSize(18).FontColor("#00213b").Bold();
+                                text.Span(" km").FontSize(16).FontColor("#00213b");
+                            });
+                        });
+
+                        column.Item().Row(row =>
+                        {
+                            row.ConstantItem(180).Text("Anticipo:").FontSize(16).FontColor("#00213b").Bold();
+                            row.RelativeItem().Text($"{offer.DatiEconomici.Anticipo:C}").FontSize(18).FontColor("#00213b").Bold();
+                        });
+
+                        column.Item().Row(row =>
+                        {
+                            row.ConstantItem(180).Text("Canone Mensile:").FontSize(16).FontColor("#00213b").Bold();
+                            row.RelativeItem().Text($"{offer.DatiEconomici.Canone:C}").FontSize(20).FontColor("#00213b").Bold();
+                        });
+
                     });
 
                     row.RelativeItem(6).AlignRight().Column(column =>
