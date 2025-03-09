@@ -581,11 +581,12 @@
                     Note: noteAuto.value || ""
                 },
                 CarImages: carImagesUrls,
-                Servizi: Array.from(document.querySelectorAll('#servicesList input[type="checkbox"]:checked')).map(checkbox => ({
-                    Id: checkbox.value,
-                    Nome: checkbox.getAttribute('data-service-name'),
-                    Opzione: document.querySelector(`input[name="option_${checkbox.value}"]:checked`)?.value || null
+                    Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
+                    Id: serviceItem.querySelector('input[type="radio"]').name.replace('option_', ''),
+                    Nome: serviceItem.querySelector('strong').textContent,
+                    Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || null
                 })),
+
                 DatiEconomici: {
                     Durata: parseInt(document.getElementById('durataMesi').value) || 0,
                     KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
