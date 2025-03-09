@@ -359,15 +359,20 @@ namespace CIG.PDFGenerator.Controllers
                             text.Span("LA NOSTRA SOLUZIONE").FontSize(28).FontColor("#00213B").Bold();
                         });
 
-                        column.Item().PaddingTop(50).Row(row => // 👈 aggiunto PaddingTop(50)
+                        column.Item().PaddingTop(50).Column(innerColumn =>
                         {
-                            row.ConstantItem(180).Text("Durata:").FontSize(16).FontColor("#00213b");
-                            row.RelativeItem().Text(text =>
+                            innerColumn.Item().AlignCenter().Text("Durata")
+                                .FontSize(16).FontColor("#00213b");
+
+                            innerColumn.Item().AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Durata}").FontSize(18).FontColor("#00213b").Bold();
-                                text.Span(" mesi").FontSize(16).FontColor("#00213b");
+                                text.Span($"{offer.DatiEconomici.Durata}")
+                                    .FontSize(38).FontColor("#00213b").Bold();
+                                text.Span(" mesi")
+                                    .FontSize(16).FontColor("#00213b");
                             });
                         });
+
 
                         column.Item().Row(row =>
                         {
