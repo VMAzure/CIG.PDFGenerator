@@ -406,15 +406,33 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.RelativeItem(6).AlignRight().Column(column =>
                     {
-                        if (img203Bytes != null)
+                        column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
                         {
-                            column.Item()
-                                  .PaddingTop(130)
-                                  .AlignCenter()
-                                  .Width(450)
-                                  .Image(img203Bytes)
-                                  .FitWidth();
-                        }
+                            innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
+                                .FontSize(16).FontColor("#FF7100").Bold();
+
+                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
+                            {
+                                text.Span($"{offer.DatiEconomici.Canone}")
+                                    .FontSize(24).FontColor("#FFFFFF").Bold();
+                                text.Span(" € i.e.")
+                                    .FontSize(20).FontColor("#FFFFFF");
+                            });
+                        });
+                        
+                        column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
+                        {
+
+                            if (img203Bytes != null)
+                            {
+                                column.Item()
+                                      .PaddingTop(130)
+                                      .AlignCenter()
+                                      .Width(450)
+                                      .Image(img203Bytes)
+                                      .FitWidth();
+                            }
+                        });
 
                         column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
                         {
