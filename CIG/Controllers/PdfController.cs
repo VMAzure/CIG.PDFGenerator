@@ -416,17 +416,17 @@ namespace CIG.PDFGenerator.Controllers
                                   .FitWidth();
                         }
 
-                        column.Item().PaddingTop(10).Column(innerColumn =>
+                        column.Item().PaddingTop(10).PaddingLeft(10).Column(innerColumn =>
                         {
-                            innerColumn.Item().AlignCenter().Text($"Canone mensile")
-                                .FontSize(16).FontColor("#FF7100");
+                            innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
+                                .FontSize(16).FontColor("#FF7100").Bold();
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
                                 text.Span($"{offer.DatiEconomici.Canone}")
-                                    .FontSize(20).FontColor("#FFFFFF").Bold();
-                                text.Span(" euro i.e.")
-                                    .FontSize(20).FontColor("#FFFFFF").Bold();
+                                    .FontSize(24).FontColor("#FFFFFF").Bold();
+                                text.Span(" € i.e.")
+                                    .FontSize(20).FontColor("#FFFFFF");
                             });
                         });
 
