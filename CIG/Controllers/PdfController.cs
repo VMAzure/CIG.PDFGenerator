@@ -406,27 +406,26 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.RelativeItem(6).AlignRight().Column(column =>
                     {
-                        column.Item().PaddingTop(50).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(60).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text(text =>
                             { 
                                 text.Span($"{offer.Auto.Marca}")
-                                .FontSize(20).FontColor("#FF7100").Bold();
+                                .FontSize(24).FontColor("#FF7100").Bold();
 
                                 text.Span(" ")
-                                .FontSize(20).FontColor("#FF7100").Bold();
+                                .FontSize(24).FontColor("#FF7100").Bold();
 
                                 text.Span($"{offer.Auto.Modello}")
-                                .FontSize(20).FontColor("#FFFFFF").Bold();
+                                .FontSize(24).FontColor("#FFFFFF").Bold();
 
                             });
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Canone}")
-                                    .FontSize(24).FontColor("#FFFFFF").Bold();
-                                text.Span(" € i.e.")
-                                    .FontSize(20).FontColor("#FFFFFF");
+                                text.Span($"{offer.Auto.DescrizioneVersione}")
+                                    .FontSize(16).FontColor("#FFFFFF");
+                                
                             });
                         });
                         
@@ -444,7 +443,7 @@ namespace CIG.PDFGenerator.Controllers
                             }
                         });
 
-                        column.Item().PaddingTop(-10).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(-20).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
                                 .FontSize(16).FontColor("#FF7100").Bold();
