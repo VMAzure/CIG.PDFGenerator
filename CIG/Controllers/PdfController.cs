@@ -409,19 +409,19 @@ namespace CIG.PDFGenerator.Controllers
                         column.Item().PaddingTop(60).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text(text =>
-                            { 
-                                text.Span($"{offer.Auto.Marca}")
+                            {
+                                text.Span($"{offer.Auto.Marca.ToUpper()}")
                                 .FontSize(24).FontColor("#FF7100").Bold();
 
                                 text.Span(" ")
                                 .FontSize(24).FontColor("#FF7100").Bold();
 
-                                text.Span($"{offer.Auto.Modello}")
+                                text.Span($"{offer.Auto.Versione.ToUpper()}")
                                 .FontSize(24).FontColor("#FFFFFF").Bold();
 
                             });
 
-                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
+                            innerColumn.Item().PaddingTop(0).AlignCenter().Text(text =>
                             {
                                 text.Span($"{offer.Auto.DescrizioneVersione}")
                                     .FontSize(16).FontColor("#FFFFFF");
