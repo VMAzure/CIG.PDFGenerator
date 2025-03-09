@@ -406,14 +406,14 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.RelativeItem(6).AlignRight().Column(column =>
                     {
-                        column.Item().PaddingTop(30).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(40).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text(text =>
                             { 
                                 text.Span($"{offer.Auto.Marca}")
                                 .FontSize(20).FontColor("#FF7100").Bold();
 
-                                innerColumn.Item().AlignCenter().Text("-")
+                                text.Span(" ")
                                 .FontSize(20).FontColor("#FF7100").Bold();
 
                                 text.Span($"{offer.Auto.Modello}")
@@ -436,7 +436,7 @@ namespace CIG.PDFGenerator.Controllers
                             if (img203Bytes != null)
                             {
                                 column.Item()
-                                      .PaddingTop(120)
+                                      .PaddingTop(10)
                                       .AlignCenter()
                                       .Width(450)
                                       .Image(img203Bytes)
