@@ -429,7 +429,7 @@ namespace CIG.PDFGenerator.Controllers
                             });
                         });
                         
-                        column.Item().PaddingTop().PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
                         {
 
                             if (img203Bytes != null)
