@@ -406,7 +406,7 @@ namespace CIG.PDFGenerator.Controllers
 
                     row.RelativeItem(6).AlignRight().Column(column =>
                     {
-                        column.Item().PaddingTop(40).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(50).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text(text =>
                             { 
@@ -444,7 +444,7 @@ namespace CIG.PDFGenerator.Controllers
                             }
                         });
 
-                        column.Item().PaddingTop(0).PaddingLeft(40).Column(innerColumn =>
+                        column.Item().PaddingTop(-10).PaddingLeft(40).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text($"CANONE MENSILE")
                                 .FontSize(16).FontColor("#FF7100").Bold();
