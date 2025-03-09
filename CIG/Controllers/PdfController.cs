@@ -374,7 +374,7 @@ namespace CIG.PDFGenerator.Controllers
                         });
 
 
-                        column.Item().PaddingTop(10).Column(innerColumn =>
+                        column.Item().PaddingTop(11).Column(innerColumn =>
                         {
                             innerColumn.Item().AlignCenter().Text("Chilometraggio totale previsto:")
                             .FontSize(16).FontColor("#00213b");
@@ -388,16 +388,18 @@ namespace CIG.PDFGenerator.Controllers
                             });
                         });
 
-                        column.Item().Row(row =>
+                        column.Item().PaddingTop(11).Column(innerColumn =>
                         {
-                            row.ConstantItem(180).Text("Anticipo:").FontSize(16).FontColor("#00213b").Bold();
-                            row.RelativeItem().Text($"{offer.DatiEconomici.Anticipo:C}").FontSize(18).FontColor("#00213b").Bold();
-                        });
+                            innerColumn.Item().AlignCenter().Text("Anticipo:")
+                                .FontSize(16).FontColor("#00213b");
 
-                        column.Item().Row(row =>
-                        {
-                            row.ConstantItem(180).Text("Canone Mensile:").FontSize(16).FontColor("#00213b").Bold();
-                            row.RelativeItem().Text($"{offer.DatiEconomici.Canone:C}").FontSize(20).FontColor("#00213b").Bold();
+                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
+                            {
+                                text.Span($"{offer.DatiEconomici.Anticipo:C}")
+                                    .FontSize(40).FontColor("#00213b").Bold();
+                                text.Span(" Euro i.e.")
+                                    .FontSize(40).FontColor("#00213b").Bold();
+                            });
                         });
 
                     });
