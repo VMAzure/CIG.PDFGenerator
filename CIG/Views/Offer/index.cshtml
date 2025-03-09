@@ -473,10 +473,11 @@
 
                     if (service.conditions && service.conditions.options) {
                         html += '<div class="service-options">';
-                        service.conditions.options.forEach(option => {
+                        service.conditions.options.forEach((option, index) => {
                             html += `
                                 <label style="margin-right:10px;">
-                                    <input type="radio" name="option_${service.id}" value="${option}">
+                                    <input type="radio" name="option_${service.id}"
+                                           value="${option}" ${index === 0 ? "checked" : ""}>
                                     ${option}
                                 </label>
                             `;
