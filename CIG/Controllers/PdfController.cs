@@ -428,7 +428,7 @@ namespace CIG.PDFGenerator.Controllers
                             if (img203Bytes != null)
                             {
                                 column.Item()
-                                      .PaddingTop(130)
+                                      .PaddingTop(30)
                                       .AlignCenter()
                                       .Width(450)
                                       .Image(img203Bytes)
