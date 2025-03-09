@@ -103,8 +103,9 @@
 <div class="navigation-buttons">
     <button id="backBtn" style="display:none;">← Indietro</button>
     <button id="nextStepBtn">Step 2 →</button>
-    <button id="generatePdfBtn" style="margin-top:20px;">📄 Genera PDF</button>
+    <button id="generatePdfBtn" style="display:none; margin-top:10px;">📥 Genera PDF</button>
 </div>
+
 
 @section Scripts {
 
@@ -410,14 +411,14 @@
             if (currentStep > 1) goToStep(currentStep - 1);
         });
 
-                function goToStep(stepNumber) {
+                    function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
 
             setTimeout(() => {
                 current.style.display = 'none';
-                current.classList.remove('exit-left');
+                current.classList.remove('exit-left'); // pulizia classe
 
                 const next = document.getElementById(`step${stepNumber}`);
                 next.style.display = 'block';
@@ -425,19 +426,23 @@
 
                 currentStep = stepNumber;
 
-                // Gestione pulsanti navigazione
-                document.getElementById('backBtn').style.display = currentStep > 1 ? 'inline-block' : 'none';
-
+                // Pulsanti navigazione
+                const backBtn = document.getElementById('backBtn');
                 const nextStepBtn = document.getElementById('nextStepBtn');
-                if (currentStep < 5) {
+                const generatePdfBtn = document.getElementById('generatePdfBtn');
+
+                backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+
+                if (currentStep === 5) {
+                    nextStepBtn.style.display = 'none';
+                    generatePdfBtn.style.display = 'inline-block';
+                } else {
                     nextStepBtn.textContent = `Step ${currentStep + 1} →`;
                     nextStepBtn.style.display = 'inline-block';
-                } else {
-                    nextStepBtn.textContent = '📄 Genera PDF';
-                    nextStepBtn.style.display = 'none';
+                    generatePdfBtn.style.display = 'none';
                 }
 
-                // ✅ Carica servizi SOLO quando entri nello STEP 3
+                // ✅ Carica servizi solo nello STEP 3
                 if (currentStep === 3) {
                     caricaServizi();
                 }
@@ -450,7 +455,7 @@
             }, 300);
         }
 
-
+        
         function caricaServizi() { // 👈 mancava questa apertura!
 
             const token = new URLSearchParams(window.location.search).get("token");
