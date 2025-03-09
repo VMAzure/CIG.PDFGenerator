@@ -369,18 +369,22 @@ namespace CIG.PDFGenerator.Controllers
                                 text.Span($"{offer.DatiEconomici.Durata}")
                                     .FontSize(40).FontColor("#00213b").Bold();
                                 text.Span(" mesi")
-                                    .FontSize(40).FontColor("#00213b");
+                                    .FontSize(40).FontColor("#00213b").Bold();
                             });
                         });
 
 
-                        column.Item().Row(row =>
+                        column.Item().PaddingTop(10).Column(innerColumn =>
                         {
-                            row.ConstantItem(180).Text("Chilometraggio totale:").FontSize(16).FontColor("#00213b").Bold();
-                            row.RelativeItem().Text(text =>
+                            innerColumn.Item().AlignCenter().Text("Chilometraggio totale previsto:")
+                            .FontSize(16).FontColor("#00213b");
+
+                            innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.KmTotali}").FontSize(18).FontColor("#00213b").Bold();
-                                text.Span(" km").FontSize(16).FontColor("#00213b");
+                                text.Span($"{offer.DatiEconomici.KmTotali}")
+                                    .FontSize(40).FontColor("#00213b").Bold();
+                                text.Span(" km")
+                                    .FontSize(40).FontColor("#00213b").Bold();
                             });
                         });
 
