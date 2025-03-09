@@ -381,7 +381,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.KmTotali}")
+                                text.Span($"{offer.DatiEconomici.KmTotali:N}")
                                     .FontSize(40).FontColor("#00213b").Bold();
                                 text.Span(" km")
                                     .FontSize(40).FontColor("#00213b").Bold();
@@ -395,7 +395,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Anticipo}")
+                                text.Span($"{offer.DatiEconomici.Anticipo:N}")
                                     .FontSize(20).FontColor("#00213b").Bold();
                                 text.Span(" euro i.e.")
                                     .FontSize(20).FontColor("#00213b").Bold();
@@ -459,7 +459,7 @@ namespace CIG.PDFGenerator.Controllers
 
                             innerColumn.Item().PaddingTop(5).AlignCenter().Text(text =>
                             {
-                                text.Span($"{offer.DatiEconomici.Canone}")
+                                text.Span($"{offer.DatiEconomici.Canone:N}")
                                     .FontSize(24).FontColor("#FFFFFF").Bold();
                                 text.Span(" € i.e.")
                                     .FontSize(20).FontColor("#FFFFFF");
