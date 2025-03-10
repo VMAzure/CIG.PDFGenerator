@@ -345,7 +345,7 @@
         });
 
             async function loadCustomersTable() {
-            const token = new URLSearchParams(window.location.search).get('token');
+            token = new URLSearchParams(window.location.search).get('token');
             const customerTableBody = document.getElementById('customerTableBody');
 
             try {
@@ -395,87 +395,87 @@
             }
         }
 
-                   document.addEventListener('click', function(event) {
-            if (event.target && event.target.id === 'generatePdfBtn') {
-                const token = new URLSearchParams(window.location.search).get("token");
+           document.addEventListener('click', function(event) {
+    if (event.target && event.target.id === 'generatePdfBtn') {
+        const token = new URLSearchParams(window.location.search).get("token");
 
-                if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
-                    alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
-                    return;
-                }
-
-                if (!carImagesUrls.length) {
-                    alert("CarImagesUrls è vuoto! Devi selezionare una variante prima di generare il PDF.");
-                    return;
-                }
-
-                const payload = {
-                    CustomerFirstName: selectedCustomer.nome || "",
-                    CustomerLastName: selectedCustomer.cognome || "",
-                    CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-                    CustomerIcon: "icona_default.png",
-                    CarMainImageUrl: carMainImageUrl,
-                    CarThumbnailUrl: carMainImageUrl,
-                    AdminInfo: adminInfo,
-                    DealerInfo: null,
-                    Auto: {
-                        Marca: marcaDropdown.value || "",
-                        Modello: modelloDropdown.value || "",
-                        Versione: versioneDropdown.value || "",
-                        Variante: varianteDropdown.value || "",
-                        DescrizioneVersione: descrizioneVersione.value || "",
-                        Note: noteAuto.value || ""
-                    },
-                    CarImages: carImagesUrls,
-                    Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
-                        Id: serviceItem.querySelector('input[type="radio"]').name.replace('option_', ''),
-                        Nome: serviceItem.querySelector('strong').textContent,
-                        Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || null
-                    })),
-                    DatiEconomici: {
-                        Durata: parseInt(document.getElementById('durataMesi').value) || 0,
-                        KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
-                        Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
-                        Canone: parseFloat(document.getElementById('canone').value) || 0
-                    }
-                };
-
-                const token = new URLSearchParams(window.location.search).get("token");
-
-                fetch('/api/Pdf/GenerateOffer', {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(res => res.blob())
-                .then(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = getUniqueFileName();
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                })
-                .catch(error => {
-                    console.error("Errore generazione PDF:", error);
-                });
-        });
-
-        function getUniqueFileName(){
-            const now = new Date();
-            const dateTimeString = now.getFullYear().toString() +
-                ('0' + (now.getMonth() + 1)).slice(-2) +
-                ('0' + now.getDate()).slice(-2) + '_' +
-                ('0' + now.getHours()).slice(-2) +
-                ('0' + now.getMinutes()).slice(-2) +
-                ('0' + now.getSeconds()).slice(-2);
-
-            return `NLT_Offer_${dateTimeString}.pdf`;
+        if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
+            alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
+            return;
         }
+
+        if (!carImagesUrls.length) {
+            alert("CarImagesUrls è vuoto! Devi selezionare una variante prima di generare il PDF.");
+            return;
+        }
+
+        const payload = {
+            CustomerFirstName: selectedCustomer.nome || "",
+            CustomerLastName: selectedCustomer.cognome || "",
+            CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+            CustomerIcon: "icona_default.png",
+            CarMainImageUrl: carMainImageUrl,
+            CarThumbnailUrl: carMainImageUrl,
+            AdminInfo: adminInfo,
+            DealerInfo: null,
+            Auto: {
+                Marca: marcaDropdown.value || "",
+                Modello: modelloDropdown.value || "",
+                Versione: versioneDropdown.value || "",
+                Variante: varianteDropdown.value || "",
+                DescrizioneVersione: descrizioneVersione.value || "",
+                Note: noteAuto.value || ""
+            },
+            CarImages: carImagesUrls,
+            Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
+                Id: serviceItem.querySelector('input[type="radio"]').name.replace('option_', ''),
+                Nome: serviceItem.querySelector('strong').textContent,
+                Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || null
+            })),
+            DatiEconomici: {
+                Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                Canone: parseFloat(document.getElementById('canone').value) || 0
+            }
+        };
+
+        const token = new URLSearchParams(window.location.search).get("token");
+
+        fetch('/api/Pdf/GenerateOffer', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.blob())
+        .then(blob => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = getUniqueFileName();
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch(error => {
+            console.error("Errore generazione PDF:", error);
+        });
+});
+
+function getUniqueFileName(){
+    const now = new Date();
+    const dateTimeString = now.getFullYear().toString() +
+        ('0' + (now.getMonth() + 1)).slice(-2) +
+        ('0' + now.getDate()).slice(-2) + '_' +
+        ('0' + now.getHours()).slice(-2) +
+        ('0' + now.getMinutes()).slice(-2) +
+        ('0' + now.getSeconds()).slice(-2);
+
+    return `NLT_Offer_${dateTimeString}.pdf`;
+}
 
 
 
