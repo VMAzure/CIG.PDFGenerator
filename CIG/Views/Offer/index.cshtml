@@ -395,12 +395,14 @@
             }
         }
 
-             document.addEventListener('DOMContentLoaded', () => {
-            loadCustomersTable();  // ✅ richiamo della funzione al caricamento
+                  document.addEventListener('DOMContentLoaded', () => {
+            loadCustomersTable();  // ✅ caricamento iniziale clienti
 
             const generatePdfBtn = document.getElementById('generatePdfBtn');
 
             generatePdfBtn.addEventListener('click', () => {
+
+                // ✅ Token recuperato qui (importante!)
                 const token = new URLSearchParams(window.location.search).get("token");
 
                 if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
@@ -479,6 +481,7 @@
                 return `NLT_Offer_${dateTimeString}.pdf`;
             }
         });
+
 
 
 
