@@ -114,6 +114,8 @@
         let adminInfo = null;
         let marcaDropdown, modelloDropdown, versioneDropdown, varianteDropdown, anteprimaAuto, loader, imagePlaceholder, carMainImageUrl, descrizioneVersione, noteAuto;
         let carImagesUrls = [];
+        let customerInput, customerResults, selectedCustomer = {};
+
 
         document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
@@ -126,6 +128,8 @@
             carMainImageUrl = "";
             descrizioneVersione = document.getElementById('descrizioneVersione');
             noteAuto = document.getElementById('noteAuto');
+            customerInput = document.getElementById('customerInput'); // 👈 aggiungi questo
+            customerResults = document.getElementById('customerResults'); // 👈 aggiungi questo  
 
             adminInfo = await fetchAdminInfo();
 
