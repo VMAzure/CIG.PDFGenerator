@@ -400,25 +400,14 @@
 
 
 
-        let currentStep = 1;
-        const totalSteps = 5;
-
-        document.getElementById('nextStepBtn').addEventListener('click', () => {
-            if (currentStep < totalSteps) goToStep(currentStep + 1);
-        });
-
-        document.getElementById('backBtn').addEventListener('click', () => {
-            if (currentStep > 1) goToStep(currentStep - 1);
-        });
-
-                    function goToStep(stepNumber) {
+                function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
 
             setTimeout(() => {
                 current.style.display = 'none';
-                current.classList.remove('exit-left'); // pulizia classe
+                current.classList.remove('exit-left');
 
                 const next = document.getElementById(`step${stepNumber}`);
                 next.style.display = 'block';
@@ -431,15 +420,15 @@
                 const nextStepBtn = document.getElementById('nextStepBtn');
                 const generatePdfBtn = document.getElementById('generatePdfBtn');
 
-                backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+                backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
 
                 if (currentStep === 5) {
-                    nextStepBtn.style.display = 'none';
-                    generatePdfBtn.style.display = 'inline-block';
+                    nextStepBtn.style.visibility = 'hidden';
+                    generatePdfBtn.style.visibility = 'visible';
                 } else {
                     nextStepBtn.textContent = `Step ${currentStep + 1} →`;
-                    nextStepBtn.style.display = 'inline-block';
-                    generatePdfBtn.style.display = 'none';
+                    nextStepBtn.style.visibility = 'visible';
+                    generatePdfBtn.style.visibility = 'hidden';
                 }
 
                 // ✅ Carica servizi solo nello STEP 3
@@ -454,6 +443,7 @@
 
             }, 300);
         }
+
 
         
         function caricaServizi() { // 👈 mancava questa apertura!
