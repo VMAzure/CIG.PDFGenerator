@@ -387,6 +387,51 @@
             }
         }
 
+        //TABELLA CLIENTI
+                async function loadCustomersTable() {
+            const token = new URLSearchParams(window.location.search).get('token');
+            const customerTableBody = document.getElementById('customerTableBody');
+
+            customerTableBody.innerHTML = '<tr><td colspan="4">Caricamento clienti...</td></tr>';
+
+            try {
+                const response = await fetch('https://coreapi-production-ca29.up.railway.app/customers/clienti', {
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                });
+
+                const clienti = await response.json();
+
+                customerTableBody.innerHTML = '';
+
+                clienti.forEach(cliente => {
+                    const tr = document.createElement('tr');
+
+                    tr.innerHTML = `
+                        <td>${cliente.nome || '-'}</td>
+                        <td>${cliente.cognome || cliente.ragione_sociale || '-'}</td>
+                        <td>${cliente.email || '-'}</td>
+                        <td>${cliente.telefono || '-'}</td>
+                    `;
+
+                    tr.addEventListener('click', () => {
+                        selectedCustomer = cliente;
+                        customerInput.value = `${cliente.nome || ''} ${cliente.cognome || cliente.ragione_sociale || ''}`.trim();
+                        customerResults.style.display = 'none';
+                        document.getElementById('nextStepBtn').style.display = 'inline-block';
+                    });
+
+                    customerTableBody.appendChild(tr);
+                });
+
+            } catch (error) {
+                console.error('Errore nel caricamento clienti:', error);
+                customerTableBody.innerHTML = '<tr><td colspan="4">Errore nel caricamento clienti.</td></tr>';
+            }
+        }
+
+
         document.addEventListener('click', function(event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
