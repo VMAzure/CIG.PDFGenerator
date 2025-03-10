@@ -117,7 +117,7 @@
         let customerInput, customerResults, selectedCustomer = {};
 
 
-        document.addEventListener("DOMContentLoaded", async () => {
+    document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
             modelloDropdown = document.getElementById("modello");
             versioneDropdown = document.getElementById("versione");
@@ -134,8 +134,8 @@
             adminInfo = await fetchAdminInfo();
 
             // Carica inizialmente le marche
-            fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
-        });
+        fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
+        
 
 
             marcaDropdown.addEventListener("change", () => {
@@ -209,6 +209,7 @@
                 imagePlaceholder.style.display = "flex";
             }
         });
+    });
 
 
 
