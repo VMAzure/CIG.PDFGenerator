@@ -115,9 +115,12 @@
         let marcaDropdown, modelloDropdown, versioneDropdown, varianteDropdown, anteprimaAuto, loader, imagePlaceholder, carMainImageUrl, descrizioneVersione, noteAuto;
         let carImagesUrls = [];
         let customerInput, customerResults, selectedCustomer = {};
+        let currentStep = 1, totalSteps = 5; // 👈 necessario
+        let backBtn, nextStepBtn, generatePdfBtn; // 👈 necessario
 
 
-    document.addEventListener("DOMContentLoaded", async () => {
+
+        document.addEventListener("DOMContentLoaded", async () => {
             marcaDropdown = document.getElementById("marca");
             modelloDropdown = document.getElementById("modello");
             versioneDropdown = document.getElementById("versione");
@@ -125,129 +128,118 @@
             anteprimaAuto = document.getElementById("anteprimaAuto");
             loader = document.getElementById("loader");
             imagePlaceholder = document.getElementById("imagePlaceholder");
-            carMainImageUrl = "";
             descrizioneVersione = document.getElementById('descrizioneVersione');
             noteAuto = document.getElementById('noteAuto');
-            customerInput = document.getElementById('customerInput'); // 👈 aggiungi questo
-            customerResults = document.getElementById('customerResults'); // 👈 aggiungi questo  
+            customerInput = document.getElementById('customerInput');
+            customerResults = document.getElementById('customerResults');
 
             adminInfo = await fetchAdminInfo();
 
-            // Carica inizialmente le marche
-        fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
-        
-
+            fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
 
             marcaDropdown.addEventListener("change", () => {
-            modelloDropdown.innerHTML = '';
-            versioneDropdown.innerHTML = '';
-            varianteDropdown.innerHTML = '';
-            anteprimaAuto.src = '';
+                modelloDropdown.innerHTML = '';
+                versioneDropdown.innerHTML = '';
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
 
-            if (marcaDropdown.value) {
-                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily");
-            }
-        });
-
-        modelloDropdown.addEventListener("change", () => {
-            versioneDropdown.innerHTML = '';
-            varianteDropdown.innerHTML = '';
-            anteprimaAuto.src = '';
-
-            if (modelloDropdown.value) {
-                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
-            }
-        });
-
-        versioneDropdown.addEventListener("change", () => {
-            varianteDropdown.innerHTML = '';
-            anteprimaAuto.src = '';
-
-            if (versioneDropdown.value) {
-                fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}`, varianteDropdown, "modelVariant");
-            }
-        });
-
-        varianteDropdown.addEventListener("change", () => {
-            loader.style.display = "block";
-            anteprimaAuto.style.display = "none";
-            imagePlaceholder.style.display = "none";
-
-            if (varianteDropdown.value) {
-                const angles = [203, 29, 17, 9, 21, 13];
-                const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
-
-                function getRandomColor() {
-                    return colors[Math.floor(Math.random() * colors.length)];
+                if (marcaDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}`, modelloDropdown, "modelFamily");
                 }
+            });
 
-                carImagesUrls = angles.map(angle => {
-                    const color = getRandomColor();
-                    return {
-                        url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
-                        color: color,
-                        angle: angle
+            modelloDropdown.addEventListener("change", () => {
+                versioneDropdown.innerHTML = '';
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
+
+                if (modelloDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
+                }
+            });
+
+            versioneDropdown.addEventListener("change", () => {
+                varianteDropdown.innerHTML = '';
+                anteprimaAuto.src = '';
+
+                if (versioneDropdown.value) {
+                    fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}`, varianteDropdown, "modelVariant");
+                }
+            });
+
+            varianteDropdown.addEventListener("change", () => {
+                loader.style.display = "block";
+                anteprimaAuto.style.display = "none";
+                imagePlaceholder.style.display = "none";
+
+                if (varianteDropdown.value) {
+                    const angles = [203, 29, 17, 9, 21, 13];
+                    const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
+
+                    function getRandomColor() {
+                        return colors[Math.floor(Math.random() * colors.length)];
+                    }
+
+                    carImagesUrls = angles.map(angle => {
+                        const color = getRandomColor();
+                        return {
+                            url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
+                            color: color,
+                            angle: angle
+                        };
+                    });
+
+                    anteprimaAuto.src = carImagesUrls[0].url;
+
+                    anteprimaAuto.onload = function () {
+                        loader.style.display = "none";
+                        anteprimaAuto.style.display = "block";
+                        carMainImageUrl = carImagesUrls[0].url;
                     };
-                });
 
-                anteprimaAuto.src = carImagesUrls[0].url;
-
-                anteprimaAuto.onload = function () {
+                    anteprimaAuto.onerror = function () {
+                        loader.style.display = "none";
+                        imagePlaceholder.textContent = "Anteprima non disponibile";
+                        imagePlaceholder.style.display = "flex";
+                    };
+                } else {
                     loader.style.display = "none";
-                    anteprimaAuto.style.display = "block";
-                    carMainImageUrl = carImagesUrls[0].url;
-                };
-
-                anteprimaAuto.onerror = function () {
-                    loader.style.display = "none";
-                    imagePlaceholder.textContent = "Anteprima non disponibile";
+                    imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
                     imagePlaceholder.style.display = "flex";
-                };
-            } else {
-                loader.style.display = "none";
-                imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
-                imagePlaceholder.style.display = "flex";
-            }
-        });
-    let currentStep = 1;
-    const totalSteps = 5;
+                }
+            });
 
-    const nextStepBtn = document.getElementById('nextStepBtn');
-    const backBtn = document.getElementById('backBtn');
-    const generatePdfBtn = document.getElementById('generatePdfBtn');
+            // INIZIALIZZA backBtn e bottoni step
+            backBtn = document.getElementById('backBtn');
+            nextStepBtn = document.getElementById('nextStepBtn');
+            generatePdfBtn = document.getElementById('generatePdfBtn');
 
-    nextStepBtn.addEventListener('click', () => {
-        if (currentStep < totalSteps) {
-            document.getElementById(`step${currentStep}`).style.display = 'none';
-            currentStep++;
-            document.getElementById(`step${currentStep}`).style.display = 'block';
+            nextStepBtn.addEventListener('click', () => {
+                if (currentStep < totalSteps) {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep++;
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+                    nextStepBtn.textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Fine';
+                    backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
 
-            backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+                    // Se è l'ultimo step mostra il bottone PDF
+                    generatePdfBtn.style.display = (currentStep === totalSteps) ? 'inline-block' : 'none';
+                }
+            });
 
-            if (currentStep === totalSteps) {
-                nextStepBtn.style.display = 'none';
-                generatePdfBtn.style.display = 'inline-block';
-            } else {
-                nextStepBtn.textContent = `Step ${currentStep + 1} →`;
-            }
-        }
-    });
+            backBtn.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    document.getElementById(`step${currentStep}`).style.display = 'none';
+                    currentStep--;
+                    document.getElementById(`step${currentStep}`).style.display = 'block';
+                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+                    backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+                    generatePdfBtn.style.display = 'none';
+                }
+            });
 
-    backBtn.addEventListener('click', () => {
-        if (currentStep > 1) {
-            document.getElementById(`step${currentStep}`).style.display = 'none';
-            currentStep--;
-            document.getElementById(`step${currentStep}`).style.display = 'block';
+        }); // chiusura DOMContentLoaded
 
-            generatePdfBtn.style.display = 'none';
-            nextStepBtn.style.display = 'inline-block';
-            nextStepBtn.textContent = `Step ${currentStep + 1} →`;
-
-            backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
-        }
-    });
-
-}); // chiusura DOMContentLoaded
 
     
 
