@@ -164,26 +164,11 @@ select, input[type="text"] {
     left: 0;
     width: 100%;
     background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    z-index: 9999; /* 👈 Impedisce sovrapposizioni da altri elementi */
-}
-
-
-.navigation-buttons {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between; /* 👈 Modificato qui */
-    gap: 10px;
+    gap: 5px;
     box-sizing: border-box;
     z-index: 9999;
 }
