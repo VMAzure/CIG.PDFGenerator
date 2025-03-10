@@ -440,7 +440,7 @@
             servicesList.innerHTML = 'Caricamento servizi...';
 
             try {
-                const response = await fetch('https://coreapi-production-ca29.up.railway.app/services/list', {
+                const response = await fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
