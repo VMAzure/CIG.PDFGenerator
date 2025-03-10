@@ -398,7 +398,7 @@
         document.addEventListener('click', function(event) {
         if (event.target && event.target.id === 'generatePdfBtn') {
         const token = new URLSearchParams(window.location.search).get("token");
-
+            }
         if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
             alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
             return;
