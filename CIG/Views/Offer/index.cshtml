@@ -117,19 +117,20 @@
 
 
 
-        document.addEventListener("DOMContentLoaded", async () => {
-            marcaDropdown = document.getElementById("marca");
-            modelloDropdown = document.getElementById("modello");
-            versioneDropdown = document.getElementById("versione");
-            varianteDropdown = document.getElementById("variante");
-            anteprimaAuto = document.getElementById("anteprimaAuto");
-            loader = document.getElementById("loader");
-            imagePlaceholder = document.getElementById("imagePlaceholder");
-            carMainImageUrl = "";
-            descrizioneVersione = document.getElementById('descrizioneVersione');
-            noteAuto = document.getElementById('noteAuto');
+            document.addEventListener("DOMContentLoaded", async () => {
+        marcaDropdown = document.getElementById("marca");
+        modelloDropdown = document.getElementById("modello");
+        versioneDropdown = document.getElementById("versione");
+        varianteDropdown = document.getElementById("variante");
+        anteprimaAuto = document.getElementById("anteprimaAuto");
+        loader = document.getElementById("loader");
+        imagePlaceholder = document.getElementById("imagePlaceholder");
+        carMainImageUrl = "";
+        descrizioneVersione = document.getElementById('descrizioneVersione');
+        noteAuto = document.getElementById('noteAuto');
 
-            adminInfo = await fetchAdminInfo();
+        adminInfo = await fetchAdminInfo();
+
 
             // Carica inizialmente le marche
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
@@ -177,6 +178,7 @@
                 function getRandomColor() {
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
+            });
 
                 carImagesUrls = angles.map(angle => {  // ⚠️ Qui era l'errore (no const)
                     const color = getRandomColor();
