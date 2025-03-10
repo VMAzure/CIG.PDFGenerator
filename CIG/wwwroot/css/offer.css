@@ -171,6 +171,8 @@ select, input[type="text"] {
     box-sizing: border-box;
     justify-content: space-between;
     z-index: 9999;
+    align-items: center; /* allineamento verticale perfetto */
+    margin-top: 10px;
 }
 
     .navigation-buttons button {
@@ -182,6 +184,7 @@ select, input[type="text"] {
         border-radius: 4px;
         white-space: nowrap;
         height: 40px; /* 👈 Altezza fissa per evitare cambiamenti */
+        margin-top: 0; 
     }
 
 #backBtn {
