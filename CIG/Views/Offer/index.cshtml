@@ -178,7 +178,7 @@
                 function getRandomColor() {
                     return colors[Math.floor(Math.random() * colors.length)];
                 }
-            });
+            
 
                 carImagesUrls = angles.map(angle => {  // ⚠️ Qui era l'errore (no const)
                     const color = getRandomColor();
