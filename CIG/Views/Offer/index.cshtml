@@ -458,9 +458,13 @@
 
                     const options = service.conditions?.options || [];
 
-                    let optionsHtml = options.map(option =>
-                        `<label><input type="radio" name="option_${service.id}" value="${option}"> ${option}</label>`
+                    let optionsHtml = options.map((option, index) =>
+                        `<label>
+                            <input type="radio" name="option_${service.id}" value="${option}" ${index === 0 ? 'checked' : ''}>
+                            ${option}
+                        </label>`
                     ).join('');
+
 
                     div.innerHTML = `
                         <strong>${service.name}</strong><br>
