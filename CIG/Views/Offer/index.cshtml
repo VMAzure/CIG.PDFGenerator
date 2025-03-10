@@ -209,7 +209,47 @@
                 imagePlaceholder.style.display = "flex";
             }
         });
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    const nextStepBtn = document.getElementById('nextStepBtn');
+    const backBtn = document.getElementById('backBtn');
+    const generatePdfBtn = document.getElementById('generatePdfBtn');
+
+    nextStepBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+            document.getElementById(`step${currentStep}`).style.display = 'none';
+            currentStep++;
+            document.getElementById(`step${currentStep}`).style.display = 'block';
+
+            backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+
+            if (currentStep === totalSteps) {
+                nextStepBtn.style.display = 'none';
+                generatePdfBtn.style.display = 'inline-block';
+            } else {
+                nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+            }
+        }
     });
+
+    backBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+            document.getElementById(`step${currentStep}`).style.display = 'none';
+            currentStep--;
+            document.getElementById(`step${currentStep}`).style.display = 'block';
+
+            generatePdfBtn.style.display = 'none';
+            nextStepBtn.style.display = 'inline-block';
+            nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+
+            backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+        }
+    });
+
+}); // chiusura DOMContentLoaded
+
+    
 
 
 
