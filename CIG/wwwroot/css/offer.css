@@ -173,13 +173,27 @@ select, input[type="text"] {
 }
 
 
+.navigation-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between; /* 👈 Modificato qui */
+    gap: 10px;
+    box-sizing: border-box;
+    z-index: 9999;
+}
+
     .navigation-buttons button {
-        padding: 8px 16px;
+        flex: 1; /* 👈 I pulsanti occupano metà ciascuno */
+        padding: 8px;
         font-size: 14px;
         cursor: pointer;
-        border: none;
-        border-radius: 4px;
-        z-index: 10000; /* Ancora più alto */
+        white-space: nowrap;
     }
 
 #backBtn {
@@ -187,24 +201,21 @@ select, input[type="text"] {
     color: #333;
 }
 
-#nextStepBtn {
-    background-color: #007bff;
-    color: #fff;
-}
-
-#generatePdfBtn {
+#nextStepBtn, #generatePdfBtn {
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    position: relative;
 }
 
-    #generatePdfBtn:hover {
+    #generatePdfBtn:hover,
+    #nextStepBtn:hover {
         background-color: #0056b3;
     }
+
+#backBtn:hover {
+    background-color: #bbb;
+}
+
 
     
 
