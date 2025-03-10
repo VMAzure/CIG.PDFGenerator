@@ -555,8 +555,8 @@
             `;
         }
 
-                document.addEventListener('DOMContentLoaded', () => {
-            const generatePdfBtn = document.getElementById('generatePdfBtn');
+        document.addEventListener('DOMContentLoaded', () => {
+        const generatePdfBtn = document.getElementById('generatePdfBtn');
 
             generatePdfBtn.addEventListener('click', () => {
                 const token = new URLSearchParams(window.location.search).get("token");
@@ -625,6 +625,7 @@
                 .catch(error => {
                     console.error("Errore generazione PDF:", error);
                 });
+            });
         });
 
 
