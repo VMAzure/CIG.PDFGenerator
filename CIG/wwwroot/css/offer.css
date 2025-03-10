@@ -164,27 +164,25 @@ select, input[type="text"] {
     left: 0;
     width: 100%;
     background-color: #fff;
-    padding: 5px;
+    padding: 10px;
     box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: space-between; /* 👈 Modificato qui */
-    gap: 5px;
+    gap: 10px;
     box-sizing: border-box;
+    justify-content: space-between;
     z-index: 9999;
 }
 
     .navigation-buttons button {
-        flex: 1; /* 👈 I pulsanti occupano metà ciascuno */
-        border: none;
-        padding: 8px;
+        flex: 1;
+        padding: 8px 16px;
         font-size: 14px;
         cursor: pointer;
+        border: none;
+        border-radius: 4px;
         white-space: nowrap;
-        visibility: visible; /* ✅ default visibile */
+        height: 40px; /* 👈 Altezza fissa per evitare cambiamenti */
     }
-        .navigation-buttons button[style*="visibility: hidden"] {
-            pointer-events: none; /* ✅ evita clic accidentali */
-        }
 
 #backBtn {
     background-color: #ccc;
@@ -194,24 +192,13 @@ select, input[type="text"] {
 #nextStepBtn, #generatePdfBtn {
     background-color: #007bff;
     color: #fff;
-    border: none; /* ✅ elimina qualsiasi bordo nero */
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    font-size: 14px;
-    position: relative;
-    transition: background-color 0.3s ease;
-    margin-top: 0; /* ✅ rimuove l'eccessivo margine superiore */
+    border: none;
 }
 
-    #generatePdfBtn:hover,
-    #nextStepBtn:hover {
+    #generatePdfBtn:hover, #nextStepBtn:hover {
         background-color: #0056b3;
     }
 
-#backBtn:hover {
-    background-color: #bbb;
-}
 
 
     

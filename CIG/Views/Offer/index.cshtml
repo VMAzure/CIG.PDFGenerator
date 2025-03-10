@@ -400,7 +400,7 @@
 
 
 
-                function goToStep(stepNumber) {
+                    function goToStep(stepNumber) {
             const current = document.getElementById(`step${currentStep}`);
             current.classList.remove('active');
             current.classList.add('exit-left');
@@ -415,34 +415,32 @@
 
                 currentStep = stepNumber;
 
-                // Pulsanti navigazione
                 const backBtn = document.getElementById('backBtn');
                 const nextStepBtn = document.getElementById('nextStepBtn');
                 const generatePdfBtn = document.getElementById('generatePdfBtn');
 
-                backBtn.style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+                backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
 
                 if (currentStep === 5) {
-                    nextStepBtn.style.visibility = 'hidden';
-                    generatePdfBtn.style.visibility = 'visible';
+                    nextStepBtn.style.display = 'none';
+                    generatePdfBtn.style.display = 'inline-block';
                 } else {
+                    nextStepBtn.style.display = 'inline-block';
                     nextStepBtn.textContent = `Step ${currentStep + 1} →`;
-                    nextStepBtn.style.visibility = 'visible';
-                    generatePdfBtn.style.visibility = 'hidden';
+                    generatePdfBtn.style.display = 'none';
                 }
 
-                // ✅ Carica servizi solo nello STEP 3
                 if (currentStep === 3) {
                     caricaServizi();
                 }
 
-                // ✅ Genera riepilogo SOLO nello STEP 5
                 if (currentStep === 5) {
                     generaRiepilogo();
                 }
 
             }, 300);
         }
+
 
 
         
