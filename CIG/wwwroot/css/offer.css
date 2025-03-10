@@ -205,36 +205,7 @@ select, input[type="text"] {
         background-color: #0056b3;
     }
 
-    #generatePdfBtn.loading {
-        opacity: 0.6;
-        pointer-events: none;
-    }
-
-        #generatePdfBtn.loading::after {
-            content: "";
-            width: 16px;
-            height: 16px;
-            border: 2px solid #ffffff;
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: spin 1s linear infinite;
-        }
-
-@keyframes spin {
-    0% {
-        transform: translateY(-50%) rotate(0deg);
-    }
-
-    100% {
-        transform: translateY(-50%) rotate(360deg);
-    }
-}
-
-
+    
 
 .economic-data-form {
     display: flex;
