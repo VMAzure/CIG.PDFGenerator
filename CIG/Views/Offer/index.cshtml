@@ -338,7 +338,7 @@
             }
         }
 
-                        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function(event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
 
@@ -352,7 +352,6 @@
                     return;
                 }
 
-                // Costruzione corretta payload
                 const payload = {
                     CustomerFirstName: selectedCustomer.nome || "",
                     CustomerLastName: selectedCustomer.cognome || "",
@@ -383,6 +382,31 @@
                         Canone: parseFloat(document.getElementById('canone').value) || 0
                     }
                 };
+
+                fetch('/api/Pdf/GenerateOffer', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = getUniqueFileName();
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                })
+                .catch(error => {
+                    console.error("Errore generazione PDF:", error);
+                });
+            } // <-- Chiusura IF
+        }); // <-- Chiusura document.addEventListener
+
 
                 fetch('/api/Pdf/GenerateOffer', {
                     method: 'POST',
