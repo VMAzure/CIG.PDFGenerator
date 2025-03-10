@@ -214,29 +214,32 @@
             nextStepBtn = document.getElementById('nextStepBtn');
             generatePdfBtn = document.getElementById('generatePdfBtn');
 
-                    nextStepBtn.addEventListener('click', () => {
+        nextStepBtn.addEventListener('click', () => {
             if (currentStep < totalSteps) {
                 document.getElementById(`step${currentStep}`).style.display = 'none';
                 currentStep++;
                 document.getElementById(`step${currentStep}`).style.display = 'block';
 
-                nextStepBtn.textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : 'Fine';
                 backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
 
-                // Se è l'ultimo step mostra il bottone PDF
-                generatePdfBtn.style.display = (currentStep === totalSteps) ? 'inline-block' : 'none';
+                if (currentStep === totalSteps) {
+                    nextStepBtn.style.display = 'none';  // 👈 nasconde il bottone "Fine"
+                    generatePdfBtn.style.display = 'inline-block';
+                    populateSummary(); // 👈 chiameremo la funzione per creare il riepilogo (da creare subito dopo)
+                } else {
+                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+                }
 
-                // 👇 Carica clienti allo step 2
                 if (currentStep === 2) {
                     loadCustomersTable();
                 }
 
-                // 👇 Carica servizi allo step 3
                 if (currentStep === 3) {
                     loadServicesList();
                 }
             }
         });
+
 
 
             backBtn.addEventListener('click', () => {
