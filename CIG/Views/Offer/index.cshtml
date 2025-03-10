@@ -238,29 +238,33 @@
             }
         });
 
-        backBtn.addEventListener('click', () => {
+                backBtn.addEventListener('click', () => {
             if (currentStep > 1) {
+                // Nascondo step corrente
                 document.getElementById(`step${currentStep}`).style.display = 'none';
                 currentStep--;
+
+                // Mostro step precedente
                 document.getElementById(`step${currentStep}`).style.display = 'block';
 
+                // Riporto visibilità bottoni allo stato corretto
                 nextStepBtn.style.display = 'inline-block';
                 nextStepBtn.textContent = `Step ${currentStep + 1} →`;
                 generatePdfBtn.style.display = 'none';
 
+                // Mostro il backBtn solo se non sono allo step 1
                 backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
             }
         });
 
+
         // Impostazione iniziale dei bottoni (da mettere nel DOMContentLoaded)
         document.addEventListener('DOMContentLoaded', () => {
+            currentStep = 1; // 👈 assicurati che questa riga ci sia!
             backBtn.style.display = 'none';
             generatePdfBtn.style.display = 'none';
             nextStepBtn.textContent = 'Step 2 →';
         });
-
-
-
 
             backBtn.addEventListener('click', () => {
                 if (currentStep > 1) {
