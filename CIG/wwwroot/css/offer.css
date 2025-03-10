@@ -175,6 +175,7 @@ select, input[type="text"] {
 
     .navigation-buttons button {
         flex: 1; /* 👈 I pulsanti occupano metà ciascuno */
+        border: none;
         padding: 8px;
         font-size: 14px;
         cursor: pointer;
@@ -189,7 +190,14 @@ select, input[type="text"] {
 #nextStepBtn, #generatePdfBtn {
     background-color: #007bff;
     color: #fff;
-    border: none;
+    border: none; /* ✅ elimina qualsiasi bordo nero */
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    position: relative;
+    transition: background-color 0.3s ease;
+    margin-top: 0; /* ✅ rimuove l'eccessivo margine superiore */
 }
 
     #generatePdfBtn:hover,
