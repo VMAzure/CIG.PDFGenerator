@@ -484,6 +484,46 @@
             }
         }
 
+        //RIEPILOGO
+
+                function populateSummary() {
+            const riepilogoOfferta = document.getElementById('riepilogoOfferta');
+
+            const selectedServices = Array.from(document.querySelectorAll('.service-item')).map(serviceItem => {
+                const name = serviceItem.querySelector('strong').textContent;
+                const option = serviceItem.querySelector('input[type="radio"]:checked')?.value || 'Nessuna';
+                return { name, option };
+            });
+
+            riepilogoOfferta.innerHTML = `
+            <table class="table summary-table">
+                <tr><th colspan="2">Dati Auto</th></tr>
+                <tr><td>Marca:</td><td>${marcaDropdown.value || '-'}</td></tr>
+                <tr><td>Modello:</td><td>${modelloDropdown.value || '-'}</td></tr>
+                <tr><td>Versione:</td><td>${versioneDropdown.value || '-'}</td></tr>
+                <tr><td>Variante:</td><td>${varianteDropdown.value || '-'}</td></tr>
+                <tr><td>Descrizione versione:</td><td>${descrizioneVersione.value || '-'}</td></tr>
+                <tr><td>Note:</td><td>${noteAuto.value || '-'}</td></tr>
+
+                <tr><th colspan="2">Dati Cliente</th></tr>
+                <tr><td>Nome:</td><td>${selectedCustomer.nome || '-'}</td></tr>
+                <tr><td>Cognome / Ragione Sociale:</td><td>${selectedCustomer.cognome || selectedCustomer.ragione_sociale || '-'}</td></tr>
+                <tr><td>Email:</td><td>${selectedCustomer.email || '-'}</td></tr>
+                <tr><td>Telefono:</td><td>${selectedCustomer.telefono || '-'}</td></tr>
+
+                <tr><th colspan="2">Dati Economici</th></tr>
+                <tr><td>Durata (mesi):</td><td>${document.getElementById('durataMesi').value || '-'}</td></tr>
+                <tr><td>Km totali:</td><td>${document.getElementById('kmTotali').value || '-'}</td></tr>
+                <tr><td>Anticipo (€):</td><td>${document.getElementById('anticipo').value || '-'}</td></tr>
+                <tr><td>Canone Mensile (€):</td><td>${document.getElementById('canone').value || '-'}</td></tr>
+
+                <tr><th colspan="2">Servizi Selezionati</th></tr>
+                ${selectedServices.map(service => `
+                    <tr><td>${service.name}</td><td>${service.option}</td></tr>
+                `).join('')}
+            </table>
+            `;
+        }
 
 
         document.addEventListener('click', function(event) {
@@ -560,7 +600,7 @@
 
 
         // Funzione esterna per nome file PDF
-                function getUniqueFileName(){
+            function getUniqueFileName(){
             const now = new Date();
             const dateTimeString = now.getFullYear().toString() +
                 ('0' + (now.getMonth() + 1)).slice(-2) +

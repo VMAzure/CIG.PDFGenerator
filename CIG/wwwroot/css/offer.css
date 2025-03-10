@@ -266,6 +266,28 @@ select, input[type="text"] {
             margin-bottom: 6px;
         }
 
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+    .summary-table th, .summary-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .summary-table th {
+        background-color: #f4f4f4;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    .summary-table td {
+        font-size: 13px;
+    }
+
+
 /* Intestazione tabella */
 #customerTable thead tr {
     background-color: #00213b;
