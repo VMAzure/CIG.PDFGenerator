@@ -395,156 +395,10 @@
             }
         }
 
-        // Chiama la funzione al caricamento della pagina:
-        document.addEventListener("DOMContentLoaded", loadCustomersTable);
+             document.addEventListener('DOMContentLoaded', () => {
+            loadCustomersTable();  // ✅ richiamo della funzione al caricamento
 
-
-
-                    function goToStep(stepNumber) {
-            const current = document.getElementById(`step${currentStep}`);
-            current.classList.remove('active');
-            current.classList.add('exit-left');
-
-            setTimeout(() => {
-                current.style.display = 'none';
-                current.classList.remove('exit-left');
-
-                const next = document.getElementById(`step${stepNumber}`);
-                next.style.display = 'block';
-                setTimeout(() => next.classList.add('active'), 10);
-
-                currentStep = stepNumber;
-
-                const backBtn = document.getElementById('backBtn');
-                const nextStepBtn = document.getElementById('nextStepBtn');
-                const generatePdfBtn = document.getElementById('generatePdfBtn');
-
-                backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
-
-                if (currentStep === 5) {
-                    nextStepBtn.style.display = 'none';
-                    generatePdfBtn.style.display = 'inline-block';
-                } else {
-                    nextStepBtn.style.display = 'inline-block';
-                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
-                    generatePdfBtn.style.display = 'none';
-                }
-
-                if (currentStep === 3) {
-                    caricaServizi();
-                }
-
-                if (currentStep === 5) {
-                    generaRiepilogo();
-                }
-
-            }, 300);
-        }
-
-
-
-        
-        function caricaServizi() { // 👈 mancava questa apertura!
-
-            const token = new URLSearchParams(window.location.search).get("token");
-            const servicesList = document.getElementById("servicesList");
-
-            fetch('https://coreapi-production-ca29.up.railway.app/nlt/services', {
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                servicesList.innerHTML = '';
-
-                data.services.forEach(service => {
-                    let html = `
-                        <div class="service-item">
-                            <strong>${service.name}</strong><br>
-                            <small>${service.description}</small>
-                    `;
-
-                    if (service.conditions && service.conditions.options) {
-                        html += '<div class="service-options">';
-                        service.conditions.options.forEach((option, index) => {
-                            html += `
-                                <label style="margin-right:10px;">
-                                    <input type="radio" name="option_${service.id}"
-                                           value="${option}" ${index === 0 ? "checked" : ""}>
-                                    ${option}
-                                </label>
-                            `;
-                        });
-                        html += '</div>';
-                    }
-
-                    html += '</div>';
-
-                    const serviceItem = document.createElement('div');
-                    serviceItem.innerHTML = html;
-                    servicesList.appendChild(serviceItem);
-                });
-
-            })
-            .catch(error => {
-                servicesList.textContent = 'Errore caricamento servizi.';
-                console.error('Errore:', error);
-            });
-        }
-        
-
-
-        function generaRiepilogo() {
-            const riepilogo = document.getElementById('riepilogoOfferta');
-
-            // Recupera dati selezionati
-            const auto = {
-                marca: marcaDropdown.value,
-                modello: modelloDropdown.value,
-                versione: versioneDropdown.value,
-                variante: varianteDropdown.value
-            };
-
-            const cliente = document.getElementById('customerInput').value;
-
-            // Servizi selezionati
-            const serviziSelezionati = [];
-            document.querySelectorAll('.service-item').forEach(serviceItem => {
-                const nomeServizio = serviceItem.querySelector('strong').textContent;
-                const opzioneSelezionata = serviceItem.querySelector('input[type="radio"]:checked')?.value || 'Nessuna opzione';
-
-                serviziSelezionati.push(`${nomeServizio} (${opzioneSelezionata})`);
-            });
-
-            // Dati economici
-            const durata = document.getElementById('durataMesi').value;
-            const km = document.getElementById('kmTotali').value;
-            const anticipo = document.getElementById('anticipo').value;
-            const canone = document.getElementById('canone').value;
-
-            riepilogo.innerHTML = `
-                <h4>🚗 Auto selezionata</h4>
-                <p>${auto.marca} ${auto.modello} ${auto.versione} ${auto.variante}</p>
-
-                <h4>👤 Cliente</h4>
-                <p>${cliente}</p>
-
-                <h4>🛠️ Servizi selezionati</h4>
-                <ul>${serviziSelezionati.map(s => `<li>${s}</li>`).join('')}</ul>
-
-                <h4>💶 Dati economici</h4>
-                <ul>
-                    <li>Durata: ${durata} mesi</li>
-                    <li>Km previsti: ${km}</li>
-                    <li>Anticipo: € ${anticipo}</li>
-                    <li>Canone: € ${canone}</li>
-                </ul>
-            `;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-        const generatePdfBtn = document.getElementById('generatePdfBtn');
+            const generatePdfBtn = document.getElementById('generatePdfBtn');
 
             generatePdfBtn.addEventListener('click', () => {
                 const token = new URLSearchParams(window.location.search).get("token");
@@ -590,8 +444,6 @@
                     }
                 };
 
-                console.log("Payload:", payload);
-
                 fetch('/api/Pdf/GenerateOffer', {
                     method: 'POST',
                     headers: {
@@ -614,7 +466,8 @@
                     console.error("Errore generazione PDF:", error);
                 });
             });
-                function getUniqueFileName(){
+
+            function getUniqueFileName(){
                 const now = new Date();
                 const dateTimeString = now.getFullYear().toString() +
                     ('0' + (now.getMonth() + 1)).slice(-2) +
@@ -624,8 +477,9 @@
                     ('0' + now.getSeconds()).slice(-2);
 
                 return `NLT_Offer_${dateTimeString}.pdf`;
-                }
+            }
         });
+
 
 
             
