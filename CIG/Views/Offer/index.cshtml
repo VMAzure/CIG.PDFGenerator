@@ -214,31 +214,51 @@
             nextStepBtn = document.getElementById('nextStepBtn');
             generatePdfBtn = document.getElementById('generatePdfBtn');
 
-        nextStepBtn.addEventListener('click', () => {
+                nextStepBtn.addEventListener('click', () => {
             if (currentStep < totalSteps) {
                 document.getElementById(`step${currentStep}`).style.display = 'none';
                 currentStep++;
                 document.getElementById(`step${currentStep}`).style.display = 'block';
 
+                // Nascondi bottone 'Avanti' al raggiungimento ultimo step
+                nextStepBtn.style.display = (currentStep === totalSteps) ? 'none' : 'inline-block';
+                nextStepBtn.textContent = currentStep < totalSteps ? `Step ${currentStep + 1} →` : '';
+
                 backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
 
                 if (currentStep === totalSteps) {
-                    nextStepBtn.style.display = 'none';  // 👈 nasconde il bottone "Fine"
                     generatePdfBtn.style.display = 'inline-block';
-                    populateSummary(); // 👈 chiameremo la funzione per creare il riepilogo (da creare subito dopo)
+                    populateSummary();
                 } else {
-                    nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+                    generatePdfBtn.style.display = 'none';
                 }
 
-                if (currentStep === 2) {
-                    loadCustomersTable();
-                }
-
-                if (currentStep === 3) {
-                    loadServicesList();
-                }
+                if (currentStep === 2) loadCustomersTable();
+                if (currentStep === 3) loadServicesList();
             }
         });
+
+        backBtn.addEventListener('click', () => {
+            if (currentStep > 1) {
+                document.getElementById(`step${currentStep}`).style.display = 'none';
+                currentStep--;
+                document.getElementById(`step${currentStep}`).style.display = 'block';
+
+                nextStepBtn.style.display = 'inline-block';
+                nextStepBtn.textContent = `Step ${currentStep + 1} →`;
+                generatePdfBtn.style.display = 'none';
+
+                backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+            }
+        });
+
+        // Impostazione iniziale dei bottoni (da mettere nel DOMContentLoaded)
+        document.addEventListener('DOMContentLoaded', () => {
+            backBtn.style.display = 'none';
+            generatePdfBtn.style.display = 'none';
+            nextStepBtn.textContent = 'Step 2 →';
+        });
+
 
 
 
