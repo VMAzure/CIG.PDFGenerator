@@ -342,7 +342,7 @@
                 customerResults.innerHTML = '<li>Errore durante la ricerca.</li>';
                 customerResults.style.display = 'block';
             });
-        });
+       
 
             async function loadCustomersTable() {
             token = new URLSearchParams(window.location.search).get('token');
@@ -395,8 +395,8 @@
             }
         }
 
-           document.addEventListener('click', function(event) {
-    if (event.target && event.target.id === 'generatePdfBtn') {
+        document.addEventListener('click', function(event) {
+        if (event.target && event.target.id === 'generatePdfBtn') {
         const token = new URLSearchParams(window.location.search).get("token");
 
         if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
@@ -463,26 +463,23 @@
         .catch(error => {
             console.error("Errore generazione PDF:", error);
         });
-});
-
-function getUniqueFileName(){
-    const now = new Date();
-    const dateTimeString = now.getFullYear().toString() +
-        ('0' + (now.getMonth() + 1)).slice(-2) +
-        ('0' + now.getDate()).slice(-2) + '_' +
-        ('0' + now.getHours()).slice(-2) +
-        ('0' + now.getMinutes()).slice(-2) +
-        ('0' + now.getSeconds()).slice(-2);
-
-    return `NLT_Offer_${dateTimeString}.pdf`;
-}
-
-
-
-
-
-
             
-        
+    
+
+        function getUniqueFileName(){
+            const now = new Date();
+            const dateTimeString = now.getFullYear().toString() +
+                ('0' + (now.getMonth() + 1)).slice(-2) +
+                ('0' + now.getDate()).slice(-2) + '_' +
+                ('0' + now.getHours()).slice(-2) +
+                ('0' + now.getMinutes()).slice(-2) +
+                ('0' + now.getSeconds()).slice(-2);
+
+            return `NLT_Offer_${dateTimeString}.pdf`;
+        }
+
+    });
+
+
     </script>
 }
