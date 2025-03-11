@@ -611,7 +611,8 @@
             pdfLoading(true);
 
             try {
-                const res = await fetch('/api/Pdf/GenerateOffer', {
+                const response = await fetch('/api/Pdf/GenerateOffer', { // 👈 URL locale
+
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
