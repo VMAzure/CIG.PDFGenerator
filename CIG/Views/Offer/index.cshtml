@@ -106,6 +106,13 @@
     <button id="generatePdfBtn" style="display:none; margin-top:10px;">Ottieni PDF</button>
 </div>
 
+<button id="generatePdfBtn" style="display:none; margin-top:10px;">Ottieni PDF</button>
+<div id="pdfLoader" style="display:none; margin-top:10px;">
+    <span>Generazione PDF in corso...</span>
+    <div class="loader"></div>
+</div>
+
+
 
 @section Scripts {
 
@@ -550,79 +557,124 @@
         }
 
 
-        document.addEventListener('click', function(event) {
+                document.addEventListener('click', function(event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
 
-                if (!selectedCustomer || !carMainImageUrl || !adminInfo) {
-                    alert("Alcuni dati obbligatori mancano. Controlla la selezione cliente, auto e info admin.");
-                    return;
+                // Mostro il loader
+                document.getElementById('pdfLoader').style.display = 'block';
+
+                if (currentStep === totalSteps) {
+                    const payload = {
+                        CustomerFirstName: selectedCustomer.nome || "",
+                        CustomerLastName: selectedCustomer.cognome || "",
+                        CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+                        CustomerIcon: selectedCustomer.icon || "default.png",
+                        CarImages: carImagesUrls,
+                        CarMainImageUrl: carMainImageUrl,
+                        Auto: {
+                            Marca: marcaDropdown.value,
+                            Modello: modelloDropdown.value,
+                            Versione: versioneDropdown.value,
+                            Variante: varianteDropdown.value,
+                            DescrizioneVersione: descrizioneVersione.value,
+                            Note: noteAuto.value
+                        },
+                        Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => {
+                            return {
+                                Nome: serviceItem.querySelector('.service-name').textContent,
+                                Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || "Nessuna"
+                            };
+                        }),
+                        DatiEconomici: {
+                            Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                            KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                            Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                            CanoneMensile: parseFloat(document.getElementById('canone').value) || 0
+                        },
+                        AdminInfo: adminInfo,
+                        NoteAuto: noteAuto.value || ""
+                    };
+
+                    fetchPdf(payload, token);
                 }
+            }
+        });
 
-                if (!carImagesUrls.length) {
-                    alert("CarImagesUrls è vuoto! Devi selezionare una variante prima di generare il PDF.");
-                    return;
-                }
+        // Nuova funzione per la fetch con gestione del loader
+        async function fetchPdf(payload, token) {
+            const loader = document.getElementById('loader');
+            const pdfLoader = document.getElementById('pdfLoader');
+            const generatePdfBtn = document.getElementById('generatePdfBtn');
 
-                const payload = {
-                    CustomerFirstName: selectedCustomer.nome || "",
-                    CustomerLastName: selectedCustomer.cognome || "",
-                    CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-                    CustomerIcon: "icona_default.png",
-                    CarMainImageUrl: carMainImageUrl,
-                    CarThumbnailUrl: carMainImageUrl,
-                    AdminInfo: adminInfo,
-                    DealerInfo: null,
-                    Auto: {
-                        Marca: marcaDropdown.value || "",
-                        Modello: modelloDropdown.value || "",
-                        Versione: versioneDropdown.value || "",
-                        Variante: varianteDropdown.value || "",
-                        DescrizioneVersione: descrizioneVersione.value || "",
-                        Note: noteAuto.value || ""
-                    },
-                    CarImages: carImagesUrls,
-                    Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
-                        Id: serviceItem.querySelector('input[type="radio"]').name.replace('option_', ''),
-                        Nome: serviceItem.querySelector('strong').textContent,
-                        Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || null
-                    })),
-                    DatiEconomici: {
-                        Durata: parseInt(document.getElementById('durataMesi').value) || 0,
-                        KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
-                        Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
-                        Canone: parseFloat(document.getElementById('canone').value) || 0
-                    }
-                };
+            pdfLoading(true);
 
-                fetch('/api/Pdf/GenerateOffer', {
+            try {
+                const res = await fetch('/api/Pdf/Generate', {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": "Bearer " + token
                     },
                     body: JSON.stringify(payload)
-                })
-                .then(res => res.blob())
-                .then(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = getUniqueFileName();
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                })
-                .catch(error => {
-                    console.error("Errore generazione PDF:", error);
                 });
-            } // <-- Chiusura IF
-        }); // <-- Chiusura document.addEventListener
 
+                const blob = await res.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = getUniqueFileName();
+                document.body.appendChild(a);
+                a.click();
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error("Errore generazione PDF:", error);
+                alert('Errore durante la generazione del PDF.');
+            } finally {
+                document.getElementById('generatePdfBtn').style.display = 'inline-block';
+                document.getElementById('pdfLoader').style.display = 'none';
+            }
+        }
 
-             
+        // Funzione per mostrare/nascondere loader
+        function pdfLoading(show) {
+            document.getElementById('pdfLoader').style.display = show ? 'block' : 'none';
+            document.getElementById('generatePdfBtn').style.display = show ? 'none' : 'inline-block';
+        }
 
+        // Modifica della funzione fetchPdf per gestione loader
+        async function fetchPdf(payload, token) {
+            document.getElementById('generatePdfBtn').style.display = 'none';
+            document.getElementById('pdfLoader').style.display = 'block';
 
+            try {
+                const response = await fetch('https://coreapi-production-ca29.up.railway.app/api/Pdf/GenerateOffer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = getUniqueFileName();
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert('Errore nella generazione del PDF.');
+                console.error(error);
+            } finally {
+                document.getElementById('pdfLoader').style.display = 'none';
+                document.getElementById('generatePdfBtn').style.display = 'inline-block';
+            }
+        }
+        
         // Funzione esterna per nome file PDF
             function getUniqueFileName(){
             const now = new Date();

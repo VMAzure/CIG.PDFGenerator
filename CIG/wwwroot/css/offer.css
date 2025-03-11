@@ -84,16 +84,6 @@ select, input[type="text"] {
     text-align: center;
 }
 
-#loader {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-}
-
 /* Responsive: dispositivi mobili/tablet */
 @media (max-width: 768px) {
     body {
@@ -116,11 +106,7 @@ select, input[type="text"] {
     }
 }
 
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
+
 #servicesSection {
     margin-top: 30px;
     padding: 10px;
@@ -367,4 +353,32 @@ select, input[type="text"] {
         .service-options label {
             margin-bottom: 8px;
         }
+}
+
+/* Stile per il loader della generazione PDF */
+.loader {
+    border: 4px solid #f3f3f3; /* colore di sfondo loader */
+    border-top: 4px solid #3498db; /* colore loader */
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+    margin-top: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#pdfLoader {
+    display: none; /* inizialmente nascosto */
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
 }
