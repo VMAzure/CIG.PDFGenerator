@@ -602,7 +602,67 @@ namespace CIG.PDFGenerator.Controllers
                         column.Item().PaddingTop(20).Width(150).Image(logoBytes).FitWidth();
                     }
 
-                    // (proseguiremo qui con il prossimo passo)
+                    column.Item().PaddingTop(20).Row(row =>
+                    {
+                        if (offer.DealerInfo != null)
+                        {
+                            row.RelativeItem().Column(dealerColumn =>
+                            {
+                                dealerColumn.Item().Text("Il tuo Dealer di riferimento:")
+                                    .FontSize(18).FontColor("#00213b").Bold();
+
+                                dealerColumn.Item().PaddingTop(10).Text(offer.DealerInfo.CompanyName)
+                                    .FontSize(16).Bold();
+
+                                dealerColumn.Item().Text(offer.DealerInfo.FullName)
+                                    .FontSize(14);
+
+                                dealerColumn.Item().Text(offer.DealerInfo.Email)
+                                    .FontSize(14);
+
+                                if (!string.IsNullOrWhiteSpace(offer.DealerInfo.Phone))
+                                {
+                                    dealerColumn.Item().Text($"Tel: {offer.DealerInfo.Phone}")
+                                        .FontSize(14);
+                                }
+
+                                if (!string.IsNullOrWhiteSpace(offer.DealerInfo.Address))
+                                {
+                                    dealerColumn.Item().PaddingTop(5).Text(offer.DealerInfo.Address)
+                                        .FontSize(14);
+                                }
+                            });
+                        }
+
+                        row.Spacing(50);
+
+                        row.RelativeItem().Column(adminColumn =>
+                        {
+                            adminColumn.Item().Text("La nostra sede principale:")
+                                .FontSize(18).FontColor("#00213b").Bold();
+
+                            adminColumn.Item().PaddingTop(10).Text(offer.AdminInfo.CompanyName)
+                                .FontSize(16).Bold();
+
+                            adminColumn.Item().Text(offer.AdminInfo.FullName)
+                                .FontSize(14);
+
+                            adminColumn.Item().Text(offer.AdminInfo.Email)
+                                .FontSize(14);
+
+                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.Phone))
+                            {
+                                adminColumn.Item().Text($"Tel: {offer.AdminInfo.Phone}")
+                                    .FontSize(14);
+                            }
+
+                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.Address))
+                            {
+                                adminColumn.Item().PaddingTop(5).Text(offer.AdminInfo.Address)
+                                    .FontSize(14);
+                            }
+                        });
+                    });
                 });
             });
         }
