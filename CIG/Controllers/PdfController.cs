@@ -584,6 +584,8 @@ namespace CIG.PDFGenerator.Controllers
         }
         private void CreatePage6(IDocumentContainer container, OfferPdfPage1 offer, byte[] logoBytes)
         {
+            Console.WriteLine($"📌 Dealer MobilePhone: {offer.DealerInfo?.MobilePhone}");
+
             container.Page(page =>
             {
                 page.Size(PageSizes.A4.Landscape());
@@ -624,14 +626,24 @@ namespace CIG.PDFGenerator.Controllers
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.MobilePhone))
                                     dealerColumn.Item().Text($"Tel: {offer.DealerInfo.MobilePhone}").FontSize(14);
 
+                                var addressParts = new List<string>();
+
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.Address))
-                                    dealerColumn.Item().Text(offer.DealerInfo.Address).FontSize(14);
+                                    addressParts.Add(offer.DealerInfo.Address);
 
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.PostalCode))
-                                    dealerColumn.Item().Text(offer.DealerInfo.PostalCode).FontSize(14);
+                                    addressParts.Add(offer.DealerInfo.PostalCode);
 
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.City))
-                                    dealerColumn.Item().Text(offer.DealerInfo.City).FontSize(14);
+                                    addressParts.Add(offer.DealerInfo.City);
+
+                                if (addressParts.Any())
+                                {
+                                    dealerColumn.Item()
+                                        .Text(string.Join(" ", addressParts))
+                                        .FontSize(14);
+                                }
+
                             });
 
                             row.Spacing(50); // Spazio tra Dealer e Admin
