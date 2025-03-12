@@ -603,40 +603,41 @@
         });
 
         // Nuova funzione per la fetch con gestione del loader
-        async function fetchPdf(payload, token) {
-            const loader = document.getElementById('loader');
-            const pdfLoader = document.getElementById('pdfLoader');
-            const generatePdfBtn = document.getElementById('generatePdfBtn');
-
-            pdfLoading(true);
+                async function fetchPdf(payload, token) {
+            document.getElementById('generatePdfBtn').style.display = 'none';
+            document.getElementById('pdfLoader').style.display = 'flex'; // Loader attivo
 
             try {
                 const response = await fetch('/api/Pdf/GenerateOffer', { // 👈 URL locale
-
                     method: 'POST',
                     headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(payload)
                 });
 
-                const blob = await res.blob();
+                if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
+
+                const blob = await response.blob();
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
                 a.download = getUniqueFileName();
                 document.body.appendChild(a);
                 a.click();
+                document.body.removeChild(a);
                 URL.revokeObjectURL(url);
+
             } catch (error) {
-                console.error("Errore generazione PDF:", error);
-                alert('Errore durante la generazione del PDF.');
+                alert('Errore nella generazione del PDF.');
+                console.error(error);
             } finally {
+                document.getElementById('pdfLoader').style.display = 'none'; // nascondi loader
                 document.getElementById('generatePdfBtn').style.display = 'inline-block';
-                document.getElementById('pdfLoader').style.display = 'none';
             }
         }
+
 
         // Funzione per mostrare/nascondere loader
         function pdfLoading(show) {
