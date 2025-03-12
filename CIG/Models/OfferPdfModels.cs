@@ -82,9 +82,10 @@
 
     public class OfferPdfPage5
     {
-        public string TipoCliente { get; set; } // Privato, Società, Professionista
-        public List<string> Documenti { get; set; } = new();
+        public string tipo_cliente { get; set; }
+        public List<string> documenti { get; set; } // 👈 aggiungi questa proprietà
     }
+
 
 
 }
