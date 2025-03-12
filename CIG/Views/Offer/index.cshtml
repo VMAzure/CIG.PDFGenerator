@@ -429,7 +429,7 @@
         }
 
         //TABELLA CLIENTI
-                async function loadCustomersTable() {
+        async function loadCustomersTable() {
             const token = new URLSearchParams(window.location.search).get('token');
             const customerTableBody = document.getElementById('customerTableBody');
 
@@ -524,7 +524,7 @@
 
         //RIEPILOGO
 
-                function populateSummary() {
+        function populateSummary() {
             const riepilogoOfferta = document.getElementById('riepilogoOfferta');
 
             const selectedServices = Array.from(document.querySelectorAll('.service-item')).map(serviceItem => {
@@ -563,24 +563,7 @@
             `;
         }
 
-        //RICHIEDO L'ELENCO DEI DOCUMENTI
-
-            async function getDocumentiNecessari(tipoCliente, token) {
-            const response = await fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error("Errore recupero documenti necessari");
-            }
-
-            const data = await response.json();
-            return data.documenti; // ritorna direttamente l'array di documenti
-        }
-
-
+        
         // QUI GENERO IL PDF
         document.addEventListener('click', async function (event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
