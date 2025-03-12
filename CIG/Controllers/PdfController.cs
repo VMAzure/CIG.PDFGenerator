@@ -555,8 +555,19 @@ namespace CIG.PDFGenerator.Controllers
                         }
                     });
 
+                    column.Item().PaddingTop(20).Text(text =>
+                    {
+                        text.DefaultTextStyle(x => x.FontSize(14).FontColor("#00213b"));
 
-                    column.Item().PaddingTop(30).Text("Verrà censita la tua anagrafica e saranno necessarie alcune firme (OTP) per autorizzare la gestione dei dati .")
+                        text.Span("Puoi inviare tutto a: ");
+                        
+                        var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
+                        column.Item().AlignLeft().Text(specialistaEmail)
+                            .FontSize(14).FontColor("#00213b");
+
+                    });
+
+                    column.Item().PaddingTop(10).Text("Verrà censita la tua anagrafica e saranno necessarie alcune firme (OTP) per autorizzare la gestione dei dati .")
                         .FontSize(14).FontColor("#00213b");
                 });
 
