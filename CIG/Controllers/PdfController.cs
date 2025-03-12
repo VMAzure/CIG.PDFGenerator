@@ -599,14 +599,24 @@ namespace CIG.PDFGenerator.Controllers
                 {
                     column.Spacing(10);
 
-                    column.Item().PaddingTop(10).Text(text =>
+                    column.Item().PaddingTop(10).Row(row =>
                     {
-                        text.Span("#4 - ").FontSize(28).FontColor("#FFFFFF");
-                        text.Span("I NOSTRI").FontSize(28).FontColor("#FFFFFF");
-                        text.Span("CONTATTI").FontSize(28).FontColor("#FF7100").Bold();
+                        row.RelativeItem().AlignMiddle().Text(text =>
+                        {
+                            text.Span("#4 - ").FontSize(28).FontColor("#FFFFFF");
+                            text.Span("I NOSTRI").FontSize(28).FontColor("#FFFFFF");
+                            text.Span("CONTATTI").FontSize(28).FontColor("#FF7100").Bold();
+                        });
+
+                        if (logoBytes != null)
+                        {
+                            row.AutoItem().AlignRight().AlignBottom()
+                               .Width(150).Image(logoBytes).FitWidth();
+                        }
                     });
 
-                    
+
+
                     column.Item().PaddingTop(30).Row(row =>
                     {
                         // Dealer info, solo se presente
@@ -692,10 +702,7 @@ namespace CIG.PDFGenerator.Controllers
                         });
                     });
 
-                    if (logoBytes != null)
-                    {
-                        column.Item().PaddingTop(30).Width(120).Image(logoBytes).FitWidth();
-                    }
+                    
                 });
             });
         }
