@@ -614,15 +614,16 @@ namespace CIG.PDFGenerator.Controllers
                                 dealerColumn.Item().PaddingTop(10).Text(offer.DealerInfo.CompanyName)
                                     .FontSize(16).Bold();
 
-                                dealerColumn.Item().Text(offer.DealerInfo.FullName)
+                                var dealerFullName = $"{offer.DealerInfo.FirstName} {offer.DealerInfo.LastName}".Trim();
+                                dealerColumn.Item().Text(dealerFullName)
                                     .FontSize(14);
 
                                 dealerColumn.Item().Text(offer.DealerInfo.Email)
                                     .FontSize(14);
 
-                                if (!string.IsNullOrWhiteSpace(offer.DealerInfo.Phone))
+                                if (!string.IsNullOrWhiteSpace(offer.DealerInfo.MobilePhone))
                                 {
-                                    dealerColumn.Item().Text($"Tel: {offer.DealerInfo.Phone}")
+                                    dealerColumn.Item().Text($"Tel: {offer.DealerInfo.MobilePhone}")
                                         .FontSize(14);
                                 }
 
@@ -644,15 +645,16 @@ namespace CIG.PDFGenerator.Controllers
                             adminColumn.Item().PaddingTop(10).Text(offer.AdminInfo.CompanyName)
                                 .FontSize(16).Bold();
 
-                            adminColumn.Item().Text(offer.AdminInfo.FullName)
+                            var adminFullName = $"{offer.AdminInfo.FirstName} {offer.AdminInfo.LastName}".Trim();
+                            adminColumn.Item().Text(adminFullName)
                                 .FontSize(14);
 
                             adminColumn.Item().Text(offer.AdminInfo.Email)
                                 .FontSize(14);
 
-                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.Phone))
+                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.MobilePhone))
                             {
-                                adminColumn.Item().Text($"Tel: {offer.AdminInfo.Phone}")
+                                adminColumn.Item().Text($"Tel: {offer.AdminInfo.MobilePhone}")
                                     .FontSize(14);
                             }
 
@@ -666,6 +668,7 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+
 
 
 
