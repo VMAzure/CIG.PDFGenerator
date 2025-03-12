@@ -7,6 +7,8 @@
         public string? CustomerLastName { get; set; }
         public string? CustomerCompanyName { get; set; }
         public string? CustomerIcon { get; set; }
+        public string? TipoCliente { get; set; }
+
 
         // Immagini auto
         public string? CarMainImageUrl { get; set; }

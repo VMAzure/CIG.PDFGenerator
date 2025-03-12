@@ -58,7 +58,8 @@ namespace CIG.PDFGenerator.Controllers
 
                 var carImagesDetails = await DownloadCarImagesAsync(offer.CarImages);
                 var serviceIconBytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_environment.WebRootPath, "images", "Services_icon.png"));
-                var tipoCliente = "privato"; // provvisorio
+                var tipoCliente = offer.TipoCliente ?? "privato";
+
                 var documentiNecessari = await GetDocumentiNecessariAsync(tipoCliente, token);
                 RegisterFonts();
 
