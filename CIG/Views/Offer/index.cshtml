@@ -565,7 +565,7 @@
 
         
         // QUI GENERO IL PDF
-                document.addEventListener('click', async function (event) {
+        document.addEventListener('click', async function (event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
 
@@ -577,6 +577,7 @@
                 if (!selectedCustomer || !carMainImageUrl || !adminInfo || !carImagesUrls.length) {
                     alert("Alcuni dati obbligatori mancano. Controlla cliente, auto, immagini e info admin.");
                     pdfLoader.style.display = 'none';
+                    generatePdfBtn.style.display = 'inline-block';
                     return;
                 }
 
@@ -608,7 +609,7 @@
                         KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
                         Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
                         Canone: parseFloat(document.getElementById('canone').value) || 0
-                    }),
+                    },
                     AdminInfo: adminInfo,
                     NoteAuto: noteAuto.value || ""
                 };
@@ -631,6 +632,7 @@
                 } catch (error) {
                     console.error("Errore recupero documenti:", error);
                     pdfLoader.style.display = 'none';
+                    generatePdfBtn.style.display = 'inline-block';
                 }
             }
         });
