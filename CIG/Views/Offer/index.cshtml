@@ -563,53 +563,111 @@
             `;
         }
 
+        //RICHIEDO L'ELENCO DEI DOCUMENTI
+
+            async function getDocumentiNecessari(tipoCliente, token) {
+            const response = await fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error("Errore recupero documenti necessari");
+            }
+
+            const data = await response.json();
+            return data.documenti; // ritorna direttamente l'array di documenti
+        }
+
+
         // QUI GENERO IL PDF
-                document.addEventListener('click', function(event) {
+        document.addEventListener('click', async function (event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
 
                 // Mostro il loader
                 document.getElementById('pdfLoader').style.display = 'block';
 
-                if (currentStep === totalSteps) {
-                    const payload = {
-                        CustomerFirstName: selectedCustomer.nome || "",
-                        CustomerLastName: selectedCustomer.cognome || "",
-                        CustomerCompanyName: selectedCustomer.ragione_sociale || "",
-                        CustomerIcon: selectedCustomer.icon || "default.png",
-                        TipoCliente: selectedCustomer.tipo_cliente || "", // 👈 nuova proprietà dinamica
-
-                        CarImages: carImagesUrls,
-                        CarMainImageUrl: carMainImageUrl,
-                        Auto: {
-                            Marca: marcaDropdown.value,
-                            Modello: modelloDropdown.value,
-                            Versione: versioneDropdown.value,
-                            Variante: varianteDropdown.value,
-                            DescrizioneVersione: descrizioneVersione.value,
-                            Note: noteAuto.value
-                        },
-                        Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => {
-                            return {
-                                Nome: serviceItem.querySelector('strong').textContent,
-
-                                Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || "Nessuna"
-                            };
-                        }),
-                        DatiEconomici: {
-                            Durata: parseInt(document.getElementById('durataMesi').value) || 0,
-                            KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
-                            Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
-                            Canone: parseFloat(document.getElementById('canone').value) || 0
-                        },
-                        AdminInfo: adminInfo,
-                        NoteAuto: noteAuto.value || ""
-                    };
-
-                    fetchPdf(payload, token);
+                // Controllo dati obbligatori
+                if (!selectedCustomer || !carMainImageUrl || !adminInfo || !carImagesUrls.length) {
+                    alert("Alcuni dati obbligatori mancano. Controlla cliente, auto, immagini e info admin.");
+                    document.getElementById('pdfLoader').style.display = 'none';
+                    return;
                 }
+
+                // Determino il tipo cliente (con fallback a 'privato')
+                const tipoCliente = selectedCustomer.tipo_cliente || "privato";
+
+                // Recupero dinamicamente i documenti necessari prima del payload
+                let documentiNecessari = [];
+                try {
+                    const response = await fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
+                        headers: {
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    const documentiData = await response.json();
+                    documentiNecessari = documentiNecessari.concat(documentiNecessari, documentiNecessari.documenti || []);
+                } catch (error) {
+                    alert("Errore recupero documenti necessari.");
+                    console.error(error);
+                    document.getElementById('pdfLoader').style.display = 'none';
+                    return;
+                }
+
+                const payload = {
+                    CustomerFirstName: selectedCustomer.nome || "",
+                    CustomerLastName: selectedCustomer.cognome || "",
+                    CustomerCompanyName: selectedCustomer.ragione_sociale || "",
+                    CustomerIcon: selectedCustomer.icon || "default.png",
+                    TipoCliente: selectedCustomer.tipo_cliente || "",
+                    DocumentiNecessari: [], // 👈 da popolare tramite fetch JS
+                    CarImages: carImagesUrls,
+                    CarMainImageUrl: carMainImageUrl,
+                    Auto: {
+                        Marca: marcaDropdown.value || "",
+                        Modello: modelloDropdown.value || "",
+                        Versione: versioneDropdown.value || "",
+                        Variante: varianteDropdown.value || "",
+                        DescrizioneVersione: descrizioneVersione.value || "",
+                        Note: noteAuto.value || ""
+                    },
+                    Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
+                        Nome: serviceItem.querySelector('strong').textContent,
+                        Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || "Nessuna"
+                    })),
+                    DatiEconomici: {
+                        Durata: parseInt(document.getElementById('durataMesi').value) || 0,
+                        KmTotali: parseInt(document.getElementById('kmTotali').value) || 0,
+                        Anticipo: parseFloat(document.getElementById('anticipo').value) || 0,
+                        Canone: parseFloat(document.getElementById('canone').value) || 0
+                    },
+                    AdminInfo: adminInfo,
+                    NoteAuto: noteAuto.value || ""
+                };
+
+                    const tipoCliente = selectedCustomer.tipo_cliente || "privato";
+                    fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
+                        headers: {
+                            "Authorization": "Bearer " + token
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        payload.DocumentiNecessari = data.documenti;
+                        fetchPdf(payload, token);
+                    })
+                    .catch(error => {
+                        console.error("Errore recupero documenti:", error);
+                    });
+
+
+                // Chiama la funzione per generare e scaricare il PDF
+                fetchPdf(payload, token);
             }
         });
+
 
         // Nuova funzione per la fetch con gestione del loader
         async function fetchPdf(payload, token) {

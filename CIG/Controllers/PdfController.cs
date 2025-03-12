@@ -60,7 +60,6 @@ namespace CIG.PDFGenerator.Controllers
                 var serviceIconBytes = await System.IO.File.ReadAllBytesAsync(Path.Combine(_environment.WebRootPath, "images", "Services_icon.png"));
                 var tipoCliente = offer.TipoCliente ?? "privato";
 
-                var documentiNecessari = await GetDocumentiNecessariAsync(tipoCliente, token);
                 RegisterFonts();
 
                 var pdfBytes = Document.Create(container =>
@@ -69,7 +68,7 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage2(container, img29Bytes, img09Bytes, offer);
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
                     CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
-                    CreatePage5(container, offer, documentiNecessari.documenti); // 👈 utilizza i documenti recuperati
+                    CreatePage5(container, offer, offer.DocumentiNecessari); // 👈 utilizza i documenti recuperati
 
 
                 }).GeneratePdf();
@@ -500,29 +499,7 @@ namespace CIG.PDFGenerator.Controllers
             });
         }
 
-        private async Task<OfferPdfPage5> GetDocumentiNecessariAsync(string tipoCliente, string token)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var response = await client.GetAsync($"https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/{tipoCliente}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<OfferPdfPage5>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                return result;
-            }
-            else
-            {
-                throw new Exception("Errore recupero documenti necessari");
-            }
-        }
-
+        
         private void CreatePage5(IDocumentContainer container, OfferPdfPage1 offer, List<string> documenti)
         {
             container.Page(page =>

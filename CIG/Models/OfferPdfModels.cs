@@ -8,6 +8,7 @@
         public string? CustomerCompanyName { get; set; }
         public string? CustomerIcon { get; set; }
         public string? TipoCliente { get; set; }
+        public List<string> DocumentiNecessari { get; set; } = new();
 
 
         // Immagini auto
@@ -81,14 +82,8 @@
         public string? MobilePhone { get; set; }
         public string? LogoUrl { get; set; }
     }
-
-    public class OfferPdfPage5
-    {
-        public string tipo_cliente { get; set; }
-        public List<string> documenti { get; set; } // 👈 aggiungi questa proprietà
-    }
-
-
-
 }
+
+
+
 
