@@ -563,11 +563,11 @@ namespace CIG.PDFGenerator.Controllers
                         
                         var specialistaEmail = offer.DealerInfo?.Email ?? offer.AdminInfo.Email;
                         column.Item().AlignLeft().Text(specialistaEmail)
-                            .FontSize(14).FontColor("#00213b");
+                            .FontSize(14).FontColor("#00213b").Bold();
 
                     });
 
-                    column.Item().PaddingTop(10).Text("Verrà censita la tua anagrafica e saranno necessarie alcune firme (OTP) per autorizzare la gestione dei dati .")
+                    column.Item().PaddingTop(20).Text("Verrà censita la tua anagrafica e saranno necessarie alcune firme (OTP) per autorizzare la gestione dei dati .")
                         .FontSize(14).FontColor("#00213b");
                 });
 
