@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jD8QslLoBClu2dI09gynCxPwN1/ID/JpTSMsFzJwAbw=",
+  "Hash": "g4I4GTy3iFFrzbGh7WNSu2XIRNycCgBJFlbPLaa6bIs=",
   "Source": "CIG.PDFGenerator",
   "BasePath": "_content/CIG.PDFGenerator",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "kbyuvwaxam",
-      "Integrity": "wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=",
+      "Fingerprint": "bwp3ww8v2d",
+      "Integrity": "24VDhsizbx4J5fXymkvjQWJr3+SKt321WiyoibxKz8Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\offer.css"
@@ -122,6 +122,405 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Black.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Black#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yhj0pfmpwg",
+      "Integrity": "SqifBeRmUa+saI4NlwgkiZ4T3ba4tZg7i7IDHHauRaA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Black.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BlackItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-BlackItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "faw0vmgde3",
+      "Integrity": "d3ppAIDrKYQGGZpnqzLmlU63eCOlEyAIUjJbkDK9UBM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-BlackItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Bold.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Bold#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0f68wwysiu",
+      "Integrity": "hG1YI+XJCaWq1J771x3V8zIKhkD/+GhAv31SnI2GYKU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Bold.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BoldItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-BoldItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "54vmr8m2r7",
+      "Integrity": "BUI4EaX7rwN62wQLHYmGa+ei96cHXZKRtvZ9GvKI+D0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-BoldItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBold.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-ExtraBold#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8xxo37h9d2",
+      "Integrity": "RI/hAr+nhdKHkNXhpyrGjOhI5nRysJXtfxra3Da/Geo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-ExtraBold.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBoldItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-ExtraBoldItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fh2dij0z1i",
+      "Integrity": "04usYe2o2MACsahS9TaJAaCF++HYRLXgoUm2dOIuLN0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-ExtraBoldItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLight.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-ExtraLight#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "547lkdxsqo",
+      "Integrity": "u/A7hZWMzumnHN2Q6Ln+2q/jRiDSoOoCtDk4WgXcgOk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-ExtraLight.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLightItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-ExtraLightItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "pptluvaswj",
+      "Integrity": "reN7Jq/dEwEvqUxBi6hF8jfJuNPAXe8mRsurewrZjj0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-ExtraLightItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Italic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Italic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "knmvhweokc",
+      "Integrity": "kGqERiIMH9LTaakT3mrHDcxNXW98AqWEkmO1rIinfcU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Italic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Light.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Light#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "01sei0cdnq",
+      "Integrity": "nChrR6+EV+/ItNYtBqZIt3NLmfe7ToCtBiUYKDvTxgs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Light.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-LightItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-LightItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gxus2zaoti",
+      "Integrity": "bCbytUa+AbyS0Q3oMQ17M2We2tp+yIfgqLe9QK8+yjQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-LightItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Medium.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Medium#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "j8xlfg648r",
+      "Integrity": "fVV+1fVrlcK+SnEuCcljbIZKXsSb0ST+TylzvuEo7Ps=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Medium.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-MediumItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-MediumItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "eofdaz5s62",
+      "Integrity": "YmmZ+II+O2mhQiKvfNLN1ukDQQfHAJV2m9QIaRw1h/E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-MediumItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Regular.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Regular#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x1juw6fwdo",
+      "Integrity": "9aPwLEpy8doRxtrfT9eMB7LxRaNO1G64de0Nooy9NIw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Regular.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBold.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-SemiBold#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rppzjfcfyl",
+      "Integrity": "73uArRjTr6scdplyRS0eLkTCC6EqexyxxtZiUlyFWK4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-SemiBold.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBoldItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-SemiBoldItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "g76rw80qme",
+      "Integrity": "LBgN2g6YkQAnWrWXhoB47a+9rpRf0SS7fCZz5olv0B8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-SemiBoldItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Thin.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-Thin#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qadrd63oex",
+      "Integrity": "ErEFUryaENUHwZj/RJyR1j+pi6SfQcXFX0gl304AvYQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-Thin.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ThinItalic.ttf",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "fonts/Montserrat-ThinItalic#[.{fingerprint}]?.ttf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bnbwgpe4u1",
+      "Integrity": "9/YYfzx4tKEf/ZAkuezhzxYkybMZa4hzKyki3884DGg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\fonts\\Montserrat-ThinItalic.ttf"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\_offer_pag_4.jpg",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/_offer_pag_4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "a30xjxieq8",
+      "Integrity": "tjVu58Vpil52a4/wZIByjQ6Tyg49HoyKGY7ki/lSltk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\_offer_pag_4.jpg"
+    },
+    {
       "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\default-car.png",
       "SourceId": "CIG.PDFGenerator",
       "SourceType": "Discovered",
@@ -157,11 +556,95 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "o8ff28ocx3",
-      "Integrity": "GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=",
+      "Fingerprint": "hkfa1a7z7b",
+      "Integrity": "r1llThXkZXKFRQzqpJQPjSIv5sLcbt4p9dQRQGdYR7c=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\offer_pag_1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_2.jpg",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/offer_pag_2#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "bgkjjgxmcg",
+      "Integrity": "tU5612SBtLz8vkpABjlFTzQnLOTgsBbpc/JOgxUYpBM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\offer_pag_2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_3.jpg",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/offer_pag_3#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "0br3a1rtiv",
+      "Integrity": "/Ir/Iairevh9JKVsWiruxeFlcu7Rtr3B3byiWvhnt9U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\offer_pag_3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_4.jpg",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/offer_pag_4#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "hwr0sto5kk",
+      "Integrity": "QX13X2AHERhviTB7pKeyn0UCNjBhIbCF50zGxGQePBM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\offer_pag_4.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\Services_icon.png",
+      "SourceId": "CIG.PDFGenerator",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\",
+      "BasePath": "_content/CIG.PDFGenerator",
+      "RelativePath": "images/Services_icon#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "q3hxi9ad6x",
+      "Integrity": "KjWhtMUZBRapxG10GIAMCtJE9bu2r+i/blbvKyw8ulg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Services_icon.png"
     },
     {
       "Identity": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\js\\site.js",
@@ -1590,6 +2073,51 @@
       ]
     },
     {
+      "Route": "css/offer.bwp3ww8v2d.css",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8369"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"24VDhsizbx4J5fXymkvjQWJr3+SKt321WiyoibxKz8Q=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 18:19:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bwp3ww8v2d"
+        },
+        {
+          "Name": "label",
+          "Value": "css/offer.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-24VDhsizbx4J5fXymkvjQWJr3+SKt321WiyoibxKz8Q="
+        }
+      ]
+    },
+    {
       "Route": "css/offer.css",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
       "Selectors": [],
@@ -1600,7 +2128,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5453"
+          "Value": "8369"
         },
         {
           "Name": "Content-Type",
@@ -1608,11 +2136,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
+          "Value": "\"24VDhsizbx4J5fXymkvjQWJr3+SKt321WiyoibxKz8Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
+          "Value": "Tue, 11 Mar 2025 18:19:28 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1622,52 +2150,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
-        }
-      ]
-    },
-    {
-      "Route": "css/offer.kbyuvwaxam.css",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\css\\offer.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5453"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 07 Mar 2025 07:54:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "kbyuvwaxam"
-        },
-        {
-          "Name": "label",
-          "Value": "css/offer.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-wBdceoI3D8S5w7skhyD3FUHQ3yLWZ/eMb3IQfw2ZbrY="
+          "Value": "sha256-24VDhsizbx4J5fXymkvjQWJr3+SKt321WiyoibxKz8Q="
         }
       ]
     },
@@ -1836,6 +2319,1564 @@
       ]
     },
     {
+      "Route": "fonts/Montserrat-Black.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Black.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "343296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SqifBeRmUa+saI4NlwgkiZ4T3ba4tZg7i7IDHHauRaA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-SqifBeRmUa+saI4NlwgkiZ4T3ba4tZg7i7IDHHauRaA="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Black.yhj0pfmpwg.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Black.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "343296"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"SqifBeRmUa+saI4NlwgkiZ4T3ba4tZg7i7IDHHauRaA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yhj0pfmpwg"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Black.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SqifBeRmUa+saI4NlwgkiZ4T3ba4tZg7i7IDHHauRaA="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-BlackItalic.faw0vmgde3.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BlackItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348396"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"d3ppAIDrKYQGGZpnqzLmlU63eCOlEyAIUjJbkDK9UBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "faw0vmgde3"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-BlackItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-d3ppAIDrKYQGGZpnqzLmlU63eCOlEyAIUjJbkDK9UBM="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-BlackItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BlackItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348396"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"d3ppAIDrKYQGGZpnqzLmlU63eCOlEyAIUjJbkDK9UBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-d3ppAIDrKYQGGZpnqzLmlU63eCOlEyAIUjJbkDK9UBM="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Bold.0f68wwysiu.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Bold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "335788"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hG1YI+XJCaWq1J771x3V8zIKhkD/+GhAv31SnI2GYKU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0f68wwysiu"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Bold.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hG1YI+XJCaWq1J771x3V8zIKhkD/+GhAv31SnI2GYKU="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Bold.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Bold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "335788"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hG1YI+XJCaWq1J771x3V8zIKhkD/+GhAv31SnI2GYKU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hG1YI+XJCaWq1J771x3V8zIKhkD/+GhAv31SnI2GYKU="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-BoldItalic.54vmr8m2r7.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "342016"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BUI4EaX7rwN62wQLHYmGa+ei96cHXZKRtvZ9GvKI+D0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "54vmr8m2r7"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-BoldItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BUI4EaX7rwN62wQLHYmGa+ei96cHXZKRtvZ9GvKI+D0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-BoldItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-BoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "342016"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"BUI4EaX7rwN62wQLHYmGa+ei96cHXZKRtvZ9GvKI+D0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-BUI4EaX7rwN62wQLHYmGa+ei96cHXZKRtvZ9GvKI+D0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraBold.8xxo37h9d2.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "344052"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RI/hAr+nhdKHkNXhpyrGjOhI5nRysJXtfxra3Da/Geo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "8xxo37h9d2"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-ExtraBold.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RI/hAr+nhdKHkNXhpyrGjOhI5nRysJXtfxra3Da/Geo="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraBold.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "344052"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RI/hAr+nhdKHkNXhpyrGjOhI5nRysJXtfxra3Da/Geo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RI/hAr+nhdKHkNXhpyrGjOhI5nRysJXtfxra3Da/Geo="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraBoldItalic.fh2dij0z1i.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348532"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"04usYe2o2MACsahS9TaJAaCF++HYRLXgoUm2dOIuLN0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fh2dij0z1i"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-ExtraBoldItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-04usYe2o2MACsahS9TaJAaCF++HYRLXgoUm2dOIuLN0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraBoldItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraBoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "348532"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"04usYe2o2MACsahS9TaJAaCF++HYRLXgoUm2dOIuLN0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-04usYe2o2MACsahS9TaJAaCF++HYRLXgoUm2dOIuLN0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraLight.547lkdxsqo.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLight.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u/A7hZWMzumnHN2Q6Ln+2q/jRiDSoOoCtDk4WgXcgOk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "547lkdxsqo"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-ExtraLight.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-u/A7hZWMzumnHN2Q6Ln+2q/jRiDSoOoCtDk4WgXcgOk="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraLight.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLight.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"u/A7hZWMzumnHN2Q6Ln+2q/jRiDSoOoCtDk4WgXcgOk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-u/A7hZWMzumnHN2Q6Ln+2q/jRiDSoOoCtDk4WgXcgOk="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraLightItalic.pptluvaswj.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLightItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "336808"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"reN7Jq/dEwEvqUxBi6hF8jfJuNPAXe8mRsurewrZjj0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "pptluvaswj"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-ExtraLightItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-reN7Jq/dEwEvqUxBi6hF8jfJuNPAXe8mRsurewrZjj0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ExtraLightItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ExtraLightItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "336808"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"reN7Jq/dEwEvqUxBi6hF8jfJuNPAXe8mRsurewrZjj0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-reN7Jq/dEwEvqUxBi6hF8jfJuNPAXe8mRsurewrZjj0="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Italic.knmvhweokc.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Italic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337132"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kGqERiIMH9LTaakT3mrHDcxNXW98AqWEkmO1rIinfcU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "knmvhweokc"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Italic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kGqERiIMH9LTaakT3mrHDcxNXW98AqWEkmO1rIinfcU="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Italic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Italic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337132"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kGqERiIMH9LTaakT3mrHDcxNXW98AqWEkmO1rIinfcU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kGqERiIMH9LTaakT3mrHDcxNXW98AqWEkmO1rIinfcU="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Light.01sei0cdnq.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Light.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330888"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nChrR6+EV+/ItNYtBqZIt3NLmfe7ToCtBiUYKDvTxgs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "01sei0cdnq"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Light.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-nChrR6+EV+/ItNYtBqZIt3NLmfe7ToCtBiUYKDvTxgs="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Light.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Light.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330888"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"nChrR6+EV+/ItNYtBqZIt3NLmfe7ToCtBiUYKDvTxgs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-nChrR6+EV+/ItNYtBqZIt3NLmfe7ToCtBiUYKDvTxgs="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-LightItalic.gxus2zaoti.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-LightItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337208"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bCbytUa+AbyS0Q3oMQ17M2We2tp+yIfgqLe9QK8+yjQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gxus2zaoti"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-LightItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bCbytUa+AbyS0Q3oMQ17M2We2tp+yIfgqLe9QK8+yjQ="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-LightItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-LightItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337208"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bCbytUa+AbyS0Q3oMQ17M2We2tp+yIfgqLe9QK8+yjQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bCbytUa+AbyS0Q3oMQ17M2We2tp+yIfgqLe9QK8+yjQ="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Medium.j8xlfg648r.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Medium.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fVV+1fVrlcK+SnEuCcljbIZKXsSb0ST+TylzvuEo7Ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "j8xlfg648r"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Medium.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fVV+1fVrlcK+SnEuCcljbIZKXsSb0ST+TylzvuEo7Ps="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Medium.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Medium.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330872"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fVV+1fVrlcK+SnEuCcljbIZKXsSb0ST+TylzvuEo7Ps=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-fVV+1fVrlcK+SnEuCcljbIZKXsSb0ST+TylzvuEo7Ps="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-MediumItalic.eofdaz5s62.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-MediumItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337092"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YmmZ+II+O2mhQiKvfNLN1ukDQQfHAJV2m9QIaRw1h/E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "eofdaz5s62"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-MediumItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-YmmZ+II+O2mhQiKvfNLN1ukDQQfHAJV2m9QIaRw1h/E="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-MediumItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-MediumItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "337092"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"YmmZ+II+O2mhQiKvfNLN1ukDQQfHAJV2m9QIaRw1h/E=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-YmmZ+II+O2mhQiKvfNLN1ukDQQfHAJV2m9QIaRw1h/E="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Regular.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Regular.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330948"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9aPwLEpy8doRxtrfT9eMB7LxRaNO1G64de0Nooy9NIw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9aPwLEpy8doRxtrfT9eMB7LxRaNO1G64de0Nooy9NIw="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Regular.x1juw6fwdo.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Regular.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "330948"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9aPwLEpy8doRxtrfT9eMB7LxRaNO1G64de0Nooy9NIw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x1juw6fwdo"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Regular.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9aPwLEpy8doRxtrfT9eMB7LxRaNO1G64de0Nooy9NIw="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-SemiBold.rppzjfcfyl.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "333988"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"73uArRjTr6scdplyRS0eLkTCC6EqexyxxtZiUlyFWK4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rppzjfcfyl"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-SemiBold.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-73uArRjTr6scdplyRS0eLkTCC6EqexyxxtZiUlyFWK4="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-SemiBold.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBold.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "333988"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"73uArRjTr6scdplyRS0eLkTCC6EqexyxxtZiUlyFWK4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-73uArRjTr6scdplyRS0eLkTCC6EqexyxxtZiUlyFWK4="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-SemiBoldItalic.g76rw80qme.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "339028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LBgN2g6YkQAnWrWXhoB47a+9rpRf0SS7fCZz5olv0B8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g76rw80qme"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-SemiBoldItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LBgN2g6YkQAnWrWXhoB47a+9rpRf0SS7fCZz5olv0B8="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-SemiBoldItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-SemiBoldItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "339028"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LBgN2g6YkQAnWrWXhoB47a+9rpRf0SS7fCZz5olv0B8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:47 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LBgN2g6YkQAnWrWXhoB47a+9rpRf0SS7fCZz5olv0B8="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Thin.qadrd63oex.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Thin.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "329864"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ErEFUryaENUHwZj/RJyR1j+pi6SfQcXFX0gl304AvYQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qadrd63oex"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-Thin.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ErEFUryaENUHwZj/RJyR1j+pi6SfQcXFX0gl304AvYQ="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-Thin.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-Thin.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "329864"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ErEFUryaENUHwZj/RJyR1j+pi6SfQcXFX0gl304AvYQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ErEFUryaENUHwZj/RJyR1j+pi6SfQcXFX0gl304AvYQ="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ThinItalic.bnbwgpe4u1.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ThinItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "336148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9/YYfzx4tKEf/ZAkuezhzxYkybMZa4hzKyki3884DGg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "bnbwgpe4u1"
+        },
+        {
+          "Name": "label",
+          "Value": "fonts/Montserrat-ThinItalic.ttf"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9/YYfzx4tKEf/ZAkuezhzxYkybMZa4hzKyki3884DGg="
+        }
+      ]
+    },
+    {
+      "Route": "fonts/Montserrat-ThinItalic.ttf",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\fonts\\Montserrat-ThinItalic.ttf",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "336148"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/x-font-ttf"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9/YYfzx4tKEf/ZAkuezhzxYkybMZa4hzKyki3884DGg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 17:55:46 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9/YYfzx4tKEf/ZAkuezhzxYkybMZa4hzKyki3884DGg="
+        }
+      ]
+    },
+    {
+      "Route": "images/_offer_pag_4.a30xjxieq8.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\_offer_pag_4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728824"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tjVu58Vpil52a4/wZIByjQ6Tyg49HoyKGY7ki/lSltk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 17:56:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "a30xjxieq8"
+        },
+        {
+          "Name": "label",
+          "Value": "images/_offer_pag_4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-tjVu58Vpil52a4/wZIByjQ6Tyg49HoyKGY7ki/lSltk="
+        }
+      ]
+    },
+    {
+      "Route": "images/_offer_pag_4.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\_offer_pag_4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "728824"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tjVu58Vpil52a4/wZIByjQ6Tyg49HoyKGY7ki/lSltk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 17:56:07 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tjVu58Vpil52a4/wZIByjQ6Tyg49HoyKGY7ki/lSltk="
+        }
+      ]
+    },
+    {
       "Route": "images/default-car.dved4xkmac.png",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\default-car.png",
       "Selectors": [],
@@ -1918,6 +3959,51 @@
       ]
     },
     {
+      "Route": "images/offer_pag_1.hkfa1a7z7b.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "805497"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"r1llThXkZXKFRQzqpJQPjSIv5sLcbt4p9dQRQGdYR7c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 19:01:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hkfa1a7z7b"
+        },
+        {
+          "Name": "label",
+          "Value": "images/offer_pag_1.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-r1llThXkZXKFRQzqpJQPjSIv5sLcbt4p9dQRQGdYR7c="
+        }
+      ]
+    },
+    {
       "Route": "images/offer_pag_1.jpg",
       "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
       "Selectors": [],
@@ -1928,7 +4014,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "740559"
+          "Value": "805497"
         },
         {
           "Name": "Content-Type",
@@ -1936,11 +4022,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+          "Value": "\"r1llThXkZXKFRQzqpJQPjSIv5sLcbt4p9dQRQGdYR7c=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+          "Value": "Fri, 07 Mar 2025 19:01:08 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1950,13 +4036,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
+          "Value": "sha256-r1llThXkZXKFRQzqpJQPjSIv5sLcbt4p9dQRQGdYR7c="
         }
       ]
     },
     {
-      "Route": "images/offer_pag_1.o8ff28ocx3.jpg",
-      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_1.jpg",
+      "Route": "images/offer_pag_2.bgkjjgxmcg.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_2.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1965,7 +4051,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "740559"
+          "Value": "725647"
         },
         {
           "Name": "Content-Type",
@@ -1973,11 +4059,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8=\""
+          "Value": "\"tU5612SBtLz8vkpABjlFTzQnLOTgsBbpc/JOgxUYpBM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 07 Mar 2025 14:56:10 GMT"
+          "Value": "Fri, 07 Mar 2025 19:44:55 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1987,15 +4073,298 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "o8ff28ocx3"
+          "Value": "bgkjjgxmcg"
         },
         {
           "Name": "label",
-          "Value": "images/offer_pag_1.jpg"
+          "Value": "images/offer_pag_2.jpg"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-GCOL4YCI8PaFfUtB/oMFn5Y4zg+OuXL4STyreVCOqc8="
+          "Value": "sha256-tU5612SBtLz8vkpABjlFTzQnLOTgsBbpc/JOgxUYpBM="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_2.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_2.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "725647"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"tU5612SBtLz8vkpABjlFTzQnLOTgsBbpc/JOgxUYpBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 19:44:55 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-tU5612SBtLz8vkpABjlFTzQnLOTgsBbpc/JOgxUYpBM="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_3.0br3a1rtiv.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "657682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Ir/Iairevh9JKVsWiruxeFlcu7Rtr3B3byiWvhnt9U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 08 Mar 2025 20:22:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "0br3a1rtiv"
+        },
+        {
+          "Name": "label",
+          "Value": "images/offer_pag_3.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Ir/Iairevh9JKVsWiruxeFlcu7Rtr3B3byiWvhnt9U="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_3.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_3.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "657682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/Ir/Iairevh9JKVsWiruxeFlcu7Rtr3B3byiWvhnt9U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 08 Mar 2025 20:22:12 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/Ir/Iairevh9JKVsWiruxeFlcu7Rtr3B3byiWvhnt9U="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_4.hwr0sto5kk.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "340289"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QX13X2AHERhviTB7pKeyn0UCNjBhIbCF50zGxGQePBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 18:02:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hwr0sto5kk"
+        },
+        {
+          "Name": "label",
+          "Value": "images/offer_pag_4.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QX13X2AHERhviTB7pKeyn0UCNjBhIbCF50zGxGQePBM="
+        }
+      ]
+    },
+    {
+      "Route": "images/offer_pag_4.jpg",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\offer_pag_4.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "340289"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"QX13X2AHERhviTB7pKeyn0UCNjBhIbCF50zGxGQePBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 11 Mar 2025 18:02:33 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-QX13X2AHERhviTB7pKeyn0UCNjBhIbCF50zGxGQePBM="
+        }
+      ]
+    },
+    {
+      "Route": "images/Services_icon.png",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\Services_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3980"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KjWhtMUZBRapxG10GIAMCtJE9bu2r+i/blbvKyw8ulg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 19:40:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-KjWhtMUZBRapxG10GIAMCtJE9bu2r+i/blbvKyw8ulg="
+        }
+      ]
+    },
+    {
+      "Route": "images/Services_icon.q3hxi9ad6x.png",
+      "AssetFile": "C:\\Users\\valer\\source\\repos\\VMAzure\\CIG.PDFGenerator\\CIG\\wwwroot\\images\\Services_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3980"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"KjWhtMUZBRapxG10GIAMCtJE9bu2r+i/blbvKyw8ulg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 07 Mar 2025 19:40:50 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "q3hxi9ad6x"
+        },
+        {
+          "Name": "label",
+          "Value": "images/Services_icon.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-KjWhtMUZBRapxG10GIAMCtJE9bu2r+i/blbvKyw8ulg="
         }
       ]
     },
