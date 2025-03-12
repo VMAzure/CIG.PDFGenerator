@@ -612,11 +612,11 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             row.RelativeItem().Column(dealerColumn =>
                             {
-                                dealerColumn.Item().Text("Il tuo Dealer di riferimento:")
+                                dealerColumn.Item().Text("Il tuo Dealer:")
                                     .FontSize(18).FontColor("#00213b").Bold();
 
                                 dealerColumn.Item().PaddingTop(10).Text($"{offer.DealerInfo.CompanyName}")
-                                    .FontSize(16).Bold();
+                                    .FontSize(14).Bold();
 
                                 var dealerFullName = $"{offer.DealerInfo.FirstName} {offer.DealerInfo.LastName}".Trim();
                                 dealerColumn.Item().Text(dealerFullName).FontSize(14);
@@ -640,10 +640,11 @@ namespace CIG.PDFGenerator.Controllers
                                 if (addressParts.Any())
                                 {
                                     dealerColumn.Item()
-                                        .PaddingTop(5) // 👈 modifica questo valore per regolare lo spazio
-                                        .Text(string.Join(" ", addressParts))
+                                        .PaddingTop(10)
+                                        .Text($"Sede di: {string.Join(" ", addressParts)}")
                                         .FontSize(14);
                                 }
+
 
 
                             });
@@ -658,18 +659,34 @@ namespace CIG.PDFGenerator.Controllers
                                 .FontSize(18).FontColor("#00213b").Bold();
 
                             adminColumn.Item().PaddingTop(10).Text($"{offer.AdminInfo.CompanyName}")
-                                .FontSize(16).Bold();
+                                .FontSize(14).Bold();
 
                             var adminFullName = $"{offer.AdminInfo.FirstName} {offer.AdminInfo.LastName}".Trim();
                             adminColumn.Item().Text(adminFullName).FontSize(14);
 
-                            adminColumn.Item().Text(offer.AdminInfo.Email).FontSize(14);
-
                             if (!string.IsNullOrWhiteSpace(offer.AdminInfo.MobilePhone))
                                 adminColumn.Item().Text($"Tel: {offer.AdminInfo.MobilePhone}").FontSize(14);
 
+                            adminColumn.Item().Text(offer.AdminInfo.Email).FontSize(14);
+
+                            var AdminaddressParts = new List<string>();
+
                             if (!string.IsNullOrWhiteSpace(offer.AdminInfo.Address))
-                                adminColumn.Item().Text(offer.AdminInfo.Address).FontSize(14);
+                                AdminaddressParts.Add(offer.AdminInfo.Address);
+
+                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.PostalCode))
+                                AdminaddressParts.Add(offer.AdminInfo.PostalCode);
+
+                            if (!string.IsNullOrWhiteSpace(offer.AdminInfo.City))
+                                AdminaddressParts.Add(offer.AdminInfo.City);
+
+                            if (AdminaddressParts.Any())
+                            {
+                                adminColumn.Item()
+                                    .PaddingTop(10)
+                                    .Text(string.Join(" ", AdminaddressParts))
+                                    .FontSize(14);
+                            }
                         });
                     });
 
