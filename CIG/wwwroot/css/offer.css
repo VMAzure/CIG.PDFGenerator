@@ -373,7 +373,7 @@ select, input[type="text"] {
 .loader {
     width: 150px;
     height: 150px;
-    border: 14px solid #f3f3f3; /* Spessore incrementato */
+    border: 54px solid #f3f3f3; /* Spessore incrementato */
     border-top: 14px solid #3498db;
     border-radius: 50%;
     animation: spin 1s linear infinite;
