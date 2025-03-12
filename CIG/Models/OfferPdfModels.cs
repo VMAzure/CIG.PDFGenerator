@@ -1,4 +1,6 @@
-﻿namespace CIG.PDFGenerator.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CIG.PDFGenerator.Models
 {
     public class OfferPdfPage1
     {
@@ -79,6 +81,8 @@
         public string? PostalCode { get; set; }
         public string? City { get; set; }
         public string? SDICode { get; set; }
+        
+        [JsonPropertyName("cellulare")]
         public string? MobilePhone { get; set; }
         public string? LogoUrl { get; set; }
     }

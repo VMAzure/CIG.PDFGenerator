@@ -69,7 +69,8 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
                     CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
                     CreatePage5(container, offer, offer.DocumentiNecessari); // 👈 utilizza i documenti recuperati
-                    CreatePage6(container, offer, logoBytes);
+                    CreatePage6(container, offer, logoBytes, userRole);
+
 
 
 
@@ -627,10 +628,10 @@ namespace CIG.PDFGenerator.Controllers
                                     dealerColumn.Item().Text(offer.DealerInfo.Address).FontSize(14);
                             });
 
-                            row.Spacing(50); // spazio tra Dealer e Admin
+                            row.Spacing(50); // Spazio tra Dealer e Admin
                         }
 
-                        // Dati Admin obbligatori
+                        // Admin (sempre presente)
                         row.RelativeItem().Column(adminColumn =>
                         {
                             adminColumn.Item().Text("La nostra sede principale:")
@@ -659,6 +660,8 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
+
+
 
     }
 }
