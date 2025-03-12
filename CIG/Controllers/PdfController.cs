@@ -69,7 +69,7 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
                     CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
                     CreatePage5(container, offer, offer.DocumentiNecessari); // 👈 utilizza i documenti recuperati
-                    CreatePage6(container, offer, logoBytes, userRole);
+                    CreatePage6(container, offer, logoBytes);
 
 
 

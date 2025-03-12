@@ -148,6 +148,8 @@
             customerResults = document.getElementById('customerResults');
 
             adminInfo = await fetchAdminInfo();
+            const dealerInfo = await fetchDealerInfo();
+
 
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
 
@@ -359,36 +361,55 @@
             });
         });
 
-        // Recupera informazioni Admin
-        async function fetchAdminAndDealerInfo() {
+                // Recupera informazioni Admin/Dealer
+        async function fetchAdminInfo() {
             const token = new URLSearchParams(window.location.search).get('token');
             try {
                 const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
-                    headers: { 'Authorization': `Bearer ${token}` }
+                    headers: { "Authorization": "Bearer " + token }
                 });
+
+                if (!res.ok) throw new Error('Errore caricamento dati Admin');
 
                 const userData = await res.json();
 
-                const result = {
-                    AdminInfo: {
-                        Id: userData.admin_info.id,
-                        Email: userData.admin_info.email,
-                        FirstName: userData.admin_info.nome,
-                        LastName: userData.admin_info.cognome,
-                        CompanyName: userData.admin_info.ragione_sociale,
-                        VatNumber: userData.admin_info.partita_iva,
-                        Address: userData.admin_info.indirizzo,
-                        PostalCode: userData.admin_info.cap,
-                        City: userData.admin_info.citta,
-                        SDICode: userData.admin_info.codice_sdi,
-                        MobilePhone: userData.admin_info.cellulare,
-                        LogoUrl: userData.admin_info.logo_url
-                    },
-                    DealerInfo: null
-                };
+                // Verifica se è dealer o admin
+                const adminSource = userData.admin_info || userData;
 
-                if (userData.role === "dealer" && userData.dealer_info) {
-                    result.DealerInfo = {
+                return {
+                    Id: adminSource.id,
+                    Email: adminSource.email,
+                    FirstName: adminSource.nome,
+                    LastName: adminSource.cognome,
+                    CompanyName: adminSource.ragione_sociale,
+                    VatNumber: adminSource.partita_iva,
+                    Address: adminSource.indirizzo,
+                    PostalCode: adminSource.cap,
+                    City: adminSource.citta,
+                    SDICode: adminSource.codice_sdi,
+                    MobilePhone: adminSource.cellulare,
+                    LogoUrl: adminSource.logo_url
+                };
+            } catch(error){
+                console.error(error);
+                alert("Errore caricamento dati Admin.");
+                return null;
+            }
+        }
+        // Aggiunta dati Dealer, SOLO se utente è dealer
+        async function fetchDealerInfo() {
+            const token = new URLSearchParams(window.location.search).get('token');
+            try {
+                const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
+                    headers: { "Authorization": "Bearer " + token }
+                });
+
+                if (!res.ok) throw new Error('Errore caricamento dati Dealer');
+
+                const userData = await res.json();
+
+                if (userData.role === 'dealer' && userData.dealer_info) {
+                    return {
                         Id: userData.dealer_info.id,
                         Email: userData.dealer_info.email,
                         FirstName: userData.dealer_info.nome,
@@ -401,16 +422,19 @@
                         SDICode: userData.dealer_info.codice_sdi,
                         MobilePhone: userData.dealer_info.cellulare,
                         LogoUrl: userData.dealer_info.logo_url
-                    }
-                };
+                    };
+                }
 
-                return result;
+                // se non è un dealer, restituisci null
+                return null;
 
-            } catch (error) {
+            } catch(error){
                 console.error(error);
+                alert("Errore caricamento dati Dealer.");
                 return null;
             }
         }
+
 
 
         // Popola dropdown da API
@@ -634,6 +658,7 @@
                         Canone: parseFloat(document.getElementById('canone').value) || 0
                     },
                     AdminInfo: adminInfo,
+                    DealerInfo: dealerInfo, // aggiunto solo se presente, altrimenti sarà null
                     NoteAuto: noteAuto.value || ""
                 };
 
