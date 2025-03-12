@@ -590,21 +590,21 @@ namespace CIG.PDFGenerator.Controllers
             {
                 page.Size(PageSizes.A4.Landscape());
                 page.Margin(0);
-                page.Background(Colors.White);
+                var imagePathPag6 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_6.jpg");
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
                 page.Content().Padding(30).Column(column =>
                 {
-                    column.Spacing(20);
+                    column.Spacing(10);
 
-                    column.Item().Text("#4 - I NOSTRI CONTATTI")
-                        .FontSize(28).FontColor("#FF7100").Bold();
-
-                    if (logoBytes != null)
+                    column.Item().PaddingTop(10).Text(text =>
                     {
-                        column.Item().Width(150).Image(logoBytes).FitWidth();
-                    }
+                        text.Span("#4 - ").FontSize(28).FontColor("#FFFFFF");
+                        text.Span("I NOSTRI").FontSize(28).FontColor("#FFFFFF");
+                        text.Span("CONTATTI").FontSize(28).FontColor("#FF7100").Bold();
+                    });
 
+                    
                     column.Item().PaddingTop(10).Row(row =>
                     {
                         // Dealer info, solo se presente
