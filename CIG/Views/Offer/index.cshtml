@@ -661,50 +661,13 @@
                         console.error("Errore recupero documenti:", error);
                     });
 
+                console.log("Payload completo prima di fetchPdf:", payload);
 
                 // Chiama la funzione per generare e scaricare il PDF
                 fetchPdf(payload, token);
             }
         });
-
-
-        // Nuova funzione per la fetch con gestione del loader
-        async function fetchPdf(payload, token) {
-            document.getElementById('generatePdfBtn').style.display = 'none';
-            document.getElementById('pdfLoader').style.display = 'flex'; // Loader attivo
-
-            try {
-                const response = await fetch('/api/Pdf/GenerateOffer', { // 👈 URL locale
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (!response.ok) throw new Error(`Errore HTTP: ${response.status}`);
-
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = getUniqueFileName();
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-
-            } catch (error) {
-                alert('Errore nella generazione del PDF.');
-                console.error(error);
-            } finally {
-                document.getElementById('pdfLoader').style.display = 'none'; // nascondi loader
-                document.getElementById('generatePdfBtn').style.display = 'inline-block';
-            }
-        }
-
-
+                        
         // Funzione per mostrare/nascondere loader
         function pdfLoading(show) {
             document.getElementById('pdfLoader').style.display = show ? 'block' : 'none';
@@ -712,7 +675,7 @@
         }
 
         // Modifica della funzione fetchPdf per gestione loader
-                async function fetchPdf(payload, token) {
+        async function fetchPdf(payload, token) {
             document.getElementById('generatePdfBtn').style.display = 'none';
             document.getElementById('pdfLoader').style.display = 'block';
 
