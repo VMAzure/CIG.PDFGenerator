@@ -522,7 +522,7 @@ namespace CIG.PDFGenerator.Controllers
                         text.Span("PASSI").FontSize(28).FontColor("#FF7100").Bold();
                     });
 
-                    column.Item().PaddingTop(30).Text("OFFERTA INTERESSANTE?").FontSize(20).FontColor("#00213b").Bold();
+                    column.Item().PaddingTop(40).Text("OFFERTA INTERESSANTE?").FontSize(20).FontColor("#00213b").Bold();
 
                     var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
                                   ? offer.CustomerCompanyName
@@ -530,18 +530,33 @@ namespace CIG.PDFGenerator.Controllers
 
                     var validitaOfferta = DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
 
-                    column.Item().PaddingTop(10).Text($"L'offerta è riservata a {cliente} ed è valida fino al {validitaOfferta}. Per procedere con una prima fase istruttoria è necessario fornirci:")
-                        .FontSize(14).FontColor("#00213b");
+                    column.Item().PaddingTop(10).Text(text =>
+                    {
+                        text.DefaultTextStyle(x => x.FontSize(14).FontColor("#00213b"));
+
+                        text.Span("Bloccala Subito! ").Bold();
+                        text.Span("L'offerta è riservata a ");
+                        text.Span(cliente).Bold();
+                        text.Span(" ed è valida fino al ");
+                        text.Span(validitaOfferta).Bold();
+                        text.Span(". Per procedere con una prima fase istruttoria è necessario fornirci:");
+                    });
+
 
                     column.Item().PaddingTop(20).Column(docList =>
                     {
                         foreach (var doc in documenti)
                         {
-                            docList.Item().Text($"• {doc}").FontSize(14).FontColor("#00213b");
+                            docList.Item().PaddingVertical(3) // padding sul contenitore dell'elemento
+                                .Text($"• {doc}")
+                                .FontSize(14)
+                                .FontColor("#00213b")
+                                .Bold();
                         }
                     });
 
-                    column.Item().PaddingTop(30).Text("Siamo a disposizione per qualsiasi chiarimento o supporto necessario.")
+
+                    column.Item().PaddingTop(30).Text("Verrà censita la tua anagrafica e saranno necessarie alcune firme (OTP) per autorizzare la gestione dei dati .")
                         .FontSize(14).FontColor("#00213b");
                 });
 
