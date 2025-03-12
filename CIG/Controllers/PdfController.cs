@@ -493,6 +493,55 @@ namespace CIG.PDFGenerator.Controllers
             });
         }
 
+        private void CreatePage5(IDocumentContainer container, OfferPdfPage1 offer, List<string> documenti)
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4.Landscape());
+                page.Margin(0);
+
+                var imagePathPag5 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_5.jpg");
+                page.Background().Image(imagePathPag5).FitArea();
+                page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
+
+                page.Content().Padding(30).Column(column =>
+                {
+                    column.Spacing(10);
+
+                    column.Item().PaddingTop(10).Text(text =>
+                    {
+                        text.Span("#3 - ").FontSize(28).FontColor("#FFFFFF");
+                        text.Span("PROSSIMI").FontSize(28).FontColor("#FFFFFF");
+                        text.Span("PASSI").FontSize(28).FontColor("#FF7100").Bold();
+                    });
+
+                    column.Item().PaddingTop(30).Text("OFFERTA INTERESSANTE?").FontSize(20).FontColor("#00213b").Bold();
+
+                    var cliente = !string.IsNullOrWhiteSpace(offer.CustomerCompanyName)
+                                  ? offer.CustomerCompanyName
+                                  : $"{offer.CustomerFirstName} {offer.CustomerLastName}".Trim();
+
+                    var validitaOfferta = DateTime.Now.AddDays(15).ToString("dd/MM/yyyy");
+
+                    column.Item().PaddingTop(10).Text($"L'offerta è riservata a {cliente} ed è valida fino al {validitaOfferta}. Per procedere con una prima fase istruttoria è necessario fornirci:")
+                        .FontSize(14).FontColor("#00213b");
+
+                    column.Item().PaddingTop(20).Column(docList =>
+                    {
+                        foreach (var doc in documenti)
+                        {
+                            docList.Item().Text($"• {doc}").FontSize(14).FontColor("#00213b");
+                        }
+                    });
+
+                    column.Item().PaddingTop(30).Text("Siamo a disposizione per qualsiasi chiarimento o supporto necessario.")
+                        .FontSize(14).FontColor("#00213b");
+                });
+            });
+        }
+
+
+
 
 
     }

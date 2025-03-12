@@ -563,7 +563,40 @@
             `;
         }
 
+        // Recupero documenti necessari
+        var tipoCliente = "privato"; // provvisorio, poi sarà dinamico in base al cliente
+        var documentiNecessari = await GetDocumentiNecessari(tipoCliente: tipoCliente, token);
 
+        // Metodo per recuperare il JSON dei documenti
+        async Task<OfferPdfPage5> GetDocumentiNecessariAsync(string tipoCliente, string token)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync($"https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/{tipoCliente}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<OfferPdfPage5>(json: json, options: new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                return result;
+            }
+            else
+            {
+                throw new Exception("Errore recupero documenti necessari");
+            }
+        }
+
+        // Chiamata del metodo
+        var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+        var documentiNecessari = await GetDocumentiNecessariAsync("privato", token);
+
+
+        // QUI GENERO IL PDF
                 document.addEventListener('click', function(event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");

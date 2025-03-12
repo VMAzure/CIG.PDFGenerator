@@ -79,5 +79,13 @@
         public string? MobilePhone { get; set; }
         public string? LogoUrl { get; set; }
     }
+
+    public class OfferPdfPage5
+    {
+        public string TipoCliente { get; set; } // Privato, Società, Professionista
+        public List<string> Documenti { get; set; } = new();
+    }
+
+
 }
 
