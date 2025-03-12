@@ -500,6 +500,29 @@ namespace CIG.PDFGenerator.Controllers
             });
         }
 
+        private async Task<OfferPdfPage5> GetDocumentiNecessariAsync(string tipoCliente, string token)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            var response = await client.GetAsync($"https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/{tipoCliente}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<OfferPdfPage5>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                return result;
+            }
+            else
+            {
+                throw new Exception("Errore recupero documenti necessari");
+            }
+        }
+
         private void CreatePage5(IDocumentContainer container, OfferPdfPage1 offer, List<string> documenti)
         {
             container.Page(page =>
@@ -549,28 +572,7 @@ namespace CIG.PDFGenerator.Controllers
 
 
         }
-        private async Task<OfferPdfPage5> GetDocumentiNecessariAsync(string tipoCliente, string token)
-        {
-            var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var response = await client.GetAsync($"https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/{tipoCliente}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                var json = await response.Content.ReadAsStringAsync();
-                var result = JsonSerializer.Deserialize<OfferPdfPage5>(json, new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                });
-
-                return result;
-            }
-            else
-            {
-                throw new Exception("Errore recupero documenti necessari");
-            }
-        }
+        
 
 
 
