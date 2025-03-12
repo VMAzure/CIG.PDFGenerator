@@ -647,7 +647,6 @@
                     NoteAuto: noteAuto.value || ""
                 };
 
-                    const tipoCliente = selectedCustomer.tipo_cliente || "privato";
                     fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
                         headers: {
                             "Authorization": "Bearer " + token
