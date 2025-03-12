@@ -69,6 +69,8 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
                     CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
                     CreatePage5(container, offer, offer.DocumentiNecessari); // 👈 utilizza i documenti recuperati
+                    CreatePage6(container, offer, logoBytes);
+
 
 
                 }).GeneratePdf();
@@ -547,13 +549,18 @@ namespace CIG.PDFGenerator.Controllers
                     {
                         foreach (var doc in documenti)
                         {
-                            docList.Item().PaddingVertical(3) // padding sul contenitore dell'elemento
-                                .Text($"• {doc}")
-                                .FontSize(14)
-                                .FontColor("#00213b")
-                                .Bold();
+                            docList.Item().PaddingVertical(3).Row(row =>
+                            {
+                                row.AutoItem().Width(16).Height(16).Image("percorso/immagine.png");
+                                row.Spacing(5);
+                                row.RelativeItem().AlignMiddle().Text(doc)
+                                    .FontSize(14)
+                                    .FontColor("#00213b")
+                                    .Bold();
+                            });
                         }
                     });
+
 
                     column.Item().PaddingTop(20).Text(text =>
                     {
@@ -573,12 +580,32 @@ namespace CIG.PDFGenerator.Controllers
 
             });
 
-
         }
-        
+        private void CreatePage6(IDocumentContainer container, OfferPdfPage1 offer, byte[] logoBytes)
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4.Landscape());
+                page.Margin(0);
+                page.Background(Colors.White);
+                page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
+                page.Content().Padding(30).Column(column =>
+                {
+                    column.Spacing(15);
 
+                    column.Item().Text("#4 - I NOSTRI CONTATTI")
+                        .FontSize(28).FontColor("#FF7100").Bold();
 
+                    if (logoBytes != null)
+                    {
+                        column.Item().PaddingTop(20).Width(150).Image(logoBytes).FitWidth();
+                    }
+
+                    // (proseguiremo qui con il prossimo passo)
+                });
+            });
+        }
 
 
 

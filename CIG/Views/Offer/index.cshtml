@@ -616,7 +616,7 @@
                     NoteAuto: noteAuto.value || ""
                 };
 
-                try {
+            try {
                     const response = await fetch(`https://coreapi-production-ca29.up.railway.app/nlt/documenti-richiesti/${tipoCliente}`, {
                         headers: { "Authorization": `Bearer ${token}` }
                     });
