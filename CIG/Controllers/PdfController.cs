@@ -507,7 +507,7 @@ namespace CIG.PDFGenerator.Controllers
                 page.Size(PageSizes.A4.Landscape());
                 page.Margin(0);
 
-                var imagePathPag5 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_5.jpg");
+                var imagePathPag5 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_3.jpg");
                 page.Background().Image(imagePathPag5).FitArea();
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
