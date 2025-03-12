@@ -621,10 +621,10 @@ namespace CIG.PDFGenerator.Controllers
                                 var dealerFullName = $"{offer.DealerInfo.FirstName} {offer.DealerInfo.LastName}".Trim();
                                 dealerColumn.Item().Text(dealerFullName).FontSize(14);
 
-                                dealerColumn.Item().Text(offer.DealerInfo.Email).FontSize(14);
-
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.MobilePhone))
                                     dealerColumn.Item().Text($"Tel: {offer.DealerInfo.MobilePhone}").FontSize(14);
+
+                                dealerColumn.Item().Text(offer.DealerInfo.Email).FontSize(14);
 
                                 var addressParts = new List<string>();
 
@@ -640,9 +640,11 @@ namespace CIG.PDFGenerator.Controllers
                                 if (addressParts.Any())
                                 {
                                     dealerColumn.Item()
+                                        .PaddingTop(5) // 👈 modifica questo valore per regolare lo spazio
                                         .Text(string.Join(" ", addressParts))
                                         .FontSize(14);
                                 }
+
 
                             });
 
