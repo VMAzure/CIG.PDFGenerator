@@ -69,7 +69,7 @@ namespace CIG.PDFGenerator.Controllers
                     CreatePage3(container, offer,serviceIconBytes); // <-- Aggiungi questo
                     CreatePage4(container, offer, carImageBytes); // <-- Aggiungi questo
                     CreatePage5(container, offer, offer.DocumentiNecessari); // 👈 utilizza i documenti recuperati
-                    CreatePage6(container, offer, logoBytes);
+                    CreatePage6(container, offer, logoBytes, carImagesDetails);
 
 
 
@@ -582,7 +582,7 @@ namespace CIG.PDFGenerator.Controllers
             });
 
         }
-        private void CreatePage6(IDocumentContainer container, OfferPdfPage1 offer, byte[] logoBytes)
+        private void CreatePage6(IDocumentContainer container, OfferPdfPage1 offer, byte[] logoBytes, List<(byte[] bytes, string color, int angle)> carImagesDetails)
         {
             Console.WriteLine($"📌 Dealer MobilePhone: {offer.DealerInfo?.MobilePhone}");
 
@@ -701,8 +701,18 @@ namespace CIG.PDFGenerator.Controllers
                             }
                         });
                     });
+                    // inserisci qui dopo le due colonne admin/dealer
+                    column.Item().PaddingTop(30).Row(row =>
+                    {
+                        row.Spacing(10);
 
-                    
+                        foreach (var imgDetail in carImagesDetails.Where(x => x.bytes != null).Take(5))
+                        {
+                            row.RelativeItem().Image(imgDetail.bytes).FitArea();
+                        }
+                    });
+
+
                 });
             });
         }
