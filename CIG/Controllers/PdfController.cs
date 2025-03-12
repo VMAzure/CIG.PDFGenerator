@@ -592,18 +592,19 @@ namespace CIG.PDFGenerator.Controllers
 
                 page.Content().Padding(30).Column(column =>
                 {
-                    column.Spacing(15);
+                    column.Spacing(20);
 
                     column.Item().Text("#4 - I NOSTRI CONTATTI")
                         .FontSize(28).FontColor("#FF7100").Bold();
 
                     if (logoBytes != null)
                     {
-                        column.Item().PaddingTop(20).Width(150).Image(logoBytes).FitWidth();
+                        column.Item().Width(150).Image(logoBytes).FitWidth();
                     }
 
-                    column.Item().PaddingTop(20).Row(row =>
+                    column.Item().PaddingTop(10).Row(row =>
                     {
+                        // Dealer info, solo se presente
                         if (offer.DealerInfo != null)
                         {
                             row.RelativeItem().Column(dealerColumn =>
@@ -611,66 +612,53 @@ namespace CIG.PDFGenerator.Controllers
                                 dealerColumn.Item().Text("Il tuo Dealer di riferimento:")
                                     .FontSize(18).FontColor("#00213b").Bold();
 
-                                dealerColumn.Item().PaddingTop(10).Text(offer.DealerInfo.CompanyName)
+                                dealerColumn.Item().PaddingTop(10).Text($"{offer.DealerInfo.CompanyName}")
                                     .FontSize(16).Bold();
 
                                 var dealerFullName = $"{offer.DealerInfo.FirstName} {offer.DealerInfo.LastName}".Trim();
-                                dealerColumn.Item().Text(dealerFullName)
-                                    .FontSize(14);
+                                dealerColumn.Item().Text(dealerFullName).FontSize(14);
 
-                                dealerColumn.Item().Text(offer.DealerInfo.Email)
-                                    .FontSize(14);
+                                dealerColumn.Item().Text(offer.DealerInfo.Email).FontSize(14);
 
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.MobilePhone))
-                                {
-                                    dealerColumn.Item().Text($"Tel: {offer.DealerInfo.MobilePhone}")
-                                        .FontSize(14);
-                                }
+                                    dealerColumn.Item().Text($"Tel: {offer.DealerInfo.MobilePhone}").FontSize(14);
 
                                 if (!string.IsNullOrWhiteSpace(offer.DealerInfo.Address))
-                                {
-                                    dealerColumn.Item().PaddingTop(5).Text(offer.DealerInfo.Address)
-                                        .FontSize(14);
-                                }
+                                    dealerColumn.Item().Text(offer.DealerInfo.Address).FontSize(14);
                             });
+
+                            row.Spacing(50); // spazio tra Dealer e Admin
                         }
 
-                        row.Spacing(50);
-
+                        // Dati Admin obbligatori
                         row.RelativeItem().Column(adminColumn =>
                         {
                             adminColumn.Item().Text("La nostra sede principale:")
                                 .FontSize(18).FontColor("#00213b").Bold();
 
-                            adminColumn.Item().PaddingTop(10).Text(offer.AdminInfo.CompanyName)
+                            adminColumn.Item().PaddingTop(10).Text($"{offer.AdminInfo.CompanyName}")
                                 .FontSize(16).Bold();
 
                             var adminFullName = $"{offer.AdminInfo.FirstName} {offer.AdminInfo.LastName}".Trim();
-                            adminColumn.Item().Text(adminFullName)
-                                .FontSize(14);
+                            adminColumn.Item().Text(adminFullName).FontSize(14);
 
-                            adminColumn.Item().Text(offer.AdminInfo.Email)
-                                .FontSize(14);
+                            adminColumn.Item().Text(offer.AdminInfo.Email).FontSize(14);
 
                             if (!string.IsNullOrWhiteSpace(offer.AdminInfo.MobilePhone))
-                            {
-                                adminColumn.Item().Text($"Tel: {offer.AdminInfo.MobilePhone}")
-                                    .FontSize(14);
-                            }
+                                adminColumn.Item().Text($"Tel: {offer.AdminInfo.MobilePhone}").FontSize(14);
 
                             if (!string.IsNullOrWhiteSpace(offer.AdminInfo.Address))
-                            {
-                                adminColumn.Item().PaddingTop(5).Text(offer.AdminInfo.Address)
-                                    .FontSize(14);
-                            }
+                                adminColumn.Item().Text(offer.AdminInfo.Address).FontSize(14);
                         });
                     });
+
+                    if (logoBytes != null)
+                    {
+                        column.Item().PaddingTop(30).Width(120).Image(logoBytes).FitWidth();
+                    }
                 });
             });
         }
-
-
-
 
     }
 }
