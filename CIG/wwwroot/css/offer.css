@@ -423,38 +423,38 @@ select, input[type="text"] {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
+    flex-direction: column; /* Centra verticalmente testo e spinner */
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     z-index: 9999;
 }
 
-.pdf-loader {
-    width: 150px;
-    height: 150px;
-    border: 14px solid #f3f3f3;
-    border-top: 14px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
+    #pdfLoader .loader {
+        width: 150px;
+        height: 150px;
+        border: 12px solid #f3f3f3; /* spessore aumentato */
+        border-top: 12px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-top: 10px;
+    }
 
-#pdfLoader span {
-    margin-top: 20px;
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    font-weight: bold;
-}
+    #pdfLoader span {
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
 
 @keyframes spin {
-    0% {
+    from {
         transform: rotate(0deg);
     }
 
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
+
 
