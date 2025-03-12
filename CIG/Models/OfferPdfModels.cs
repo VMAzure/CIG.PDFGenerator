@@ -67,45 +67,24 @@ namespace CIG.PDFGenerator.Models
         public decimal Anticipo { get; set; }
         public decimal Canone { get; set; }
     }
-public class AdminDealerData
+
+    // Classe supporto dati Admin/Dealer
+    public class AdminDealerData
     {
-        [JsonPropertyName("id")]
         public int Id { get; set; }
-
-        [JsonPropertyName("email")]
         public string? Email { get; set; }
-
-        [JsonPropertyName("nome")]
         public string? FirstName { get; set; }
-
-        [JsonPropertyName("cognome")]
         public string? LastName { get; set; }
-
-        [JsonPropertyName("ragione_sociale")]
         public string? CompanyName { get; set; }
-
-        [JsonPropertyName("partita_iva")]
         public string? VatNumber { get; set; }
-
-        [JsonPropertyName("indirizzo")]
         public string? Address { get; set; }
-
-        [JsonPropertyName("cap")]
         public string? PostalCode { get; set; }
-
-        [JsonPropertyName("citta")]
         public string? City { get; set; }
-
-        [JsonPropertyName("codice_sdi")]
         public string? SDICode { get; set; }
-
-        [JsonPropertyName("cellulare")]
+        
         public string? MobilePhone { get; set; }
-
-        [JsonPropertyName("logo_url")]
         public string? LogoUrl { get; set; }
     }
-
 }
 
 
