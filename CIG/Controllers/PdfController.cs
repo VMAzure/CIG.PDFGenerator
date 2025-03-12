@@ -660,9 +660,6 @@ namespace CIG.PDFGenerator.Controllers
                 });
             });
         }
-
-
-
     }
 }
 

@@ -360,37 +360,58 @@
         });
 
         // Recupera informazioni Admin
-        async function fetchAdminInfo() {
+        async function fetchAdminAndDealerInfo() {
             const token = new URLSearchParams(window.location.search).get('token');
             try {
                 const res = await fetch('https://coreapi-production-ca29.up.railway.app/users/me', {
-                    headers: { "Authorization": "Bearer " + token }
+                    headers: { 'Authorization': `Bearer ${token}` }
                 });
 
-                if (!res.ok) throw new Error('Errore caricamento dati Admin');
+                const userData = await res.json();
 
-                const adminData = await res.json();
-
-                return {
-                    Id: adminData.id,
-                    Email: adminData.email,
-                    FirstName: adminData.nome,
-                    LastName: adminData.cognome,
-                    CompanyName: adminData.ragione_sociale,
-                    VatNumber: adminData.partita_iva,
-                    Address: adminData.indirizzo,
-                    PostalCode: adminData.cap,
-                    City: adminData.citta,
-                    SDICode: adminData.codice_sdi,
-                    MobilePhone: adminData.cellulare,
-                    LogoUrl: adminData.logo_url
+                const result = {
+                    AdminInfo: {
+                        Id: userData.admin_info.id,
+                        Email: userData.admin_info.email,
+                        FirstName: userData.admin_info.nome,
+                        LastName: userData.admin_info.cognome,
+                        CompanyName: userData.admin_info.ragione_sociale,
+                        VatNumber: userData.admin_info.partita_iva,
+                        Address: userData.admin_info.indirizzo,
+                        PostalCode: userData.admin_info.cap,
+                        City: userData.admin_info.citta,
+                        SDICode: userData.admin_info.codice_sdi,
+                        MobilePhone: userData.admin_info.cellulare,
+                        LogoUrl: userData.admin_info.logo_url
+                    },
+                    DealerInfo: null
                 };
-            } catch(error){
+
+                if (userData.role === "dealer" && userData.dealer_info) {
+                    result.DealerInfo = {
+                        Id: userData.dealer_info.id,
+                        Email: userData.dealer_info.email,
+                        FirstName: userData.dealer_info.nome,
+                        LastName: userData.dealer_info.cognome,
+                        CompanyName: userData.dealer_info.ragione_sociale,
+                        VatNumber: userData.dealer_info.partita_iva,
+                        Address: userData.dealer_info.indirizzo,
+                        PostalCode: userData.dealer_info.cap,
+                        City: userData.dealer_info.citta,
+                        SDICode: userData.dealer_info.codice_sdi,
+                        MobilePhone: userData.dealer_info.cellulare,
+                        LogoUrl: userData.dealer_info.logo_url
+                    }
+                };
+
+                return result;
+
+            } catch (error) {
                 console.error(error);
-                alert("Errore caricamento dati Admin.");
                 return null;
             }
         }
+
 
         // Popola dropdown da API
         async function fetchDropdown(url, dropdown, keyName) {
