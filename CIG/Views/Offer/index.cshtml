@@ -568,6 +568,9 @@
         document.addEventListener('click', async function (event) {
             if (event.target && event.target.id === 'generatePdfBtn') {
                 const token = new URLSearchParams(window.location.search).get("token");
+                const pdfLoader = document.getElementById('pdfLoader');
+                const generatePdfBtn = document.getElementById('generatePdfBtn');
+
 
                 // Mostro il loader
                 pdfLoader.style.display = 'block';
