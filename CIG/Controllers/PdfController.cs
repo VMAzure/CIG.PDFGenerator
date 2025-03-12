@@ -551,7 +551,7 @@ namespace CIG.PDFGenerator.Controllers
                         {
                             docList.Item().PaddingVertical(3).Row(row =>
                             {
-                                row.AutoItem().Width(16).Height(16).Image("percorso/immagine.png");
+                                row.AutoItem().Width(16).Height(16);
                                 row.Spacing(5);
                                 row.RelativeItem().AlignMiddle().Text(doc)
                                     .FontSize(14)
