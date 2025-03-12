@@ -591,6 +591,8 @@ namespace CIG.PDFGenerator.Controllers
                 page.Size(PageSizes.A4.Landscape());
                 page.Margin(0);
                 var imagePathPag6 = Path.Combine(_environment.WebRootPath, "images", "offer_pag_6.jpg");
+                page.Background().Image(imagePathPag6).FitArea();
+
                 page.DefaultTextStyle(x => x.FontFamily("Montserrat"));
 
                 page.Content().Padding(30).Column(column =>
@@ -605,7 +607,7 @@ namespace CIG.PDFGenerator.Controllers
                     });
 
                     
-                    column.Item().PaddingTop(10).Row(row =>
+                    column.Item().PaddingTop(30).Row(row =>
                     {
                         // Dealer info, solo se presente
                         if (offer.DealerInfo != null)
