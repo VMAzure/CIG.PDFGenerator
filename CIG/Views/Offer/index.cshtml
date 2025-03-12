@@ -126,6 +126,8 @@
     <script>
 
         let adminInfo = null;
+        let dealerInfo = null;
+
         let marcaDropdown, modelloDropdown, versioneDropdown, varianteDropdown, anteprimaAuto, loader, imagePlaceholder, carMainImageUrl, descrizioneVersione, noteAuto;
         let carImagesUrls = [];
         let customerInput, customerResults, selectedCustomer = {};
@@ -148,7 +150,7 @@
             customerResults = document.getElementById('customerResults');
 
             adminInfo = await fetchAdminInfo();
-            const dealerInfo = await fetchDealerInfo();
+            dealerInfo = await fetchDealerInfo();
 
 
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive`, marcaDropdown, "make");
