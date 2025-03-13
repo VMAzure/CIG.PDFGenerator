@@ -1,5 +1,5 @@
 ﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-import { salvaPreventivoSuDB } from './saveOffer.js';
+import { salvaPreventivoSuDB } from './savePreventivo.js';
 
 let adminInfo = null;
 let dealerInfo = null;
