@@ -654,11 +654,5 @@ function getUniqueFileName() {
 }
 
 
-
-if (!risultatoSalvataggio) {
-    alert('Errore durante il salvataggio dei dati del preventivo.');
-} else {
-    console.log('Preventivo salvato nel database:', risultatoSalvataggio);
-}
 // 👇 Esposizione globale della funzione (se necessaria)
 window.fetchPdf = fetchPdf;
