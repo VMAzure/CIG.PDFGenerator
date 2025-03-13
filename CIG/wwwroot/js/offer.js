@@ -612,13 +612,20 @@ async function fetchPdf(payload, token) {
         } else {
             const supabaseFileUrl = `https://vqfloobaovtdtcuflqeu.supabase.co/storage/v1/object/private/${data.fullPath}`;
             console.log('File salvato su Supabase:', supabaseFileUrl);
-            // Qui potrai fare il salvataggio dell'URL nel database
+            console.log('Parametri per salvaPreventivoSuDB:', {
+                clienteId: selectedCustomer.id,
+                fileUrl: supabaseFileUrl,
+                creatoDa: adminInfo.Id
+            });
+
             risultatoSalvataggio = await salvaPreventivoSuDB(selectedCustomer.id, supabaseFileUrl, adminInfo.Id);
+
             if (risultatoSalvataggio) {
-                console.log('Salvataggio nel DB riuscito:', risultatoSalvataggio);
+                console.log('Risultato salvataggio:', risultatoSalvataggio);
             } else {
-                alert('Errore durante il salvataggio del preventivo nel DB.');
+                console.error('Salvataggio fallito!');
             }
+
         }
 
         // 👇 Mantieni invariato il download automatico del file 👇
