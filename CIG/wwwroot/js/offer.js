@@ -652,8 +652,6 @@ function getUniqueFileName() {
     return `NLT_Offer_${dateTimeString}.pdf`;
 }
 
-// 👇 Esposizione globale della funzione (se necessaria)
-window.fetchPdf = fetchPdf;
 
 
 if (!risultatoSalvataggio) {
@@ -661,3 +659,5 @@ if (!risultatoSalvataggio) {
 } else {
     console.log('Preventivo salvato nel database:', risultatoSalvataggio);
 }
+// 👇 Esposizione globale della funzione (se necessaria)
+window.fetchPdf = fetchPdf;
