@@ -1,4 +1,6 @@
 ﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+import { salvaPreventivoSuDB } from './saveOffer.js';
+
 let adminInfo = null;
 let dealerInfo = null;
 
@@ -610,6 +612,12 @@ async function fetchPdf(payload, token) {
             const supabaseFileUrl = `https://vqfloobaovtdtcuflqeu.supabase.co/storage/v1/object/private/${data.fullPath}`;
             console.log('File salvato su Supabase:', supabaseFileUrl);
             // Qui potrai fare il salvataggio dell'URL nel database
+            const risultatoSalvataggio = await salvaPreventivoSuDB(selectedCustomer.id, supabaseFileUrl, adminInfo.Id);
+            if (risultatoSalvataggio) {
+                console.log('Salvataggio nel DB riuscito:', risultatoSalvataggio);
+            } else {
+                alert('Errore durante il salvataggio del preventivo nel DB.');
+            }
         }
 
         // 👇 Mantieni invariato il download automatico del file 👇
@@ -646,3 +654,10 @@ function getUniqueFileName() {
 
 // 👇 Esposizione globale della funzione (se necessaria)
 window.fetchPdf = fetchPdf;
+
+
+if (!risultatoSalvataggio) {
+    alert('Errore durante il salvataggio dei dati del preventivo.');
+} else {
+    console.log('Preventivo salvato nel database:', risultatoSalvataggio);
+}
