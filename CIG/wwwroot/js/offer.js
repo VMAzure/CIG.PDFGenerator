@@ -1,4 +1,6 @@
-﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+﻿export async function fetchPdf(payload, token) { 
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const supabaseUrl = 'https://vqfloobaovtdtcuflqeu.supabase.co';
 const supabaseServiceKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZxZmxvb2Jhb3Z0ZHRjdWZscWV1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczOTUzOTUzMCwiZXhwIjoyMDU1MTE1NTMwfQ.Lq-uIgXYZiBJK4ChfF_D7i5qYBDuxMfL2jY5GGKDuVk';
@@ -76,4 +78,7 @@ function getUniqueFileName() {
         ('0' + now.getSeconds()).slice(-2);
 
     return `NLT_Offer_${dateTimeString}.pdf`;
+    }
 }
+
+    window.fetchPdf = fetchPdf;
