@@ -613,7 +613,7 @@ async function fetchPdf(payload, token) {
             const supabaseFileUrl = `https://vqfloobaovtdtcuflqeu.supabase.co/storage/v1/object/private/${data.fullPath}`;
             console.log('File salvato su Supabase:', supabaseFileUrl);
             // Qui potrai fare il salvataggio dell'URL nel database
-            const risultatoSalvataggio = await salvaPreventivoSuDB(selectedCustomer.id, supabaseFileUrl, adminInfo.Id);
+            risultatoSalvataggio = await salvaPreventivoSuDB(selectedCustomer.id, supabaseFileUrl, adminInfo.Id);
             if (risultatoSalvataggio) {
                 console.log('Salvataggio nel DB riuscito:', risultatoSalvataggio);
             } else {
