@@ -572,6 +572,7 @@ document.addEventListener('click', async function (event) {
 });
 
 
+console.log("Cliente selezionato:", selectedCustomer);
 
 // Funzione per mostrare/nascondere loader
 function pdfLoading(show) {
