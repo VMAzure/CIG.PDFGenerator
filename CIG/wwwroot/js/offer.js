@@ -1,6 +1,14 @@
-﻿import { supabase } from './supabaseClient.js';
+﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-async function fetchPdf(payload, token) {
+const supabaseUrl = 'https://vqfloobaovtdtcuflqeu.supabase.co';
+const supabaseServiceKey = 'LA_TUA_SERVICE_ROLE_KEY';
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+    auth: { persistSession: false }
+});
+
+// lascia inalterata la funzione fetchPdf
+export async function fetchPdf(payload, token) {
     document.getElementById('generatePdfBtn').style.display = 'none';
     document.getElementById('pdfLoader').style.display = 'block';
 
@@ -21,22 +29,24 @@ async function fetchPdf(payload, token) {
         const blob = await response.blob();
         const fileName = getUniqueFileName();
 
-        // Upload su Supabase
+        const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+            auth: { persistSession: false }
+        });
+
         const { data, error } = await supabase.storage
             .from('nlt-preventivi')
             .upload(fileName, blob, { contentType: 'application/pdf' });
 
         if (error) {
             console.error('Errore upload Supabase:', error);
-            alert('Errore durante il salvataggio del file su Supabase.');
+            alert('Errore upload file su Supabase.');
         } else {
-            const supabaseFileUrl = `https://vqfloobaovtdtcuflqeu.supabase.co/storage/v1/object/private/${data.fullPath}`;
+            const supabaseFileUrl = `${supabaseUrl}/storage/v1/object/private/${data.fullPath}`;
             console.log('File salvato su Supabase:', supabaseFileUrl);
-
-            // (Successivamente, qui potrai salvare questo URL nella tabella `nlt_preventivi`)
+            // Qui puoi successivamente salvare questo URL nel DB.
         }
 
-        // 👇 Manteniamo invariato il download automatico del file 👇
+        // download automatico file
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -55,7 +65,7 @@ async function fetchPdf(payload, token) {
     }
 }
 
-// La funzione getUniqueFileName() resta invariata
+// Funzione originale invariata
 function getUniqueFileName() {
     const now = new Date();
     const dateTimeString = now.getFullYear().toString() +
