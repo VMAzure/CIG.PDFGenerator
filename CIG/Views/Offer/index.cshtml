@@ -3,6 +3,8 @@
 }
 <link rel="stylesheet" href="~/css/offer.css" />
 <hr />  
+<script type="module" src="js/tuoscript.js"></script>
+
 
 <div id="stepsContainer">
     <!-- STEP 1: Scelta Auto -->
@@ -695,7 +697,6 @@
         }
 
         // Modifica della funzione fetchPdf per gestione loader
-        type="module" src="js/tuoscript.js"
         import { supabase } from './supabaseClient.js';
 
         async function fetchPdf(payload, token) {
