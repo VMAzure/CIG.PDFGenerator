@@ -600,6 +600,7 @@ async function fetchPdf(payload, token) {
 
         const blob = await response.blob();
         const fileName = getUniqueFileName();
+        let risultatoSalvataggio;  // 👈 devi dichiararla prima di usarla
 
         const { data, error } = await supabase.storage
             .from('nlt-preventivi')
