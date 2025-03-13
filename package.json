@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "name": "cig.pdfgenerator",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VMAzure/CIG.PDFGenerator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VMAzure/CIG.PDFGenerator/issues"
+  },
+  "homepage": "https://github.com/VMAzure/CIG.PDFGenerator#readme",
+  "description": ""
+}
+
