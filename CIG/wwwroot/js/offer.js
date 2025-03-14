@@ -481,7 +481,7 @@ function populateSummary() {
 }
 
 
-import { salvaPreventivoSuAPI } from './savepreventivo.js';
+import { salvaPreventivoSuAPI } from './js/savepreventivo.js';
 
 // QUI GENERO IL PDF
 document.addEventListener('click', async function (event) {
