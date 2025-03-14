@@ -72,30 +72,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    varianteDropdown.addEventListener("change", () => {
-        updateCarPreview();
-    });
-
-
-            anteprimaAuto.src = carImagesUrls[0].url;
-
-            anteprimaAuto.onload = function () {
-                loader.style.display = "none";
-                anteprimaAuto.style.display = "block";
-                carMainImageUrl = carImagesUrls[0].url;
-            };
-
-            anteprimaAuto.onerror = function () {
-                loader.style.display = "none";
-                imagePlaceholder.textContent = "Anteprima non disponibile";
-                imagePlaceholder.style.display = "flex";
-            };
-        } else {
-            loader.style.display = "none";
-            imagePlaceholder.textContent = "Seleziona una variante per visualizzare l'anteprima";
-            imagePlaceholder.style.display = "flex";
-        }
-    });
+   
 
     // INIZIALIZZA backBtn e bottoni step
     backBtn = document.getElementById('backBtn');
