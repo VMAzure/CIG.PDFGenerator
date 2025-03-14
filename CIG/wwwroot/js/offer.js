@@ -575,6 +575,8 @@ function pdfLoading(show) {
 }
 
 // lascia inalterata la funzione fetchPdf
+import { salvaPreventivoSuAPI } from './savepreventivo.js';
+
 async function fetchPdf(payload, token) {
     document.getElementById('generatePdfBtn').style.display = 'none';
     document.getElementById('pdfLoader').style.display = 'block';
@@ -595,33 +597,36 @@ async function fetchPdf(payload, token) {
 
         const blob = await response.blob();
         const fileName = getUniqueFileName();
-        let risultatoSalvataggio;  // 👈 devi dichiararla prima di usarla
 
-        const { data, error } = await supabase.storage
-            .from('nlt-preventivi')
-            .upload(fileName, blob, { contentType: 'application/pdf' });
+        console.log("✅ PDF generato correttamente:", fileName);
 
-        if (error) {
-            console.error('Errore upload Supabase:', error);
-            alert('Errore upload Supabase');
+        // 👇 Invia il PDF e i dati all'API FastAPI
+        const risultatoSalvataggio = await salvaPreventivoSuAPI(
+            blob,
+            selectedCustomer.id,
+            dealerInfo?.Id || adminInfo.Id,
+            payload.Auto.Marca,
+            payload.Auto.Modello,
+            payload.DatiEconomici.Durata,
+            payload.DatiEconomici.KmTotali,
+            payload.DatiEconomici.Anticipo,
+            payload.DatiEconomici.Canone
+        );
+
+        if (risultatoSalvataggio.success) {
+            console.log("✅ Preventivo salvato con successo:", risultatoSalvataggio);
         } else {
-            const supabaseFileUrl = `https://vqfloobaovtdtcuflqeu.supabase.co/storage/v1/object/private/${data.fullPath}`;
-            console.log('File salvato su Supabase:', supabaseFileUrl);
-            console.log('Parametri per salvaPreventivoSuDB:', {
-                clienteId: selectedCustomer.id,
-                fileUrl: supabaseFileUrl,
-                creatoDa: adminInfo.Id
-            });
-
-            risultatoSalvataggio = await salvaPreventivoSuDB(selectedCustomer.id, supabaseFileUrl, adminInfo.Id);
-
-            if (risultatoSalvataggio) {
-                console.log('Risultato salvataggio:', risultatoSalvataggio);
-            } else {
-                console.error('Salvataggio fallito!');
-            }
-
+            console.error("❌ Errore nel salvataggio del preventivo!", risultatoSalvataggio.error);
         }
+
+    } catch (error) {
+        alert('Errore nella generazione del PDF.');
+        console.error(error);
+    } finally {
+        document.getElementById('pdfLoader').style.display = 'none';
+        document.getElementById('generatePdfBtn').style.display = 'inline-block';
+    }
+}
 
         // 👇 Mantieni invariato il download automatico del file 👇
         const url = URL.createObjectURL(blob);
