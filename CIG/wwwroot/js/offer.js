@@ -666,7 +666,12 @@ function updateCarPreview() {
         carUrl += `&modelVariant=${varianteDropdown.value}`;
     }
 
-    carUrl += `&angle=29&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`;
+    // Angolo di anteprima fisso a 203
+    carUrl += `&angle=203&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`;
+
+    loader.style.display = "block";
+    anteprimaAuto.style.display = "none";
+    imagePlaceholder.style.display = "none";
 
     anteprimaAuto.src = carUrl;
 
@@ -681,6 +686,7 @@ function updateCarPreview() {
         imagePlaceholder.style.display = "flex";
     };
 }
+
 
 // 👇 Esposizione globale della funzione (se necessaria)
 window.fetchPdf = fetchPdf;
