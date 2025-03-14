@@ -676,12 +676,14 @@ function updateCarPreview() {
     anteprimaAuto.style.display = "none";
     imagePlaceholder.style.display = "none";
 
-    carImagesUrls = angles.map(angle => {
-        return {
-            url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}${versioneDropdown.value ? `&modelRange=${versioneDropdown.value}` : ''}${varianteDropdown.value ? `&modelVariant=${varianteDropdown.value}` : ''}&angle=${angle}&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
-            angle: angle
-        };
-    });
+    carImagesUrls = angles.map(angle => ({
+        Url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}${versioneDropdown.value ? `&modelRange=${versioneDropdown.value}` : ''}${varianteDropdown.value ? `&modelVariant=${varianteDropdown.value}` : ''}&angle=${angle}&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
+        Angle: angle,
+        Color: getRandomColor()
+    }));
+
+    carMainImageUrl = carImagesUrls[0].Url;
+
 
     carMainImageUrl = carImagesUrls[0].url; // 👈 importantissimo!
 
