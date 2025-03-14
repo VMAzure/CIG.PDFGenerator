@@ -54,12 +54,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     modelloDropdown.addEventListener("change", () => {
         versioneDropdown.innerHTML = '';
         varianteDropdown.innerHTML = '';
-        anteprimaAuto.src = '';
 
         if (modelloDropdown.value) {
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
         }
+
+        updateCarPreview();
     });
+
 
     versioneDropdown.addEventListener("change", () => {
         varianteDropdown.innerHTML = '';
@@ -71,26 +73,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     varianteDropdown.addEventListener("change", () => {
-        loader.style.display = "block";
-        anteprimaAuto.style.display = "none";
-        imagePlaceholder.style.display = "none";
+        updateCarPreview();
+    });
 
-        if (varianteDropdown.value) {
-            const angles = [203, 29, 17, 9, 21, 13];
-            const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
-
-            function getRandomColor() {
-                return colors[Math.floor(Math.random() * colors.length)];
-            }
-
-            carImagesUrls = angles.map(angle => {
-                const color = getRandomColor();
-                return {
-                    url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}&modelVariant=${varianteDropdown.value}&angle=${angle}&paintDescription=${color}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
-                    color: color,
-                    angle: angle
-                };
-            });
 
             anteprimaAuto.src = carImagesUrls[0].url;
 
@@ -675,6 +660,50 @@ function getUniqueFileName() {
     return `NLT_Offer_${dateTimeString}.pdf`;
 }
 
+const angles = [203, 29, 17, 9, 21, 13];
+const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function updateCarPreview() {
+    if (!marcaDropdown.value || !modelloDropdown.value) {
+        imagePlaceholder.textContent = "Seleziona almeno marca e modello per visualizzare l'anteprima";
+        imagePlaceholder.style.display = "flex";
+        anteprimaAuto.src = '';
+        return;
+    }
+
+    loader.style.display = "block";
+    anteprimaAuto.style.display = "none";
+    imagePlaceholder.style.display = "none";
+
+    let carUrl = `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`;
+
+    if (versioneDropdown.value) {
+        carUrl += `&modelRange=${versioneDropdown.value}`;
+    }
+
+    if (varianteDropdown.value) {
+        carUrl += `&modelVariant=${varianteDropdown.value}`;
+    }
+
+    carUrl += `&angle=29&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`;
+
+    anteprimaAuto.src = carUrl;
+
+    anteprimaAuto.onload = function () {
+        loader.style.display = "none";
+        anteprimaAuto.style.display = "block";
+    };
+
+    anteprimaAuto.onerror = function () {
+        loader.style.display = "none";
+        imagePlaceholder.textContent = "Anteprima non disponibile";
+        imagePlaceholder.style.display = "flex";
+    };
+}
 
 // 👇 Esposizione globale della funzione (se necessaria)
 window.fetchPdf = fetchPdf;
