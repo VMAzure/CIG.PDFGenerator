@@ -684,9 +684,6 @@ function updateCarPreview() {
 
     carMainImageUrl = carImagesUrls[0].Url;
 
-
-    carMainImageUrl = carImagesUrls[0].url; // 👈 importantissimo!
-
     anteprimaAuto.src = carMainImageUrl;
 
     anteprimaAuto.onload = function () {
