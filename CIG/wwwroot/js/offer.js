@@ -335,10 +335,10 @@ async function fetchDropdown(url, dropdown, keyName) {
 
         let items = [];
 
-        if (data[keyName]) {
-            items = data[keyName];
-        } else if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
+        if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
             items = data.preselect.options[keyName];
+        } else if (data[keyName]) {
+            items = data[keyName];
         } else {
             console.error('Struttura dati imprevista:', data);
             dropdown.innerHTML = `<option>Nessun dato disponibile</option>`;
@@ -357,10 +357,12 @@ async function fetchDropdown(url, dropdown, keyName) {
         dropdown.disabled = false;
 
     } catch (error) {
-        console.error('Errore caricamento:', error);
-        dropdown.innerHTML = `<option value="">Errore caricamento</option>`;
+        console.error('Errore nel caricamento:', error);
+        dropdown.innerHTML = `<option>Errore caricamento dati</option>`;
+        dropdown.disabled = true;
     }
 }
+
 
 
 //TABELLA CLIENTI
