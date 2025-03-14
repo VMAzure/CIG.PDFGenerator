@@ -493,6 +493,14 @@ document.addEventListener('click', async function (event) {
 
         const token = new URLSearchParams(window.location.search).get("token");
 
+        console.log({
+            selectedCustomer,
+            carMainImageUrl,
+            adminInfo,
+            carImagesUrls
+        });
+
+
         if (!selectedCustomer || !carMainImageUrl || !adminInfo || !carImagesUrls.length) {
             alert("Alcuni dati obbligatori mancano.");
             pdfLoader.style.display = 'none';
