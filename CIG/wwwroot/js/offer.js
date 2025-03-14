@@ -574,8 +574,7 @@ function pdfLoading(show) {
     document.getElementById('generatePdfBtn').style.display = show ? 'none' : 'inline-block';
 }
 
-// lascia inalterata la funzione fetchPdf
-
+// ✅ Funzione `fetchPdf` corretta
 async function fetchPdf(payload, token) {
     document.getElementById('generatePdfBtn').style.display = 'none';
     document.getElementById('pdfLoader').style.display = 'block';
@@ -618,17 +617,7 @@ async function fetchPdf(payload, token) {
             console.error("❌ Errore nel salvataggio del preventivo!", risultatoSalvataggio.error);
         }
 
-    } catch (error) {
-        alert('Errore nella generazione del PDF.');
-        console.error(error);
-    } finally {
-        document.getElementById('pdfLoader').style.display = 'none';
-        document.getElementById('generatePdfBtn').style.display = 'inline-block';
-    }
-}
-
-
-        // 👇 Mantieni invariato il download automatico del file 👇
+        // ✅ Mantieni invariato il download automatico del file
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
