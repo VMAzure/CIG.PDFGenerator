@@ -326,26 +326,27 @@ async function fetchDealerInfo() {
 
 // Popola dropdown da API
 async function fetchDropdown(url, dropdown, keyName) {
-    dropdown.innerHTML = '<option value="">Caricamento...</option>';
     dropdown.disabled = true;
+    dropdown.innerHTML = `<option>Caricamento...</option>`;
 
     try {
         const response = await fetch(url);
         const data = await response.json();
 
-        dropdown.innerHTML = `<option value="">Seleziona ${keyName}</option>`;
-
         let items = [];
-        if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
-            items = data.preselect.options[keyName];
-        } else if (data[keyName]) {
+
+        if (data[keyName]) {
             items = data[keyName];
+        } else if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
+            items = data.preselect.options[keyName];
         } else {
-            console.error("Struttura dati imprevista", data);
-            dropdown.innerHTML = `<option value="">Nessun dato disponibile</option>`;
+            console.error('Struttura dati imprevista:', data);
+            dropdown.innerHTML = `<option>Nessun dato disponibile</option>`;
+            dropdown.disabled = true;
             return;
         }
 
+        dropdown.innerHTML = `<option value="">Seleziona ${keyName}</option>`;
         items.forEach(item => {
             const option = document.createElement('option');
             option.value = item;
@@ -354,11 +355,13 @@ async function fetchDropdown(url, dropdown, keyName) {
         });
 
         dropdown.disabled = false;
+
     } catch (error) {
-        console.error('Errore nel recupero dati:', error);
+        console.error('Errore caricamento:', error);
         dropdown.innerHTML = `<option value="">Errore caricamento</option>`;
     }
 }
+
 
 //TABELLA CLIENTI
 async function loadCustomersTable() {
