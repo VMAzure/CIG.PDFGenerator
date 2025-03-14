@@ -662,11 +662,20 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
+const angles = [203, 29, 17, 9, 21, 13];
+const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
+
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
 function updateCarPreview() {
     if (!marcaDropdown.value || !modelloDropdown.value) {
         imagePlaceholder.textContent = "Seleziona almeno marca e modello per visualizzare l'anteprima";
         imagePlaceholder.style.display = "flex";
         anteprimaAuto.src = '';
+        carMainImageUrl = null;
+        carImagesUrls = [];
         return;
     }
 
@@ -674,24 +683,16 @@ function updateCarPreview() {
     anteprimaAuto.style.display = "none";
     imagePlaceholder.style.display = "none";
 
-    let carUrl = `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`;
+    carImagesUrls = angles.map(angle => {
+        return {
+            url: `https://cdn.imagin.studio/getImage?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}${versioneDropdown.value ? `&modelRange=${versioneDropdown.value}` : ''}${varianteDropdown.value ? `&modelVariant=${varianteDropdown.value}` : ''}&angle=${angle}&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`,
+            angle: angle
+        };
+    });
 
-    if (versioneDropdown.value) {
-        carUrl += `&modelRange=${versioneDropdown.value}`;
-    }
+    carMainImageUrl = carImagesUrls[0].url; // 👈 importantissimo!
 
-    if (varianteDropdown.value) {
-        carUrl += `&modelVariant=${varianteDropdown.value}`;
-    }
-
-    // Angolo di anteprima fisso a 203
-    carUrl += `&angle=203&paintDescription=${getRandomColor()}&zoomType=FullScreen&groundPlaneAdjustment=0&fileType=png&width=800`;
-
-    loader.style.display = "block";
-    anteprimaAuto.style.display = "none";
-    imagePlaceholder.style.display = "none";
-
-    anteprimaAuto.src = carUrl;
+    anteprimaAuto.src = carMainImageUrl;
 
     anteprimaAuto.onload = function () {
         loader.style.display = "none";
@@ -702,6 +703,8 @@ function updateCarPreview() {
         loader.style.display = "none";
         imagePlaceholder.textContent = "Anteprima non disponibile";
         imagePlaceholder.style.display = "flex";
+        carMainImageUrl = null;
+        carImagesUrls = [];
     };
 }
 
