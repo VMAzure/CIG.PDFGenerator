@@ -343,7 +343,7 @@ async function fetchDropdown(url, dropdown, keyName) {
 
         if (!items || items.length === 0) {
             console.warn(`⚠️ Campo "${keyName}" assente nella risposta:`, data);
-            dropdown.innerHTML = `<option value="">Nessuna opzione disponibile</option>`;
+            dropdown.innerHTML = `<option value="">Nessun dato disponibile</option>`;
             dropdown.disabled = true;
             return;
         }
@@ -357,7 +357,14 @@ async function fetchDropdown(url, dropdown, keyName) {
         });
 
         dropdown.disabled = false;
+
+    } catch (error) {
+        console.error('Errore caricamento:', error);
+        dropdown.innerHTML = `<option>Errore caricamento dati</option>`;
+        dropdown.disabled = true;
     }
+}
+
 
 
 
