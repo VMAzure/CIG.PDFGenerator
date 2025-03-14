@@ -440,6 +440,8 @@ async function loadServicesList() {
 //RIEPILOGO
 
 function populateSummary() {
+    console.log("Cliente nello step finale:", selectedCustomer); // 👈 AGGIUNGI QUESTO
+
     const riepilogoOfferta = document.getElementById('riepilogoOfferta');
 
     const selectedServices = Array.from(document.querySelectorAll('.service-item')).map(serviceItem => {
@@ -541,7 +543,8 @@ document.addEventListener('click', async function (event) {
 
             payload.DocumentiNecessari = data.documenti || [];
 
-            console.log("Payload completo prima di fetchPdf:", payload);
+            console.log("🚨 Payload finale inviato a fetchPdf:", JSON.stringify(payload, null, 2));
+
 
             fetchPdf(payload, token);
 
