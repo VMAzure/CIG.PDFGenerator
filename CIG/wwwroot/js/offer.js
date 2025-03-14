@@ -335,12 +335,12 @@ async function fetchDropdown(url, dropdown, keyName) {
 
         let items = [];
 
-        if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
-            items = data.preselect.options[keyName];
-        } else if (data[keyName]) {
+        if (data[keyName]) {
             items = data[keyName];
+        } else if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
+            items = data.preselect.options[keyName];
         } else {
-            console.error('Struttura dati imprevista:', data);
+            console.warn(`⚠️ Campo "${keyName}" assente nella risposta:`, data);
             dropdown.innerHTML = `<option>Nessun dato disponibile</option>`;
             dropdown.disabled = true;
             return;
@@ -357,11 +357,12 @@ async function fetchDropdown(url, dropdown, keyName) {
         dropdown.disabled = false;
 
     } catch (error) {
-        console.error('Errore nel caricamento:', error);
-        dropdown.innerHTML = `<option>Errore caricamento dati</option>`;
+        console.error('Errore:', error);
+        dropdown.innerHTML = `<option>Errore caricamento</option>`;
         dropdown.disabled = true;
     }
 }
+
 
 
 
