@@ -1,23 +1,31 @@
-﻿import { supabase } from './supabaseClient.js';
+﻿export async function salvaPreventivoSuAPI(file, clienteId, creatoDa, marca, modello, durata, kmTotali, anticipo, canone) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("cliente_id", clienteId);
+    formData.append("creato_da", creatoDa);
+    formData.append("marca", marca);
+    formData.append("modello", modello);
+    formData.append("durata", durata);
+    formData.append("km_totali", kmTotali);
+    formData.append("anticipo", anticipo);
+    formData.append("canone", canone);
 
-export async function salvaPreventivoSuDB(clienteId, fileUrl, creatoDa) {
-    const { data, error } = await supabase.from('nlt_preventivi').insert([
-        {
-            cliente_id: clienteId,
-            file_url: fileUrl,
-            creato_da: creatoDa
+    try {
+        const response = await fetch("https://coreapi-production-ca29.up.railway.app/nlt/salva-preventivo", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+            console.error("Errore nell'invio del preventivo:", result.error);
+            return false;
         }
-    ]).select(); // 👈 aggiunto ".select()" per ottenere dati di ritorno
 
-    if (error) {
-        console.error('Errore nel salvataggio del preventivo:', error);
+        console.log("✅ Preventivo salvato correttamente su API:", result);
+        return result;
+    } catch (error) {
+        console.error("Errore nella richiesta all'API:", error);
         return false;
-    }
-
-    if (data && data.length > 0) {
-        return data; // successo con dati restituiti
-    } else {
-        console.warn('Salvataggio effettuato ma senza dati restituiti:', data);
-        return true; // comunque avvenuto con successo, ma senza dati restituiti
     }
 }

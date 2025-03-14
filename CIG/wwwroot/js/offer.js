@@ -481,10 +481,11 @@ function populateSummary() {
 }
 
 
+import { salvaPreventivoSuAPI } from './savepreventivo.js';
+
 // QUI GENERO IL PDF
 document.addEventListener('click', async function (event) {
     if (event.target && event.target.id === 'generatePdfBtn') {
-
         const pdfLoader = document.getElementById('pdfLoader');
         const generatePdfBtn = document.getElementById('generatePdfBtn');
 
@@ -492,14 +493,6 @@ document.addEventListener('click', async function (event) {
         generatePdfBtn.style.display = 'none';
 
         const token = new URLSearchParams(window.location.search).get("token");
-
-        console.log({
-            selectedCustomer,
-            carMainImageUrl,
-            adminInfo,
-            carImagesUrls
-        });
-
 
         if (!selectedCustomer || !carMainImageUrl || !adminInfo || !carImagesUrls.length) {
             alert("Alcuni dati obbligatori mancano.");
@@ -529,7 +522,7 @@ document.addEventListener('click', async function (event) {
             },
             Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
                 Nome: serviceItem.querySelector('strong').textContent,
-                Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || "Nessuna"
+                Opzione: serviceItem.querySelector('input[type="radio"]:checked")?.value || "Nessuna"
             })),
             DatiEconomici: {
                 Durata: parseInt(document.getElementById('durataMesi').value) || 0,
@@ -538,7 +531,7 @@ document.addEventListener('click', async function (event) {
                 Canone: parseFloat(document.getElementById('canone').value) || 0
             },
             AdminInfo: adminInfo,
-            DealerInfo: dealerInfo, // aggiunto solo se presente, altrimenti sarà null
+            DealerInfo: dealerInfo,
             NoteAuto: noteAuto.value || ""
         };
 
@@ -548,13 +541,28 @@ document.addEventListener('click', async function (event) {
             });
 
             const data = await response.json();
-
             payload.DocumentiNecessari = data.documenti || [];
 
-            console.log("🚨 Payload finale inviato a fetchPdf:", JSON.stringify(payload, null, 2));
+            console.log("🚨 Payload finale inviato:", JSON.stringify(payload, null, 2));
 
+            // 👇 Ora generiamo il PDF in locale prima di inviarlo all'API
+            const file = await fetchPdf(payload, token);
 
-            fetchPdf(payload, token);
+            if (file) {
+                await salvaPreventivoSuAPI(
+                    file,
+                    selectedCustomer.id,
+                    dealerInfo?.Id || adminInfo.Id,  // 👈 Usa dealerId se presente, altrimenti adminId
+                    payload.Auto.Marca,
+                    payload.Auto.Modello,
+                    payload.DatiEconomici.Durata,
+                    payload.DatiEconomici.KmTotali,
+                    payload.DatiEconomici.Anticipo,
+                    payload.DatiEconomici.Canone
+                );
+            } else {
+                alert("Errore nella generazione del PDF.");
+            }
 
         } catch (error) {
             alert("Errore recupero documenti necessari.");
@@ -564,9 +572,6 @@ document.addEventListener('click', async function (event) {
         }
     }
 });
-
-
-console.log("Cliente selezionato:", selectedCustomer);
 
 // Funzione per mostrare/nascondere loader
 function pdfLoading(show) {
