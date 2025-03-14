@@ -575,7 +575,6 @@ function pdfLoading(show) {
 }
 
 // lascia inalterata la funzione fetchPdf
-import { salvaPreventivoSuAPI } from './savepreventivo.js';
 
 async function fetchPdf(payload, token) {
     document.getElementById('generatePdfBtn').style.display = 'none';
