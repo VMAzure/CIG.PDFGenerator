@@ -370,11 +370,13 @@ async function loadCustomersTable() {
                     `;
 
             tr.addEventListener('click', () => {
+                console.log("Cliente cliccato:", cliente); // 👈 Aggiungi questo!
                 selectedCustomer = cliente;
                 customerInput.value = `${cliente.nome || ''} ${cliente.cognome || cliente.ragione_sociale || ''}`.trim();
                 customerResults.style.display = 'none';
                 document.getElementById('nextStepBtn').style.display = 'inline-block';
             });
+
 
             customerTableBody.appendChild(tr);
         });
