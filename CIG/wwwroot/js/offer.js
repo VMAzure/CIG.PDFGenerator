@@ -626,10 +626,13 @@ async function fetchPdf(payload, token) {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
+        return blob;
+
 
     } catch (error) {
-        alert('Errore nella generazione del PDF.');
-        console.error(error);
+        console.error("❌ Errore nella generazione del PDF:", error);
+        alert("Errore nella generazione del PDF.");
+        return null;  // 👈 Restituisce null in caso di errore
     } finally {
         document.getElementById('pdfLoader').style.display = 'none';
         document.getElementById('generatePdfBtn').style.display = 'inline-block';
