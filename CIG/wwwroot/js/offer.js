@@ -627,6 +627,7 @@ async function fetchPdf(payload, token) {
     }
 }
 
+
         // 👇 Mantieni invariato il download automatico del file 👇
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
