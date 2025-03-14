@@ -1,5 +1,5 @@
 ﻿import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-import { salvaPreventivoSuDB } from './savePreventivo.js';
+import { salvaPreventivoSuAPI } from './savepreventivo.js';
 
 let adminInfo = null;
 let dealerInfo = null;
@@ -148,10 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 }); // chiusura DOMContentLoaded
-
-
-
-
 
 
 customerInput = document.getElementById('customerInput');
@@ -480,8 +476,6 @@ function populateSummary() {
             `;
 }
 
-
-import { salvaPreventivoSuAPI } from './savepreventivo.js';
 
 
 // QUI GENERO IL PDF
