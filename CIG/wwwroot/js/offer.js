@@ -662,13 +662,6 @@ function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
 
-const angles = [203, 29, 17, 9, 21, 13];
-const colors = ["White", "Grey", "Red", "Yellow", "Azure"];
-
-function getRandomColor() {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
 function updateCarPreview() {
     if (!marcaDropdown.value || !modelloDropdown.value) {
         imagePlaceholder.textContent = "Seleziona almeno marca e modello per visualizzare l'anteprima";
