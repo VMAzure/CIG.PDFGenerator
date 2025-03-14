@@ -342,9 +342,12 @@ async function fetchDropdown(url, dropdown, keyName) {
         }
 
         if (!items || items.length === 0) {
-            console.warn(`⚠️ Campo "${keyName}" assente nella risposta:`, data);
-            dropdown.innerHTML = `<option value="">Nessun dato disponibile</option>`;
+            // Gestione dropdown opzionale
+            console.warn(`⚠️ Nessun dato per "${keyName}"`);
+            dropdown.innerHTML = `<option value="">Nessuna opzione disponibile</option>`;
             dropdown.disabled = true;
+
+            // Procedi con il prossimo step/script qui (se necessario)
             return;
         }
 
@@ -360,10 +363,11 @@ async function fetchDropdown(url, dropdown, keyName) {
 
     } catch (error) {
         console.error('Errore caricamento:', error);
-        dropdown.innerHTML = `<option>Errore caricamento dati</option>`;
+        dropdown.innerHTML = `<option value="">Errore caricamento dati</option>`;
         dropdown.disabled = true;
     }
 }
+
 
 
 
