@@ -339,9 +339,11 @@ async function fetchDropdown(url, dropdown, keyName) {
             items = data[keyName];
         } else if (data.preselect && data.preselect.options && data.preselect.options[keyName]) {
             items = data.preselect.options[keyName];
-        } else {
+        }
+
+        if (!items || items.length === 0) {
             console.warn(`⚠️ Campo "${keyName}" assente nella risposta:`, data);
-            dropdown.innerHTML = `<option>Nessun dato disponibile</option>`;
+            dropdown.innerHTML = `<option value="">Nessuna opzione disponibile</option>`;
             dropdown.disabled = true;
             return;
         }
@@ -355,13 +357,8 @@ async function fetchDropdown(url, dropdown, keyName) {
         });
 
         dropdown.disabled = false;
-
-    } catch (error) {
-        console.error('Errore:', error);
-        dropdown.innerHTML = `<option>Errore caricamento</option>`;
-        dropdown.disabled = true;
     }
-}
+
 
 
 
