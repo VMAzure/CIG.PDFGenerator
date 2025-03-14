@@ -522,7 +522,7 @@ document.addEventListener('click', async function (event) {
             },
             Servizi: Array.from(document.querySelectorAll('.service-item')).map(serviceItem => ({
                 Nome: serviceItem.querySelector('strong').textContent,
-                Opzione: serviceItem.querySelector('input[type="radio"]:checked")?.value || "Nessuna"
+                Opzione: serviceItem.querySelector('input[type="radio"]:checked')?.value || "Nessuna"
             })),
             DatiEconomici: {
                 Durata: parseInt(document.getElementById('durataMesi').value) || 0,
