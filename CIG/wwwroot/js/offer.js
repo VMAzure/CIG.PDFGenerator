@@ -59,18 +59,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}`, versioneDropdown, "modelRange");
         }
 
-        updateCarPreview();
+        updateCarPreview(); // 👈 aggiorna subito dopo "modello"
     });
-
 
     versioneDropdown.addEventListener("change", () => {
         varianteDropdown.innerHTML = '';
-        anteprimaAuto.src = '';
 
         if (versioneDropdown.value) {
             fetchDropdown(`https://cdn.imagin.studio/getCarListing?customer=it-azureautomotive&make=${marcaDropdown.value}&modelFamily=${modelloDropdown.value}&modelRange=${versioneDropdown.value}`, varianteDropdown, "modelVariant");
         }
+
+        updateCarPreview(); // 👈 aggiorna subito dopo "versione"
     });
+
+    varianteDropdown.addEventListener("change", () => {
+        updateCarPreview(); // 👈 aggiorna subito dopo "variante"
+    });
+
 
    
 
