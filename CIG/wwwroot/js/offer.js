@@ -574,7 +574,7 @@ function pdfLoading(show) {
     document.getElementById('generatePdfBtn').style.display = show ? 'none' : 'inline-block';
 }
 
-// ✅ Funzione `fetchPdf` corretta
+// ✅ Funzione `fetchPdf` corretta SENZA chiamata interna a salvaPreventivoSuAPI
 async function fetchPdf(payload, token) {
     document.getElementById('generatePdfBtn').style.display = 'none';
     document.getElementById('pdfLoader').style.display = 'block';
@@ -598,26 +598,7 @@ async function fetchPdf(payload, token) {
 
         console.log("✅ PDF generato correttamente:", fileName);
 
-        // 👇 Invia il PDF e i dati all'API FastAPI
-        const risultatoSalvataggio = await salvaPreventivoSuAPI(
-            blob,
-            selectedCustomer.id,
-            dealerInfo?.Id || adminInfo.Id,
-            payload.Auto.Marca,
-            payload.Auto.Modello,
-            payload.DatiEconomici.Durata,
-            payload.DatiEconomici.KmTotali,
-            payload.DatiEconomici.Anticipo,
-            payload.DatiEconomici.Canone
-        );
-
-        if (risultatoSalvataggio.success) {
-            console.log("✅ Preventivo salvato con successo:", risultatoSalvataggio);
-        } else {
-            console.error("❌ Errore nel salvataggio del preventivo!", risultatoSalvataggio.error);
-        }
-
-        // ✅ Mantieni invariato il download automatico del file
+        // ✅ Download automatico del PDF generato
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -626,18 +607,19 @@ async function fetchPdf(payload, token) {
         a.click();
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        return blob;
 
+        return blob;
 
     } catch (error) {
         console.error("❌ Errore nella generazione del PDF:", error);
         alert("Errore nella generazione del PDF.");
-        return null;  // 👈 Restituisce null in caso di errore
+        return null;
     } finally {
         document.getElementById('pdfLoader').style.display = 'none';
         document.getElementById('generatePdfBtn').style.display = 'inline-block';
     }
 }
+
 
 // Funzione originale invariata
 function getUniqueFileName() {
